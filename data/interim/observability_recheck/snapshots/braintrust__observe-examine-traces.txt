@@ -1,0 +1,385 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.braintrust.dev/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Examine traces
+
+> Open any trace to inspect its spans, inputs, outputs, timing, metadata, and context. Explore trace views, translate content, navigate origins, and share results.
+
+The trace viewer is available across [** Logs**](https://www.braintrust.dev/app/~/logs), [** Experiments**](https://www.braintrust.dev/app/~/experiments), and [** Review**](https://www.braintrust.dev/app/~/review). Select any row to open a trace in a panel on the right side of your screen, showing all spans with detailed information about inputs, outputs, timing, metadata, and context.
+
+Click  **Toggle fullscreen trace** or press `Shift+F` to expand the trace to fullscreen. To open it in a separate page, click  **View trace as page**. When the trace header has more actions, it moves into the  menu.
+
+## Anatomy of a trace
+
+A **trace** represents one end-to-end execution — a single request or interaction in logs, or a single test case run in experiments. Every trace contains one or more **spans**, each representing a unit of work with a start and end time. Spans nest inside each other to reflect your application's execution flow.
+
+Braintrust assigns a type to each span:
+
+| Span type | What it represents |
+| - | - |
+|  `eval` | The root span for an evaluation run, wrapping a `task` span for your application code. One per test case — contains the input, expected output, and all child spans. |
+|  `task` | A unit of application logic — a workflow, pipeline step, or named operation. In logs, the root span is always a `task` span. Multiple `task` spans can appear in a single trace. |
+|  `llm` | A single call to an LLM. Shows the model, messages, parameters, token usage, and cost. |
+|  `function` | A named block of application logic — retrieval, formatting, routing, etc. |
+|  `tool` | A tool call made by the model — an external API, code execution, database query, etc. |
+|  `score` | The result of a scorer — [online](https://docs.braintrust.dev/evaluate/score-online.md) (in logs) or [offline](https://docs.braintrust.dev/evaluate/write-scorers.md) (in evaluations). Contains the score value, scorer name, and for [LLM-as-a-judge](https://docs.braintrust.dev/evaluate/llm-as-a-judge.md) scorers, the judge's reasoning. |
+|  `review` | A single reviewer's [human review](https://docs.braintrust.dev/annotate/human-review.md) scores for the span they reviewed. Each reviewer who scores a span produces their own review span, so multiple reviewers can score the same span independently. |
+|  `automation` | An [automation](https://docs.braintrust.dev/evaluate/score-online.md) run against a logged trace, such as online scoring or an alert. Contains the automation function's result. |
+|  `preprocessor` | A [Topics](https://docs.braintrust.dev/observe/topics.md) step that formats a raw trace into readable text for analysis. The built-in Thread preprocessor is the default. |
+|  `facet` | A [Topics](https://docs.braintrust.dev/observe/topics.md) step that summarizes a trace through one lens, such as task, sentiment, or issues. One span per facet. |
+|  `classifier` | A [Topics](https://docs.braintrust.dev/observe/topics.md) step that matches a trace to its closest generated topic for each facet. |
+
+Each span has an `id` that identifies it individually, while the trace as a whole is identified by its `root_span_id`. To learn how these IDs work and which to use when querying or linking, see [identify spans and traces](https://docs.braintrust.dev/observe/filter.md#identify-spans-and-traces).
+
+## Inspect a trace
+
+The tabs in the trace pane switch between ways of working with a trace:
+
+* ** Spans**: [Read the trace as a nested call graph](#view-as-a-hierarchy).
+* ** Timeline**: [See execution flow and token efficiency](#view-as-a-timeline).
+* ** Evaluators**: [Test and apply evaluators](#test-and-apply-evaluators) to the trace. Available on project logs traces.
+
+On mobile devices, a single ** Trace** tab replaces the **Spans** and **Timeline** tabs. Select **Spans**, **Thread**, or **Timeline** inside it to switch layouts. In human review on desktop, a toggle above the trace switches between  **Thread**,  **Trace**, and  **Views**. Select **Trace** to use the **Spans** and **Timeline** tabs.
+
+### Choose a trace layout
+
+On desktop, a trace opens in two panes: the **Views** pane on the left, where you read the trace as a conversation or a custom view, and the trace pane on the right, where you inspect spans. To change which panes appear, open the layout menu at the left of the header above both panes and choose a layout:
+
+* ** Views and trace** (`Shift+\`): Shows both panes side by side. This is the default.
+* ** Views** (`Shift+[`): Shows only the Views pane.
+* ** Trace** (`Shift+]`): Shows only the trace pane.
+
+Your browser remembers the layout you choose, so the next trace opens the same way. The trace's actions, such as **Find**, **Share**, and fullscreen, stay in the header in every layout. While the Views pane is showing, the span tree is collapsed. Click  **Tree** or press `\` to show it.
+
+In the Views pane, select  **Thread** to read the trace as a conversation, or select  **Custom view** for a [custom view](#create-custom-trace-views). The Views pane opens on the tab you last selected in the project.
+
+On mobile devices, **Thread** () is a layout you select in the **Trace** tab instead of a pane. In human review on desktop, select **Thread** in the toggle above the trace. Traces shown inside other pages, such as function run results, monitor chart sample traces, and Loop, also show **Thread** as a layout. Dataset rows have no thread.
+
+### View as a hierarchy
+
+Select the  **Spans** tab to view the trace as a nested hierarchy. Each span is indented under its parent, making it useful for understanding the logical structure of your application: which function called which, how tool calls nest under LLM calls, and how sub-tasks relate to the root task. Expand and collapse branches to navigate the call graph.
+
+![The Trace layout with the Spans tab selected, showing the span hierarchy on the left and the root span's Details tab on the right, with its scores in the trace header and in the Scores section](https://mintcdn.com/braintrust/Pt8v_-1gKeysCNY0/images/observe/trace-spans-layout-2026-10-28.png?fit=max\&auto=format\&n=Pt8v_-1gKeysCNY0\&q=85\&s=19cea183db8d8d0a1c2fe35df9b22042)
+
+> [accordion] View span details
+>
+> Select a span to open its detail panel, which groups the span's data into tabs:
+>
+> * **Details**: Input and output messages, tool calls, annotations, scores, metrics, metadata, context, parameters, and other span fields. Span errors appear on this tab too, with the input and output that produced them. On mobile devices and in human review, when [topics](https://docs.braintrust.dev/observe/topics.md) are enabled, a **Topics** section shows topics and facet summaries. On desktop, facet results appear at the top of the [thread](#view-as-a-conversation) instead, and on project logs traces, in the [**Evaluators** tab](#test-and-apply-evaluators).
+> * **Review**: Expected output, [human review](https://docs.braintrust.dev/annotate/human-review.md) scores, and the output-versus-expected comparison.
+> * **Activity**: The span's version history and comments. See [View activity history](#view-activity-history).
+> * **Raw**: The complete JSON representation of the span or trace. See [View raw span data](#view-raw-span-data).
+>
+> On desktop, the trace header shows the root span's scores, model, cost, and token counts, whichever span is selected.
+>
+> To read a span's messages in context, click  **View in thread** at the bottom of the **Details** tab. The thread opens scrolled to that span.
+
+> [accordion] Display span metrics
+>
+> In the nested hierarchy, each span row shows inline metrics. By default, these are duration, total tokens, estimated LLM cost, and hit rate. Cost is propagated from child spans to parent spans, making it easy to see which parts of a multi-step workflow are consuming the most of your cost budget. A parent span's displayed cost is the sum of its child span costs plus any `metrics.estimated_cost` logged on the parent itself. Use  > **Display metric types** to toggle which metrics appear:
+>
+> * **Duration** (on by default)
+> * **Total tokens** (on by default)
+> * **Time to first token**
+> * **Estimated LLM cost** (on by default)
+> * **Hit rate** (on by default)
+>
+>   ![The trace options menu open to Display metric types, with Duration, Total tokens, Estimated LLM cost, and Hit rate selected](https://mintcdn.com/braintrust/h15Ujn72JMcH5vYX/images/observe/trace-display-metrics-2026-10-23.png?fit=max\&auto=format\&n=h15Ujn72JMcH5vYX\&q=85\&s=2728233c57a795b46213ce77a2fae91a)
+
+### View as a conversation
+
+On desktop, select  **Thread** in the [Views pane](#choose-a-trace-layout) to view the trace as a conversation thread. On mobile devices, select **Thread** () in the **Trace** tab instead. In human review on desktop, select **Thread** in the toggle above the trace. This layout displays messages, tool calls, and scores in chronological order, stripping away the hierarchy to show what was said and in what order. Use it for reading agent conversations and understanding the narrative flow of multi-turn interactions.
+
+* In the original thread view, the thread layout renders raw span data by default. To apply a preprocessor, select  and choose **Preprocessor**. The [new thread view](#use-the-new-thread-view) doesn't show the preprocessor picker. Choose the built-in **Thread** preprocessor to format the trace as a readable conversation, or select a [custom preprocessor](https://docs.braintrust.dev/observe/topics/enable.md#write-a-custom-preprocessor) to control exactly how messages are rendered. When [topics](https://docs.braintrust.dev/observe/topics.md) are enabled, topic tags and facet outputs appear at the top of the thread layout as well.
+* In raw-span mode, the thread layout shows the root span and spans whose `span_attributes.type` is `llm` or `facet`. Spans with type `score` appear in a separate scorer block. To include a span in the conversation, set its `span_attributes.type` to `llm` or `facet`.
+* To write a custom preprocessor, choose **+ Custom preprocessor** in the picker, then click **Copy prompt** to pass coding-agent instructions for inspecting your real trace data and generating the function. See [Write a custom preprocessor](https://docs.braintrust.dev/observe/topics/enable.md#write-a-custom-preprocessor). Output that isn't a recognized message array is converted to text, which the thread layout renders labeled with the preprocessor's name instead of a role. If a preprocessor returns nothing at all, the thread layout shows an empty state with a **Create custom preprocessor** button.
+* If a trace has no LLM spans, the thread layout shows a **No LLM spans to display** empty state. Inspect the full trace in the trace panel, or click  **Hide thread panel** to close the thread. In the original thread view's default raw-span mode, recognized user messages from the root span and failed task errors still render in place of LLM content. User messages are followed by a **No LLM spans were recorded for this thread** notice with a  **View spans** action that opens the trace, while a rendered task error appears on its own without that notice.
+* Use  **Find** or press `Cmd/Ctrl+F` to search within the thread layout and quickly locate specific content such as message text and score rationale. Matches are highlighted in-place using your browser's native highlighting. This search is scoped to the thread layout content — use the trace's [search feature](#search-within-a-trace) to search across spans.
+
+![The Views and trace layout, with the original thread view and the new thread view banner in the Views pane beside the trace pane](https://mintcdn.com/braintrust/h15Ujn72JMcH5vYX/images/observe/trace-thread-panel-2026-10-23.png?fit=max\&auto=format\&n=h15Ujn72JMcH5vYX\&q=85\&s=639896cdae1f3b02ce4d6bf66d52c15b)
+
+### Use the new thread view
+
+> [!WARNING]
+>
+> The new thread view is in [public preview](https://docs.braintrust.dev/feature-lifecycle.md) and can change before reaching general availability.
+
+The new thread view organizes a trace by conversation turn. Each turn shows the request, the work the agent did to answer it, and the final response, so you can follow a long agent trace without reading every intermediate message.
+
+![The new thread view in the Views pane, with each turn's work collapsed into a Worked block above the agent's response](https://mintcdn.com/braintrust/h15Ujn72JMcH5vYX/images/observe/new-thread-view-2026-10-23.png?fit=max\&auto=format\&n=h15Ujn72JMcH5vYX\&q=85\&s=00dc775c76f556614f99e760dafd8cef)
+
+The new thread view is on by default. To switch back, select  and choose **Go back to old thread view**. To return to the new view, select  and choose **Try new thread view**, or click **Try it now** on the **Better thread view, now in public preview** banner at the top of the original thread view. The choice applies to your current browser, and so does dismissing the banner.
+
+![The Better thread view, now in public preview banner with the Try it now button](https://mintcdn.com/braintrust/h15Ujn72JMcH5vYX/images/observe/new-thread-view-banner-2026-10-23.png?fit=max\&auto=format\&n=h15Ujn72JMcH5vYX\&q=85\&s=341b24f067c58f3d6ae82ce34dbb7eb1)
+
+In the new thread view:
+
+* Each turn starts with its user message. The LLM and tool calls the agent made before responding collapse into a **Worked** block that shows how long the turn took and how many LLM calls, tool calls, and errors it contains. Select the block to expand it. When a finished turn contains only one LLM or tool call, such as a single failed request, that call appears directly in the turn without a **Worked** block.
+* Each tool call appears with the LLM call that requested it. Expand a tool call to see its input and output side by side, and select **LLM span** to open the span that requested it.
+* Work done by a sub-agent is nested under the step that started it.
+* A **Compaction** divider marks where the agent's context was compacted. When the trace has a compaction span, the divider shows how long the compaction took and how many messages it replaced, when the span records them. Select these details to open the span. When a provider returns the compacted context in encrypted form, as OpenAI does, one divider appears above the first turn that sends it. The thread view doesn't display the encrypted content, and  **Find** doesn't match it.
+* The rail along the left edge marks each turn and step. Hover over it to open the **Thread contents** list, then select an entry to scroll to it and expand it.
+* If the trace has saved findings, their supporting evidence is highlighted in the thread. To open a highlight's card, click the orange  (**Show reason**) button next to it. Click the button again to hide the card. Use the arrows on the card to move to the previous or next example, which opens that example's card.
+* Hover over an LLM response or a user message to reveal a  copy button. For a user message that also contains images or other non-text content, only its text is copied. To read a non-English thread in English, see [Translate trace content](#translate-trace-content).
+* In the **Timeline** () layout, click  **View in thread** on a span's row to open the thread scrolled to that span. The button appears only on spans that are part of the thread.
+
+Select  to adjust the view:
+
+* **Expand/collapse all** expands or collapses the work in every turn. You can also press `W`.
+* **Group intermediate steps** and **Group tool calls** control whether intermediate steps collapse into each turn's **Worked** block and whether consecutive tool calls are grouped. Both are on by default.
+
+The new thread view always uses its own conversation format. It ignores the project's default preprocessor and doesn't show the preprocessor picker. Playground traces always use the original thread view. In human review on desktop, the new thread view replaces the span tree when you select **Thread**, and its  settings appear next to **Thread** in the toggle above the trace.
+
+#### Generate thread summaries
+
+> [!WARNING]
+>
+> Thread summaries are in [public preview](https://docs.braintrust.dev/feature-lifecycle.md) and can change before reaching general availability.
+
+Thread summaries are Loop-generated headings for each turn and a short summary of the whole conversation, so you can scan a long agent trace before reading it.
+
+To turn them on, select  and check **Generate summaries**, or click **Try it now** on the **Thread summaries, now in public preview** banner at the top of the new thread view. The setting applies to your current browser, and so does dismissing the banner.
+
+With summaries on:
+
+* Each turn starts with a generated heading that describes the work in that turn. These headings also appear in the **Thread contents** list.
+* A **Summary** bar at the top of the thread summarizes the conversation. Select it to expand the full text, and select an underlined phrase to jump to the turn it describes.
+* Summaries that are ready when you open a trace appear with the thread. Summaries that finish later wait for you, so the thread doesn't shift while you read. The bar shows **Generating summaries...**, then **Show summaries** once they're ready. Select **Show summaries** to reveal all of them at once.
+
+Summaries use your organization's [default provider for Loop](https://docs.braintrust.dev/admin/organizations.md#set-a-default-provider-for-loop) when it can serve the summary model, and otherwise another available provider. When summaries run on a [built-in model](https://docs.braintrust.dev/admin/ai-providers.md#manage-built-in-models), they draw from your [model credits](https://docs.braintrust.dev/plans-and-limits.md#model-credits). If no provider is available, the thread view doesn't show summaries.
+
+### View as a timeline
+
+Select the  **Timeline** tab to understand execution flow and token efficiency:
+
+* **Timeline bars** — Each bar represents a span scaled by a metric of your choice and color-coded by span type.
+* **Token distribution overview** — Breaks down LLM span token usage by type (uncached input, cached read, cache write, and output) and shows cache hit rate per span, making it easy to spot where caching is and isn't working.
+
+![The Timeline tab, with the token distribution overview above span bars scaled by duration](https://mintcdn.com/braintrust/h15Ujn72JMcH5vYX/images/observe/trace-timeline-layout-2026-10-23.png?fit=max\&auto=format\&n=h15Ujn72JMcH5vYX\&q=85\&s=04495a953acf18d62807001d45311076)
+
+> [accordion] Scale timeline by metrics
+>
+> To change the metric used to scale the bars and token distribution overview, select  and then \*\* Scale by\*\*. Available options:
+>
+> * **Duration** (default) — Bar width represents wall-clock time
+> * **Total tokens** — Bar width represents total token usage, useful for identifying spans that consume the most context
+> * **Prompt tokens** — Bar width represents input token usage
+> * **Completion tokens** — Bar width represents output token usage
+> * **Estimated cost** — Bar width represents the estimated cost of each span
+
+> [accordion] Filter by span type
+>
+> To show only spans of specific types in the timeline and token distribution overview, select  and then \*\* Filter by span type\*\*.
+>
+> * Enable **Maintain hierarchy** to preserve parent-child relationships: Parent spans are kept even if they don't match the filter, as long as they have matching descendants.
+
+> [accordion] Assess prompt caching effectiveness
+>
+> To assess prompt caching effectiveness at a glance, select  and then **Cached tokens view**. This filters the timeline to LLM spans only, flattens the hierarchy, and scales each bar by cached read tokens with stacked segments for the input token breakdown (uncached input, cached read, and cache write). The **Scale by** and **Filter by span type** options and **Maintain hierarchy** are unavailable while it's active.
+
+> [accordion] Post-hoc scoring spans
+>
+> Post-hoc scoring spans (such as AutoEval results applied to logs) run after the root span completes and extend beyond the execution timeline. By default, the timeline hides these scorer spans to focus on the root execution duration. To display scorer spans inline, select  and toggle **Include score spans in timeline**. This expands the timeline axis to fit the scoring duration, making it easy to see how long evaluations take to complete on each trace.
+
+### Change span data format
+
+When viewing a trace, each span field (input, output, metadata, context, etc.) displays data in a specific format. Change how a field displays by selecting the view mode dropdown in the field's header.
+
+Available views:
+
+* **Pretty** - Parses objects deeply and renders values as Markdown (optimized for readability)
+* **JSON** - JSON highlighting and folding
+* **YAML** - YAML highlighting and folding
+* **Tree** - Hierarchical tree view for nested data structures
+
+Additional format-specific views appear automatically for certain data types:
+
+* **LLM** - Formatted AI messages and tool calls with Markdown
+* **LLM Raw** - Unformatted AI messages and tool calls
+* **HTML** - Rendered HTML content
+
+Your view mode selection is remembered per field type. To set a default view mode for all fields, go to ** Settings** > [** Account**](https://www.braintrust.dev/app/~/configuration/account) and, under **Display preferences**, select a **Default data display format**. See [Personal settings](https://docs.braintrust.dev/admin/personal-settings.md#default-data-display-format) for more details.
+
+### View activity history
+
+Select the  **Spans** tab, select a span, and then select **Activity** in the span section tabs to see the row's change history over time. This includes a chronological record of edits and merges, along with any comments left on the row.
+
+Activity history is stored with each row and is available on all plans.
+
+Writes from the API or SDK, including bulk upserts, add new entries without removing earlier ones. These entries are attributed to **API user** and may not list which fields changed. To compare values, query the row at earlier `_xact_id` values with the `version` parameter of [`POST /btql`](https://docs.braintrust.dev/api-reference/query#query-data), or export its full history by setting `audit_log` to `true`. See [Export parameters](https://docs.braintrust.dev/annotate/export.md#export-parameters).
+
+> [!NOTE]
+>
+> Activity history is scoped to a single row and is separate from organization [audit logging](https://docs.braintrust.dev/admin/audit-logs.md), an Enterprise feature that records administrative actions across your organization, such as permission changes, member management, and API key creation.
+
+### View raw span data
+
+Select the  **Spans** tab, select a span, and then select **Raw** in the span section tabs to view the complete JSON representation. The raw data view shows all fields including metadata, inputs, outputs, and internal properties that may not be visible in other views.
+
+The raw data view has two options:
+
+* **This span** - Shows the complete JSON for the selected span only
+* **Full trace** - Shows the complete JSON for the entire trace
+
+Use the search bar to find specific content within the data.
+
+Raw span data is useful when you need to:
+
+* Inspect the complete span structure for debugging
+* Find specific fields in large or deeply nested spans
+* Verify exact values and data types
+* Export or copy the full span for reproduction
+
+![The Raw tab for a span, with This span selected and the span data shown as YAML](https://mintcdn.com/braintrust/h15Ujn72JMcH5vYX/images/observe/trace-raw-span-data-2026-10-23.png?fit=max\&auto=format\&n=h15Ujn72JMcH5vYX\&q=85\&s=0d32852881d8c5a193b357f4015d5bb6)
+
+### Search within a trace
+
+While viewing a trace, use  **Find** or press `Cmd/Ctrl+F` to search for content within the trace. A scope dropdown lets you choose where to search:
+
+* ** This span** — Search only within the currently selected span. Defaults to substring matching.
+* ** Full trace** — Search across all spans in the trace. Defaults to whole-word matching, which is faster than substring matching on large traces.
+
+Select  **Match whole words** to toggle between whole-word and substring matching. Whole-word mode restricts results to complete word tokens, so `error` doesn't match `terror` or `errors`. It also treats punctuation-delimited terms as equivalent, so `gpt-4`, `gpt_4`, and `gpt 4` all match the same content. Switching scopes resets the mode to that scope's default unless you have explicitly set a mode.
+
+Matching spans are highlighted in the trace tree so you can quickly navigate to relevant content. Clicking a result opens the matched span and switches the span detail panel to the tab containing the matched field.
+
+Use the previous () and next () buttons, the Up and Down arrow keys, `Enter`, or `Cmd/Ctrl+G` to step through matches one occurrence at a time. In **Full trace** mode, navigation moves across span and field boundaries. When a field contains more than one match, the results panel shows the match count next to that field.
+
+> [!NOTE]
+>
+> Trace search finds content within the currently open trace. To search across all traces in your project, use [filters](https://docs.braintrust.dev/observe/filter.md).
+
+### Translate trace content
+
+Braintrust can translate a non-English trace to English on your device, with the built-in translation API in desktop Chrome or Edge. Trace text doesn't leave your device, and translation doesn't use your [model credits](https://docs.braintrust.dev/plans-and-limits.md#model-credits). In other browsers, the **Translate trace** button is disabled.
+
+To translate a trace:
+
+1. In the trace header, select  **Translate trace**, next to  **Find**. The button appears only when Braintrust detects non-English text in the trace.
+2. If the trace contains more than one non-English language, choose the language to translate from.
+3. Turn on **Translate to English**. If your browser doesn't have the language model it needs, a download button, such as **Download Spanish**, appears instead. Select it, and translation starts when the download finishes. If the download fails, select **Retry translation**.
+
+The setting applies to your current browser, so later traces you open in this browser are translated automatically.
+
+Translation covers:
+
+* Span names and span input, output, expected output, metadata, context, errors, and annotations.
+* Messages in the [thread](#view-as-a-conversation). Tool calls, and the results shown under them, stay in their original language. A tool result that appears as its own message is translated.
+* [Custom trace views](#create-custom-trace-views). Within them, form fields, editable text, code, and elements marked `translate="no"` keep their original text.
+* Instructions and labels on [decision span](https://docs.braintrust.dev/instrument/trace-application-logic.md#log-typed-decisions) question cards.
+
+While translation is on:
+
+* Only the **Pretty**, **Text**, **JSON**, and **LLM** [views](#change-span-data-format) show translated text. Other views, such as **YAML** and **LLM Raw**, show the original text.
+* Translated fields are read-only. To edit a field, turn off **Translate to English**. Translation doesn't change the logged data.
+* While [trace search](#search-within-a-trace) is open, the trace shows the original text, because search matches it. Close search to see the translation again.
+* [Diff mode](https://docs.braintrust.dev/evaluate/compare-experiments.md#use-diff-mode) shows the original text.
+
+## Test and apply evaluators
+
+While viewing a trace in [** Logs**](https://www.braintrust.dev/app/~/logs), select  **Evaluators** to test topic facets and scorers on the current trace. This tab doesn't appear in [** Experiments**](https://www.braintrust.dev/app/~/experiments) or [** Review**](https://www.braintrust.dev/app/~/review).
+
+* **Topic facets**: Test how preprocessors transform the trace data, test what summaries prompts extract, or apply the complete facet (preprocessor + prompt) to see the end-to-end result.
+
+* **Scorers**: Test scorers, apply them to the trace, or configure an automation rule for online scoring. The **Evaluators** tab includes scorers and classifiers from other projects in your organization, listed after scorers from the current project. A scorer from another project shows its source project name, or **No project details** if you can't access that project, and can't be edited from this tab.
+
+Scorers and classifiers that scored the trace's root span are listed under **Applied scorers**. When one recorded a rationale, it appears inline beneath its row, so you can read why a score or label was assigned without opening the span that produced it. [LLM-as-a-judge](https://docs.braintrust.dev/evaluate/llm-as-a-judge.md) scorers also show which choice the judge selected, and [classifiers](https://docs.braintrust.dev/evaluate/llm-as-a-judge.md#apply-classification-labels) show the assigned label.
+
+A scorer records a rationale only when it produces one. LLM-as-a-judge scorers and classifiers record one when **Use chain of thought (CoT)** is enabled.
+
+> [!NOTE]
+>
+> An [online scoring](https://docs.braintrust.dev/evaluate/score-online.md) rule set to **Trace** scope nests its score spans under a span named after the rule, so the score isn't recorded on the root span. Its scorer stays under **Other scorers** with no rationale. To surface the rationale here, set the rule to **Span** scope with **All root spans** selected.
+
+The **Evaluators** tab is particularly useful when creating [custom facets](https://docs.braintrust.dev/observe/topics/custom-facets.md) or [scorers](https://docs.braintrust.dev/evaluate/write-scorers.md), allowing you to iterate quickly by testing against real trace data.
+
+![View evaluators tab](https://mintcdn.com/braintrust/wnKh80ZxpSZ__gif/images/observe/trace-evaluators-tab.png?fit=max\&auto=format\&n=wnKh80ZxpSZ__gif\&q=85\&s=eb21c06b9f6a6b9c9d119dc996eb5c6a)
+
+## Create custom trace views
+
+While viewing a trace on desktop, select  **Custom view** at the top of the [Views pane](#choose-a-trace-layout) to create custom visualizations using natural language. On mobile devices, select the  **Views** tab instead. In human review on desktop, select **Views** in the toggle above the trace. Describe how you want to view your trace data and [** Loop**](https://docs.braintrust.dev/loop.md) will generate the code.
+
+For example:
+
+* "Create a view that renders a list of all tools available in this trace and their outputs"
+* "Render the video url from the trace's metadata field and show simple thumbs up/down buttons"
+
+A custom trace view exists only in your browser until you save it. Saved views are available to everyone in the project. See [Share views](https://docs.braintrust.dev/annotate/custom-views.md#share-views).
+
+See [Create custom trace views](https://docs.braintrust.dev/annotate/custom-views.md) for detailed examples, API reference, and how to embed views in your own applications.
+
+## Trace actions
+
+Share, link to, and re-run content from a trace, or jump to where it came from. These options are available from the trace header or span context menus, regardless of the selected tab.
+
+### Share a trace
+
+When viewing a trace:
+
+1. Select  **Share**. In the header above both panes on desktop, **Share** shows only its icon: , or  when the trace is public.
+2. Choose whether to make the trace  **Private** or  **Public**. Making a trace public grants access only to that trace.
+3. Click **Copy link** and share it with others.
+
+### Link to a trace or span
+
+Every trace and span has a stable URL you can share or generate programmatically.
+
+* **Trace**: open the logs route with `r=` set to the trace's `root_span_id`:
+
+  ```
+  https://www.braintrust.dev/app/{org}/p/{project}/logs?r=<root_span_id>
+  ```
+
+  The `r=` parameter is always the `root_span_id`, not a span's `id`. See [Identify spans and traces](https://docs.braintrust.dev/observe/filter.md#identify-spans-and-traces).
+
+* **Single span or event**: use the object permalink with the span's `id`:
+
+  ```
+  https://www.braintrust.dev/app/{org}/object?object_type=project_logs&object_id=<project_id>&id=<id>
+  ```
+
+* **From the SDK**: call [`Span.permalink()`](https://docs.braintrust.dev/instrument/advanced-tracing#deep-link-to-spans) to generate a span link without building the URL by hand.
+
+* **From a proxied request**: if you call models through the AI proxy without the SDK, see [Link a request to its logged event](https://docs.braintrust.dev/deploy/ai-proxy.md#link-a-request-to-its-logged-event) to get the event `id` for the permalink.
+
+To open a link in a specific view, append the `tvt` and `tv` parameters. See [Open trace URLs in a specific view mode](https://docs.braintrust.dev/kb/open-trace-urls-in-a-specific-view-mode).
+
+### Copy a span name
+
+Click a span's name in the span detail header to copy it to the clipboard.
+
+### Navigate to trace origins
+
+To trace the origin of a trace that comes from a prompt or dataset:
+
+1. Click  in the trace header.
+2. Choose  **Go to origin prompt** or  **Go to origin dataset row**.
+
+This helps you:
+
+* Trace issues back to the original prompt or dataset
+* See which dataset example led to a result
+* Move efficiently between trace analysis and refining prompts or datasets
+
+### Re-run a prompt
+
+When viewing a prompt span in a trace:
+
+1. Select  **Run**.
+2. In the **Run prompt** dialog, make changes as necessary.
+3. In the **Test** section, select  **Run** to see the output.
+
+You can also give this prompt a name and select **Save as custom prompt** to save it to your project's prompt library.
+
+## Next steps
+
+* [Score online](https://docs.braintrust.dev/evaluate/score-online.md) to apply automated scoring to production traces
+* [Add to a dataset](https://docs.braintrust.dev/annotate/datasets/create.md#promote-traces-from-logs) to curate interesting traces into ground truth
+* [Filter and search](https://docs.braintrust.dev/observe/filter.md) to find specific traces across logs
+* [Create dashboards](https://docs.braintrust.dev/observe/dashboards.md) to monitor metrics at scale
+* [Analyze with Loop](https://docs.braintrust.dev/loop.md) to query across traces with natural language
+* [Enable Patterns](https://docs.braintrust.dev/observe/patterns.md) to have Loop find recurring problems across many traces
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

@@ -1,0 +1,9 @@
+tool,metric,verdict,tool_specific_name,doc_url,snapshot_file,quote,note,confidence
+Laminar,Tool execution errors,not found,,,,,Searched laminar snapshots for tool + error/status/exception. Only 'the same tool error' in alerts text (a use case) and the user-written SQL countIf examples.,high
+Laminar,Tool call count,not found,,,,,"Searched span-types, span attribute reference, viewing-traces, dashboards for tool call counts. TOOL span type (user-set) drives transcript rows; no count metric or preset.",low
+Laminar,Tool execution latency,not found,,,,,"Searched same pages. Duration is shown on every row of the trace view and a Longest spans preset exists, but nothing names tool latency.",low
+Laminar,Step count,not found,,,,,"Searched overview, viewing-traces, dashboards for step count; only prose about multi-step workflows.",high
+Laminar,LLM call latency,custom,,https://laminar.sh/docs/platform/dashboards,laminar__platform-dashboards.txt,"This query charts p90 LLM latency per model, one line per model:","SQL example (quantile over duration where span_type = 'LLM'). Trace view also shows Duration on every row, not named for LLM calls.",low
+Laminar,Time to first token,not found,,,,,Searched all laminar snapshots for ttft/first token/time_to/streaming: no hits.,high
+Laminar,Error count / rate,custom,,https://laminar.sh/docs/platform/dashboards,laminar__platform-dashboards.txt,`countIf(status = 'error') / count() * 100` for an error rate in percent.,Custom SQL metric in the dashboard builder; no preset or named error metric found.,high
+Laminar,LLM call count,not found,,,,,"Searched dashboards (presets: Total cost, Total tokens, Tokens by model, Top span names...), cost-tracking, span types for LLM call count; only user-written SQL could count LLM spans, and no example does.",low

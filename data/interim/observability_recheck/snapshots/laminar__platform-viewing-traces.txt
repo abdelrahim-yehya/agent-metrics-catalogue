@@ -1,0 +1,154 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://laminar.sh/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Viewing Traces
+
+A Laminar trace can have thousands of spans. The trace view gives you several ways to read it: **Transcript** (the default), **Tree**, [custom render templates](#custom-views-with-render-templates), and **Timeline**, plus **Metadata** and **Chat** side panels. Selecting any span in any view opens the full span detail pane on the right.
+
+## Transcript view
+
+Transcript view presents an agent trace as a conversation rather than a tree of span names. Laminar auto-extracts the agent input, the LLM turns, the tool calls, and the subagent invocations, and lays them out top-to-bottom so you can read what happened instead of click-hunting for it. It is the default view on every trace.
+
+![Single-agent trace in transcript view](https://mintcdn.com/laminarai/RPYdoMdfsv6y-QUL/images/transcript-view/single-agent.png?fit=max\&auto=format\&n=RPYdoMdfsv6y-QUL\&q=85\&s=0663d34d51cf0028589429487bffe785)
+
+Transcript view of a single-agent fizzbuzz review: the input, two LLM turns, and a Read tool call laid out in reading order.
+
+### Why transcript, not a span tree
+
+A span tree gives every row equal visual weight: the outer agent span, its query span, the planning LLM turn, each tool call, and every nested subagent are all just rows. On a long trace (six to ten subagents, dozens of tool calls) you end up scrolling an outline to reconstruct what the agent actually did.
+
+Transcript view flips that: it shows the **agent input**, the **LLM outputs**, the **tool-call arguments and results**, and each **subagent as a single collapsed card**. Spans that exist only to hold children (wrappers, framework internals) are elided from the reading flow. The decision you care about when debugging an agent (*what did it see, what did it decide, what did it call*) is what transcript view surfaces first.
+
+### Inputs to every agent and subagent, surfaced for free
+
+The input to the root call and to each subagent is parsed out of system and user messages and rendered inline as a labelled `Input` block. You do not need to instrument anything: any OpenAI- or Anthropic-style chat completion is parsed automatically, and Laminar will surface the task prompt even when it is buried many messages deep in the request.
+
+This matters most when you are reading a trace that someone else wrote, or a trace from a run you started three days ago. Before transcript view, recovering *what did we actually ask this agent to do?* meant opening the first LLM span, finding the input JSON, expanding the messages array, and scrolling to the last user message. Now it is the first thing on the page.
+
+The same task appears as the **Input** column in the traces table and as `agent_input` in SQL. See [Task extraction](https://laminar.sh/docs/tracing/task-extraction.md) for how Laminar finds it and how to query it.
+
+### Subagents are cards, not a flood of spans
+
+Multi-agent runs (Claude Agent SDK, OpenAI Agents SDK, LangGraph, custom orchestrators) produce deeply nested trees. Transcript view collapses each subagent invocation into a named card that shows the subagent's name, duration, token/cost badges, the **Input** prompt it was given, and an **Output** preview of its final message.
+
+![Multi-agent trace in transcript view](https://mintcdn.com/laminarai/RPYdoMdfsv6y-QUL/images/transcript-view/multi-agent.png?fit=max\&auto=format\&n=RPYdoMdfsv6y-QUL\&q=85\&s=d73aabf6f561ef045aa03b11a0f75453)
+
+Transcript view of a multi-agent Claude Agent SDK run. Each Code Analyst subagent is a single card with its input prompt and output preview inline. Click a card to expand it in place.
+
+Clicking a card expands it in place: the card fills out with the subagent's own LLM turns, tool calls, and any further nested subagents. Other cards on the page stay collapsed, so you can drill into one branch without flooding the rest of the view.
+
+![Subagent card expanded in place](https://mintcdn.com/laminarai/RPYdoMdfsv6y-QUL/images/transcript-view/subagent-expanded.png?fit=max\&auto=format\&n=RPYdoMdfsv6y-QUL\&q=85\&s=6021cfb4a037129bbd487974ad23bfb8)
+
+The first Code Analyst subagent card expanded in place. Its Input, the subagent's LLM turn, and the Read tool call it made sit inside the card.
+
+### Inline previews on every row
+
+LLM turns and tool calls render a one-line preview next to the row: the first part of the model's response for an LLM turn, and the first argument or result for a tool call (for example, `Read fizzbuzz.py` or `Read /sandbox/scratch/...`). You can scan a long trace and get a sense of what was happening at each step without expanding anything.
+
+### Switch between Transcript and Tree
+
+Transcript is the default, but Tree view is one click away and useful when you need to confirm parent/child nesting, debug a custom integration, or inspect span attributes at specific nodes in the hierarchy. Use the view-mode dropdown in the trace toolbar.
+
+![Multi-agent trace in tree view](https://mintcdn.com/laminarai/RPYdoMdfsv6y-QUL/images/transcript-view/multi-agent-tree.png?fit=max\&auto=format\&n=RPYdoMdfsv6y-QUL\&q=85\&s=9edce998a985734ba908dc35f7d69dca)
+
+The same multi-agent trace in Tree view: every span rendered as a row, with the three subagents and their children interleaved in the list.
+
+## Tree view
+
+### Open Tree view
+
+1. Open a trace (from **Traces**).
+2. In the trace view toolbar, open the view-mode dropdown.
+3. Select **Tree** (switch back the same way).
+
+* **Hierarchy-first**: Shows parent/child nesting so you can follow the trace's call structure.
+* **Collapsible branches**: Collapse spans with children to hide entire subtrees.
+* **Inline metrics**: Duration on every row; tokens and cost badges on LLM spans.
+* **Fast navigation**: Virtualized list stays responsive on large traces.
+* **Synced minimap**: Jump to spans and scrub the shared session-time cursor.
+
+Use Tree view when you want to understand structure: what called what, and where time or cost sits in the hierarchy.
+
+## Custom views with render templates
+
+The same view-mode dropdown lists your project's [trace render templates](https://laminar.sh/docs/platform/render-templates.md#trace-templates) under **Custom**. A trace template is a small JSX component plus a SQL filter over the trace's spans: it receives the matching spans and renders the whole trace however you define, instead of as a transcript or a tree.
+
+![Trace rendered through a custom template showing a side-by-side SQL diff between model output and target](https://mintcdn.com/laminarai/XAojCVbhs9bn1a75/images/evaluations/eval-custom-renderer.png?fit=max\&auto=format\&n=XAojCVbhs9bn1a75\&q=85\&s=995ff2aad869c57f76fae6a42f21d5f0)
+
+An evaluation trace rendered through a custom SQL diff template: the question, the scores, and a word diff between the model's output and the target, built from the executor and evaluator spans.
+
+This is what the trace view is built for when you review the same shape of trace over and over: eval runs, extraction pipelines, agent runs with a known plan/act structure. The pane remembers the view you picked, so clicking through a run's datapoints keeps your custom view open. See [Render templates](https://laminar.sh/docs/platform/render-templates.md#trace-templates) for the payload shape and a full worked example.
+
+## Timeline
+
+### Open Timeline
+
+1. Open a trace (from **Traces**).
+2. In the trace header, click the **Timeline** toggle (Gantt icon) below the search bar.
+3. The condensed timeline appears at the top of the trace view. Click the toggle again to hide it.
+
+![Timeline view](https://mintcdn.com/laminarai/pKM35iraOOzRKwfP/images/timeline-view.png?fit=max\&auto=format\&n=pKM35iraOOzRKwfP\&q=85\&s=384638f51ad764513fe5a7b5796a76c5)
+
+* **Time-first overview**: Spans render as colored bars on a single time axis.
+* **Zoom controls**: Use the +/- buttons (or cmd/ctrl + scroll) to zoom in and out.
+* **Hover needle**: Move your cursor to see precise time markers.
+* **Span selection**: Drag to select a range; non-selected spans dim and the selection is clearable.
+* **Session playhead (if available)**: Shows the browser session position on the timeline.
+
+Use the condensed timeline when diagnosing latency, overlaps, gaps, or long-running steps.
+
+## Metadata
+
+### Open Metadata
+
+1. Open a trace (from **Traces**).
+2. In the trace view toolbar, click **Metadata**.
+
+![Metadata view](https://mintcdn.com/laminarai/pKM35iraOOzRKwfP/images/metadata-view.png?fit=max\&auto=format\&n=pKM35iraOOzRKwfP\&q=85\&s=59c91441408c349e9634f3e1daee7d1f)
+
+* **Read-only source of truth**: Shows the trace metadata exactly as stored.
+* **JSON-first**: Defaults to a JSON view with formatting and syntax highlighting.
+* **Search/copy friendly**: Quickly find keys/values and copy raw text as needed.
+
+Use Metadata when you need to verify context fields (inputs, run config, tags, custom attributes) without digging through spans. See [Metadata](https://laminar.sh/docs/tracing/structure/metadata.md).
+
+## Chat about a trace
+
+1. Open a trace (from **Traces**).
+2. In the trace view toolbar, click **Chat**.
+
+This opens [Laminar Agent](https://laminar.sh/docs/platform/laminar-agent.md) in a side panel with the open trace as context.
+
+![Chat panel open next to a trace](https://mintcdn.com/laminarai/VCesC-sVGbi0XUXP/images/ai-view.png?fit=max\&auto=format\&n=VCesC-sVGbi0XUXP\&q=85\&s=85a03d3f0473862b28e55ad6672b5a13)
+
+* **Automatic summary**: Generates a trace summary (and deeper analysis) to orient you quickly.
+* **Span-aware answers**: When the assistant cites spans, they show up as clickable chips that jump you to the referenced span.
+* **Iterate fast**: Ask follow-ups about errors, unexpected outputs, tool calls, or performance.
+* **Resettable**: Start a new chat when you want a fresh thread.
+
+Use the chat when you want a quick narrative explanation or guided debugging without manually scanning the whole trace.
+
+## Open in SQL Editor
+
+1. Open a trace (from **Traces**).
+2. In the trace view header, open the **Trace** dropdown.
+3. Select **Open in SQL editor** (opens in a new tab).
+
+* **Pre-filled query (trace)**: Starts with `SELECT * FROM spans WHERE trace_id = ... ORDER BY start_time ASC`.
+* **Pre-filled query (span)**: From a span's detail header dropdown, **Open in SQL editor** creates `SELECT * FROM spans WHERE span_id = ...`.
+
+Use SQL Editor when you need precise filtering, aggregation, or auditing on the raw spans table beyond what the UI exposes. See [SQL Editor](https://laminar.sh/docs/platform/sql-editor.md).
+
+## Next steps
+
+> [card] [Define Signals](https://laminar.sh/docs/signals/introduction.md)
+>
+> Turn outcomes and failures you see in the transcript into structured events you can query and alert on.
+
+> [card] [Query across traces](https://laminar.sh/docs/platform/sql-editor.md)
+>
+> Use the SQL editor, SQL API, [CLI](https://laminar.sh/docs/platform/cli.md), or [MCP server](https://laminar.sh/docs/platform/mcp.md) to slice every span, event, and signal across your traces.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

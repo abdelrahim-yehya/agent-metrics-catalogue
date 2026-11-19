@@ -1,0 +1,417 @@
+# Thread Traces
+
+Group your traces as threads to evaluate an entire conversation workflow
+
+## Overview
+
+A thread is a group of traces that share a thread ID. It lets you view and evaluate a whole conversation as one unit, whether it's a chatbot, a multi-turn agent or a voice agent.
+
+Most apps create one trace per turn. Traces with the same thread ID are then shown in order, as the turns of the conversation.
+
+> Threads group **traces** together, not spans.
+>
+> One trace per turn is the usual setup, not a requirement. Depending on the integration, a single trace can be the entire conversation:
+>
+> - **[LangGraph](/docs/integrations/third-party/langgraph)**: each `graph.invoke` is one trace, so a conversation is a thread of traces, one per turn.
+> - **[LiveKit](/docs/integrations/third-party/livekit)**: each call is one trace, so the trace is the whole conversation and its thread holds that call, turn by turn. [Pipecat](/docs/integrations/third-party/pipecat) works the same way.
+
+## Create a Thread
+
+The simplest way to create a thread is to wrap each turn of your app in `turn()`. It starts a new trace for that turn and gives it the thread ID you pass in. Traces with the same thread ID form one thread.
+
+#### Python
+
+```python title="main.py" {2,8}
+from openai import OpenAI
+from confident_trace import init, turn, update_trace, shutdown
+
+init()
+client = OpenAI()
+
+def llm_app(query: str, thread_id: str):
+    with turn("llm_app", thread_id=thread_id):
+        res = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": query}]
+        ).choices[0].message.content
+        update_trace(input=query, output=res)
+        return res
+
+try:
+    llm_app("What's the weather in SF?", thread_id="your-thread-id")
+    llm_app("What about tomorrow?", thread_id="your-thread-id")
+finally:
+    shutdown()
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {2,8} maxLines={0}
+import OpenAI from "openai";
+import { init, turn, updateTrace } from "confident-trace";
+
+const runtime = init();
+const openai = new OpenAI();
+
+const llmApp = async (query: string, threadId: string) => {
+  return turn({ threadId }, async () => {
+    const res = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: query }],
+    });
+    const data = res.choices[0].message.content;
+    updateTrace({ input: query, output: data });
+    return data;
+  });
+};
+
+try {
+  await llmApp("What's the weather in SF?", "your-thread-id");
+  await llmApp("What about tomorrow?", "your-thread-id");
+} finally {
+  await runtime.shutdown();
+}
+```
+
+Remember to run your entry point with the [Node preload](/docs/llm-tracing/quickstart#instrument-your-ai-app) so auto-instrumented spans (like the OpenAI call above) nest inside the turn.
+
+A few things to know about `turn()`:
+
+- **The thread ID can be any string**, typically a session or conversation ID from your app.
+- **It can identify the [user](/docs/llm-tracing/features/users) and [customer](/docs/llm-tracing/features/customers) too**, with `user_id` / `userId` and `customer_id` / `customerId`.
+- **It works with sync and async code.**
+
+> Call `turn()` **before** any LLM calls in each conversational turn. It starts
+> a new trace, and every span created inside it — including auto-instrumented
+> ones — inherits the thread ID.
+
+### Add a Thread ID to an Existing Trace
+
+Setting a thread ID on an existing trace only labels that trace. Unlike `turn()`, it doesn't start a new one.
+
+Use this only when your app already starts a separate trace for every request. Otherwise, use `turn()` so each turn gets its own trace.
+
+#### Python
+
+```python title="main.py" {12}
+from openai import OpenAI
+from confident_trace import span, update_trace
+
+client = OpenAI()
+
+def llm_app(query: str):
+    with span("llm_app", type="agent"):
+        res = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": query}]
+        ).choices[0].message.content
+        update_trace(thread_id="your-thread-id", input=query, output=res)
+        return res
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {13} maxLines={0}
+import OpenAI from "openai";
+import { withSpan, updateTrace } from "confident-trace";
+
+const openai = new OpenAI();
+
+const llmApp = async (query: string) => {
+  return withSpan({ name: "llm_app", type: "agent" }, async () => {
+    const res = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: query }],
+    });
+    const data = res.choices[0].message.content;
+    updateTrace({ threadId: "your-thread-id", input: query, output: data });
+    return data;
+  });
+};
+```
+
+If your app is fully auto-instrumented and already starts a trace for every request, a trace context can add the thread ID without a wrapper span. It can set the [user](/docs/llm-tracing/features/users) and [customer](/docs/llm-tracing/features/customers) the same way:
+
+#### Python
+
+```python title="main.py" {4}
+from confident_trace import trace_context
+
+def llm_app(query: str, thread_id: str):
+    with trace_context(thread_id=thread_id):
+        return client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": query}]
+        ).choices[0].message.content
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {4} maxLines={0}
+import { traceContext } from "confident-trace";
+
+const llmApp = async (query: string, threadId: string) => {
+  const res = await traceContext({ threadId }, () =>
+    openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: query }],
+    }),
+  );
+  return res.choices[0].message.content;
+};
+```
+
+A trace context doesn't create a trace or a span. It only fills in defaults for the traces started inside it.
+
+Use `turn()` instead when you need a new trace for each turn, or want to set [thread I/O](#set-thread-io) yourself. For how trace contexts behave in full, see [Update Trace Properties](/docs/llm-tracing/features/trace-context#update-trace-properties).
+
+> Linking traces into a thread doesn't merge them. Each turn keeps its own trace
+> and span tree; the thread only groups them for display and evals. So a resumed
+> conversation, such as one restored from a framework checkpoint, shows up as a
+> new trace in the same thread.
+
+## Voice Calls
+
+Put your voice agent's calls in threads to review and evaluate them call by call:
+
+- **Voice timing.** With LiveKit or Pipecat, each turn shows how long the agent took to answer and whether the caller interrupted it.
+- **Audio on every turn.** Each turn plays its own audio, from its message or its part of the call recording. See [Audio in Traces](/docs/llm-tracing/multimodal/audio).
+- **Voice metrics.** Thread evals score the audio of the call, not just its transcript. See [Evaluate Threads](/docs/llm-tracing/evaluate-threads).
+
+With LiveKit or Pipecat, set the thread ID with a trace context around the call, as in [LiveKit](/docs/integrations/third-party/livekit#set-trace-span-properties) or [Pipecat](/docs/integrations/third-party/pipecat#set-trace-span-properties).
+
+## Customize Threads
+
+Set what each trace in a thread carries, so the conversation reads and evaluates the way it happened.
+
+### Set Thread I/O
+
+For each trace, set `input` to the raw **user text** and `output` to the **LLM's reply**. Confident AI shows them as the turns of the conversation, and [thread evaluations](/docs/llm-tracing/evaluate-threads) read them the same way.
+
+#### Python
+
+```python title="main.py"
+from openai import OpenAI
+from confident_trace import turn, update_trace
+
+client = OpenAI()
+
+def llm_app(query: str):
+    with turn("llm_app", thread_id="your-thread-id"):
+        messages = [{"role": "user", "content": query}]
+        res = client.chat.completions.create(
+            model="gpt-4o",
+            messages=messages
+        ).choices[0].message.content
+
+        # ✅ Do this — query is the raw user input
+        update_trace(input=query, output=res)
+
+        # ❌ Don't do this — messages is not the raw user input
+        # update_trace(input=messages, output=res)
+        return res
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" maxLines={0}
+import OpenAI from "openai";
+import { turn, updateTrace } from "confident-trace";
+
+const openai = new OpenAI();
+
+const llmApp = async (query: string) => {
+  return turn({ threadId: "your-thread-id" }, async () => {
+    const messages = [{ role: "user" as const, content: query }];
+    const res = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages,
+    });
+    const data = res.choices[0].message.content;
+
+    // ✅ Do this — query is the raw user input
+    updateTrace({ input: query, output: data });
+
+    // ❌ Don't do this — messages is not the raw user input
+    // updateTrace({ input: messages, output: data });
+    return data;
+  });
+};
+```
+
+You **don't** have to set both on every trace. If a turn only has a user message or only an LLM reply, set just that one, and Confident AI shows and evaluates the turn accordingly.
+
+#### Python
+
+```python title="example.py"
+# ✅ Set only input (e.g. user message with no immediate LLM response)
+update_trace(thread_id="your-thread-id", input=query)
+
+# ✅ Set only output (e.g. proactive LLM message with no user input)
+update_trace(thread_id="your-thread-id", output=res)
+
+# ✅ Omit both (e.g. background processing step in the conversation)
+update_trace(thread_id="your-thread-id")
+```
+
+#### TypeScript
+
+```typescript title="example.ts"
+// ✅ Set only input
+updateTrace({ threadId: "your-thread-id", input: query });
+
+// ✅ Set only output
+updateTrace({ threadId: "your-thread-id", output: data });
+
+// ✅ Omit both
+updateTrace({ threadId: "your-thread-id" });
+```
+
+> If I/O is not provided, it defaults to the [trace's default I/O
+> values](/docs/llm-tracing/features/input-output#set-trace-io). There
+> must be at least one trace in the thread with an input or output set.
+
+### Set Thread Fields
+
+Tags and metadata on a thread label the conversation as a whole, such as its agent version, client or status. You can filter and group by them across the Observatory.
+
+They're separate from the [tags](/docs/llm-tracing/features/tags) and [metadata](/docs/llm-tracing/features/metadata) on each trace. To set them, pass a `thread` object when starting a turn, with the ID, tags (a list of strings) and metadata (any JSON-serializable values):
+
+#### Python
+
+```python title="main.py" {3-7}
+from confident_trace import turn
+
+with turn(thread={
+    "id": "chat-42",
+    "tags": ["support"],
+    "metadata": {"channel": "web"},
+}):
+    agent.invoke(...)
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {4-8} maxLines={0}
+import { turn } from "confident-trace";
+
+await turn({
+  thread: {
+    id: "chat-42",
+    tags: ["support"],
+    metadata: { channel: "web" },
+  },
+}, async () => {
+  await agent.invoke(...);
+});
+```
+
+You can identify the thread in either of two ways — use one form or the other:
+
+- Pass `thread_id` / `threadId` when you only need the ID.
+- Pass a `thread` object when you also want to set thread tags or metadata. The
+  object can contain `id`, `tags`, and `metadata`. `turn()` still requires an
+  ID in the object.
+
+The same two options are available with a [trace
+context](/docs/llm-tracing/features/trace-context#update-trace-properties) and
+the trace update helper.
+
+> Thread tags and metadata replace whatever was previously set for that field
+> **on the current trace**; fields you leave out are unchanged. Thread metadata
+> is subject to the same [content controls](/docs/llm-tracing/features/masking)
+> as the rest of your trace data.
+
+### Set Tools Called
+
+If your app calls tools, log which ones each turn used. They're attached to the trace next to the `output` they helped produce, and each tool is an object with at least a `name`.
+
+#### Python
+
+```python title="main.py" {9}
+from confident_trace import turn, update_trace
+
+def llm_app(query: str):
+    with turn("llm_app", thread_id="your-thread-id"):
+        res, tools = call_agent(query)
+        update_trace(
+            input=query,
+            output=res,
+            tools_called=[{"name": "WebSearch"}, {"name": "Calculator"}],
+        )
+        return res
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {9} maxLines={0}
+import { turn, updateTrace } from "confident-trace";
+
+const llmApp = async (query: string) => {
+  return turn({ threadId: "your-thread-id" }, async () => {
+    const { res, tools } = await callAgent(query);
+    updateTrace({
+      input: query,
+      output: res,
+      toolsCalled: [{ name: "WebSearch" }, { name: "Calculator" }],
+    });
+    return res;
+  });
+};
+```
+
+### Set Retrieval Context
+
+For RAG apps, log the retrieval context behind each reply, so Confident AI can evaluate retrieval quality across the conversation.
+
+#### Python
+
+```python title="main.py" {10}
+from confident_trace import turn, update_trace
+
+def llm_app(query: str):
+    with turn("llm_app", thread_id="your-thread-id"):
+        chunks = retrieve(query)
+        res = generate(query, chunks)
+        update_trace(
+            input=query,
+            output=res,
+            retrieval_context=[chunk.text for chunk in chunks],
+        )
+        return res
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {10} maxLines={0}
+import { turn, updateTrace } from "confident-trace";
+
+const llmApp = async (query: string) => {
+  return turn({ threadId: "your-thread-id" }, async () => {
+    const chunks = await retrieve(query);
+    const res = await generate(query, chunks);
+    updateTrace({
+      input: query,
+      output: res,
+      retrievalContext: chunks.map((c) => c.text),
+    });
+    return res;
+  });
+};
+```
+
+> You can set `tools_called` and `retrieval_context` on the same trace. Together
+> they show how that turn's output was produced.
+
+## Next Steps
+
+With threads set up, evaluate conversation quality or add more context to your traces.
+
+#### [Evaluate Threads](/docs/llm-tracing/evaluate-threads)
+
+Run online evaluations on entire conversation threads to monitor multi-turn
+quality.
+
+#### [Customize Traces](/docs/llm-tracing/features/tags)
+
+Add tags, metadata, user info, and customer info to your traces.

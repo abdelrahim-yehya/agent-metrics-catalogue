@@ -1,0 +1,89 @@
+# Custom Reports
+
+AI-written reports that summarize what happened in your project, generated on a schedule.
+
+## Overview
+
+**Reports** are AI-generated documents written over your project's data on a schedule: stat cards, graphs, tables, findings and caveats. Each comes from a **report template**: either a plain-English prompt describing what you want to understand, or a set of sections you build yourself. Confident AI plans the queries, runs them, and writes a report you can read on the platform or download.
+
+Product preview: Weekly Health Check report: an 82.4% pass rate, 52 test runs, a daily pass-rate graph and a datasets table
+
+*A generated report*
+
+A report can contain:
+
+- **Stat cards** — headline metrics that anchor the findings.
+- **Graphs** — trends over time, such as pass rate by day.
+- **Tables** — supporting rollups, e.g. top failure modes, slowest spans, lowest-scoring metrics.
+- **Text** — an overview, key findings and recommendations.
+- **Admonitions** — callouts for caveats and can't-miss highlights.
+
+## How a Report Is Generated
+
+When a template runs, Confident AI:
+
+1. **Plans queries.** A planner model reads the template's prompt (or each section's prompt) and proposes a set of queries against your project's tracing, threads, metric, and test-run data.
+2. **Executes queries.** Each planned query runs against the same backing data the rest of the platform uses.
+3. **Writes the report.** A summarizer model writes each section from the query results.
+
+If the planner determines that your prompt doesn't map to data the project actually has (e.g. you ask about red-team scores in a project with no red-teaming data), the report comes back as **"Irrelevant query"** with an explanation, and you can tighten the prompt and try again.
+
+## Create a Template
+
+#### Add a new template
+
+Open **Reports** from the project sidebar and click **New Template**. Give it a **Name** (e.g. *Daily Error Summary*, *Weekly Test-Run Health*) and a **Prompt** describing what you want to understand about your data, or start from one of the **Default Templates**, then click **Create**.
+
+#### Be specific in the prompt
+
+The planner uses your prompt to decide which queries to run, and the summarizer uses it to frame the narrative. Mention the data types, metrics, and time windows you care about.
+
+A vague prompt like *"How are we doing?"* produces a vague report. A specific prompt like *"Show me the passing rates of test runs this past week and which metrics had the highest failure rates. What was our thread activity and have any threads been annotated?"* produces a focused, useful one.
+
+#### Choose how the report is built
+
+On the template's **Customize report** tab, choose **Generate from prompt** to have the whole report written from the prompt, or **Build from scratch** to define each section yourself. See [Generating Reports for Stakeholders](/docs/guides/reports) for building sections.
+
+#### Set a schedule
+
+Click the schedule button under the template's name to choose how often a report is generated (e.g. weekly). **Pause** stops scheduled reports without deleting the template, and **Generate new report** creates one right away.
+
+## Read a Report
+
+Open **Reports** from the project sidebar. Each template has a card showing its schedule, how many reports it has, and its latest ones.
+
+Product preview: Reports page listing the Cost Check, Error Check and Weekly Health Check templates with their schedules and latest reports
+
+*Reports page*
+
+Click a template to see its reports, newest first, on the **Reports** tab. Open one to read it full screen, and use the **Newer report** and **Older report** arrows beside it to step through earlier reports. Each report carries the date it was generated and the period it covers.
+
+## Export a Report
+
+Each report has a **Download report** action, on its card and in the full-screen view. The download mirrors the rendered report, including its graphs and tables, so it stays shareable on its own.
+
+## Which Model Generates Reports
+
+Reports use your project's configured **evaluation model** when the provider is OpenAI-compatible (`OpenAI` or Confident's pooled OpenAI-backed default). For any other provider — Anthropic, Bedrock, Vertex, etc. — the system falls back to Confident AI's standard generation model so report quality stays consistent.
+
+You can change the active model in **Project Settings** → **[Model Settings](/docs/settings/project/model-settings)**.
+
+> If you select **`gpt-5`** specifically, OpenAI requires the org whose key handles the call to be verified. See the [Model Settings](/docs/settings/project/model-settings) page for details.
+
+## When a Report Says "Irrelevant Query"
+
+If the planner can't find data that matches your prompt, the report returns an "irrelevant query" message instead of a fabricated narrative. Common reasons:
+
+- The prompt names a feature the project doesn't have data for (e.g. red-team results in a project without red-teaming).
+- The prompt names a time window with no traffic.
+- The prompt is too abstract to map onto any concrete query.
+
+Tighten the prompt (data types, metrics, time window, what "good" looks like) and the next generation will produce a real report.
+
+#### [Dashboards](/docs/customizations/dashboards)
+
+Build live, drillable dashboards over the same data — graphs, tables, and big-number tiles you can refresh on demand.
+
+#### [Model Settings](/docs/settings/project/model-settings)
+
+Configure which model and credentials reports use, including the `gpt-5` verification note.

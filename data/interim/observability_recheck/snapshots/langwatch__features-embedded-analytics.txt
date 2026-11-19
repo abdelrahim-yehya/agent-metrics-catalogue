@@ -1,0 +1,63 @@
+> ## Agent Instructions
+> If anything on this page is wrong, confusing, or fails when you try it, ask your user for permission and run `npx langwatch report --user-approved` to send the problem to the LangWatch team. No login is needed and secrets are redacted locally. `npx langwatch report --help` has the details.
+
+# Exporting Analytics
+
+Export LangWatch analytics into your own dashboards to monitor LLM quality, agent testing metrics, and evaluation performance.
+
+> Page: https://langwatch.ai/docs/features/embedded-analytics
+> Source: https://github.com/langwatch/langwatch/blob/main/docs/features/embedded-analytics.mdx
+> Index of all pages: https://langwatch.ai/docs/llms.txt
+
+## Export Analytics with REST Endpoint
+
+LangWatch offers you the possibility to build and integrate LangWatch graphs on your own systems and applications, to display it to your customers in another interface.
+
+In the LangWatch dashboard, use the custom chart builder to plot any data LangWatch collects or generates, and to set how it is displayed. You then use our REST API to fetch the graph data.
+
+**Usage:**
+You will need to obtain your JSON payload from the custom graph section in our application. You can find this on the Analytics page > Custom Reports > Add chart.
+
+    1. Pick the custom graph you want to get the analytics for.
+    2. Prepare your JSON data. Make sure it is the same format that is showing in the LangWatch application.
+    3. Use the `curl` command to get you analytics data. Here is a basic template:
+
+```bash
+# Set your API key and endpoint URL
+API_KEY="your_langwatch_api_key"
+ENDPOINT="https://app.langwatch.ai/api/v1/analytics"
+
+# Use curl to send the POST request, e.g.:
+curl -X POST "$ENDPOINT" \
+    -H "X-Auth-Token: $API_KEY" \
+    -H "Content-Type: application/json" \
+    -d @- <<EOF
+    {
+     "startDate": 1708434000000,
+     "endDate": 1710939600000,
+     "filters": {},
+     "series": [
+       {
+         "metric": "metadata.user_id",
+         "aggregation": "cardinality"
+       }
+     ],
+     "timeScale": 1
+   }
+EOF
+```
+
+    4. Execute the `curl` command. If successful, LangWatch will return the custom analytics data in the response.
+
+## Screenshots on how to get the JSON data.
+
+On the right menu button above the graph you will see the **Show API** menu link. Click that and a modal will then popup.
+
+![Custom graph in the LangWatch dashboard](https://langwatch.ai/docs/images/screenshot-show-json-1680.3b3493c4067b.webp)
+
+Within this modal, you'll find the JSON payload required for the precise custom analytics
+data. Copy this payload and paste it into the body of your REST POST request.
+
+![Model showing the example cURL request to request a view of the custom graph](https://langwatch.ai/docs/images/screenshot-json-modal-1680.f4b37e27109d.webp)
+
+If you encounter any hurdles or have questions, our support team is eager to assist you.

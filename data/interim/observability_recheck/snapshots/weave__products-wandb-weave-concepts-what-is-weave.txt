@@ -1,0 +1,131 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.coreweave.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# What is Weave?
+
+> Learn about W&B Weave and how it helps you build, evaluate, and improve LLM applications
+
+W\&B Weave is an observability and evaluation platform for building reliable agents and LLM applications. Weave helps you understand what your AI application is doing, measure how well it performs, and systematically improve it over time.
+
+Building LLM applications is fundamentally different from traditional software development. LLM outputs are non-deterministic, making debugging harder. Quality is subjective and context-dependent. Small prompt changes can cause unexpected behavior changes. Traditional testing approaches fall short.
+
+## Core capabilities
+
+Weave provides the following core functionality:
+
+* **Visibility** into agent sessions and multi-turn conversations, or into individual function calls and outputs in application code.
+* **Systematic evaluation** to measure performance against curated test cases.
+* **Version tracking** for prompts, models, and data so you can understand what changed.
+* **Experimentation** with different prompt and model comparisons.
+* **Feedback collection** to capture human judgments and annotations.
+* **Monitoring** in production using guardrails and scorers for LLM safety and quality.
+
+## Choose a workflow
+
+Weave provides this functionality through two different workflows:
+
+* Automatic agent tracing
+* Instrumenting your application's arbitrary LLM calls and functions to trace their input, output, and code
+
+### Trace an Agent
+
+> [!NOTE]
+>
+> Weave's agent tracing workflows are also available in [CoreWeave Agent Lens](https://docs.coreweave.com/products/agent-lens.md), the successor to Weights & Biases Weave. Both services already receive your agent tracing data, so there is nothing to migrate. See [What is Agent Lens](https://docs.coreweave.com/products/agent-lens.md) for more information.
+
+Weave provides agent observability for the full lifecycle of agent conversations, including sessions, LLM calls, and tool executions.
+
+Agent tracing is built on [OpenTelemetry (OTel)](https://opentelemetry.io/docs/concepts/) and the [GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/). If your agent is already instrumented with OTel, you can send its existing spans to Weave without re-instrumenting your code. Weave accepts any OTel span and stores its attributes so you can query them. Spans that follow the GenAI agent conventions, such as `invoke_agent` and `execute_tool`, render as conversations, turns, and tool calls in the **Agents** view. To learn how to emit these spans from your own agent, see the [custom agents quickstart](https://docs.coreweave.com/products/wandb/weave/custom-agents-quickstart.md).
+
+If you're building an agent, start with the [agent integration quickstart](https://docs.coreweave.com/products/wandb/weave/agent-integration-quickstart.md) to pick a built-in integration, or follow the [custom agents quickstart](https://docs.coreweave.com/products/wandb/weave/custom-agents-quickstart.md) to manually instrument your own. To learn how the Weave SDK models agents, see [Trace your agents](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-agents.md).
+
+If you're using a supported third-party agent harness, such as Claude Code or OpenAI Agent SDK, Weave instruments it automatically with no additional code. See [Integrations](https://docs.coreweave.com/products/wandb/weave/guides/integrations.md) for all supported frameworks.
+
+### Instrument and trace functions
+
+To trace individual function calls, application code, or custom logic, use Weave Ops and Calls. Add one line to any function to track inputs, outputs, cost, token count, and latency. You can also:
+
+* Track end-to-end how data flows through your LLM application.
+* See source documents used to produce the LLM feedback.
+* Drill down into specific prompts and how answers are produced.
+
+To trace individual functions, follow the Weave [Op tracing quickstart](https://docs.coreweave.com/products/wandb/weave/quickstart.md) or learn to use the Weave [Ops and Calls](https://docs.coreweave.com/products/wandb/weave/guides/tracking/tracing.md).
+
+The Weave SDK also autopatches with many different frameworks and LLM providers to automatically capture traces from LLM calls in your code. See [Integrations](https://docs.coreweave.com/products/wandb/weave/guides/integrations.md) for all supported providers and frameworks.
+
+### When to use agent tracing and when to use application instrumentation
+
+Choose which workflow to use based on what you want to observe:
+
+* **Use agent tracing if you're building or running an agent.** This is the right fit if you use a supported agent harness or agent SDK, or if you've built a custom agent that you can instrument yourself.
+
+* **Use application instrumentation if you're tracing application code.** This is the right fit for applications structured around discrete calls rather than conversations, such as a RAG pipeline, a summarization endpoint, or custom business logic.
+
+Each approach records traces in its own part of the UI: agent traces appear on the **Agents** page, and `weave.op` calls appear on the **Traces** page. You can use both approaches in the same Weave project, but they produce separate traces.
+
+If you're not sure where to start and your system involves an agent, start with agent tracing using the [agent integration quickstart](https://docs.coreweave.com/products/wandb/weave/agent-integration-quickstart.md). Otherwise, start with the [Op tracing quickstart](https://docs.coreweave.com/products/wandb/weave/quickstart.md).
+
+## Evaluations
+
+Benchmark and monitor your agent's or LLM application's performance with evaluations to iteratively improve quality and reliability.
+
+* Track which model and prompt versions resulted in what performance.
+* Define metrics to evaluate responses using one or more scoring functions.
+* Compare two or more different evaluations over multiple metrics. Contrast specific samples for their performance.
+
+[Build an evaluation pipeline](https://docs.coreweave.com/products/wandb/weave/tutorial-eval.md)
+
+## Version everything
+
+Weave tracks versions of your prompts, datasets, and model configurations. When something breaks, you can see exactly what changed. When something works, you can reproduce it.
+
+[Learn about versioning](https://docs.coreweave.com/products/wandb/weave/guides/tracking/objects.md)
+
+## Experiment with prompts and models
+
+Bring your API keys to test prompts and compare responses from different commercial models using the Playground.
+
+[Experiment in the Weave Playground](https://docs.coreweave.com/products/wandb/weave/guides/tools/playground.md)
+
+### Collect feedback
+
+Capture human feedback, annotations, and corrections from production use. Use this data to build better test cases and improve your application.
+
+[Collect feedback](https://docs.coreweave.com/products/wandb/weave/guides/tracking/feedback.md)
+
+### Monitor production
+
+Score production traffic with the same scorers you use in evaluation. Set up guardrails to catch issues before they reach users.
+
+[Set up guardrails](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/guardrails.md)
+
+## Get started with Weave
+
+Weave provides SDKs for Python and TypeScript. Both SDKs support tracing, evaluation, datasets, and the core Weave features. Some advanced features, such as class-based Models and Scorers, aren't available in the Weave TypeScript SDK.
+
+To get started with Weave:
+
+1. Create a CoreWeave Forge account at [https://id.coreweave.com/signup](https://id.coreweave.com/signup) and get your API key from [https://forge.coreweave.com/settings#apikeys](https://forge.coreweave.com/settings#apikeys?utm_source=course\&utm_medium=course\&utm_campaign=weave).
+2. Install Weave:
+
+   ```python Python theme={"system"}
+   pip install weave
+   ```
+
+   ```typescript TypeScript theme={"system"}
+   npm install weave
+   ```
+3. In your script, import Weave and initialize a project. Replace `<your-team>` with your CoreWeave Forge team name and `<your-project>` with your Weights & Biases project name.
+
+   ```python Python theme={"system"}
+   import weave
+   client = weave.init('<your-team>/<your-project>')
+   ```
+
+   ```typescript TypeScript theme={"system"}
+   import * as weave from 'weave';
+   const client = await weave.init('<your-team>/<your-project>');
+   ```
+
+You're now ready to use Weave.

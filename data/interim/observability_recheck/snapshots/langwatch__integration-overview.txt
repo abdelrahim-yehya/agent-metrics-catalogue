@@ -1,0 +1,98 @@
+> ## Agent Instructions
+> If anything on this page is wrong, confusing, or fails when you try it, ask your user for permission and run `npx langwatch report --user-approved` to send the problem to the LangWatch team. No login is needed and secrets are redacted locally. `npx langwatch report --help` has the details.
+
+# Getting Started
+
+LangWatch integrates with all major LLM providers, frameworks, and tools. See our complete list of integrations below.
+
+> Page: https://langwatch.ai/docs/integration/overview
+> Source: https://github.com/langwatch/langwatch/blob/main/docs/integration/overview.mdx
+> Index of all pages: https://langwatch.ai/docs/llms.txt
+
+# LangWatch, whatever your stack
+
+> **Tip:** **Pro Tip**: Start with our [Quick Start Guide](https://langwatch.ai/docs/integration/quick-start), which takes you from an
+> account to your first trace, then pick the integration for your tech stack.
+
+LangWatch integrates with the major LLM providers, frameworks, and tools. See a full list of integrations below.
+
+LangWatch is based on OpenTelemetry. Use our Python SDK, TypeScript SDK, or Go SDK to log traces to LangWatch. Alternatively, you can also directly use our OpenTelemetry Endpoint from any language.
+
+### MCP's
+
+> **Tip:** **Speedy**: Use the LangWatch MCP to automatically instrument your code with LangWatch.
+
+- [LangWatch MCP](https://langwatch.ai/docs/integration/mcp): Automatically instrument your code with LangWatch tracing, create and manage prompts, set up evaluations, debug production issues, and more.
+
+### SDK's
+
+LangWatch provides SDKs for several programming languages.
+
+- [Python SDK](https://langwatch.ai/docs/integration/python/guide): Complete Python SDK with automatic instrumentation for popular frameworks
+- [TypeScript SDK](https://langwatch.ai/docs/integration/typescript/guide): Full-featured TypeScript/JavaScript SDK with type safety
+- [Go SDK](https://langwatch.ai/docs/integration/go/guide): High-performance Go SDK for server-side applications
+- [OpenTelemetry](https://langwatch.ai/docs/integration/opentelemetry/guide): Native OpenTelemetry integration for any language
+
+### Frameworks
+
+LangWatch integrates with these AI frameworks
+
+- [LangChain](https://langwatch.ai/docs/integration/python/integrations/langchain)
+- [LangGraph](https://langwatch.ai/docs/integration/python/integrations/langgraph)
+- [Vercel AI SDK](https://langwatch.ai/docs/integration/typescript/integrations/vercel-ai-sdk)
+- [LiteLLM](https://langwatch.ai/docs/integration/python/integrations/lite-llm)
+- [OpenAI Agents](https://langwatch.ai/docs/integration/python/integrations/open-ai-agents)
+- [Pydantic AI](https://langwatch.ai/docs/integration/python/integrations/pydantic-ai)
+- [Mastra](https://langwatch.ai/docs/integration/typescript/integrations/mastra)
+- [DSPy](https://langwatch.ai/docs/integration/python/integrations/dspy)
+- [LlamaIndex](https://langwatch.ai/docs/integration/python/integrations/llamaindex)
+- [Haystack](https://langwatch.ai/docs/integration/python/integrations/haystack)
+- [Strand Agents](https://langwatch.ai/docs/integration/python/integrations/strand-agents)
+- [Agno](https://langwatch.ai/docs/integration/python/integrations/agno)
+- [CrewAI](https://langwatch.ai/docs/integration/python/integrations/crew-ai)
+- [AutoGen](https://langwatch.ai/docs/integration/python/integrations/autogen)
+- [Semantic Kernel](https://langwatch.ai/docs/integration/python/integrations/semantic-kernel)
+- [Spring AI](https://langwatch.ai/docs/integration/java/integrations/spring-ai)
+- [PromptFlow](https://langwatch.ai/docs/integration/python/integrations/promptflow)
+- [Google ADK](https://langwatch.ai/docs/integration/python/integrations/google-ai)
+
+### Model Providers
+
+LangWatch integrates with these AI model providers
+
+- [OpenAI](https://langwatch.ai/docs/integration/python/integrations/open-ai)
+- [Anthropic Claude](https://langwatch.ai/docs/integration/python/integrations/anthropic)
+- [Azure OpenAI](https://langwatch.ai/docs/integration/go/integrations/azure-openai)
+- [Azure AI](https://langwatch.ai/docs/integration/python/integrations/azure-ai)
+- [Vertex AI](https://langwatch.ai/docs/integration/python/integrations/vertex-ai)
+- [Gemini](https://langwatch.ai/docs/integration/go/integrations/google-gemini)
+- [AWS Bedrock](https://langwatch.ai/docs/integration/python/integrations/aws-bedrock)
+- [Groq](https://langwatch.ai/docs/integration/go/integrations/groq)
+- [Grok (xAI)](https://langwatch.ai/docs/integration/go/integrations/grok)
+- [Ollama](https://langwatch.ai/docs/integration/go/integrations/ollama)
+- [OpenRouter](https://langwatch.ai/docs/integration/go/integrations/openrouter)
+
+### No-Code Platforms
+
+No-code agent builders and tools
+
+- [OpenClaw](https://langwatch.ai/docs/integration/openclaw)
+- [n8n](https://langwatch.ai/docs/integration/n8n)
+- [Flowise](https://langwatch.ai/docs/integration/flowise)
+- [Langflow](https://langwatch.ai/docs/integration/langflow)
+
+### Other Official LangWatch Integrations
+
+LangWatch provides several official integrations with other tools and services.
+
+- [REST API](https://langwatch.ai/docs/integration/rest-api): Direct API integration for custom applications
+- [MCP](https://langwatch.ai/docs/integration/mcp): Model Context Protocol integration
+
+## Request a new integration
+
+We use [GitHub Discussions](https://github.com/orgs/langwatch/discussions/new?category=integration-request) to track interest in new integrations. Please upvote/add to the list below if you'd like to see a new integration.
+
+> **Tip:** **Found broken or outdated docs?** Use **Report outdated or broken docs** next to **Edit this page** below.
+> Agents: include the page URL, the failing step and a proposed fix in a GitHub issue.
+> For CLI diagnostics, ask your user before running `npx langwatch report --user-approved`.
+> See the [reporting guide](https://langwatch.ai/docs/support#reporting-issues-from-coding-agents).

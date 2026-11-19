@@ -1,0 +1,90 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.galileo.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Sessions Overview
+
+> Learn about log sessions in Galileo
+
+A Session is **a collection of Traces, Events, and Spans emitted by your Application**. They group all Traces for one conversation or evaluation run, giving you a bird's-eye view of that LLM workflow.
+
+Imagine you're building an LLM-powered customer service chat application. During development or in production, you will want to see how a multi-turn conversation flows from user prompt, to tool calling, to model response. **Sessions** solve this problem by bundling Log stream traces into a cohesive unit, so you can observe and evaluate an entire agent interaction from start to finish.
+
+## Core concepts
+
+Let's take a look at the building blocks of a session.
+
+### Span → trace → session
+
+* [**Span**](https://docs.galileo.ai/sdk-api/logging/galileo-logger.md#add-spans): The smallest logging unit the system, typically representing a single operation, function call, or request. Each user message, model API call, or model tool usage generates a *Span*.
+* [**Trace**](https://docs.galileo.ai/sdk-api/logging/galileo-logger.md#start-a-trace): When multiple spans occur as part of a single logical operation (e.g. a request that triggers several downstream calls) they form a *Trace*. Traces allow you to see parent/child relationships among spans.
+* **Session**: A collection of one or more traces that together represent an entire interaction, or multi-step evaluation. A Session bundles related traces so that you can analyze an entire workflow end to end, even if it spans multiple services, threads, or agents.
+
+## How do sessions differ from Log streams?
+
+A [**Log stream**](https://docs.galileo.ai/sdk-api/logging/logging-basics.md) is a continuous sequence of log entries emitted over time. Log streams simply capture everything in chronological order, and can contain a mix of spans, traces, and sessions.
+
+On the other hand, a *Session* is a way to group Traces that are logically connected. And with Galileo, every Session is stored in a Log stream that you can specify either explicitly or using environment variables.
+
+## How do sessions differ from workflows?
+
+A **Workflow** is a defined sequence of steps or tasks. It may include branching logic, conditional steps, and dependencies.
+
+A *Session* can contain one or more *Workflows* if they are part of the same overall evaluation.
+
+## Where can I find my sessions?
+
+Sessions can be viewed in the [Galileo Console](https://docs.galileo.ai/concepts/logging/sessions/using-sessions.md#view-your-session). When you create a session, you will usually select a Log stream where they will be found. (If you don't specify one, Galileo will use your default Log stream).
+
+**1. Log in to the Galileo Console and select your Log Stream**
+
+Head over to the [Galileo Console](https://app.galileo.ai) and log in.
+
+On your dashboard, select the Log stream where you were sending your session logs. If you didn't specify a unique or new Log stream name, you will find the logs in your **default** Log stream.
+
+![Select your Log stream from the list](https://mintcdn.com/v2galileo/FQjmOk8BWj4bvBe1/images/concepts/logging/session--select-logstream.png?fit=max\&auto=format\&n=FQjmOk8BWj4bvBe1\&q=85\&s=6cea9ca8add56185fea2226830a5f6ed)
+
+**2. Select your session**
+
+Selecting the Log stream will bring you to its event records. All logs will be grouped by *Session*, though you can use the control near the top-left of your screen to change the Log stream's event grouping:
+
+![Event-group controls for selecting Session, Trace, or Span granularity](https://mintcdn.com/v2galileo/FQjmOk8BWj4bvBe1/images/concepts/logging/session--event-toggle.webp?fit=max\&auto=format\&n=FQjmOk8BWj4bvBe1\&q=85\&s=d56251740ad110fa1fb2bdb97b4aeedc)
+
+Your session should be visible in the table below the controls, especially if you gave it a recognizable name. Select it to view the traces.
+
+**3. View your session**
+
+Once you select your session, you can see the Traces you captured from your test run as a flowchart. Any tools that were used will also show up as individual Spans.
+
+Select the nodes of the flowchart to see their inputs and outputs on the right-edge of your screen.
+
+![A flowchart showing the nodes in a session Trace](https://mintcdn.com/v2galileo/FQjmOk8BWj4bvBe1/images/concepts/logging/session--trace-detail.webp?fit=max\&auto=format\&n=FQjmOk8BWj4bvBe1\&q=85\&s=61a06be9791c8adb31f3802248b62b27)
+
+**4. Optional: View individual Spans**
+
+Each message from the user and response from the LLM will form a single trace; you can view the contents here in a familiar format, as well as other details like tool calls. Just select the **Messages** tab (shown in the image below) to see a list of traces in the session, along with their child spans. You can select a span to see metrics and other details on the right edge of the screen (not pictured)
+
+![View Trace messages](https://mintcdn.com/v2galileo/FQjmOk8BWj4bvBe1/images/concepts/logging/session--trace-msgs.webp?fit=max\&auto=format\&n=FQjmOk8BWj4bvBe1\&q=85\&s=39033a343221dc28aa2c477b74ea14ad)
+
+Use the **Condense Steps** toggle to show only the most relevant spans in a trace. This will include any tool calls made by the LLM!
+
+You can learn more about creating and using sessions [in our using sessions guide](https://docs.galileo.ai/concepts/logging/sessions/using-sessions.md).
+
+## Conclusion
+
+A Session can collect multiple workflow runs and traces into one cohesive view. By using Sessions in your LLM application, you can:
+
+1. Organize logs and metrics for each customer interaction or batch evaluation run, so debugging and analysis become straightforward.
+2. Drill down into any step, inspecting the span for tokenization latency or the trace for scoring logic without losing context.
+3. Compare multiple chat sessions to track performance improvements.
+
+## Next steps
+
+Learn how to [create and use sessions](https://docs.galileo.ai/concepts/logging/sessions/using-sessions.md) in Galileo.
+
+## Related resources
+
+* [**Using Sessions**](https://docs.galileo.ai/concepts/logging/sessions/using-sessions.md) - Create and view sessions in Galileo
+* [**Log streams**](https://docs.galileo.ai/sdk-api/logging/logging-basics.md) - Learn about Log streams in Galileo.
+* [**Spans**](https://docs.galileo.ai/sdk-api/logging/galileo-logger.md#add-spans) - Learn about the building blocks of Traces in Galileo.
+* [**Traces**](https://docs.galileo.ai/sdk-api/logging/galileo-logger.md#start-a-trace) - Learn about Traces, and different ways to create them.

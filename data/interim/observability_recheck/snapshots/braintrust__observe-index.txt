@@ -1,0 +1,105 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.braintrust.dev/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Observe your application
+
+> Turn every production request into a searchable trace. Filter, analyze, and drill into real-time data to identify issues and gather signal for improving your AI system.
+
+After instrumenting your application, Braintrust captures every request as traces that you can view, filter, and analyze in real time. This observability enables you to monitor production behavior, identify issues, and gather data for improving your application.
+
+## Why observe in Braintrust
+
+Observability in Braintrust creates a feedback loop between production and evaluation. Logs use the same data structure as experiments, which means:
+
+* Instrumentation code works for both logging and evaluation
+* Traces capture identical data in production and testing
+* Scores and feedback apply to both logs and experiments
+* Production data seamlessly becomes evaluation datasets
+
+This unified structure lets you iterate faster and maintain consistency across your development workflow.
+
+## View your logs
+
+The  **Logs** page displays all traces from your application in a searchable, filterable table. Each row represents a complete trace with its root span.
+
+![Logs page](https://mintcdn.com/braintrust/wnKh80ZxpSZ__gif/images/observe/logs.png?fit=max\&auto=format\&n=wnKh80ZxpSZ__gif\&q=85\&s=5f1254cfe0eb121f829e87a25ba750ce)
+
+You can:
+
+* Browse traces and individual spans, in the UI or from the terminal with [`bt view logs`](https://docs.braintrust.dev/reference/cli/view).
+* Group related traces by metadata or tags.
+* Create custom columns to surface important values.
+* Extract prompts to iterate in playgrounds.
+* Apply tags to organize traces.
+* Download logs as CSV or JSON, or pull them locally with [`bt sync pull`](https://docs.braintrust.dev/reference/cli/sync).
+
+## Use Loop
+
+[** Loop**](https://docs.braintrust.dev/loop.md) is Braintrust's AI agent. It understands your data structure, so you can investigate your logs through natural language instead of writing queries. Loop is available on the  **Logs** page, on individual trace pages, and on its own full page, and it powers Patterns.
+
+See [What Loop can do](https://docs.braintrust.dev/loop/capabilities.md) for the full range, including building datasets, writing scorers, and running evaluations from what it finds.
+
+## Choose an analysis approach
+
+Reading every trace stops being practical quickly. Braintrust offers two ways to apply intelligence to your logs, at different scales.
+
+| Approach | Use it to | Scope |
+| - | - | - |
+| [Patterns](https://docs.braintrust.dev/observe/patterns.md) | Have Loop investigate recurring problems and recommend what to do next | The traces it selects, in depth |
+| [Topics](https://docs.braintrust.dev/observe/topics.md) | Classify and cluster your traces by user intent, sentiment, and issues | Every trace |
+
+You can use either on its own or use them together. Neither requires the other.
+
+### Investigate with Patterns
+
+[** Patterns**](https://docs.braintrust.dev/observe/patterns.md) puts Loop to work on your trace backlog on a schedule. It searches for recurring problems and trends that no scorer already measures, then records each one with supporting evidence and a suggested fix.
+
+See [Get started with Patterns](https://docs.braintrust.dev/observe/patterns.md) for details.
+
+### Discover insights with Topics
+
+&#x20;**Topics** automatically analyze and classify your logs without manual review. Each trace is analyzed by **facets** that extract short labels, then similar labels are clustered into named **topics** like user intents, sentiment, and issues.
+
+Use Topics for:
+
+* **Blind-spot detection**: Surface user request types and system gaps you didn't know to look for.
+* **Silent failure detection**: Catch quality issues that don't trip explicit checks.
+* **Product roadmap signals**: Cluster real user requests into themes to inform what to build.
+* **Targeted evaluation datasets**: Filter classified logs to build datasets for focused evals.
+
+Built-in facets include Task (user intents), Sentiment (emotional tone), and Issues (agent problems). You can also create custom facets for domain-specific analysis.
+
+Where Topics tells you what your traces are about, Patterns tells you what deserves your attention. See [Patterns and Topics](https://docs.braintrust.dev/observe/patterns.md#patterns-and-topics) for how the two compare, and [Get started with Topics](https://docs.braintrust.dev/observe/topics.md) for details.
+
+## Filter and search
+
+Find specific traces using multiple approaches:
+
+* **Filters**: Type in the search field for suggestions and completions, or choose **Add a structured filter** for point-and-click filtering and SQL. You can also apply filters via the CLI or API.
+* **Common filters**: Paste [ready-made filter patterns](https://docs.braintrust.dev/observe/filter.md#common-filters) for typical queries.
+* **Saved views**: Save useful combinations as [custom table views](https://docs.braintrust.dev/observe/view-logs.md#create-custom-table-views).
+* **Loop**: Ask natural language questions about your logs.
+
+## Monitor with dashboards
+
+Custom dashboards aggregate metrics across your logs and experiments. Track request counts, latency, token usage, costs, scores, and custom metrics over time.
+
+Dashboards help you:
+
+* Visualize trends and anomalies
+* Compare performance across time periods
+* Drill into specific data points
+* Share insights with your team
+
+## Next steps
+
+* [View your logs](https://docs.braintrust.dev/observe/view-logs.md) in the Braintrust dashboard
+* [Enable Patterns](https://docs.braintrust.dev/observe/patterns/enable.md) to surface recurring problems automatically
+* [Discover insights with Topics](https://docs.braintrust.dev/observe/topics.md)
+* [Use Loop](https://docs.braintrust.dev/loop.md) to analyze logs with natural language
+* [Filter and search](https://docs.braintrust.dev/observe/filter.md) for specific traces
+* [Score online](https://docs.braintrust.dev/evaluate/score-online.md) to evaluate production quality
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

@@ -1,0 +1,72 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.coreweave.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Use trace plots
+
+> Visualize trace-level metrics with interactive charts in Weave to explore latency, cost, and token usage patterns for LLM applications.
+
+The *trace plots* tool in Weave lets you explore, visualize, and debug trace-level metrics (for example, latency, cost, and tokens) using interactive charts. You can use the default trace plots or create your own through the custom trace plot builder. This guide shows you how to open the trace plots panel, work with the default plots, and build custom plots tailored to your project's data.
+
+![Trace plots in action](https://mintcdn.com/coreweave-dbfa0e8d/3Dv_sw2eg8feUJlx/products/wandb/weave/_media/plots-example.png?fit=max\&auto=format\&n=3Dv_sw2eg8feUJlx\&q=85\&s=9eee047c397435c4c8ead3de6f1216d5)
+
+## Get started
+
+Follow these steps to open the trace plots side pane for your project:
+
+1. Navigate to your project's **Traces** page.
+2. Optional: Select **Filter** to filter selected traces (for example, by datetime or operation).
+3. In the upper right corner of the **Traces** view, click the **Show Metrics** icon to open the trace plots side pane.
+
+   ![The Show Metrics icon](https://mintcdn.com/coreweave-dbfa0e8d/3Dv_sw2eg8feUJlx/products/wandb/weave/_media/plots-show-metrics-icon.png?fit=max\&auto=format\&n=3Dv_sw2eg8feUJlx\&q=85\&s=2c655d29a5067007263a4380acb1ea08)
+
+   From here, you can:
+
+   * View the [default trace plots](#default-trace-plots).
+   * Create a [custom trace plot](#create-a-custom-trace-plot).
+4. Charts update dynamically based on your trace filters and selections.
+
+## Default trace plots
+
+When you first open the trace plots panel, Weave automatically generates trace plots based on your available project trace data:
+
+* Bar chart (cost or latency grouped over time bins).
+* Line chart (latency over time).
+* Scatter plot (for example, prompt tokens versus completion tokens).
+
+Each trace plot is interactive:
+
+* Hover for tooltips.
+* Drag to zoom.
+* Double-click to reset.
+* Click points in scatter plots to open a specific trace.
+
+## Create a custom trace plot
+
+If the default trace plots don't show the metrics or relationships you need, you can build your own. To create a custom trace plot, do the following:
+
+1. From the trace plots side pane, click **➕ Add Chart**.
+
+   ![➕ Add Chart button.](https://mintcdn.com/coreweave-dbfa0e8d/3Dv_sw2eg8feUJlx/products/wandb/weave/_media/plots-add-chart.png?fit=max\&auto=format\&n=3Dv_sw2eg8feUJlx\&q=85\&s=67807c050f594f5e412cce3127ec7511)
+
+2. In the pop-up, select one of the available trace plot types:
+
+   ![Available custom trace plot types](https://mintcdn.com/coreweave-dbfa0e8d/3Dv_sw2eg8feUJlx/products/wandb/weave/_media/plots-custom-chart-types.png?fit=max\&auto=format\&n=3Dv_sw2eg8feUJlx\&q=85\&s=40d2c43a8a596f633144a549e007b71d)
+
+3. Configure your trace plot for the selected type. For information on configuration options by trace plot type, see [Trace plot settings by plot type](#trace-plot-settings-by-plot-type).
+
+4. Click **Save chart** to save your chart.
+
+Your custom trace plot now appears in the trace plots side pane alongside the default plots and updates dynamically with your trace filters and selections.
+
+### Trace plot settings by plot type
+
+When you add or edit a custom trace plot, the available configuration options vary depending on the selected trace plot type. The following table describes the configurable options.
+
+| Setting | Scatter Plot | Line Chart | Bar Chart |
+| - | - | - | - |
+| Y-axis | ✓ Required | ✓ Required | ✓ Required |
+| X-axis | ✓ Selectable | Fixed (`started at`) | Fixed (`started at`) |
+| Grouping | ✓ Optional | ✓ Optional | ✓ Optional |
+| Binning | ✗ Not used | ✓ Used | ✓ Used |
+| Aggregation | ✗ Not used | ✓ Used | ✓ Used |

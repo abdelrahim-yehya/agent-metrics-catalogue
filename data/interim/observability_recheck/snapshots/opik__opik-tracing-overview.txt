@@ -1,0 +1,142 @@
+> For clean Markdown of any page, append .md to the page URL.
+> For a complete documentation index, see https://www.comet.com/docs/opik/llms.txt.
+
+# Observability Overview
+
+> **Tip**
+>
+> If you want to jump straight to code, head to the [Getting started](/docs/opik/tracing/getting-started) guide to add tracing in under five minutes.
+
+LLM applications are more than a single API call. A typical agent involves retrieval steps, tool calls, prompt assembly, multiple LLM invocations, and post-processing — all wired together in ways that are invisible at runtime. When something goes wrong, you need to see exactly what happened at every step.
+
+Opik gives you full visibility into every request your agent handles. Every LLM call, every tool invocation, every retrieval step is captured as a trace you can inspect, search, and analyze.
+
+![](/docs/opik/_fern-files/_img/b304b7f0390ec526378e9a16d118215cc697b451ca640014b9a4b7141155a6ff.webp)
+
+## Why use Opik for observability
+
+Debugging LLM applications without observability means guessing. You see the final output but not why the model hallucinated, which retrieval step returned irrelevant context, or where latency spiked.
+
+With Opik, you can:
+
+* **See the full execution path** of every request — from user input through tool calls and LLM completions to the final response
+* **Root-cause production issues fast** — filter and search traces by status, latency, cost, or custom tags to find the problem in seconds
+* **Track costs and latency over time** — monitor token usage and spending across models and providers
+* **Capture multi-turn conversations** — group related traces into threads to understand how interactions evolve across turns
+* **Close the feedback loop** — attach human or automated scores to traces and use them to drive evaluations
+
+## What you can capture
+
+#### [Traces & spans](/docs/opik/tracing/concepts)
+
+Full execution trees with inputs, outputs, timing, and metadata for every step
+
+#### [Conversations](/docs/opik/tracing/advanced/log_chat_conversations)
+
+Multi-turn threads that group related traces into coherent sessions
+
+#### [Cost tracking](/docs/opik/tracing/advanced/cost_tracking)
+
+Token usage and spending broken down by model, provider, and trace
+
+#### [Media & attachments](/docs/opik/tracing/advanced/log_multimodal_traces)
+
+Images, audio, video, and files logged alongside your traces
+
+#### [User feedback](/docs/opik/tracing/advanced/annotate_traces)
+
+Qualitative and quantitative scores attached to individual traces
+
+#### [Agent graphs](/docs/opik/tracing/advanced/log_agent_graphs)
+
+Visual execution graphs showing how your agent's steps connect
+
+## How it works
+
+#### Connect your project
+
+Run `opik connect` from your agent's directory to pair it with Opik:
+
+```bash wordWrap
+opik connect --project <YOUR_PROJECT_NAME>
+```
+
+#### Instrument your code
+
+The fastest way to add tracing is with [opik-skills](https://github.com/comet-ml/opik-skills) — install the skill and let your coding agent handle the rest:
+
+```bash wordWrap
+uvx opik mcp configure
+```
+
+It installs the Opik skills and connects the Opik MCP server. It needs [`uv`](https://docs.astral.sh/uv/).
+
+Then ask your coding agent:
+
+```
+Instrument my agent with Opik using the /opik-instrument command.
+```
+
+This works with Claude Code, Cursor, Codex, OpenCode, and other coding agents. You can also instrument manually with the SDK:
+
+**`Python`**
+
+```python title="Python" wordWrap
+import opik
+
+@opik.track
+def my_agent(user_message):
+    context = retrieve_context(user_message)
+    response = call_llm(user_message, context)
+    return response
+```
+
+**`TypeScript`**
+
+```ts title="TypeScript" wordWrap
+import { track } from "opik";
+
+const myAgent = track(
+  { name: "my-agent" },
+  async (userMessage: string) => {
+    const context = await retrieveContext(userMessage);
+    return await callLlm(userMessage, context);
+  }
+);
+```
+
+#### View traces in the dashboard
+
+Every request creates a trace with detailed span-level information. You can inspect the full execution tree, see inputs and outputs at each step, and filter by duration, cost, status, or tags.
+
+![](/docs/opik/_fern-files/opik.docs.buildwithfern.com/9121651450c9b73bb93851097dbd1c658c16d19465e7a5d3c55203556e0bef81/img/v2/home/traces_page_for_quickstart.png)
+
+#### Analyze and improve
+
+Use traces to debug failures, identify slow steps, and track quality over time. Attach feedback scores, run evaluations against datasets, and use [Ollie](/docs/opik/tracing/debug-agents) — Opik's AI assistant — to help root-cause issues automatically.
+
+## Integrations
+
+Opik has first-class support for 30+ frameworks in Python, TypeScript, and OpenTelemetry — so you can start capturing traces without changing how your application is built.
+
+#### [LangChain](/docs/opik/integrations/langchain)
+
+#### [LlamaIndex](/docs/opik/integrations/llama_index)
+
+#### [Anthropic](/docs/opik/integrations/anthropic)
+
+#### [AWS Bedrock](/docs/opik/integrations/bedrock)
+
+#### [Google Gemini](/docs/opik/integrations/gemini)
+
+#### [CrewAI](/docs/opik/integrations/crewai)
+
+**[View all integrations →](/docs/opik/integrations/overview)**
+
+## Next steps
+
+* [Getting started](/docs/opik/tracing/getting-started) — Add observability to your agent in minutes
+* [Concepts](/docs/opik/tracing/concepts) — Understand traces, spans, threads, and feedback scores
+* [Debugging agents with Ollie](/docs/opik/tracing/debug-agents) — Use AI-assisted root-cause analysis
+* [Cost tracking](/docs/opik/tracing/advanced/cost_tracking) — Monitor token usage and spending
+* [MCP server](/docs/opik/mcp-server) — Read these traces from your AI coding assistant, without leaving your editor

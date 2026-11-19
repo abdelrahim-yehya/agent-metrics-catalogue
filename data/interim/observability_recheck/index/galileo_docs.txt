@@ -1,0 +1,367 @@
+# Galileo: Documentation
+
+## Documentation
+
+### Overview
+
+- [What Is Galileo?](https://docs.galileo.ai/what-is-galileo.md)
+
+### Get Started
+
+- [Log Your First Trace](https://docs.galileo.ai/getting-started/quickstart.md): Learn how to log your first trace with Galileo
+- [Evaluate Your Traces](https://docs.galileo.ai/getting-started/evaluate-and-improve/evaluate-and-improve.md): Learn how to evaluate metrics for your logged trace with Galileo, and improve your application
+- [Run an Experiment](https://docs.galileo.ai/getting-started/experiments.md): Learn how to run your first experiment using prompts and datasets
+- [Galileo MCP Server](https://docs.galileo.ai/getting-started/mcp/setup-galileo-mcp.md): Learn how to integrate Galileo's Model Context Protocol (MCP) server with AI-enabled IDEs like Cursor and VS Code
+
+#### Sample Projects
+
+- [Overview](https://docs.galileo.ai/getting-started/sample-projects/sample-projects.md): Learn how to get started with the Galileo sample projects that are included in every new account
+- [Preset Metric Examples](https://docs.galileo.ai/getting-started/sample-projects/preset-metric-examples.md): Explore curated Log Streams that show Galileo’s out-of-the-box metrics in action
+- [Simple Chatbot](https://docs.galileo.ai/getting-started/sample-projects/simple-chatbot.md): Get started with the simple chatbot sample project
+- [Multi-agent banking chatbot sample](https://docs.galileo.ai/getting-started/sample-projects/multi-agent.md): Get started with the multi-agent banking chatbot sample project powered by LangGraph, with RAG using Pinecone
+
+### Observability
+
+- [Overview](https://docs.galileo.ai/concepts/logging/overview.md): Core Observability concepts in Galileo
+- [Instrumentation](https://docs.galileo.ai/sdk-api/logging/logging-basics.md): Learn the basics of instrumenting your application with Galileo using the Galileo SDKs
+- [Sessions Overview](https://docs.galileo.ai/concepts/logging/sessions/sessions-overview.md): Learn about log sessions in Galileo
+- [Galileo Logger](https://docs.galileo.ai/sdk-api/logging/galileo-logger.md): Get granular control over logging with the GalileoLogger class
+- [Log Decorator](https://docs.galileo.ai/sdk-api/logging/log-decorator/log-decorator.md): Easily capture function inputs and outputs as spans in your traces
+- [Galileo Context](https://docs.galileo.ai/sdk-api/logging/galileo-context.md): Manage trace context and control logging behavior with the Galileo Context Manager
+- [Multimodal Observability](https://docs.galileo.ai/concepts/logging/multimodal-observability.md): Log, inspect, and evaluate images, audio, and documents alongside text in your traces
+- [Distributed Tracing (Beta)](https://docs.galileo.ai/sdk-api/logging/distributed-tracing.md): Log traces across multiple services
+- [Distributed Tracing with OpenTelemetry](https://docs.galileo.ai/sdk-api/logging/distributed-tracing-otel.md): Stitch traces across two agents in different processes using OTel and the GalileoSpanProcessor.
+- [Tags and Metadata](https://docs.galileo.ai/sdk-api/logging/tags-and-metadata.md): Learn to use tags and metadata in Galileo logging and monitoring
+
+#### How-to guides
+
+- [Log Using the OpenAI Wrapper](https://docs.galileo.ai/how-to-guides/basics/basic-example.md): Learn how to integrate and use OpenAI's API with Galileo's wrapper client
+- [Log Using the Log Decorator](https://docs.galileo.ai/how-to-guides/basics/basic-logging-with-decorator/basic-logging-with-decorator.md): Learn how to use the Galileo log decorator to log functions to traces
+- [Create Traces and Spans](https://docs.galileo.ai/how-to-guides/basics/manual-span-creation/manual-span-creation.md): Learn how to create log traces and spans manually in your AI apps
+- [Create and Use Sessions](https://docs.galileo.ai/concepts/logging/sessions/using-sessions.md): Learn to create and use Sessions in Galileo
+- [Set Up Alerts on Logs](https://docs.galileo.ai/how-to-guides/basics/set-up-alerts-on-logs.md): Learn how to set up alerts and be automatically notified when things go wrong
+- [Log MCP Server Tool Calls](https://docs.galileo.ai/how-to-guides/basics/log-mcp-server-calls/log-mcp-server-calls.md): Learn how to log tool calls when calling MCP servers from your AI application
+
+### Evaluation Metrics
+
+- [Metrics Overview](https://docs.galileo.ai/concepts/metrics/overview.md): Explore the comprehensive Galileo metric framework for evaluating and improving AI system performance across multiple dimensions
+- [Log Stream Metrics](https://docs.galileo.ai/concepts/logging/configure-metrics/configure-metrics.md): Learn how to configure metrics for Log streams, including managing sampling rates
+- [Experiment Metrics](https://docs.galileo.ai/sdk-api/metrics/metrics.md): Learn how to use metrics in your experiments
+- [How LLM-as-a-judge is Calculated](https://docs.galileo.ai/concepts/metrics/how-llm-as-judge-metrics-are-calculated.md): Understand how Galileo uses LLM judges to calculate metrics for AI system performance assessment
+- [Improve LLM-as-a-Judge Metrics with Autotune](https://docs.galileo.ai/concepts/metrics/autotune-llm-as-a-judge-metrics.md): Use Autotune to turn feedback into prompt improvements that make LLM-as-a-judge metrics more accurate for your use case.
+
+#### Out-of-the-Box Metrics
+
+- [Out-of-the-box Metric Categories](https://docs.galileo.ai/concepts/metrics/ootb-metric-categories.md): Learn about the available out-of-the-box metric types and when to use them
+- [Metrics Comparison](https://docs.galileo.ai/concepts/metrics/metric-comparison.md): Explore Galileo's comprehensive out-of-the-box metrics for evaluating and improving AI system performance across multiple dimensions
+
+##### Agentic AI
+
+- [Agentic Metrics](https://docs.galileo.ai/concepts/metrics/agentic/agentic-overview.md): Understand and evaluate the performance of AI agents using Galileo's agentic metrics
+- [Action Advancement](https://docs.galileo.ai/concepts/metrics/agentic/action-advancement.md): Understand how to measure and optimize the effectiveness of your AI agent's actions
+- [Action Completion](https://docs.galileo.ai/concepts/metrics/agentic/action-completion.md): Understand how to measure whether your agent accomplished a user's goals across a session
+- [Agent Efficiency](https://docs.galileo.ai/concepts/metrics/agentic/agent-efficiency.md): Learn how to measure the efficiency of your agentic workflows
+- [Agent Flow](https://docs.galileo.ai/concepts/metrics/agentic/agent-flow.md): Learn how to measure the correctness and coherence of an agentic trajectory by validating it against user-specified natural language tests
+- [Conversation Quality](https://docs.galileo.ai/concepts/metrics/agentic/conversation-quality.md): Learn how to measure the quality of a conversation between a user and an assistant
+- [Reasoning Coherence](https://docs.galileo.ai/concepts/metrics/agentic/reasoning-coherence.md): Evaluate whether an agent’s reasoning steps are logically consistent and aligned with its plan
+- [Tool Selection Quality](https://docs.galileo.ai/concepts/metrics/agentic/tool-selection-quality.md): Evaluate tool selection quality in AI agents using Galileo Guardrail Metrics to ensure agents choose appropriate tools with correct parameters
+- [Tool Error](https://docs.galileo.ai/concepts/metrics/agentic/tool-error.md): Detect and analyze tool execution errors in AI agents using Galileo Guardrail Metrics to ensure reliable tool usage in agentic workflows
+- [User Intent Change](https://docs.galileo.ai/concepts/metrics/agentic/intent-change.md): Learn how to measure if users use your agent system for different intents across multi-turn interactions
+
+##### Expression and Readability
+
+- [Expression and Readability Metrics](https://docs.galileo.ai/concepts/metrics/expression-and-readability/expression-and-readability-overview.md): Assess the style, tone, and clarity of your AI's generated content using Galileo's expression and readability metrics
+- [Tone](https://docs.galileo.ai/concepts/metrics/expression-and-readability/tone.md): Analyze and optimize the emotional tone of AI responses using Galileo's Tone Metric to ensure appropriate emotional context and user engagement
+
+##### Multimodal Quality
+
+- [Multimodal Quality Metrics](https://docs.galileo.ai/concepts/metrics/multimodal-quality/multimodal-quality-overview.md): Understand and evaluate multimodal elements (visual and audio) quality using Galileo's multimodal quality metrics
+- [Visual Quality](https://docs.galileo.ai/concepts/metrics/multimodal-quality/visual-quality.md): Evaluate whether the quality of an input / PDF in an LLM span is sufficient for the associated text prompt task to be reliably performed
+- [Visual Fidelity](https://docs.galileo.ai/concepts/metrics/multimodal-quality/visual-fidelity.md): Evaluate whether a generated image in an LLM span complies with every applicable provided brand rule based on visible evidence
+- [Interruption Detection](https://docs.galileo.ai/concepts/metrics/multimodal-quality/interruption-detection.md): Detect turn-taking violations in audio-based agent conversations, including agent overlap, premature agent barge-in, and user barge-in
+
+##### Response Quality
+
+- [Response Quality Metrics](https://docs.galileo.ai/concepts/metrics/response-quality/response-quality-overview.md): Evaluate how correctly, consistently, and in line with ground truth your AI follows instructions and answers user queries
+- [Ground Truth Adherence](https://docs.galileo.ai/concepts/metrics/response-quality/ground-truth-adherence.md): Measure equivalence between model outputs and expected responses
+- [Correctness](https://docs.galileo.ai/concepts/metrics/response-quality/correctness.md): Evaluate factual accuracy in AI outputs using Galileo Guardrail Metrics
+- [Instruction Adherence](https://docs.galileo.ai/concepts/metrics/response-quality/instruction-adherence.md): Assess instruction adherence in AI outputs using Galileo Guardrail Metrics to ensure prompt-driven models generate precise and actionable results
+
+##### RAG
+
+- [RAG Metrics](https://docs.galileo.ai/concepts/metrics/rag/rag-overview.md): Evaluate retrieval and generation quality in your RAG pipeline using Galileo's RAG metrics
+
+###### Retrieval Quality
+
+- [Chunk Relevance](https://docs.galileo.ai/concepts/metrics/rag/retrieval-quality/chunk-relevance.md): Understand how to measure and optimize the relevance of retrieved chunks to user queries in your RAG pipeline
+- [Context Relevance (Query Adherence)](https://docs.galileo.ai/concepts/metrics/rag/retrieval-quality/context-relevance.md): Understand how to measure the relevance of context provided to user queries
+- [Context Precision](https://docs.galileo.ai/concepts/metrics/rag/retrieval-quality/context-precision.md): Measure the percentage of relevant chunks in your retrieved context to evaluate retrieval quality in RAG systems
+- [Precision @ K](https://docs.galileo.ai/concepts/metrics/rag/retrieval-quality/precision-at-k.md): Evaluate the precision of your retrieval system at specific rank positions to optimize Top K and ranking strategies
+
+###### Generation Quality
+
+- [Context Adherence](https://docs.galileo.ai/concepts/metrics/rag/generation-quality/context-adherence.md): Understand Galileo's Context Adherence Metric
+- [Completeness](https://docs.galileo.ai/concepts/metrics/rag/generation-quality/completeness.md): Measure how thoroughly your model's response covers the relevant information available in the provided context
+
+##### Safety and Compliance
+
+- [Safety and Compliance Metrics](https://docs.galileo.ai/concepts/metrics/safety-and-compliance/safety-and-compliance-overview.md): Identify risks, harmful content, and compliance issues in your AI with Galileo's safety and compliance metrics
+- [Unsafe Output](https://docs.galileo.ai/concepts/metrics/safety-and-compliance/unsafe-output.md): Detect whether model output violates your application-specific output-policy rules
+- [Prompt Injection](https://docs.galileo.ai/concepts/metrics/safety-and-compliance/prompt-injection.md): Detect and prevent security vulnerabilities in AI systems using Galileo's Prompt Injection Metric to identify malicious inputs and protect your applications
+- [PII](https://docs.galileo.ai/concepts/metrics/safety-and-compliance/pii.md): Detect and protect personally identifiable information in AI systems using Galileo's PII Metric to identify sensitive data and implement appropriate safeguards
+- [Sexism](https://docs.galileo.ai/concepts/metrics/safety-and-compliance/sexism.md): Detect and prevent sexist content in AI systems using Galileo's Sexism Metric to identify and mitigate biased responses
+- [Toxicity](https://docs.galileo.ai/concepts/metrics/safety-and-compliance/toxicity.md): Detect and prevent toxic content in AI systems using Galileo's Toxicity Metric to identify and mitigate harmful responses
+
+##### Text-to-SQL
+
+- [Text-to-SQL Metrics](https://docs.galileo.ai/concepts/metrics/text2sql/text2sql-overview.md): Evaluate the quality, safety, and efficiency of AI-generated SQL queries using Galileo's Text-to-SQL metrics
+- [SQL Correctness](https://docs.galileo.ai/concepts/metrics/text2sql/sql-correctness.md): Evaluate whether generated SQL queries are syntactically valid and adhere to the provided database schema
+- [SQL Adherence](https://docs.galileo.ai/concepts/metrics/text2sql/sql-adherence.md): Evaluate whether generated SQL queries semantically align with the user's natural language intent
+- [SQL Injection](https://docs.galileo.ai/concepts/metrics/text2sql/sql-injection.md): Detect SQL injection attacks and security vulnerabilities in generated SQL queries
+- [SQL Efficiency](https://docs.galileo.ai/concepts/metrics/text2sql/sql-efficiency.md): Evaluate whether generated SQL queries are structured efficiently and avoid performance anti-patterns
+
+#### Custom Metrics
+
+- [Custom Decision Model Metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/custom-decision-model-metrics.md): Learn when and how to use decision model metrics
+- [Custom LLM-as-a-Judge Metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/custom-metrics-ui-llm.md): Learn how to create evaluation metrics using LLMs to judge the quality of responses
+- [LLM-as-a-Judge Prompt Engineering Guide](https://docs.galileo.ai/concepts/metrics/custom-metrics/prompt-engineering.md): Learn best practices for prompt engineering with custom LLM-as-a-judge metrics
+- [Custom Code-Based Metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/custom-metrics-ui-code.md): Learn how to create, register, and use custom code-based metrics to evaluate your LLM applications
+- [Composite Metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/composite-metrics.md): Learn how to create composite metrics that leverage other metrics to perform advanced evaluations
+- [Test Custom Metrics](https://docs.galileo.ai/concepts/metrics/custom-metrics/test-metrics.md): Test a custom metric with manual input, against your current logs, or against a labeled dataset to measure how closely it matches your ground truth
+- [Evaluate Selected Spans](https://docs.galileo.ai/concepts/metrics/custom-metrics/trace-selected-spans.md): Learn how to focus a metric on specific child spans within a trace instead of evaluating the full trace
+
+#### Luna-2
+
+- [Luna-2 Overview](https://docs.galileo.ai/concepts/luna/luna.md): Discover Galileo's Luna-2 Evaluation model, reducing the latency and cost for metric evaluations
+- [Luna Metrics Comparison](https://docs.galileo.ai/concepts/luna/luna-metric-comparison.md): Explore Galileo's preset Luna metrics for evaluating and improving AI system performance across multiple dimensions
+- [Fine-Tuning Luna-2 Models](https://docs.galileo.ai/concepts/luna/fine-tuning.md): Understand the requirements and process for fine-tuning Luna-2 models based off your real-world scenarios
+
+#### How-to guides
+
+- [Create a Local Metric](https://docs.galileo.ai/how-to-guides/metrics/create-local-metric/create-local-metric.md): Learn how to create a local metric in Python to use in your experiments
+- [Evaluate Metrics with the Luna-2 Model](https://docs.galileo.ai/how-to-guides/luna/evaluate-with-luna/evaluate-with-luna.md): Learn how to evaluate metrics cheaper and faster using the Luna-2 model
+- [Use Luna-2 in Your Experiments](https://docs.galileo.ai/how-to-guides/luna/experiments-with-luna/experiments-with-luna.md): Learn how to use Luna-2 metrics when running experiments in code
+
+### Signals
+
+- [Signals](https://docs.galileo.ai/concepts/signals.md): Proactively discover failure patterns across your AI agents that evaluations and manual searches might miss.
+
+### AI Assistant
+
+- [AI Assistant (Beta)](https://docs.galileo.ai/concepts/ai-assistant.md): Ask about your agentic system in natural language. Galileo's AI Assistant combs through your traces, spans, sessions, and evaluation scores to surface the root cause, the evidence, and a concrete fix.
+
+### Luna Studio
+
+- [Luna Studio](https://docs.galileo.ai/luna-studio/index.md): Choose the Luna Studio UI or SDK path for building, training, and deploying custom Luna metrics.
+
+#### UI
+
+- [Luna Studio UI](https://docs.galileo.ai/luna-studio/ui/index.md): Use the Luna Studio web app to create, train, and register custom Luna metrics.
+- [Availability and deployment](https://docs.galileo.ai/luna-studio/ui/availability.md): Luna Studio is part of the enterprise tier of Galileo and is deployed by Galileo into your own cluster or cloud.
+- [Quickstart](https://docs.galileo.ai/luna-studio/ui/quickstart.md): Sign up, configure your first integration, and launch a Luna Studio training run.
+- [Core concepts](https://docs.galileo.ai/luna-studio/ui/core-concepts.md): How projects, runs, metrics, datasets, and base models fit together in Luna Studio.
+- [Prerequisites](https://docs.galileo.ai/luna-studio/ui/prerequisites.md): Dataset preparation to get optimal results from Luna fine-tuning
+
+##### Integrations
+
+- [Integrations overview](https://docs.galileo.ai/luna-studio/ui/integrations/overview.md): Configure supported model providers, understand credential scopes, and identify deployment-managed infrastructure.
+- [LLM providers](https://docs.galileo.ai/luna-studio/ui/integrations/llm-providers.md): Choose and configure the right LLM integration for the models you want to use in Luna Studio.
+- [Galileo integration](https://docs.galileo.ai/luna-studio/ui/integrations/galileo.md): Understand how the current release supplies Galileo credentials for dataset import and metric registration.
+
+##### Projects
+
+- [Projects overview](https://docs.galileo.ai/luna-studio/ui/projects/overview.md): Top-level containers for training runs tied to a GenAI use case.
+- [Training runs home](https://docs.galileo.ai/luna-studio/ui/projects/training-runs-home.md): The main project workspace: status summary, filters, and the runs table.
+
+##### Training Runs
+
+- [Run lifecycle](https://docs.galileo.ai/luna-studio/ui/runs/lifecycle.md): The statuses a Luna Studio run can enter, and what each one means.
+- [Register a metric](https://docs.galileo.ai/luna-studio/ui/runs/register-metric.md): Publish a fine-tuned metric to the Galileo metrics store.
+
+###### Creating a run
+
+- [Creating a new run](https://docs.galileo.ai/luna-studio/ui/runs/new-run/overview.md): Four steps to pick a metric and launch a fine-tuning job.
+- [Step 1 — Metric](https://docs.galileo.ai/luna-studio/ui/runs/new-run/step-1-metric.md): Pick a predefined metric template or write a custom LLM-as-judge prompt.
+- [Step 2 — Test set](https://docs.galileo.ai/luna-studio/ui/runs/new-run/step-2-test-set.md): Pick or upload the labelled dataset Luna Studio will evaluate the fine-tuned metric against.
+- [Step 3 — Training set](https://docs.galileo.ai/luna-studio/ui/runs/new-run/step-3-training-set.md): Generate a training set from your test set or add your own training logs.
+- [Step 4 — Config and launch](https://docs.galileo.ai/luna-studio/ui/runs/new-run/step-4-config-and-launch.md): Review the run summary and launch training.
+
+##### Datasets
+
+- [Datasets overview](https://docs.galileo.ai/luna-studio/ui/datasets/overview.md): Manage test sets and training sets across all your projects.
+- [Test sets](https://docs.galileo.ai/luna-studio/ui/datasets/test-sets.md): Human-labelled datasets used to evaluate fine-tuned metrics.
+- [Training sets](https://docs.galileo.ai/luna-studio/ui/datasets/training-sets.md): The dataset used to fine-tune the Luna base model during a run.
+- [Add a dataset](https://docs.galileo.ai/luna-studio/ui/datasets/add-a-dataset.md): Reference for the three dataset sources: Upload, Fetch from URL, and Import from Galileo.
+- [Dataset validation](https://docs.galileo.ai/luna-studio/ui/datasets/validation.md): Metric-aware schema and content checks Luna Studio runs before using a dataset in a run.
+
+##### Metrics
+
+- [Metrics overview](https://docs.galileo.ai/luna-studio/ui/metrics/overview.md): Browse and register custom metrics across your project.
+
+##### References
+
+- [FAQ](https://docs.galileo.ai/luna-studio/ui/reference/faq.md): Common questions about Luna Studio — datasets, models, integrations, and more.
+- [Troubleshooting](https://docs.galileo.ai/luna-studio/ui/reference/troubleshooting.md): Common errors and how to recover.
+
+#### SDK
+
+- [Luna Studio SDK](https://docs.galileo.ai/luna-studio/sdk/overview.md): Use the Luna Studio SDK to generate data, fine-tune custom Luna metrics, and deploy them to Galileo.
+- [Installation](https://docs.galileo.ai/luna-studio/sdk/installation.md): Install the Luna Studio SDK and optional extras.
+
+##### How to Train your Luna Metric
+
+- [Overview](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/overview.md): End-to-end guide for generating data and training your Luna metric with the Luna Studio SDK.
+- [Prerequisites](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/prerequisites.md): Dataset preparation to get optimal results from Luna fine-tuning
+- [Understanding Config](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/understanding-config.md): Understand the high-level structure of the run config file.
+
+###### Data generation
+
+- [Overview](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/data-generation/overview.md): Generate a labeled training dataset for your metric.
+- [Run Labelling only](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/data-generation/run-labelling-only.md): Label an existing training dataset using your metric definition.
+
+###### Config
+
+- [Config file](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/data-generation/config/config.md): Complete reference for the data generation section of the config.
+- [Metric Input Types](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/data-generation/config/metric-input-types.md): Understanding the different input types of metrics supported by Luna Studio
+- [Metric Output Types](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/data-generation/config/metric-output-types.md): Understanding the different output types of metrics supported by Luna Studio
+
+###### Training
+
+- [Overview](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/training/overview.md): Fine-tune a Luna metric from a labelled dataset.
+- [Post Training artifacts](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/training/output-artifacts.md): What training produces and which artifacts are saved.
+- [Evaluate](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/training/evaluate.md): Run evaluation on a trained Luna metric.
+
+###### Config
+
+- [Config file](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/training/config/config.md): Complete reference for the training section.
+- [Metric Input Types](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/training/config/metric-input-types.md): Understanding the different input types of metrics supported by Luna Studio
+- [Metric Output Types](https://docs.galileo.ai/luna-studio/sdk/how-to-train-your-luna-metric/training/config/metric-output-types.md): Understanding the different output types of metrics supported by Luna Studio
+
+##### Deployment
+
+- [Overview](https://docs.galileo.ai/luna-studio/sdk/deployment/overview.md): Deploy trained Luna metrics from the Luna Studio SDK to Galileo.
+- [Register metric in Galileo](https://docs.galileo.ai/luna-studio/sdk/deployment/register-metric-in-galileo.md): Register your trained metric in the Galileo platform.
+
+##### Tutorials
+
+- [Overview](https://docs.galileo.ai/luna-studio/sdk/tutorials/overview.md): Hands-on Luna Studio SDK guides for each supported metric input category.
+- [LLM spans without RAG](https://docs.galileo.ai/luna-studio/sdk/tutorials/llm-spans-without-rag.md): Build a span-level Luna metric from multi-field examples without retrieved documents.
+- [LLM spans with RAG](https://docs.galileo.ai/luna-studio/sdk/tutorials/llm-spans-with-rag.md): Train a document-grounded Luna metric using retrieved context.
+- [LLM spans with tools (Agentic)](https://docs.galileo.ai/luna-studio/sdk/tutorials/llm-spans-with-tools-agentic.md): Train a Luna metric that evaluates tool-aware assistant behavior.
+- [Retriever spans](https://docs.galileo.ai/luna-studio/sdk/tutorials/retriever-spans.md): Train a Luna metric that evaluates retrieval quality or document sufficiency.
+- [Trace input / output only](https://docs.galileo.ai/luna-studio/sdk/tutorials/trace-input-output-only.md): Train a trace-style Luna metric from a single serialized field.
+- [Using a preset metric](https://docs.galileo.ai/luna-studio/sdk/tutorials/preset-metric.md): Use a packaged preset metric for a single-field trace-style input.
+- [Full traces](https://docs.galileo.ai/luna-studio/sdk/tutorials/full-traces.md): Work with full trace-level Luna metrics in advanced or label-only workflows.
+- [List of Trace inputs / outputs only](https://docs.galileo.ai/luna-studio/sdk/tutorials/list-of-trace-inputs-outputs-only.md): Model session-like metrics from repeated input/output pairs.
+- [Full Sessions](https://docs.galileo.ai/luna-studio/sdk/tutorials/full-sessions.md): Work with full session-level Luna metrics across multi-turn conversations.
+
+### Experiments
+
+- [Experiments Basics](https://docs.galileo.ai/sdk-api/experiments/experiments.md): Learn how to use datasets and experiments in code or the Galileo console to evaluate and improve your application
+- [Datasets](https://docs.galileo.ai/sdk-api/experiments/datasets.md): Learn how to create and manage datasets for use in your experiments with our SDKs
+- [Prompts](https://docs.galileo.ai/sdk-api/experiments/prompts.md): Learn how to create and use prompt templates in experiments
+- [Run Experiments in Code](https://docs.galileo.ai/sdk-api/experiments/running-experiments.md): Learn how to run experiments in Galileo using the Galileo SDKs
+- [Run Experiments in Playgrounds](https://docs.galileo.ai/concepts/experiments/running-experiments-in-console.md): Learn about running experiments in the Galileo console using Playgrounds and datasets
+- [Run Experiments in Unit Tests](https://docs.galileo.ai/sdk-api/experiments/running-experiments-in-unit-tests.md): Learn how to run experiments in unit tests that you can use during development, or in your CI/CD pipelines
+- [Experiment Groups](https://docs.galileo.ai/sdk-api/experiments/experiment-groups.md): Organize related experiments in the Galileo console and with the SDK
+- [Compare Experiments](https://docs.galileo.ai/concepts/experiments/compare.md): Learn how to compare multiple experiment runs in Galileo
+
+#### How-to guides
+
+- [Run an experiment against a RAG app](https://docs.galileo.ai/how-to-guides/experiments/rag-and-tools/rag-and-tools.md): Learn how to run experiments against RAG applications
+- [Run experiments with OpenTelemetry](https://docs.galileo.ai/how-to-guides/experiments/otel-experiment/otel-experiment.md): Learn how to run experiments using OpenTelemetry-instrumented frameworks with Galileo
+
+### Agent Control
+
+- [Agent Control](https://docs.galileo.ai/concepts/agent-control/overview.md): Learn how to set up Agent Control to safeguard your AI applications.
+
+#### How-to-guides
+
+- [Create a control](https://docs.galileo.ai/how-to-guides/agent-control/create-a-control.md): Learn how to create, configure, and attach a control to a Log stream.
+- [Initialize and configure Agent Control](https://docs.galileo.ai/how-to-guides/agent-control/initialize-and-configure-agent-control.md): Learn how to set up Agent Control.
+- [Monitor a control](https://docs.galileo.ai/how-to-guides/agent-control/monitor-a-control.md): Learn how to use the **Controls View** to monitor controls and the **Traces** tab to investigate how a control executed in a trace.
+
+#### Protect (deprecated)
+
+- [Protect (deprecated)](https://docs.galileo.ai/concepts/protect/overview.md): Learn the concepts behind runtime protection to safeguard applications with runtime monitoring using Luna-2 or custom code-based metrics
+- [Rules](https://docs.galileo.ai/sdk-api/protect/rules.md): Learn about defining rules for runtime protection
+- [Rulesets](https://docs.galileo.ai/sdk-api/protect/rulesets.md): Learn about defining rulesets for runtime protection
+- [Stages](https://docs.galileo.ai/sdk-api/protect/stages.md): Learn about defining stages for runtime protection to be used during different stages in your application workflow
+- [Invoke runtime protection](https://docs.galileo.ai/sdk-api/protect/invoke-protect.md): Learn how to invoke runtime protection in code using the Galileo SDK
+
+##### How-to guides
+
+- [Add runtime protection to a simple chatbot](https://docs.galileo.ai/how-to-guides/protect/basic-protect.md): Learn how to add runtime protection to a simple chatbot application
+
+### Annotations
+
+- [Annotations Overview](https://docs.galileo.ai/concepts/annotations/overview.md)
+
+### Integrations
+
+- [Integrations Overview](https://docs.galileo.ai/sdk-api/third-party-integrations/overview.md): Learn about the Galileo integrations with third-party SDKs to automatically log your applications
+- [A2A](https://docs.galileo.ai/sdk-api/third-party-integrations/a2a.md): Trace A2A (Agent2Agent) protocol interactions with Galileo for multi-agent observability
+- [Mastra](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/mastra.md): Learn how to integrate a Mastra project with Galileo using OpenTelemetry
+- [Microsoft Agent Framework](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/microsoft-agent-framework.md): Learn how to integrate a Microsoft Agent Framework project with Galileo using OpenTelemetry
+- [OpenAI SDK](https://docs.galileo.ai/sdk-api/third-party-integrations/openai/openai.md): Learn about the Galileo OpenAI integration
+- [OpenAI Agents SDK](https://docs.galileo.ai/sdk-api/third-party-integrations/openai-agents/openai-agents.md): Learn how to send traces from the OpenAI Agents SDK to Galileo for evaluation
+- [Pydantic AI](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/pydantic-ai.md): Learn how to integrate a Pydantic AI project with Galileo using OpenTelemetry
+- [Strands Agents](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/strands-agents.md): Learn how to integrate a Strands Agents project with Galileo using OpenTelemetry
+- [Vercel AI SDK](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/vercel-ai.md): Learn how to integrate a Vercel AI SDK project with Galileo using OpenTelemetry
+
+#### CrewAI
+
+- [Logging](https://docs.galileo.ai/sdk-api/third-party-integrations/crewai/crewai.md): Learn about using the Galileo CrewAI logging integration to log agent traces
+- [Experiments](https://docs.galileo.ai/sdk-api/third-party-integrations/crewai/experiments.md): Learn how to use CrewAI in an experiment
+
+#### Google ADK
+
+- [Google ADK (Native)](https://docs.galileo.ai/sdk-api/third-party-integrations/google-adk/google-adk-native.md): Learn how to use the native galileo-adk package for automatic tracing of Google ADK agents
+- [Google ADK (OpenTelemetry)](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/google-adk.md): Learn how to integrate a Google ADK project with Galileo using OpenTelemetry and OpenInference
+
+#### LangChain and LangGraph
+
+- [Logging](https://docs.galileo.ai/sdk-api/third-party-integrations/langchain/langchain.md): Learn about using the Galileo LangChain and LangGraph logging integration to log agent traces
+- [Command and Send](https://docs.galileo.ai/sdk-api/third-party-integrations/langchain/command-and-send.md): Learn how Galileo logs LangGraph Command and Send types for advanced control flow
+- [Experiments](https://docs.galileo.ai/sdk-api/third-party-integrations/langchain/experiments.md): Learn how to use LangChain or LangGraph in an experiment
+- [Runtime protection](https://docs.galileo.ai/sdk-api/third-party-integrations/langchain/protect.md): Learn about using Galileo runtime protection with LangChain and LangGraph
+- [Middleware](https://docs.galileo.ai/sdk-api/third-party-integrations/langchain/middleware.md): Learn about using GalileoMiddleware for automatic logging of LangChain agents
+
+#### Model Integrations
+
+- [AWS Bedrock Inference Profiles](https://docs.galileo.ai/sdk-api/third-party-integrations/model-integrations/aws-bedrock/awsbedrock.md): Learn how to use AWS Bedrock Inference Profiles with Galileo in a custom deployment.
+- [Custom Model Integrations](https://docs.galileo.ai/sdk-api/third-party-integrations/model-integrations/custom-model-integrations/custom-model-integrations.md): Learn about custom integrations, and how to set them up in Galileo
+- [Decision Models](https://docs.galileo.ai/sdk-api/third-party-integrations/decision-models/decision-models.md): Learn how to set up a decision model integration to create decision model metrics
+- [Set up Gemini Enterprise credentials](https://docs.galileo.ai/sdk-api/third-party-integrations/model-integrations/gemini-enterprise/gemini-enterprise-credentials.md): Create a Google Cloud service account JSON key and add it as a Gemini Enterprise integration in Galileo.
+
+#### Model Costs
+
+- [Model Pricing Settings](https://docs.galileo.ai/concepts/costs/model-pricing-settings.md)
+- [Integration Costs](https://docs.galileo.ai/concepts/costs/integration-costs.md)
+
+#### OpenTelemetry
+
+- [Overview](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference.md): Learn how to integrate Galileo with OpenTelemetry and OpenInference for comprehensive observability and tracing
+- [OpenTelemetry Integration Recommendations](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/integration-recommendations.md): Guidelines for instrumenting your spans to ensure they are valid and properly processed by Galileo's OTLP provider.
+- [Custom Spans](https://docs.galileo.ai/sdk-api/third-party-integrations/opentelemetry-and-openinference/start-galileo-span.md): Create OpenTelemetry spans enriched with Galileo-specific attributes using the start_galileo_span context manager.
+
+#### How-to guides
+
+- [Add Galileo to a CrewAI Application](https://docs.galileo.ai/how-to-guides/third-party-integrations/add-galileo-to-crewai/add-galileo-to-crewai.md): Learn how to add logging and evaluations with Galileo to an existing CrewAI application
+- [Integrate NVIDIA NIM with Galileo](https://docs.galileo.ai/how-to-guides/third-party-integrations/nvidia-nim-models.md): Learn how to connect your self-hosted NVIDIA NIM (NVIDIA Inference Microservices) to Galileo for comprehensive LLM performance assessment, playground experimentation, and enhanced generative AI model capabilities
+- [OpenAI Agent Integration](https://docs.galileo.ai/how-to-guides/third-party-integrations/openai-agent-integration.md): Get hands on integrating Galileo into an agentic app using the OpenAI Agents SDK
+- [Log with OpenTelemetry, LangGraph, and OpenAI](https://docs.galileo.ai/how-to-guides/third-party-integrations/otel.md): Learn how to integrate Galileo with OpenTelemetry and OpenInference for comprehensive observability and tracing.
+
+### Security
+
+- [Projects](https://docs.galileo.ai/concepts/projects.md): Organizational Units in Galileo
+- [Access Control](https://docs.galileo.ai/concepts/access-control.md): Control access to projects via role-based access control and groups in Galileo
+- [SSO Integration](https://docs.galileo.ai/security/sso.md): Learn how to set up SSO for your Galileo cluster
+
+### References
+
+- [FAQ](https://docs.galileo.ai/references/faqs/faqs.md)
+- [Finding Your Organization Keys](https://docs.galileo.ai/references/faqs/find-keys.md)
+- [Troubleshooting](https://docs.galileo.ai/references/faqs/troubleshooting.md)
+- [Common Errors Guide](https://docs.galileo.ai/references/faqs/errors.md)
+- [Error Catalog](https://docs.galileo.ai/references/faqs/errors-catalog.md): Complete reference of Galileo platform error codes, messages, and recommended actions.

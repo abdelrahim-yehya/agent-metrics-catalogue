@@ -1,0 +1,48 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://laminar.sh/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Live tracing
+
+Live tracing lets you watch a trace fill in while it’s still running—spans show up as they finish, so you can debug long-running workflows without waiting for the root span to end.
+
+![Live trace updating as spans arrive](https://mintcdn.com/laminarai/53JYqUiHrLWURrY9/images/realtime/realtime.gif?s=0ab5e7254d24eaebc560be2234254add)
+
+## How to use it
+
+1. Trigger a run that produces traces.
+2. Open the trace in Laminar.
+3. Keep the trace open—new spans will appear as they’re exported.
+
+## Reduce delay (development)
+
+Laminar batches spans for performance by default, which can add a small delay between a span ending and it appearing in the UI. For faster updates during development, disable batching:
+
+> [tab] TypeScript
+>
+> ```typescript theme={null}
+> import { Laminar } from '@lmnr-ai/lmnr';
+>
+> Laminar.initialize({
+>   projectApiKey: process.env.LMNR_PROJECT_API_KEY,
+>   disableBatch: true,
+> });
+> ```
+
+> [tab] Python
+>
+> ```python theme={null}
+> from lmnr import Laminar
+>
+> Laminar.initialize(
+>     project_api_key="...",
+>     disable_batch=True,
+> )
+> ```
+
+> [!NOTE]
+>
+> Disabling batching increases export overhead. Keep batching enabled in production, and flush spans explicitly for short-lived processes. See [Flushing spans and shutting down](https://laminar.sh/docs/tracing/structure/flushing-and-shutdown.md).
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

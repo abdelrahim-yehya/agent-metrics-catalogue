@@ -1,0 +1,102 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.coreweave.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Monitor your agents with signals
+
+> Use Weave signals to score agent turns, apply tags, and surface quality and safety issues in production.
+
+> [!TIP]
+>
+> **This workflow is also available in CoreWeave Agent Lens.** Agent Lens is the Forge experience built for tracing, monitoring, and analyzing AI agents, with automated insights into agent failures and user intents. It uses the same trace data as Weights & Biases Weave, so the traces you already send appear there with nothing to migrate.
+> [See how to do this in Agent Lens](https://docs.coreweave.com/products/agent-lens/tags/create-tag.md).
+
+In Weave's [Agents view](https://docs.coreweave.com/products/wandb/weave/guides/tracking/view-agent-activity.md), the Signals tab shows tags and ratings for your agent's conversations. Signals surface quality and safety issues to flag problems, find patterns, and highlight the traces that need your attention. Use signals to automatically score the quality of your agent's responses, notice when a user is frustrated, or flag NSFW content.
+
+To score turns with an HTTP endpoint that you host instead of an LLM judge, see [Score agent turns with a remote scorer](https://docs.coreweave.com/products/wandb/weave/guides/tracking/remote-scorer-signals.md).
+
+## Get started
+
+To view signals for your project:
+
+1. Navigate to [Forge](https://forge.coreweave.com/wandb) and select your project.
+2. In the sidebar menu, select **Agents** to view all agent conversations saved for your project.
+3. In the tab bar, select **Signals**.
+
+![The Signals tab showing a list of scored turns for the agent.](https://mintcdn.com/coreweave-dbfa0e8d/3Dv_sw2eg8feUJlx/products/wandb/weave/_media/agent-view-signals.png?fit=max\&auto=format\&n=3Dv_sw2eg8feUJlx\&q=85\&s=8c6cbeb0985f1892769e14cbf70fb16c)
+
+## Key terms
+
+* **Turn**: One back-and-forth exchange between the user and the agent.
+* **Rating**: A numeric score between 0.0 and 1.0 assigned to a matching span.
+* **Tags**: Labels assigned to matching spans, such as "user-frustration" or "nsfw".
+
+## Signals table
+
+The Signals tab displays a table of scored turns from your agent. Each row represents the output of one of your signal monitors. The following columns appear by default.
+
+| Column | Description |
+| - | - |
+| **Type** | The part of the conversation that gets scored. Only `turn` is supported. |
+| **Scorer** | The name of the signal that produced this score. |
+| **Last message** | A preview of the last message in the scored turn, with the role shown below. |
+| **Agent** | The agent associated with the scored turn. |
+| **Scores** | The numeric rating from 0.0 to 1.0, or a tag if matched. We recommend using consistent ratings where 1 indicates good and 0 indicates bad, but your scorers can use any scale you define. |
+| **Trend** | Displays an inline chart that shows how this signal trends over time. Shows either the average value (for ratings) or the count (for tags). |
+| **When** | When the signal was scored. |
+
+Use the time window selector and **Filter** bar to narrow results by scorer, agent, score range, or time period. The **Score volume** timeline shows counts of signals that Weave evaluated for ratings or tagged. It reflects the rows shown in the table and supports drag-to-filter on the timeline.
+
+## How Weave normalizes scores
+
+Before Weave stores a signal result, it normalizes the tags, ratings, and reasons that the scorer returned:
+
+* Tags are lowercased. Characters other than `0-9`, `a-z`, `A-Z`, space, and `. , ; - & ! @ # $ % ?` are removed. Runs of whitespace, underscores, and dashes collapse into one dash.
+* At most 10 tags are kept per result. Duplicate tags are dropped.
+* Reasons have the same characters removed and are truncated to 256 characters.
+* A tag longer than 36 characters, or a result with more than one rating, is rejected as a whole, and Weave writes no feedback for it.
+
+These rules apply to every signal, whether an LLM judge or a [remote scorer](https://docs.coreweave.com/products/wandb/weave/guides/tracking/remote-scorer-signals.md) produced the result.
+
+## Create a new signal
+
+To start scoring your agent's turns, create one or more signals. Select **+ New signal** to open the **Create signals** drawer.
+
+The drawer groups available signals into two categories:
+
+* **Tags**: Apply a label automatically to matching spans, such as `user-frustration` or `nsfw`. Use tags to categorize spans or flag unwanted behavior. The signals UI only displays rows for spans that matched at least one tag, so a tag signal might run successfully even if you don't see any output.
+* **Ratings**: Assign a score from 0 to 1 to matching spans. Use ratings to rate agent performance and measure improvements over time.
+
+### Preset signals
+
+Each category offers preset templates that you can select directly. Select any combination of presets across both categories, then select **Create \[*N*] signals** to create them all at once with default settings.
+
+#### Tags presets
+
+| Template | What it detects |
+| - | - |
+| **User Frustration** | User shows signs of frustration, anger, confusion, or dissatisfaction. |
+| **Malicious Intent (Jailbreaking)** | User attempts to jailbreak the system, extract restricted content, perform prompt injection, use role-play exploits, or otherwise manipulate the agent into ignoring its guardrails. |
+| **NSFW** | User input or agent output contains explicit sexual content, graphic violence, or other material inappropriate for a workplace setting. |
+| **Low Quality Response** | Agent output that is factually wrong, off-topic, evasive, repetitive, lacks justification when refusing, or otherwise fails to address the user's request. |
+
+#### Ratings presets
+
+| Template | What it evaluates |
+| - | - |
+| **User Satisfaction** | Whether the user is satisfied (positive feedback, follow-up engagement, task completion) or dissatisfied (complaints, repeated rephrasing, abandonment). |
+| **User Good Intent** | Whether the user's intent is benign and legitimate, versus jailbreak attempts, harmful requests, or prompt injection. |
+| **Safe-for-Work** | Whether the conversation is appropriate for any professional setting, versus explicit, violent, or otherwise inappropriate workplace content. |
+| **Response Quality** | Whether the agent's response is accurate, complete, and directly addresses the user's request. |
+
+### Custom signals
+
+To create a custom tag signal from an empty Signals tab, see [Create a custom signal](https://docs.coreweave.com/products/wandb/weave/guides/tracking/create-custom-signal.md).
+
+## Manage and edit signals
+
+If you have at least one created signal, select the active signals button in the toolbar—labeled with the number of active signals, such as **1 active signals**—to open a drawer that lists all active signals for the project. From there you can toggle signals on or off, delete them, or edit any signal. The editor shows the same configuration fields as a custom signal.
+
+## Troubleshoot signals
+
+Signal activity appears under **Traces** in the project sidebar. If you don't see the expected signal matches, debug using the **Traces** table. For example, check the scorer name and the **Status** column for error conditions. Scorer execution errors show a red indicator for **Status** and include error details.

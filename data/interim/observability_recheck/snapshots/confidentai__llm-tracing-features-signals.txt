@@ -1,0 +1,107 @@
+# Production Signals
+
+Surface patterns, spikes, and label breakdowns across your traces and threads.
+
+## Overview
+
+**Signals** are the runtime side of [classifiers](/docs/metrics/classifiers). Once a classifier is enabled, every matching trace or thread gets a label (or none), and those labels surface here as cards, breakdowns, occurrence rows, and trend findings — your at-a-glance view of "what's happening in production right now?"
+
+For voice agents, [audio classifiers](/docs/metrics/custom-classifiers#audio-classifiers) listen to each call, so Signals also show what callers heard, such as a spike in dead air or in the agent talking over callers.
+
+![Signals for a dental clinic's voice booking line: Dead Air up after Sep 26, Talks Over the Caller rising and Call Dropped new, beside Voice Issues, Sentiment, Topics and Use Cases totals](https://www.confident-ai.com/_product-previews/mock-data/signals/voiceAgentCallIssues/stills/light.webp)
+
+*Signals for a voice agent*
+
+![Signals page listing findings like Tool Call Failure up 2.6x with sparklines, beside Issues, Sentiment, Topics and Use Cases totals](https://www.confident-ai.com/_product-previews/mock-data/signals/default/stills/light.webp)
+
+*Signals overview*
+
+The Signals page has two main areas:
+
+- **What's happening** — automatically detected spikes and trends across your classifier labels (e.g. "`RateLimit` up 3.2x compared to the previous period").
+- **Classifications** — one card per classifier showing the label distribution and counts in the selected time range, with drill-down into individual labels and occurrences.
+
+Use the date picker and environment dropdown at the top to scope everything on the page.
+
+> No classifiers configured yet? Head to [Classifiers](/docs/metrics/classifiers) to create one. Trace classifiers light up immediately as new traces arrive; thread classifiers populate after the configured idle window.
+
+## Drill Into a Label
+
+Click any classifier card to drop into the per-classifier detail view: each label's count, trend and a sparkline of occurrences over time. Click a label (here, or a finding under **What's happening**) to open its page: how many times it occurred, when it was first and last seen, whether it's ongoing or resolved, and the individual occurrences, each with the classifier's reason. The newest occurrence is selected, with a histogram of occurrences over time and its classifications beside the list.
+
+Product preview: Tool Call Failure label page: 356 occurrences, up from 138, ongoing, with occurrence rows explaining which tool timed out and the newest one's classifications beside them
+
+*A label's occurrences*
+
+Each occurrence links straight to the underlying trace or thread (**View full trace** or **View full thread**) so you can investigate why the LLM picked that label.
+
+## Filter the Observatory by Label
+
+Anywhere classifiers run, you can filter the [Observatory](/docs/llm-tracing/introduction) by classifier label to scope a search to just the data that matched. Pick the classifier and label from the filter dropdown; combine with other filters (environment, tag, metadata, latency, score, etc.) to narrow further, and save the filters as a view to apply them again in one click. Each classifier also gets a column in the table, showing the label every trace was given.
+
+![Traces filtered by the Tool call failures saved view (Issues is Tool Call Failure): four errored traces, with Issues and Topics classifier columns](https://www.confident-ai.com/_product-previews/mock-data/traces/toolFailuresSavedView/stills/savedView/light.webp)
+
+*Filter traces by classifier label in the Observatory*
+
+## A Worked Example: Failure Mode + User Sentiment
+
+Suppose you want to know **"how often does an upstream model failure correlate with a user being unhappy in the same conversation?"** — a question that touches both a trace-level dimension (the failure) and a thread-level dimension (the sentiment). The cleanest way to answer it is **two cooperating classifiers**: one trace-scoped, one thread-scoped.
+
+### Step 1 — A trace classifier for failure mode
+
+Create a trace classifier called **`Failure Mode`** with this description:
+
+> Inspect each trace for technical errors. Use the error field, status codes in metadata, and any error text in the output. Pick the label that best fits.
+
+Add four labels:
+
+| Label        | Description                                                                                                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `RateLimit`  | Trace failed because the upstream model returned a 429 or rate-limit error in the response or metadata.            |
+| `Timeout`    | Trace timed out — status code 504, timeout in error field, or latency above the configured ceiling with no output. |
+| `BadRequest` | Trace returned a 4xx error from the model that wasn't a rate limit (e.g. invalid request, missing fields).         |
+| `Unhandled`  | Trace error message indicates an unexpected exception in your application code.                                    |
+
+A trace that didn't fail simply gets no label — that's the "no match" outcome and is the expected default for happy-path traffic.
+
+### Step 2 — A thread classifier for sentiment
+
+Create a thread classifier called **`User Sentiment`** with this description:
+
+> Read the user-side turns of the conversation. Decide whether the user expresses positive, negative, or neutral sentiment about the assistant's responses across the thread.
+
+Add three labels: `Positive`, `Negative`, `Neutral` (each with one or two sentences describing what triggers it). Set a **Time Limit** of around `600` seconds so the classifier waits for the conversation to settle before grading sentiment.
+
+### Step 3 — Use the labels
+
+Once both classifiers are enabled and have processed some data, you can pivot on the same dimensions across the platform:
+
+- **Signals page** — both classifiers appear as cards. The "What's happening" section flags spikes like *"`RateLimit` up 3.2x"* or *"`Negative` sentiment doubled vs. the previous period."*
+- **Observatory traces** — filter by `Failure Mode = Timeout` to inspect every trace that timed out in a window.
+- **Observatory threads** — filter by `User Sentiment = Negative` to inspect unhappy conversations end-to-end.
+- **Combined investigation** — start in threads filtered to `User Sentiment = Negative`, then drop into one of those threads and look at how many of its traces are labeled `Failure Mode = Timeout`. That's the canonical "did our outages cause user frustration?" workflow.
+- **Dashboards** — graph trace count broken down by `Failure Mode` label, or thread count over time broken down by `User Sentiment`. See [Dashboards](/docs/customizations/dashboards) for setting up breakdown widgets.
+
+## What Classifiers *Can* Do
+
+A few capabilities worth knowing:
+
+- **Listen to voice calls.** With **Include audio** on, a classifier hears the call recording and each message's audio, not just the transcript. See [Audio Classifiers](/docs/metrics/custom-classifiers#audio-classifiers).
+- **Multiple labels per classifier.** A classifier can have any number of labels — each trace or thread is assigned at most one of them.
+- **"No match" is fine.** The classifier doesn't force a label onto every item. Items that don't fit any label are simply not signaled.
+- **Sample rate.** Each classifier respects the trace or thread sample rate set in [Workflows → Classifiers](/docs/llm-tracing/workflows/classifier), so you can tune classification overhead.
+- **Time limit (threads).** Thread classifiers wait for a configurable idle window before evaluating, so you grade *settled* conversations instead of mid-flight ones.
+
+> The LLM sees what you ingest. Error messages, status codes, metadata, tags — anything the trace or thread carries is visible to the classifier, and so is its audio when **Include audio** is on. Detection by error code, metadata field, or sentiment all just work, as long as the description tells the LLM how to interpret what it sees.
+
+## Cost
+
+Each classification logs a usage event for billing. See **Project Settings → [Data Usage](/docs/settings/project/data-usage)** under the **Signals** line for live usage and projected cost. Limits are gated by your org plan — Enterprise has no cap, but the line item is still visible.
+
+#### [Configure Classifiers](/docs/metrics/classifiers)
+
+Create or edit the classifiers and labels that produce signals.
+
+#### [Dashboards](/docs/customizations/dashboards)
+
+Trend a label's volume or break a metric down by classifier label on a dashboard.

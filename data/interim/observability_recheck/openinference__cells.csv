@@ -1,0 +1,12 @@
+tool,metric,verdict,tool_specific_name,doc_url,snapshot_file,quote,note,confidence
+OpenInference,Tool execution errors,not found,,,,,Only generic exception.* attributes and span status; none specific to tool spans. tool_calling.md searched.,high
+OpenInference,Tool call count,not found,,,,,"message.tool_calls / tool_call.* describe individual calls, no count attribute.",high
+OpenInference,Tool execution latency,not found,,,,,Spans carry start_time/end_time only (traces.md); no named duration attribute.,high
+OpenInference,Step count,not found,,,,,"Searched openinference__semantic_conventions, llm_spans, tool_calling, traces, README, annotations for latency, duration, count, step, error; none.",high
+OpenInference,Trace / run latency,not found,,,,,Spans carry start_time/end_time only (traces.md); no named duration attribute.,high
+OpenInference,LLM call latency,not found,,,,,Spans carry start_time/end_time only (traces.md); no named duration attribute.,high
+OpenInference,Time to first token,mentioned only,,https://github.com/Arize-ai/openinference/blob/main/spec/traces.md,snapshots/openinference__traces.txt,-   Denoting when the first token is sent,traces.md lists first-token as an example use of a Span Event; no defined attribute or metric.,high
+OpenInference,Span duration,not found,,,,,Spans carry start_time/end_time only (traces.md); no named duration attribute.,high
+OpenInference,Error count / rate,not found,,,,,exception.type/message/stacktrace and span status Error exist but no error count or rate attribute; generic OTel.,high
+OpenInference,Trace / span count,not found,,,,,"Searched openinference__semantic_conventions, llm_spans, tool_calling, traces, README, annotations for latency, duration, count, step, error; none.",high
+OpenInference,LLM call count,not found,,,,,llm.* attributes describe a call; no count attribute.,high

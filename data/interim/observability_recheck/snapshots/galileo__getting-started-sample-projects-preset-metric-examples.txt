@@ -1,0 +1,70 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.galileo.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Preset Metric Examples
+
+> Explore curated Log Streams that show Galileo’s out-of-the-box metrics in action
+
+The **Preset Metric Examples** sample project is a pre-populated Galileo project designed to help you understand how out-of-the-box metrics behave on real-looking examples.
+
+This project includes curated evaluation examples (within Log Streams and Experiments) with metric scores and explanations so you can quickly compare high-scoring vs. low-scoring cases.
+
+> [!TIP]
+>
+> The fastest way to explore is to start from a metric page in the docs, then look for the corresponding examples inside **Preset Metric Examples**.
+
+## How it's organized
+
+* **Curated examples**: You'll find pre-populated data that demonstrates how metrics score different cases.
+* **Drill-down friendly**: Open rows to compare the input/output with the metric explanation side-by-side.
+* **Designed for contrast**: Use sorting and filtering to compare strong vs. weak examples for the same metric.
+
+## What to look for
+
+* **Score distribution**: Look at the range of scores across traces to calibrate what “good” and “bad” looks like for that metric.
+* **Explanations**: Open a handful of rows and read the metric explanation carefully — it’s often the quickest way to learn the rubric the judge is applying.
+* **Edge cases**: Pay special attention to traces that *surprise* you (high score when you expected low, or vice versa). These are the best starting points for refining prompts, tools, or evaluation criteria.
+* **Metric interplay**: Some failures show up across multiple metrics. Use the examples to learn when you should monitor a second metric alongside your primary one.
+
+## A quick tour
+
+**1. Pick one metric you care about**
+
+Start from the relevant metric documentation page, then jump into the corresponding examples in **Preset Metric Examples**.
+
+**2. Review the best and worst traces**
+
+Sort by the metric value and open a few of the highest-scoring and lowest-scoring rows.
+
+**3. Extract reusable patterns**
+
+Keep track of 2–3 patterns that correlate with strong scores (and 2–3 patterns that correlate with weak scores). These become concrete hypotheses you can test in your own app.
+
+**4. Apply it to your own Log Stream**
+
+Enable the same metric on your own Log Stream, then see whether the patterns you observed hold up on your real traffic.
+
+## Jump into metric documentation
+
+> [card] [RAG metrics](https://docs.galileo.ai/concepts/metrics/rag/rag-overview.md)
+>
+> Explore metrics focused on answer quality and grounding.
+
+> [card] [Agentic AI metrics](https://docs.galileo.ai/concepts/metrics/agentic/agentic-overview.md)
+>
+> Explore metrics for multi-step agents, tool use, and trajectories.
+
+> [card] [Safety and Compliance metrics](https://docs.galileo.ai/concepts/metrics/safety-and-compliance/safety-and-compliance-overview.md)
+>
+> Explore metrics focused on harmful content and prompt attacks.
+
+> [card] [Text-to-SQL metrics](https://docs.galileo.ai/concepts/metrics/text2sql/text2sql-overview.md)
+>
+> Explore metrics for query correctness, adherence, efficiency, and safety.
+
+## Next steps
+
+* Learn how to enable metrics on your own Log Streams: [Configure metrics](https://docs.galileo.ai/concepts/logging/configure-metrics/configure-metrics.md)
+* Browse all out-of-the-box metrics: [Metrics overview](https://docs.galileo.ai/concepts/metrics/overview.md)
+* Compare metrics and decide what to monitor: [Metric comparison](https://docs.galileo.ai/concepts/metrics/metric-comparison.md)

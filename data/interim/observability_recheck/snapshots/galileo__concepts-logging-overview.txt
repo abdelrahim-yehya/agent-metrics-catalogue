@@ -1,0 +1,26 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.galileo.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Overview
+
+> Core Observability concepts in Galileo
+
+## What is AI Observability
+
+Agentic applications are inherently non-deterministic, meaning their behavior cannot be fully predicted or exhaustively tested before deployment. As a result, traditional monitoring approaches fall short in capturing how these systems behave in production.
+
+AI observability provides visibility into the unique runtime behavior of AI applications, allowing teams to understand what is happening under the hood, why it is happening, and how it impacts performance and outcomes.
+
+## Core concepts
+
+Once instrumented, Galileo captures every session, trace, and span, producing a structured stream of real-time data.
+
+* [Log streams](https://docs.galileo.ai/sdk-api/logging/logging-basics.md) and [projects](https://docs.galileo.ai/concepts/projects.md) organize the data you send to Galileo for a given application or environment.
+* [Sessions](https://docs.galileo.ai/concepts/logging/sessions/sessions-overview.md) group related traces into a complete multi-turn interaction.
+* [Traces](https://docs.galileo.ai/sdk-api/logging/galileo-logger.md#start-a-trace) represent a single turn, request or AI workflow.
+* [Spans](https://docs.galileo.ai/sdk-api/logging/galileo-logger.md#add-spans) capture the individual steps within a trace, such as LLM calls, tool calls, or a retrieval step.
+
+## Getting started
+
+Start with [Instrumentation](https://docs.galileo.ai/sdk-api/logging/logging-basics.md) to understand how data is structured in Galileo and how to send logs from your application.

@@ -1,0 +1,321 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.braintrust.dev/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# View your logs
+
+> Browse and inspect production traces, create custom columns to surface relevant data, and organize logs with tags for faster triage and analysis.
+
+## Browse logs
+
+> [tab] UI
+>
+> To view logs from your application in real-time, go to [\*\* Logs\*\*](https://www.braintrust.dev/app/~/logs) in your project.
+>
+> Use the time range selector in the toolbar to control which logs are displayed. Select **Live tail** to stream new rows as they arrive. New rows are highlighted with a flash animation, and streaming pauses automatically when the browser tab is hidden. For a fixed window, choose a range such as **1 hour** or **7 days** instead.
+>
+> By default, logs display as a table of traces where each row represents a complete trace with its root span. Open the row type selector in the toolbar ( **Traces** by default) and choose  **Spans** to see all logged spans individually. Choose  **Logs** to see only [application logs](https://docs.braintrust.dev/instrument/application-logs.md#inspect-logs) and OpenTelemetry span events. The **Traces** and **Spans** row types also include log rows. A log that isn't attached to a trace, such as an OTLP log record without a trace ID, appears in **Traces** as its own row.
+>
+> View individual spans when you want to:
+>
+> * Analyze specific operations within traces.
+> * Find particular function calls or API requests.
+> * Examine timing for individual operations.
+>
+> Use the search field in the toolbar to narrow results. See [Filter and search](https://docs.braintrust.dev/observe/filter.md) for suggestions, recent searches, and structured filters.
+
+> [tab] CLI
+>
+> Use [`bt view logs`](https://docs.braintrust.dev/reference/cli/view) to open a live, scrollable view of your project's logs from the terminal. Narrow results with a search term, a filter expression, or a time window without leaving the terminal.
+>
+> ```bash theme={null}
+> bt view logs --search "error"                        # Full-text search
+> bt view logs --filter "scores.Factuality < 0.5"      # Filter expression
+> bt view logs --window 30m                            # Last 30 minutes
+> ```
+>
+> Pass `--url` to jump directly to a specific view from the Braintrust app. See [`bt view logs`](https://docs.braintrust.dev/reference/cli/view) for the full flag reference.
+
+## Explore the logs chart
+
+The chart above the logs table counts records over the selected time range. What each bar counts depends on the row type: traces in **Traces**, spans in **Spans**, and log rows in **Logs**.
+
+When the filter includes a [full-text search](https://docs.braintrust.dev/reference/sql/query-structure.md#full-text-search), the chart collapses and the logs table moves up to fill the space, still returning matching rows. This includes a full-text search run from the search field and a SQL filter that uses a `search()` call or a `MATCH` expression. To see the chart, remove the full-text search or replace it with a non-full-text filter, such as an `ILIKE` comparison on a specific field.
+
+To zoom in, click and drag horizontally across the chart. To act on a single time bucket, click its bar to open the chart's action menu:
+
+* **Run in query page**: Opens the [** Query**](https://www.braintrust.dev/app/~/sql) page in a new tab, with a query that returns up to 100 of the rows behind the bar.
+* **Copy "\[label]" to clipboard**: Copies the label of the clicked series.
+* **Filter to \[value]**: Adds a filter for the clicked series to the search field. Appears only when the chart is grouped.
+* **Zoom to this time range**: Sets the time range to the clicked bucket.
+* **Ungroup chart**: Removes the chart grouping. Appears only when the chart is grouped.
+* **Export data**: Downloads the chart's data as a JSON or CSV file.
+* **Export to dashboard**: Copies the chart to a dashboard.
+
+For details on the shared actions, see [Interact with chart data](https://docs.braintrust.dev/observe/dashboards.md#interact-with-chart-data).
+
+To split the chart into one series per value of a field:
+
+1. Select a trace and find the field in the trace details. Set the field's view to **Pretty**, because the option doesn't appear in the other views. Fields under **Metrics** in the **Details** tab don't offer the option.
+2. Open the  menu beside the field and select  **Group chart by this field**.
+
+The active grouping appears as a **Chart group** chip next to the search field. To remove it, click  on the chip or select **Ungroup chart** in the chart's action menu. In the **Logs** row type, the chart is grouped by log level by default.
+
+Chart grouping is independent of [table grouping](#group-related-traces). It's kept in the page URL, so you can share a link to a grouped chart, but it isn't saved with [custom table views](#create-custom-table-views).
+
+## Chart freshness
+
+The logs table includes real-time data, while the chart summarizes logs over the selected time range. For ranges of one hour or longer, such as **1 hour** and **6 hours**, chart updates can lag behind the table. During this delay, the chart can be empty or incomplete even when the table contains recent traces.
+
+If you see rows in the table but no corresponding chart data:
+
+1. Check that the selected time range includes the traces you're inspecting, and review any active filters.
+2. Use the table or **Live tail** to inspect incoming traces. Reload the page in your browser to check whether the chart data is available.
+3. If the gap persists, contact [Braintrust support](mailto:support@braintrust.dev) with a screenshot showing the table, chart, selected time range, and active filters. Include the timezone and when you first noticed the gap.
+
+## Built-in views
+
+Each project provides default table views with common filters:
+
+* **Default view**: Shows all records.
+* **Non-errors**: Shows only records without errors.
+* **Errors**: Shows only records with errors, excluding scorer and Topics spans.
+* **LLM span errors**: Shows LLM spans with errors, excluding scorer and Topics spans, so the view reflects errors from your application traffic rather than Braintrust's internal scoring and Topics processes.
+* **Unreviewed**: Hides items that have been human-reviewed.
+* **Assigned to me**: Shows only records assigned to the current user for human review.
+
+Use the  menu to switch the table view.
+
+> [!TIP]
+>
+> Built-in views can't be modified, but you can create [custom table views](#create-custom-table-views) based on custom filters and display settings.
+
+## Group related traces
+
+Group related traces by shared metadata or tags to follow multi-turn conversations and multi-step operations end to end.
+
+By default, traces are not grouped. To group by a metadata field, tag, or classification:
+
+1. Open the row type selector in the toolbar and choose  **Group by**, then select a metadata path, tag, or classification. To group by a field that isn't listed, type its name and choose the **Custom** entry. Select **None** to remove grouping.
+2. Select a trace with the grouped attribute to see it alongside all related traces.
+3. Switch to **Timeline** () view to see operation timing or **Thread** () view for the entire session.
+
+Grouping the table this way is also what gives [custom views](https://docs.braintrust.dev/annotate/custom-views.md) access to every trace in the session.
+
+![Group related traces](https://mintcdn.com/braintrust/wnKh80ZxpSZ__gif/images/observe/group-logs.png?fit=max\&auto=format\&n=wnKh80ZxpSZ__gif\&q=85\&s=d0caceba26fe4e227100dbb8e13c6c08)
+
+> [!NOTE]
+>
+> To score a session across related traces, see [Score groups of traces](https://docs.braintrust.dev/evaluate/score-online.md#configuration-parameters).
+
+## Examine a trace
+
+Select any trace from the logs table to open it in the trace viewer. See [Examine traces](https://docs.braintrust.dev/observe/examine-traces.md) for details on navigating trace views, layouts, and actions.
+
+## Delete traces
+
+> [tab] UI
+>
+> Delete traces from the log table using the Braintrust UI:
+>
+> 1. Select the traces you want to delete.
+> 2. Click  **Delete selected rows from current project logs**.
+> 3. Confirm the deletion.
+
+> [tab] API
+>
+> Mark logs for deletion by setting `_object_delete`:
+>
+> ```python theme={null}
+> import os
+> import requests
+>
+> API_URL = "https://api.braintrust.dev/"
+> headers = {"Authorization": "Bearer " + os.environ["BRAINTRUST_API_KEY"]}
+>
+> # Find logs to delete
+> query = """
+> SELECT id
+> FROM project_logs('project-id', shape => 'traces')
+> WHERE metadata.user_id = 'test-user'
+> """
+>
+> response = requests.post(
+>     f"{API_URL}/btql",
+>     headers=headers,
+>     json={"query": query}
+> ).json()
+>
+> ids = [row["id"] for row in response["data"]]
+>
+> # Delete logs
+> delete_events = [{"id": id, "_object_delete": True} for id in ids]
+> requests.post(
+>     f"{API_URL}/v1/project_logs/project-id/insert",
+>     headers=headers,
+>     json={"events": delete_events}
+> )
+> ```
+
+## Analyze with Loop
+
+Use  **Loop** to query and analyze your logs through natural language. Loop is available on both the main [** Logs**](https://www.braintrust.dev/app/~/logs) page and when viewing individual traces.
+
+See [Analyze logs](https://docs.braintrust.dev/loop/capabilities.md#explore-your-data) and [Analyze individual traces](https://docs.braintrust.dev/loop/capabilities.md#analyze-traces) for more details.
+
+## Iterate in playgrounds
+
+Extract prompts and inputs from logs to quickly test variations in playgrounds.
+
+1. Select the rows you want to extract.
+2. Select  **Iterate in playground**.
+3. Customize settings and optionally append to existing resources.
+4. Select **Create playground**.
+
+## Assign for review
+
+You can assign traces to team members for review, analysis, or follow-up action. Assignments are particularly useful for human review workflows, where you can assign specific rows that need human evaluation and distribute review work across multiple team members.
+
+See [Assign rows for review](https://docs.braintrust.dev/annotate/human-review/manage-review-work.md#assign-rows-for-review) for details.
+
+## Organize with tags
+
+Tags help you categorize and track specific types of data across logs, datasets, and experiments. See [Apply tags](https://docs.braintrust.dev/annotate/labels.md#apply-tags) for how to configure tags and apply them via the UI or SDK.
+
+## Download logs
+
+> [tab] UI
+>
+> On the [\*\* Logs\*\*](https://www.braintrust.dev/app/~/logs) page, select  and then **Download as CSV** or **Download as JSON**.
+
+> [tab] CLI
+>
+> Use [`bt sync pull`](https://docs.braintrust.dev/reference/cli/sync) to download logs to local NDJSON files for offline analysis, backup, or migration.
+>
+> ```bash theme={null}
+> bt sync pull project_logs:my-project --window 24h                           # Last 24 hours
+> bt sync pull project_logs:my-project --filter "scores.Factuality < 0.5"     # Filtered subset
+> ```
+>
+> See [`bt sync`](https://docs.braintrust.dev/reference/cli/sync) for the full flag reference.
+
+## Customize the logs table
+
+### Show and hide columns
+
+Select  **Display** >  **Columns** and then:
+
+* Show or hide columns to focus on relevant data
+* Reorder columns by dragging them
+* Pin important columns to the left
+
+All column settings are automatically saved when you save a view.
+
+[Classifier](https://docs.braintrust.dev/evaluate/write-scorers.md#classifiers) labels appear as columns in the logs table. Filter by a classification column to analyze patterns, such as finding all traces where a classifier assigned the `password_reset` label. [Topics](https://docs.braintrust.dev/observe/topics.md) add facet summary columns that work the same way.
+
+### Create custom columns
+
+Surface important metadata, scores, or nested values directly in the logs table by creating custom columns:
+
+1. Select  **Display** > **+ Add custom column**.
+2. Name your column. You cannot use names that match built-in table fields (such as `project_id`).
+3. Choose from inferred fields or write a SQL expression.
+
+For example, use `metadata.user_id` for a simple field reference, or write a more complex expression like `concat(metadata.plan, ' / ', metadata.region)` or `metadata.latency_ms / 1000.0`. You can use functions (`concat`, `coalesce`, `lower`), `CASE` expressions, arithmetic, and string patterns (`LIKE`, `ILIKE`). Aggregate functions such as `avg()` are not supported, and expressions cannot reference other custom columns.
+
+> [!NOTE]
+>
+> Custom columns evaluate against each table row. In the default **Traces** row type, each row is the root span, so fields that exist only on child spans appear empty. To show those fields, open the row type selector in the toolbar and choose  **Spans**, or log the field on the root span.
+>
+> Filters can still match child-span fields in the Traces row type, so a filter can succeed even when the custom column is empty.
+
+### Change the table density
+
+To change the table density to see more or less detail per row, select  **Display** >  **Row height** > **Dense**, **Compact**, or **Tall**.
+
+### Visualize topic distributions
+
+When [topics](https://docs.braintrust.dev/observe/topics.md) are enabled, you can switch the Logs table to a topic distribution view that shows each topic as a card with its percentage of the total and trace count. See [Real-time analysis](https://docs.braintrust.dev/observe/topics/review-insights.md#real-time-analysis) for details and other real-time options.
+
+### Create custom table views
+
+To create or update a custom table view:
+
+1. Apply the filters and display settings you want.
+2. Select  next to the  menu, then choose:
+   * &#x20;**Save view** to update the current view. Built-in views can't be updated.
+   * &#x20;**Save view as...** to create a new view. This option also appears at the top of the  menu.
+
+These options appear only when the view has unsaved changes. To discard the changes instead, select  **Reset view** from the  menu.
+
+> [!NOTE]
+>
+> Custom table views are visible to all project members. Creating or editing a table view requires the **Update** project permission.
+
+### Duplicate table views across projects
+
+If you've built a useful custom table view in one project, you can duplicate it to another project via the API rather than recreating it from scratch.
+
+1. Use the [list views](https://docs.braintrust.dev/api-reference/views/list-views.md) API endpoint to fetch the "logs" views in your source project. Pass the following query parameters:
+
+   * `object_type=project`
+   * `object_id=<source-project-id>`
+   * `view_type=logs`
+
+   ```bash theme={null}
+   curl --request GET \
+     --url 'https://api.braintrust.dev/v1/view?object_type=project&object_id=<source-project-id>&view_type=logs' \
+     --header 'Authorization: Bearer <your-api-key>'
+   ```
+2. In the response, find the view you want to duplicate and copy its `view_data` and `options` payloads.
+3. Use the [create view](https://docs.braintrust.dev/api-reference/views/create-view.md) API endpoint to create the view in the destination project. Set `object_id` to the destination project ID.
+
+   ```bash theme={null}
+   curl --request POST \
+     --url https://api.braintrust.dev/v1/view \
+     --header 'Authorization: Bearer <your-api-key>' \
+     --header 'Content-Type: application/json' \
+     --data '
+     {
+       "object_type": "project",
+       "object_id": "<destination-project-id>",
+       "view_type": "logs",
+       "name": "<new-view-name>",
+       "view_data": <view-data-payload>,
+       "options": <options-payload>
+     }'
+   ```
+
+### Set default table views
+
+You can set default views at three levels:
+
+* **Organization default**: Visible to all members when they open the page. This applies per page. For example, you can set separate organization defaults for Logs, Experiments, and Review. To set an organization default, you need the **Manage settings** organization permission (included by default in the **Owner** role). See [Access control](https://docs.braintrust.dev/admin/access-control.md) for details.
+* **Project default**: Overrides the organization default for everyone viewing this project. To set a project default, you need the project-level **Update** permission. Project admins can set project defaults even without organization-level permissions. See [Access control](https://docs.braintrust.dev/admin/access-control.md) for details.
+* **Personal default**: Overrides the project and organization defaults for you only. Personal defaults are stored in your browser, so they do not carry over across devices or browsers.
+
+To set a default view:
+
+1. Switch to the view you want by selecting it from the  menu.
+2. Select  next to the  menu.
+3. Choose  **Set as personal default view**,  **Set as project default view**, or  **Set as organization default view**.
+
+To clear a default view:
+
+1. Switch to the view whose default you want to clear by selecting it from the  menu.
+2. Select  next to the  menu.
+3. Choose  **Clear personal default view**,  **Clear project default view**, or  **Clear organization default view**.
+
+Default view settings are mutually exclusive on a given view. Setting one type of default on a view automatically clears any other default that was previously set on the same view.
+
+When you open a page, Braintrust loads the first match in this order: personal default, project default, organization default, then the standard "All ..." view (for example, **All traces view**).
+
+## Next steps
+
+* [Analyze with Loop](https://docs.braintrust.dev/loop.md) using natural language queries
+* [Filter and search](https://docs.braintrust.dev/observe/filter.md) to find specific traces
+* [Score online](https://docs.braintrust.dev/evaluate/score-online.md) to evaluate production data
+* [Create dashboards](https://docs.braintrust.dev/observe/dashboards.md) to monitor metrics
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

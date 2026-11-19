@@ -1,0 +1,167 @@
+# Laminar documentation
+
+- [Laminar](https://laminar.sh/docs/overview.md)
+- [Getting Started](https://laminar.sh/docs/getting-started.md)
+- [Tracing](https://laminar.sh/docs/tracing/introduction.md)
+- [Tracing Structure](https://laminar.sh/docs/tracing/structure/overview.md)
+- [Trace Functions](https://laminar.sh/docs/tracing/structure/observe-decorator.md)
+- [Trace Parts of Your Code](https://laminar.sh/docs/tracing/structure/manual-span-creation.md)
+- [Span Types](https://laminar.sh/docs/tracing/structure/span-types.md)
+- [Sessions](https://laminar.sh/docs/tracing/structure/sessions.md)
+- [User ID](https://laminar.sh/docs/tracing/structure/user-id.md)
+- [Metadata](https://laminar.sh/docs/tracing/structure/metadata.md)
+- [Tags](https://laminar.sh/docs/tracing/structure/tags.md)
+- [Tracing Images](https://laminar.sh/docs/tracing/structure/images.md)
+- [Continuing Traces](https://laminar.sh/docs/tracing/structure/continuing-traces.md)
+- [Span Attribute Reference](https://laminar.sh/docs/tracing/structure/span-attribute-reference.md)
+- [Flushing Spans and Shutting Down](https://laminar.sh/docs/tracing/structure/flushing-and-shutdown.md)
+- [Task extraction for AI agent runs](https://laminar.sh/docs/tracing/task-extraction.md): Laminar extracts the task from every agent run, shows it in the traces table and transcript view, and makes it queryable with SQL.
+- [Agent versioning: track prompt and tool changes](https://laminar.sh/docs/tracing/agent-versions.md): Laminar detects the agents in your traces, versions their system prompts and tools, and tags every trace with the version that ran it.
+- [LLM cost tracking](https://laminar.sh/docs/tracing/cost-tracking.md)
+- [Session replay for browser agents](https://laminar.sh/docs/tracing/browser-agent-observability.md)
+- [LangGraph Visualization](https://laminar.sh/docs/tracing/langgraph-visualization.md)
+- [Troubleshooting](https://laminar.sh/docs/tracing/troubleshooting.md)
+- [Troubleshooting non-Laminar SDKs](https://laminar.sh/docs/tracing/troubleshooting-opentelemetry.md)
+- [Signals](https://laminar.sh/docs/signals/introduction.md)
+- [Quickstart](https://laminar.sh/docs/signals/quickstart.md)
+- [Manage Signals from the CLI](https://laminar.sh/docs/signals/cli.md)
+- [Clusters](https://laminar.sh/docs/signals/clusters.md)
+- [Alerts](https://laminar.sh/docs/signals/alerts.md)
+- [Reports](https://laminar.sh/docs/signals/reports.md)
+- [Agent Evaluations in Real Environments with Laminar](https://laminar.sh/docs/agent-evaluations/introduction.md)
+- [Agent Evaluations Quickstart with lmnr-cli](https://laminar.sh/docs/agent-evaluations/quickstart.md)
+- [Agent Evaluation Concepts - Tasks, Trials, and Verifiers](https://laminar.sh/docs/agent-evaluations/concepts.md)
+- [Run Agent Evaluations with lmnr-cli eval run](https://laminar.sh/docs/agent-evaluations/running-evals.md)
+- [The Evals Folder Reference for lmnr.yaml, harbor.yaml, and task.toml](https://laminar.sh/docs/agent-evaluations/evals-folder.md)
+- [Build an Agent Evaluation Harness That Matches Production](https://laminar.sh/docs/agent-evaluations/production-harness.md)
+- [Capture Agent Trajectories in Every Evaluation Trial](https://laminar.sh/docs/agent-evaluations/trajectories.md)
+- [Troubleshooting Agent Evaluations](https://laminar.sh/docs/agent-evaluations/troubleshooting.md)
+- [LLM Evaluations](https://laminar.sh/docs/evaluations/introduction.md)
+- [LLM evaluations quickstart](https://laminar.sh/docs/evaluations/quickstart.md)
+- [Evaluation concepts](https://laminar.sh/docs/evaluations/concepts.md)
+- [Compare evaluation runs](https://laminar.sh/docs/evaluations/comparing-runs.md)
+- [Custom Rendering for Evaluation Traces](https://laminar.sh/docs/evaluations/custom-rendering.md)
+- [Datasets for evaluations](https://laminar.sh/docs/evaluations/datasets.md)
+- [Manual evaluation API](https://laminar.sh/docs/evaluations/manual-evaluation.md)
+- [Self-hosted evaluations](https://laminar.sh/docs/evaluations/self-hosted.md)
+- [AI Agent Debugger: Record, Replay, Evaluate](https://laminar.sh/docs/debugger/introduction.md)
+- [Set Up the Laminar Debugger](https://laminar.sh/docs/debugger/setup.md)
+- [How the Debugger Runs](https://laminar.sh/docs/debugger/process.md)
+- [How Debugger Caching Works](https://laminar.sh/docs/debugger/caching.md)
+- [Introduction to Laminar datasets](https://laminar.sh/docs/datasets/introduction.md)
+- [Adding data to Laminar datasets](https://laminar.sh/docs/datasets/adding-data.md)
+- [Laminar datasets CLI](https://laminar.sh/docs/datasets/cli.md)
+- [Platform](https://laminar.sh/docs/platform.md)
+- [Viewing Traces](https://laminar.sh/docs/platform/viewing-traces.md)
+- [Table views](https://laminar.sh/docs/platform/table-views.md)
+- [Slack integration](https://laminar.sh/docs/platform/integrations.md)
+- [Live tracing](https://laminar.sh/docs/platform/live-tracing.md)
+- [Laminar Agent](https://laminar.sh/docs/platform/laminar-agent.md)
+- [MCP Server](https://laminar.sh/docs/platform/mcp.md): Connect MCP clients to Laminar to query traces with SQL and summarize trace context.
+- [SQL Editor](https://laminar.sh/docs/platform/sql-editor.md)
+- [CLI](https://laminar.sh/docs/platform/cli.md)
+- [Terraform Provider for Laminar Signals and LLM Profiles](https://laminar.sh/docs/platform/terraform.md): Define Laminar Signals and LLM profiles as code, review changes in a plan, and apply them to every project from CI.
+- [Full text search](https://laminar.sh/docs/platform/search.md)
+- [Render Templates for Custom Data Views](https://laminar.sh/docs/platform/render-templates.md)
+- [Custom Model Costs for Self-Hosted and Fine-Tuned Models](https://laminar.sh/docs/platform/custom-model-costs.md)
+- [Usage Warnings and Hard Limits for Data and Signals](https://laminar.sh/docs/platform/usage-limits.md)
+- [PII Redaction for AI Agent Traces](https://laminar.sh/docs/platform/pii-redaction.md)
+- [Workspace Audit Log for Changes and Trace Data Access](https://laminar.sh/docs/platform/audit-log.md)
+- [Dashboards: Chart Agent Cost, Tokens, and Latency](https://laminar.sh/docs/platform/dashboards.md)
+- [Labeling Queues](https://laminar.sh/docs/queues/quickstart.md)
+- [LLM Profiles for Custom LLM Providers and API Keys](https://laminar.sh/docs/platform/llm-profiles.md)
+- [Playground](https://laminar.sh/docs/playground.md)
+- [Agent and LLM Observability Integrations](https://laminar.sh/docs/integrations.md)
+- [Anthropic observability](https://laminar.sh/docs/integrations/anthropic.md): Trace every Anthropic API call in TypeScript and Python: prompts, token usage, cost, and latency, all readable in Laminar's transcript view.
+- [OpenAI observability](https://laminar.sh/docs/integrations/openai.md): Trace every OpenAI API call in TypeScript and Python: prompts, token usage, cost, and latency, all readable in Laminar's transcript view.
+- [Gemini observability](https://laminar.sh/docs/integrations/gemini.md): Trace every Gemini API call made with the Google Gen AI SDK: prompts, token usage, cost, and latency, all readable in Laminar's transcript view.
+- [Cohere observability](https://laminar.sh/docs/integrations/cohere.md): Trace every Cohere chat, embed, and rerank call: prompts, token usage, cost, and latency, all readable in Laminar's transcript view.
+- [LiteLLM observability](https://laminar.sh/docs/integrations/litellm.md): Trace LiteLLM calls to any model it routes to with one integration: prompts, token usage, cost, and latency in Laminar's transcript view.
+- [OpenRouter observability](https://laminar.sh/docs/integrations/openrouter.md): Trace every OpenRouter request with the model that served it, token usage, cost, and latency, all readable in Laminar's transcript view.
+- [TypeSafe AI Jev observability](https://laminar.sh/docs/integrations/typesafe.md): Trace every TypeSafe AI Jev call with its state, questions, typed answers, and token usage, all readable in Laminar's transcript view.
+- [Vercel AI SDK observability](https://laminar.sh/docs/integrations/vercel-ai-sdk.md): Trace Vercel AI SDK calls in Next.js and Node.js: model turns, tool calls, streaming, sub-agents, token usage, and cost.
+- [eve observability](https://laminar.sh/docs/integrations/eve.md): Trace eve durable agents in TypeScript: every model turn, tool call, token count, and cost, readable as a conversation in Laminar.
+- [LangChain and LangGraph observability](https://laminar.sh/docs/integrations/langchain.md): Trace LangChain chains and LangGraph agents in TypeScript and Python: every graph node, tool call, and LLM call, with token usage and cost, read as a transcript.
+- [deepagents observability](https://laminar.sh/docs/integrations/deepagents.md): Trace deepagents runs in Python: the agent root span, every tool call, and every subagent, readable as a conversation in Laminar.
+- [Mastra observability](https://laminar.sh/docs/integrations/mastra.md): Trace Mastra agents, workflows, and tools in TypeScript: model turns, tool calls, sub-agents, token usage, and cost.
+- [Pi Durable observability](https://laminar.sh/docs/integrations/pi-durable.md): Trace Pi Durable Harness runs: one trace per run with every model request and tool call, continued in the same trace after a restart.
+- [Pydantic AI observability](https://laminar.sh/docs/integrations/pydantic-ai.md): Trace Pydantic AI agent runs in Python: every model turn, typed tool call, and sub-agent run, readable as a conversation in Laminar.
+- [Microsoft Agent Framework observability](https://laminar.sh/docs/integrations/microsoft-agent-framework.md): Trace Microsoft Agent Framework runs in Python: every agent, model turn, tool call, and workflow step, readable as a conversation in Laminar.
+- [OpenAI Agents SDK observability](https://laminar.sh/docs/integrations/openai-agents-sdk.md): Trace OpenAI Agents SDK runs in TypeScript and Python: agent turns, tool calls, handoffs, and sub-agents in Laminar's transcript view.
+- [Google ADK observability](https://laminar.sh/docs/integrations/google-adk.md): Trace Google Agent Development Kit (ADK) runs in Python: agent invocations, Gemini calls, and tool executions, readable as a conversation in Laminar.
+- [OpenHands SDK observability](https://laminar.sh/docs/integrations/openhands-sdk.md): Trace OpenHands SDK conversations: every agent step, LLM call, and tool call, grouped per conversation as a Laminar session.
+- [Temporal observability](https://laminar.sh/docs/integrations/temporal.md): Trace AI agents that run as Temporal workflows in TypeScript and Python: one trace across the client, the workflow, and every activity.
+- [Claude Code observability](https://laminar.sh/docs/integrations/claude-code.md): Trace every Claude Code session with a plugin: each prompt becomes a trace with its LLM calls and tool calls, grouped as a Laminar session.
+- [Codex observability](https://laminar.sh/docs/integrations/codex.md): Trace every Codex session with a plugin: each prompt becomes a trace with its LLM calls and tool calls, grouped as a Laminar session.
+- [Pi observability](https://laminar.sh/docs/integrations/pi.md): Trace every Pi coding agent session: each prompt becomes a trace with its LLM calls and tool calls, grouped as a Laminar session.
+- [Claude Agent SDK observability](https://laminar.sh/docs/integrations/claude-agent-sdk.md): Trace agents built on the Claude Agent SDK in TypeScript and Python, including subagent runs, tool calls, token usage, and cost.
+- [OpenCode observability](https://laminar.sh/docs/integrations/opencode.md): Trace OpenCode coding agent sessions: every model turn and tool call, grouped per session and readable as a conversation in Laminar.
+- [Browser Use observability](https://laminar.sh/docs/integrations/browser-use.md): Trace Browser Use agents and watch the browser session recording synced to the agent's steps, LLM calls, and screenshots.
+- [Stagehand observability](https://laminar.sh/docs/integrations/stagehand.md): Trace Stagehand runs and watch the browser session recording synced to each act, extract, and LLM call in Laminar.
+- [Skyvern observability](https://laminar.sh/docs/integrations/skyvern.md): Trace Skyvern workflows and watch the browser session recording synced to each step, prompt, and screenshot in Laminar.
+- [Kernel observability](https://laminar.sh/docs/integrations/kernel.md): Trace computer-using agents that drive Kernel browsers, with the browser session recording synced to the agent's steps.
+- [Playwright observability](https://laminar.sh/docs/integrations/playwright.md): Record Playwright browser sessions in JavaScript and Python and read them synced to the surrounding agent trace in Laminar.
+- [Puppeteer observability](https://laminar.sh/docs/integrations/puppeteer.md): Record Puppeteer browser sessions in JavaScript and read them synced to the surrounding agent trace in Laminar.
+- [Harbor agent evaluations](https://laminar.sh/docs/integrations/harbor.md): Add one flag to harbor run and read every trial as a scored datapoint with a full agent transcript, for Claude Code, Codex, or your own agent.
+- [Langfuse observability](https://laminar.sh/docs/integrations/langfuse.md): Keep your Langfuse instrumentation and dual-export the same spans to Laminar, then compare the two side by side before you switch.
+- [OpenTelemetry](https://laminar.sh/docs/tracing/otel.md)
+- [Understand Your Agent Using Laminar Signals](https://laminar.sh/docs/guides/signals.md)
+- [Tracing LLM calls in FastAPI with Laminar](https://laminar.sh/docs/guides/fastapi.md)
+- [Debug an AI Agent End to End: Record, Replay, Evaluate](https://laminar.sh/docs/guides/debugger-end-to-end.md)
+- [Debug a Browser Use Agent with Laminar](https://laminar.sh/docs/guides/browser-use-debugger.md)
+- [Tracing AI SDK in Next.js with Laminar](https://laminar.sh/docs/guides/nextjs-aisdk.md)
+- [Tracing LLM calls in Next.js with Laminar](https://laminar.sh/docs/guides/nextjs.md)
+- [Evaluating LLM Tool Calls with Laminar](https://laminar.sh/docs/guides/evaluating-tool-calls.md)
+- [Self-hosting Laminar](https://laminar.sh/docs/self-hosting/overview.md)
+- [Self-host Laminar with Docker Compose](https://laminar.sh/docs/self-hosting/docker-compose.md)
+- [Self-host Laminar on Kubernetes with Helm](https://laminar.sh/docs/self-hosting/kubernetes.md)
+- [Helm Configuration Reference for Self-hosted Laminar](https://laminar.sh/docs/self-hosting/configuration.md)
+- [Observe](https://laminar.sh/docs/sdk/observe.md)
+- [Manual Span Creation](https://laminar.sh/docs/sdk/manual-spans.md)
+- [Span Methods](https://laminar.sh/docs/sdk/span-methods.md)
+- [Trace Methods](https://laminar.sh/docs/sdk/trace-methods.md)
+- [Context Utilities](https://laminar.sh/docs/sdk/context-utilities.md)
+- [SDK Lifecycle](https://laminar.sh/docs/sdk/lifecycle.md)
+- [Span Batching and Export Payload Size Limits](https://laminar.sh/docs/sdk/batching.md)
+- [SDK Constants](https://laminar.sh/docs/sdk/constants.md)
+- [Client](https://laminar.sh/docs/sdk/client.md)
+- [Evaluations](https://laminar.sh/docs/sdk/evaluations.md)
+- [TypeScript Instrumentation](https://laminar.sh/docs/sdk/typescript/instrumentation.md)
+- [Python Instrumentation](https://laminar.sh/docs/sdk/python/instrumentation.md)
+- [TypeScript Types](https://laminar.sh/docs/sdk/typescript/types.md)
+- [Python Types](https://laminar.sh/docs/sdk/python/types.md)
+- [Ingest OpenTelemetry traces](https://laminar.sh/docs/api-reference/ingestion/ingest-opentelemetry-traces.md): Accepts an OTLP ExportTraceServiceRequest encoded as protobuf or OTLP JSON.
+- [Create spans](https://laminar.sh/docs/api-reference/ingestion/create-spans.md): Ingests a batch of spans using Laminar's JSON span format.
+- [Ingest OpenTelemetry logs](https://laminar.sh/docs/api-reference/ingestion/ingest-opentelemetry-logs.md): Accepts an OTLP ExportLogsServiceRequest encoded as protobuf. JSON-encoded OTLP is not accepted. This endpoint is in beta: ingested logs are stored in the `logs` table and can only be queried with SQL. They are not shown anywhere in the Laminar UI, and Signals do not read them when analyzing traces.
+- [Add labeling queue items](https://laminar.sh/docs/api-reference/labeling-queues/add-labeling-queue-items.md): Adds items to a labeling queue, optionally deduplicating them with idempotency keys.
+- [Query project data](https://laminar.sh/docs/api-reference/sql/query-project-data.md): Executes a validated, read-only SQL query scoped to the authenticated project.
+- [Get the current project](https://laminar.sh/docs/api-reference/projects/get-the-current-project.md): Returns the project ID associated with the supplied API key.
+- [List datasets](https://laminar.sh/docs/api-reference/datasets/list-datasets.md): Lists project datasets, optionally filtered by dataset ID or name.
+- [Create a dataset](https://laminar.sh/docs/api-reference/datasets/create-a-dataset.md): Creates an empty dataset. Dataset names do not need to be unique.
+- [Get a dataset](https://laminar.sh/docs/api-reference/datasets/get-a-dataset.md): Returns a dataset by its canonical ID.
+- [Delete a dataset](https://laminar.sh/docs/api-reference/datasets/delete-a-dataset.md): Deletes a dataset and its datapoints.
+- [Update a dataset](https://laminar.sh/docs/api-reference/datasets/update-a-dataset.md): Renames a dataset. Dataset names do not need to be unique.
+- [List dataset datapoints](https://laminar.sh/docs/api-reference/datasets/list-dataset-datapoints.md): Returns a paginated page of datapoints from a dataset identified by ID or name.
+- [Create dataset datapoints](https://laminar.sh/docs/api-reference/datasets/create-dataset-datapoints.md): Adds datapoints to a dataset and can optionally create the dataset when identified by name.
+- [List Signals](https://laminar.sh/docs/api-reference/signals/list-signals.md): Lists Signals in the project, optionally filtering by a name substring.
+- [Create a Signal](https://laminar.sh/docs/api-reference/signals/create-a-signal.md): Creates a Signal with the first server-managed configuration version.
+- [Get a Signal](https://laminar.sh/docs/api-reference/signals/get-a-signal.md): Returns a Signal in the authenticated project.
+- [Delete a Signal](https://laminar.sh/docs/api-reference/signals/delete-a-signal.md): Deletes a Signal and returns its final state.
+- [Update a Signal](https://laminar.sh/docs/api-reference/signals/update-a-signal.md): Updates a Signal. An update that changes the effective Signal configuration increments its server-managed version.
+- [List LLM profiles](https://laminar.sh/docs/api-reference/llm-profiles/list-llm-profiles.md): Lists every LLM profile in the authenticated project's workspace.
+- [Create an LLM profile](https://laminar.sh/docs/api-reference/llm-profiles/create-an-llm-profile.md): Creates an LLM profile in the authenticated project's workspace.
+- [Get an LLM profile](https://laminar.sh/docs/api-reference/llm-profiles/get-an-llm-profile.md): Returns an LLM profile from the authenticated project's workspace. Secret values are masked.
+- [Delete an LLM profile](https://laminar.sh/docs/api-reference/llm-profiles/delete-an-llm-profile.md): Deletes an LLM profile and returns its final state.
+- [Update an LLM profile](https://laminar.sh/docs/api-reference/llm-profiles/update-an-llm-profile.md): Updates an LLM profile. Omitted fields retain their stored values, `models` replaces the complete model list, a supplied `config` replaces the whole stored config object, and supplied secrets are merged with stored secrets.
+- [Create an evaluation](https://laminar.sh/docs/api-reference/evaluations/create-an-evaluation.md): Creates an evaluation run, generating a name when none is supplied.
+- [Update an evaluation](https://laminar.sh/docs/api-reference/evaluations/update-an-evaluation.md): Updates an evaluation's name and/or metadata; omitted fields remain unchanged.
+- [Add evaluation datapoints](https://laminar.sh/docs/api-reference/evaluations/add-evaluation-datapoints.md): Adds result datapoints to an evaluation run.
+- [Update an evaluation datapoint](https://laminar.sh/docs/api-reference/evaluations/update-an-evaluation-datapoint.md): Updates a datapoint's executor output, scores, and optional trace association.
+- [Changelog](https://laminar.sh/docs/changelog.md)
+
+## OpenAPI Specs
+
+- [openapi](/docs/openapi/openapi.yaml)
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

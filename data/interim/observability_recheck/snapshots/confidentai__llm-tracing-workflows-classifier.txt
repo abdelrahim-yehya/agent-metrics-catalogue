@@ -1,0 +1,49 @@
+# Classifier Task
+
+Label incoming traces and threads with an LLM classifier; the labels surface as Signals.
+
+## Overview
+
+A classifier task runs [classifiers](/docs/metrics/classifiers) on traces, spans and threads as a [workflow](/docs/llm-tracing/workflows) ingests them. The labels it assigns surface as [Signals](/docs/llm-tracing/features/signals) and as filterable dimensions across the Observatory and Dashboards.
+
+Product preview: The Workflows page on Traces: the Production traces workflow with its Issues classifier task, and the task open in Edit classifier task with its name, description, Enabled, Run condition and the Issues classifier
+
+*A classifier task in its workflow*
+
+To create a classifier or manage its labels, see [Custom Classifiers](/docs/metrics/custom-classifiers).
+
+## Run It in a Workflow
+
+A classifier labels nothing until a workflow runs it. On the [Workflows](/docs/llm-tracing/workflows) page, pick **Traces**, **Spans** or **Threads**, add a classifier task to a workflow, and choose the classifiers it runs, or a [classifier collection](/docs/metrics/classifier-collections) to run several together. The task's **Sample Rate** and **Filters** decide which of the ingested data it classifies. The classifier's **Used in** lists the workflows that run it.
+
+### Sample Rate
+
+Each classifier task's **Sample Rate** controls what fraction of the data it ingests is sent for classification — `1.0` classifies everything, `0.1` classifies roughly one in ten.
+
+### Time Limit (threads only)
+
+For classifier tasks on threads, **Time Limit** on the Workflows page defines how many seconds of inactivity must pass before a thread is eligible for classification. The classification runs once no new trace has arrived for that period. Set this long enough that follow-up turns have stopped arriving, but not so long that you miss the conversation window.
+
+## Classify Voice Calls
+
+For voice agents, turn on **Include audio** in a classifier's settings so it listens to each call as well as reading its transcript. Labels like dead air, interruptions or audio glitches are then picked from how the call actually sounded, and the evidence for each label is placed on the call. See [Audio Classifiers](/docs/metrics/custom-classifiers#audio-classifiers).
+
+Product preview: The Issues classifier's Settings with Enabled, Auto classify and Include audio on, and a notice that the platform model can receive audio
+
+*Include audio in a classifier's settings*
+
+## Cost
+
+Each classification logs a usage event for billing. See **Project Settings → [Data Usage](/docs/settings/project/data-usage)** under the **Signals** line for live usage and projected cost.
+
+## Next Steps
+
+#### [Signals](/docs/llm-tracing/features/signals)
+
+See how classifier labels surface as Signals — cards, breakdowns, trend
+findings, and Observatory filters.
+
+#### [Dashboards](/docs/customizations/dashboards)
+
+Break a metric down by classifier label, or trend a label's volume over time
+on a dashboard widget.

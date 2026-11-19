@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 895" width="1100" height="895" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" role="img" aria-label="Simplified flow diagram of the tool selection"><rect width="1100" height="895" fill="#ffffff"/><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a8f94"/></marker></defs>
+<text x="30" y="36" font-size="22" font-family="Georgia,serif" fill="#1d2328">How the tools were found and selected</text>
+<text x="30" y="58" font-size="12.5" fill="#5d666d">Open-source tools are chosen by adoption on GitHub and package registries; closed-source tools by how often independent sources name them.</text>
+<rect x="60" y="90" width="470" height="87" rx="9" fill="#e8f1f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="72" y="111" font-size="13" font-weight="700" fill="#1d2328">GitHub search  (open-source tools)</text>
+<text x="72" y="130" font-size="11.5" fill="#1d2328">17 queries; at least 1,000 stars, not archived,</text>
+<text x="72" y="145" font-size="11.5" fill="#1d2328">active in the last 6 months</text>
+<text x="72" y="160" font-size="11.5" fill="#1d2328">182 repositories, 37 kept after a manual check</text>
+<rect x="570" y="90" width="470" height="87" rx="9" fill="#e8f1f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="582" y="111" font-size="13" font-weight="700" fill="#1d2328">Google search  (closed-source tools, and discovery)</text>
+<text x="582" y="130" font-size="11.5" fill="#1d2328">6 queries, first 30 results each</text>
+<text x="582" y="145" font-size="11.5" fill="#1d2328">68 tools named</text>
+<text x="582" y="160" font-size="11.5" fill="#1d2328">5 closed-source tools kept (two independent sources)</text>
+<rect x="300" y="245" width="500" height="57" rx="9" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="312" y="266" font-size="13" font-weight="700" fill="#1d2328">42 candidate tools</text>
+<text x="312" y="285" font-size="11.5" fill="#1d2328">duplicates merged: an SDK and its platform count as one</text>
+<path d="M295.0,177 L295.0,211.0 L450.0,211.0 L450.0,245" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="303" y="222" font-size="11" fill="#5d666d" >37</text>
+<path d="M805.0,177 L805.0,211.0 L650.0,211.0 L650.0,245" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="813" y="222" font-size="11" fill="#5d666d" >5</text>
+<rect x="300" y="345" width="500" height="102" rx="9" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="312" y="366" font-size="13" font-weight="700" fill="#1d2328">Screening</text>
+<text x="312" y="385" font-size="11.5" fill="#1d2328">purpose: observability or evaluation of LLM apps or agents (I1, S1)</text>
+<text x="312" y="400" font-size="11.5" fill="#1d2328">exclusions: gateways, agent frameworks, benchmarks, general-purpose platforms (E1 to E6)</text>
+<text x="312" y="415" font-size="11.5" fill="#1d2328">agent relevance: official docs cover agents, tool calls or traces (A1)</text>
+<text x="312" y="430" font-size="12" font-weight="700" fill="#5d666d">30 tools</text>
+<path d="M550.0,302 L550.0,345" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="558.0" y="327.5" font-size="11" fill="#5d666d" >42</text>
+<rect x="60" y="505" width="470" height="102" rx="9" fill="#e6f6f1" stroke="#1e8e6e" stroke-width="2.2"/>
+<text x="72" y="526" font-size="13" font-weight="700" fill="#1d2328">Open source: adoption (C2)</text>
+<text x="72" y="545" font-size="11.5" fill="#1d2328">at least 5,000 stars or 1M downloads in 30 days</text>
+<text x="72" y="560" font-size="11.5" fill="#1d2328">(PyPI or npm), and at least 100k downloads</text>
+<text x="72" y="575" font-size="11.5" fill="#1d2328">when a package exists; active in 6 months</text>
+<text x="72" y="590" font-size="12" font-weight="700" fill="#1e8e6e">25 checked  →  9 tools + 2 standards</text>
+<rect x="570" y="505" width="470" height="87" rx="9" fill="#fff4ea" stroke="#d9822b" stroke-width="2.2"/>
+<text x="582" y="526" font-size="13" font-weight="700" fill="#1d2328">Closed source: corroboration (C1)</text>
+<text x="582" y="545" font-size="11.5" fill="#1d2328">at least 2 independent Google sources;</text>
+<text x="582" y="560" font-size="11.5" fill="#1d2328">the tool&#x27;s own website does not count</text>
+<text x="582" y="575" font-size="12" font-weight="700" fill="#d9822b">4 checked  →  4 tools</text>
+<path d="M550.0,447 L550.0,476.0 L295.0,476.0 L295.0,505" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M550.0,447 L550.0,476.0 L805.0,476.0 L805.0,505" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="250" y="655" width="600" height="72" rx="9" fill="#e9f4ea" stroke="#3c8a4a" stroke-width="1.4"/>
+<text x="262" y="676" font-size="13" font-weight="700" fill="#1d2328">13 tools  +  3 standards</text>
+<text x="262" y="695" font-size="11.5" fill="#1d2328">12 platforms and 1 framework; the standards (OpenTelemetry, OpenLLMetry,</text>
+<text x="262" y="710" font-size="11.5" fill="#1d2328">OpenInference) are the layer beneath the tools and are reported apart</text>
+<path d="M295.0,607 L295.0,631.0 L550.0,631.0 L550.0,655" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M805.0,592 L805.0,623.5 L550.0,623.5 L550.0,655" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="250" y="775" width="600" height="72" rx="9" fill="#f3eefa" stroke="#6f4fa0" stroke-width="1.4"/>
+<text x="262" y="796" font-size="13" font-weight="700" fill="#1d2328">46 unique metrics</text>
+<text x="262" y="815" font-size="11.5" fill="#1d2328">built-in metrics read from official docs (264 rows, each with URL and verbatim quote),</text>
+<text x="262" y="830" font-size="11.5" fill="#1d2328">scoped by M1 and merged by property: 18 Observability + 28 Evaluation</text>
+<path d="M550.0,727 L550.0,775" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="60" y="859" width="22" height="12" rx="3" fill="#e6f6f1" stroke="#1e8e6e" stroke-width="2.2"/>
+<text x="90" y="869" font-size="11" fill="#5d666d">adoption rule (C2)</text>
+<rect x="290" y="859" width="22" height="12" rx="3" fill="#fff4ea" stroke="#d9822b" stroke-width="2.2"/>
+<text x="320" y="869" font-size="11" fill="#5d666d">depends on Google source counts (C1)</text>
+<rect x="620" y="859" width="22" height="12" rx="3" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="650" y="869" font-size="11" fill="#5d666d">other rule</text></svg>

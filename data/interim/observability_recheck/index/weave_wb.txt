@@ -1,0 +1,449 @@
+# CoreWeave Docs: English Forge Weights & Biases
+
+> Learn how to deploy, manage, and observe your AI training and inference workloads on CoreWeave.
+
+## Weights & Biases
+
+- [English / Forge / Weights & Biases / Reference (372 pages)](https://docs.coreweave.com/_llms/en/forge/weights-and-biases/reference.txt): Python, Command Line Interface (CLI), Query Expression Language, Reports and Workspaces API, W&B Weave References.
+
+### Weights & Biases
+
+- [Get Started with Weights & Biases](https://docs.coreweave.com/products/wandb.md): Choose a quickstart for tracking ML experiments or tracing LLM applications with Weights & Biases
+- [Use Weights & Biases with AI Assistants](https://docs.coreweave.com/products/wandb/platform/ai-assistants.md): Use W&B Skills and the Weights & Biases MCP Server to automate workflows, query data, and search documentation.
+- [Weights & Biases Quickstart](https://docs.coreweave.com/products/wandb/quickstart.md): Install Weights & Biases and start tracking, visualizing, and managing machine learning experiments in minutes.
+- [Get Started with Weights & Biases](https://docs.coreweave.com/products/wandb/models_quickstart.md): Track experiments, log metrics, and visualize results with Weights & Biases in a few lines of code.
+
+#### Get Started with W&B Weave
+
+- [Choose an agent integration](https://docs.coreweave.com/products/wandb/weave/agent-integration-quickstart.md): Pick a built-in Weave integration for your agent SDK or harness and start sending conversations, turns, LLM calls, and tool calls to the Agents view.
+- [Quickstart: Set up custom agent observability](https://docs.coreweave.com/products/wandb/weave/custom-agents-quickstart.md): Trace a multi-turn agent with the Weave SDK. Conversations, turns, LLM calls, and tool calls render in the Agents view of your project.
+- [Evaluate your AI agent with Weave](https://docs.coreweave.com/products/wandb/weave/agent-evals.md): Evaluate single-turn and multi-turn AI agents in Weave using the agents workflow and EvaluationLogger, scored with an LLM judge.
+- [Send OpenTelemetry spans to the Agents view](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-agents-otel.md): Send OTLP trace data from any OpenTelemetry pipeline to the Weave agents endpoint, with no Weave SDK required.
+- [Quickstart: Instrument and trace functions](https://docs.coreweave.com/products/wandb/weave/quickstart.md): Get started with W&B Weave by adding tracing to your LLM application to debug and monitor model interactions.
+
+##### Cookbooks
+
+- [Overview](https://docs.coreweave.com/products/wandb/weave/cookbooks.md): Practical guides and examples for building with Weights & Biases Weave
+
+###### Weave fundamentals
+
+- [Introduction to Traces](https://docs.coreweave.com/products/wandb/weave/cookbooks/Intro_to_Weave_Hello_Trace.md): Learn how to use introduction to traces with W&B Weave
+- [Introduction to Evaluations](https://docs.coreweave.com/products/wandb/weave/cookbooks/Intro_to_Weave_Hello_Eval.md): Learn how to use introduction to evaluations with W&B Weave
+
+###### Evaluations & Datasets
+
+- [Leaderboard Quickstart](https://docs.coreweave.com/products/wandb/weave/cookbooks/leaderboard_quickstart.md): Learn how to use leaderboard quickstart with W&B Weave
+- [HuggingFace Dataset Evaluations](https://docs.coreweave.com/products/wandb/weave/cookbooks/hf_dataset_evals.md): Learn how to use HuggingFace dataset evaluations with W&B Weave
+- [Import from CSV](https://docs.coreweave.com/products/wandb/weave/cookbooks/import_from_csv.md): Import datasets from CSV files into W&B Weave for use in evaluations, tracing, and model comparison workflows.
+
+###### Models & Prompts
+
+- [Use Weave with Weights & Biases](https://docs.coreweave.com/products/wandb/weave/cookbooks/Models_and_Weave_Integration_Demo.md): Track experiments in Weights & Biases alongside LLM traces and evaluations in Weave with an interactive notebook.
+- [Chain Of Density](https://docs.coreweave.com/products/wandb/weave/cookbooks/chain_of_density.md): Implement chain-of-density summarization techniques with W&B Weave for iterative text compression and evaluation.
+- [DSPy Prompt Optimization](https://docs.coreweave.com/products/wandb/weave/cookbooks/dspy_prompt_optimization.md): Learn how to use dspy prompt optimization with W&B Weave
+- [Not Diamond custom routing](https://docs.coreweave.com/products/wandb/weave/cookbooks/notdiamond_custom_routing.md): Learn how to use Not Diamond custom routing with W&B Weave
+
+###### Advanced Topics
+
+- [Multi-agent structured output](https://docs.coreweave.com/products/wandb/weave/cookbooks/multi-agent-structured-output.md): Learn how to use multi-agent structured output with W&B Weave
+- [Codegen](https://docs.coreweave.com/products/wandb/weave/cookbooks/codegen.md): Build and evaluate code generation pipelines with W&B Weave to trace prompts, outputs, and quality metrics.
+- [Trace and Evaluate a Computer Vision Pipeline with Weave](https://docs.coreweave.com/products/wandb/weave/cookbooks/ocr-pipeline.md): Learn how to use trace and evaluate a computer vision pipeline with weave with W&B Weave
+- [Audio with Weave](https://docs.coreweave.com/products/wandb/weave/cookbooks/audio_with_weave.md): Track and evaluate audio data in your LLM applications using W&B Weave's audio logging and tracing features.
+
+###### Production & Monitoring
+
+- [Online Monitoring](https://docs.coreweave.com/products/wandb/weave/cookbooks/online_monitoring.md): Set up online monitoring for LLM applications in production using W&B Weave to track performance and quality metrics.
+- [Feedback Prod](https://docs.coreweave.com/products/wandb/weave/cookbooks/feedback_prod.md): Collect and analyze user feedback on LLM outputs in production using W&B Weave's feedback tracking features.
+- [Scorers as guardrails](https://docs.coreweave.com/products/wandb/weave/cookbooks/scorers_as_guardrails.md): Learn how to use scorers as guardrails with W&B Weave
+- [Custom Model Cost](https://docs.coreweave.com/products/wandb/weave/cookbooks/custom_model_cost.md): Define and track custom model costs in W&B Weave to monitor spending across different LLM providers and models.
+- [PII Data Handling](https://docs.coreweave.com/products/wandb/weave/cookbooks/pii.md): Handle personally identifiable information (PII) in LLM applications using Weights & Biases Weave's data redaction and filtering tools.
+
+### Guides
+
+#### Experiments
+
+- [Experiments overview](https://docs.coreweave.com/products/wandb/track.md): Track ML experiments with Weights & Biases to log metrics, hyperparameters, system metrics, and model artifacts.
+- [Create an experiment](https://docs.coreweave.com/products/wandb/track/create-an-experiment.md): Create a W&B Experiment using the Python SDK to track run initialization, hyperparameters, and metric logging.
+- [Configure experiments](https://docs.coreweave.com/products/wandb/track/config.md): Use a dictionary-like object to save your experiment configuration
+- [Projects](https://docs.coreweave.com/products/wandb/track/project-page.md): Compare versions of your model, explore results in a scratch workspace, and export findings to a report to save notes and visualizations
+- [View experiments results](https://docs.coreweave.com/products/wandb/track/workspaces.md): A playground for exploring run data with interactive visualizations
+- [Track Jupyter notebooks](https://docs.coreweave.com/products/wandb/track/jupyter.md): Use Weights & Biases with Jupyter to get interactive visualizations without leaving your notebook.
+- [Logging at scale and performance](https://docs.coreweave.com/products/wandb/track/limits.md): Learn how logging patterns affect Weights & Biases performance and scale experiment tracking in large projects.
+- [Reproduce experiments](https://docs.coreweave.com/products/wandb/track/reproduce_experiments.md): Reproduce a teammate's Weights & Biases experiment by downloading its code, dependencies, and configuration from a run.
+- [Export and update data](https://docs.coreweave.com/products/wandb/track/public-api-guide.md): Export or update data that you have saved to Weights & Biases
+- [Environment variables](https://docs.coreweave.com/products/wandb/track/environment-variables.md): Configure W&B SDK behavior using environment variables for authentication, project settings, logging modes, and more.
+
+##### What are runs?
+
+- [Overview](https://docs.coreweave.com/products/wandb/runs.md): Learn about the basic building block of Weights & Biases, Runs.
+- [Find and customize a run's ID or name](https://docs.coreweave.com/products/wandb/runs/run-identifiers.md): Learn how to find a run's unique identifier and run name, how to create a custom run ID, and how to customize a run's name.
+- [Initialize runs](https://docs.coreweave.com/products/wandb/runs/initialize-run.md): Initialize W&B runs with wandb.init() to start tracking experiments, including handling concurrent runs in one process.
+- [Run states](https://docs.coreweave.com/products/wandb/runs/run-states.md): Learn about the different states a W&B run can have.
+- [View a specific run in a project](https://docs.coreweave.com/products/wandb/runs/view-logged-runs.md): Learn how to view a specific logged run and its properties using the W&B App or the LEET terminal UI.
+- [View runs in a project](https://docs.coreweave.com/products/wandb/runs/customize-run-display.md): Details about customizing how runs are displayed in your project's runs table
+- [Fork a run](https://docs.coreweave.com/products/wandb/runs/forking.md): Explore different parameters or models from a specific point in an experiment without impacting the original run.
+- [Resume a run](https://docs.coreweave.com/products/wandb/runs/resuming.md): Resume paused, stopped, or crashed W&B runs using the resume parameter options in wandb.init().
+- [Rewind a run](https://docs.coreweave.com/products/wandb/runs/rewind.md): Rewind a run to correct or modify its history without losing original data.
+- [Pin and compare runs](https://docs.coreweave.com/products/wandb/runs/compare-runs.md): Learn how to use pinned and baseline runs to keep track of important runs and efficiently evaluate model experiments.
+- [Organize runs](https://docs.coreweave.com/products/wandb/runs/grouping.md): Organize your runs into groups and other properties.
+- [Filter runs](https://docs.coreweave.com/products/wandb/runs/filter-runs.md): Learn how to filter runs in the Runs table using the expression editor.
+- [Search runs](https://docs.coreweave.com/products/wandb/runs/search-runs.md): Learn how to search for specific runs by name or ID in your project's Runs table or Workspace.
+- [Stop runs](https://docs.coreweave.com/products/wandb/runs/stop-runs.md): Stop runs programmatically using the W&B Python SDK or manually from the W&B App.
+- [Delete runs](https://docs.coreweave.com/products/wandb/runs/delete-runs.md): Delete runs with the Weights & Biases App or Public API, and learn how Weights & Biases removes run data from storage.
+- [Add labels to runs with tags](https://docs.coreweave.com/products/wandb/runs/tags.md): Add, update, and remove tags on W&B runs using the Python SDK, Public API, or the W&B App UI for organization.
+- [Move a run to a different project or team](https://docs.coreweave.com/products/wandb/runs/manage-runs.md): Move runs between projects or teams using the W&B App.
+- [Customize run colors](https://docs.coreweave.com/products/wandb/runs/run-colors.md): Customize, randomize, and reset the colors assigned to individual runs in your Weights & Biases project workspace.
+- [Semantic run plot legends](https://docs.coreweave.com/products/wandb/runs/color-code-runs.md): Color-code W&B runs based on metrics or config parameters to create visually meaningful chart legends.
+- [Send an alert](https://docs.coreweave.com/products/wandb/runs/alert.md): Send alerts, triggered from your Python code, to your Slack or email
+- [Visualize CoreWeave infrastructure alerts](https://docs.coreweave.com/products/wandb/runs/infrastructure-alerts.md): Onboarding for CoreWeave infrastructure alerts in Weights & Biases is temporarily paused.
+
+##### Log objects and media
+
+- [Overview](https://docs.coreweave.com/products/wandb/track/log.md): Keep track of metrics, videos, custom plots, and more
+- [Create and track plots from experiments](https://docs.coreweave.com/products/wandb/track/log/plots.md): Create and track plots from machine learning experiments.
+- [Customize log axes](https://docs.coreweave.com/products/wandb/track/log/customize-logging-axes.md): Use define_metric() to set a custom x-axis for logged metrics instead of the default Weights & Biases step counter.
+- [Log distributed training experiments](https://docs.coreweave.com/products/wandb/track/log/distributed-training.md): Use Weights & Biases to log distributed training experiments with multiple GPUs.
+- [Log media and objects](https://docs.coreweave.com/products/wandb/track/log/media.md): Log rich media, from 3D point clouds and molecules to HTML and histograms
+- [Log models](https://docs.coreweave.com/products/wandb/track/log/log-models.md): Log model artifacts to a W&B run and retrieve them later using the log_model and use_model SDK methods.
+- [Log summary metrics](https://docs.coreweave.com/products/wandb/track/log/log-summary.md): Track and customize single summary metrics like best accuracy or minimum loss on a W&B run using run.summary.
+- [Log tables](https://docs.coreweave.com/products/wandb/track/log/log-tables.md): Create, populate, and log W&B Tables to visualize and query structured data from your experiment runs.
+- [Track CSV files with experiments](https://docs.coreweave.com/products/wandb/track/log/working-with-csv.md): Import CSV files into Weights & Biases as Tables and Artifacts to visualize, compare, and analyze data in dashboards.
+
+#### Sweeps
+
+- [Sweeps overview](https://docs.coreweave.com/products/wandb/sweeps.md): Hyperparameter search and model optimization with Weights & Biases Sweeps
+- [Tutorial: Define, initialize, and run a sweep](https://docs.coreweave.com/products/wandb/sweeps/walkthrough.md): Define, initialize, and run a sweep to search a hyperparameter space and find the configuration that produces the best model.
+- [Add Weights & Biases (wandb) to your code](https://docs.coreweave.com/products/wandb/sweeps/add-w-and-b-to-your-code.md): Add Weights & Biases to your Python code script or Jupyter Notebook.
+- [Initialize a sweep](https://docs.coreweave.com/products/wandb/sweeps/initialize-sweeps.md): Initialize a sweep using the Python SDK or CLI to start hyperparameter searches with your sweep configuration.
+- [Start a sweep agent](https://docs.coreweave.com/products/wandb/sweeps/start-sweep-agents.md): Start sweep agents and an optional local scheduler to run your hyperparameter search.
+- [Parallelize agents](https://docs.coreweave.com/products/wandb/sweeps/parallelize-agents.md): Parallelize sweep agents on multi-core or multi-GPU machines.
+- [Visualize sweep results](https://docs.coreweave.com/products/wandb/sweeps/visualize-sweep-results.md): Visualize the results of your Weights & Biases Sweeps with the W&B App UI.
+- [Manage sweeps](https://docs.coreweave.com/products/wandb/sweeps/pause-resume-and-cancel-sweeps.md): Pause, resume, and cancel a sweep with the CLI.
+- [Signal handling and sweep runs](https://docs.coreweave.com/products/wandb/sweeps/signal-handling-sweep-runs.md): Learn how Weights & Biases Sweeps handle UNIX signals, exit codes, and preemption in sweep runs.
+- [Learn more about sweeps](https://docs.coreweave.com/products/wandb/sweeps/useful-resources.md): Find links to academic papers, example reports, tutorials, and the Sweeps GitHub repository for further learning.
+- [Manage algorithms locally](https://docs.coreweave.com/products/wandb/sweeps/local-controller.md): Search and stop algorithms locally instead of using the Weights & Biases cloud-hosted service.
+- [Sweeps troubleshooting](https://docs.coreweave.com/products/wandb/sweeps/troubleshoot-sweeps.md): Troubleshoot common sweep issues including CommError, CUDA out of memory, and wandb agent failures.
+- [Tutorial: Create sweep job from project](https://docs.coreweave.com/products/wandb/sweeps/existing-project.md): Tutorial on how to create sweep jobs from a pre-existing Weights & Biases project.
+
+##### Define a sweep configuration
+
+- [Configuration overview](https://docs.coreweave.com/products/wandb/sweeps/define-sweep-configuration.md): Learn how to create configuration files for sweeps.
+- [Configure an optimization engine](https://docs.coreweave.com/products/wandb/sweeps/configure-engine.md)
+- [Sweep configuration options](https://docs.coreweave.com/products/wandb/sweeps/sweep-config-keys.md): Reference for all sweep configuration keys including method, metric, parameters, early termination, and command.
+
+#### Eval Tables
+
+- [Overview](https://docs.coreweave.com/products/wandb/evaltables.md): Learn how to create, compare, and visualize Eval Tables in Weights & Biases.
+- [Create an Eval Table](https://docs.coreweave.com/products/wandb/evaltables/create-an-evaluation-table.md): Learn how to create an Eval Table in Weights & Biases.
+- [View Eval Tables](https://docs.coreweave.com/products/wandb/evaltables/visualize-evaluation-tables.md)
+- [Compare runs with Eval Tables](https://docs.coreweave.com/products/wandb/evaltables/compare-runs.md)
+
+#### Tables
+
+- [Tables overview](https://docs.coreweave.com/products/wandb/tables.md): Iterate on datasets and understand model predictions
+- [Tutorial: Log tables, visualize and query data](https://docs.coreweave.com/products/wandb/tables/tables-walkthrough.md): Explore how to use W&B Tables with this 5 minute Quickstart.
+- [Log tables](https://docs.coreweave.com/products/wandb/tables/log_tables.md): Create and log W&B Tables with different logging modes including immutable, mutable, and incremental using the Python SDK.
+- [Visualize and analyze tables](https://docs.coreweave.com/products/wandb/tables/visualize-tables.md): Compare, filter, group, sort, and visualize W&B Tables data in merged or side-by-side views for analysis.
+- [Example tables](https://docs.coreweave.com/products/wandb/tables/tables-gallery.md): Explore example W&B Tables projects for image classification, audio, text analysis, and other use cases.
+- [Export table data](https://docs.coreweave.com/products/wandb/tables/tables-download.md): Export W&B Table data to pandas DataFrames and CSV files for offline analysis and data processing.
+
+#### Artifacts
+
+- [Artifacts overview](https://docs.coreweave.com/products/wandb/artifacts.md): Overview of W&B Artifacts, how they work, and how to get started using them.
+- [Create an artifact](https://docs.coreweave.com/products/wandb/artifacts/construct-an-artifact.md): Create and log a W&B Artifact. Learn how to add one or more files or a URI reference to an Artifact.
+- [Download and use artifacts](https://docs.coreweave.com/products/wandb/artifacts/download-and-use-an-artifact.md): Download and use Artifacts from multiple projects.
+- [Update an artifact](https://docs.coreweave.com/products/wandb/artifacts/update-an-artifact.md): Update an existing artifact while a run is active or using only the Public API.
+- [Create an artifact alias](https://docs.coreweave.com/products/wandb/artifacts/create-a-custom-alias.md): Create and manage custom aliases to reference specific W&B artifact versions by meaningful names like best or production.
+- [Create an artifact version](https://docs.coreweave.com/products/wandb/artifacts/create-a-new-artifact-version.md): Create a new artifact version from a single run or from a distributed process.
+- [Track external files](https://docs.coreweave.com/products/wandb/artifacts/track-external-files.md): Track files saved in an external bucket, HTTP file server, or an NFS share.
+- [Explore artifact lineage graphs](https://docs.coreweave.com/products/wandb/artifacts/explore-and-traverse-an-artifact-graph.md): View and traverse artifact lineage graphs to track the inputs and outputs of W&B runs as a directed acyclic graph.
+- [Artifact data privacy and compliance](https://docs.coreweave.com/products/wandb/artifacts/data-privacy-and-compliance.md): Learn where Weights & Biases files are stored by default. Explore how to save, store sensitive information.
+- [Tutorial: Create, track, and use a dataset artifact](https://docs.coreweave.com/products/wandb/artifacts/artifacts-walkthrough.md): Create, track, and use a dataset artifact with Weights & Biases.
+
+##### Manage data
+
+- [Delete an artifact](https://docs.coreweave.com/products/wandb/artifacts/delete-artifacts.md): Delete artifacts interactively with the App UI or programmatically with the W&B Python SDK.
+- [Manage artifact data retention](https://docs.coreweave.com/products/wandb/artifacts/ttl.md): Set time-to-live (TTL) policies on W&B artifacts to schedule automatic deletion and manage storage consumption.
+- [Manage artifact storage and memory allocation](https://docs.coreweave.com/products/wandb/artifacts/storage.md): Manage storage, memory allocation of W&B Artifacts.
+
+#### Reports
+
+- [Reports overview](https://docs.coreweave.com/products/wandb/reports.md): Project management and collaboration tools for machine learning projects
+- [Create a report](https://docs.coreweave.com/products/wandb/reports/create-a-report.md): Create a W&B Report with the W&B App or programmatically.
+- [Edit a report](https://docs.coreweave.com/products/wandb/reports/edit-a-report.md): Edit a report interactively with the App UI or programmatically with the W&B SDK.
+- [Collaborate on reports](https://docs.coreweave.com/products/wandb/reports/collaborate-on-reports.md): Collaborate and share W&B Reports with peers, coworkers, and your team.
+- [Clone and export reports](https://docs.coreweave.com/products/wandb/reports/clone-and-export-reports.md): Export W&B Reports as PDF or LaTeX files, and clone reports using the App UI or the Report and Workspace API.
+- [Embed a report](https://docs.coreweave.com/products/wandb/reports/embed-reports.md): Embed W&B reports directly into Notion or with an HTML `iframe` element.
+- [Compare runs across projects](https://docs.coreweave.com/products/wandb/reports/cross-project-reports.md): Compare runs from two different projects with cross-project reports.
+- [Example reports](https://docs.coreweave.com/products/wandb/reports/reports-gallery.md): Explore example W&B Reports showcasing use cases like experiment summaries, team collaboration, and sharing findings.
+
+#### Automations
+
+- [Automations overview](https://docs.coreweave.com/products/wandb/automations.md): Use W&B Automations for triggering workflows based on events in Weights & Biases
+- [View an automation's history](https://docs.coreweave.com/products/wandb/automations/view-automation-history.md): View the execution history of your W&B Automations to check status, triggering events, and action results.
+- [Automation events and scopes](https://docs.coreweave.com/products/wandb/automations/automation-events.md): Learn about events and scopes that trigger W&B Automations, including artifact changes, run status, and metric conditions.
+- [Manage automations with the API](https://docs.coreweave.com/products/wandb/automations/api.md): Programmatic automation management with the Python API. Create and update may be affected on some client versions. Prefer the W&B App until the SDK fix ships.
+
+##### Create an automation
+
+- [Overview](https://docs.coreweave.com/products/wandb/automations/create-automations.md): Create and manage W&B automations to streamline your ML workflows
+- [Create a Slack automation](https://docs.coreweave.com/products/wandb/automations/create-automations/slack.md): Set up a Slack integration and create a W&B Automation that sends notifications to a Slack channel on specific events.
+- [Create a webhook automation](https://docs.coreweave.com/products/wandb/automations/create-automations/webhook.md): Create a webhook automation in Weights & Biases to send HTTP requests to external services when specific events occur.
+- [Use automations with ARIA](https://docs.coreweave.com/products/wandb/automations/create-automations/aria.md): Create a W&B automation that sends a templated prompt to ARIA, starting a new conversation when a specific event occurs.
+
+##### Tutorials
+
+- [Automation tutorial overview](https://docs.coreweave.com/products/wandb/automations/tutorial.md): Learn to build a project run-failure alert or a registry alias automation.
+- [Tutorial: Project run-failure alert automation](https://docs.coreweave.com/products/wandb/automations/project-automation-tutorial.md): Build a run-failure alert that sends a Slack notification when a run in your project fails.
+- [Tutorial: Registry artifact alias automation](https://docs.coreweave.com/products/wandb/automations/registry-automation-tutorial.md): Build an automation that runs a webhook when a Registry artifact gets a specific alias like "production".
+
+#### W&B App UI
+
+- [Manage workspace, section, and panel settings](https://docs.coreweave.com/products/wandb/app/features/cascade-settings.md): Manage workspace, section, and panel settings in the W&B App, including layout and line plot configuration options.
+- [LEET terminal UI](https://docs.coreweave.com/products/wandb/app/leet-tui.md): Explore local W&B runs and remote run metrics from the terminal with the LEET terminal UI.
+- [Console logs](https://docs.coreweave.com/products/wandb/app/console-logs.md): View and debug console log messages including info, warnings, and errors from your Weights & Biases experiment runs.
+- [Keyboard shortcuts](https://docs.coreweave.com/products/wandb/app/keyboard-shortcuts.md): Learn about the keyboard shortcuts available in Weights & Biases.
+
+##### Panels
+
+- [Panels](https://docs.coreweave.com/products/wandb/app/features/panels.md): Use and customize workspace panels to visualize your logged data
+- [Bar plots](https://docs.coreweave.com/products/wandb/app/features/panels/bar-plot.md): Visualize metrics, customize axes, and compare categorical data as bars.
+- [Parallel coordinates](https://docs.coreweave.com/products/wandb/app/features/panels/parallel-coordinates.md): Compare results across machine learning experiments
+- [Scatter plots](https://docs.coreweave.com/products/wandb/app/features/panels/scatter-plot.md): Create scatter plots in Weights & Biases to compare runs and visualize relationships between experiment metrics.
+- [Media panels](https://docs.coreweave.com/products/wandb/app/features/panels/media.md): Add and configure media panels for images, video, audio, 3D objects, and point clouds in a Weights & Biases workspace.
+- [Save and diff code](https://docs.coreweave.com/products/wandb/app/features/panels/code.md): Enable code saving, compare code across W&B runs with the code comparer, and capture Jupyter session history.
+- [Parameter importance](https://docs.coreweave.com/products/wandb/app/features/panels/parameter-importance.md): Visualize the relationships between your model's hyperparameters and output metrics
+- [Compare run metrics](https://docs.coreweave.com/products/wandb/app/features/panels/run-comparer.md): Use the Run Comparer panel to compare configuration and metric differences across Weights & Biases experiment runs.
+
+###### Line plots
+
+- [Line plots overview](https://docs.coreweave.com/products/wandb/app/features/panels/line-plot.md): Visualize metrics, customize axes, and compare multiple lines on a plot
+- [Line plot reference](https://docs.coreweave.com/products/wandb/app/features/panels/line-plot/reference.md): Reference for line plot panel settings including x-axis, y-axis, smoothing, aggregation, and grouping options.
+- [Point aggregation](https://docs.coreweave.com/products/wandb/app/features/panels/line-plot/sampling.md): Explore full fidelity bucketed sampling and random sampling for Weights & Biases line plots.
+- [Smooth line plots](https://docs.coreweave.com/products/wandb/app/features/panels/line-plot/smoothing.md): In line plots, use smoothing to see trends in noisy data.
+
+###### Query panels
+
+- [Query panels overview](https://docs.coreweave.com/products/wandb/app/features/panels/query-panels.md): Some features on this page are in beta, hidden behind a feature flag. Add `weave-plot` to your bio on your profile page to unlock all related features.
+- [Embed objects](https://docs.coreweave.com/products/wandb/app/features/panels/query-panels/embedding-projector.md): Plot multidimensional embeddings on a 2D plane with Embedding Projector using PCA, UMAP, and t-SNE.
+
+##### Custom charts
+
+- [Custom charts overview](https://docs.coreweave.com/products/wandb/app/features/custom-charts.md): Create custom charts in Weights & Biases projects with Vega visualizations
+- [Tutorial: Use custom charts](https://docs.coreweave.com/products/wandb/app/features/custom-charts/walkthrough.md): Tutorial of using the custom charts feature in the W&B UI
+
+#### W&B Weave
+
+- [W&B Weave](https://docs.coreweave.com/products/wandb/weave.md): Track, test, and improve language model apps with W&B Weave
+- [What is Weave?](https://docs.coreweave.com/products/wandb/weave/concepts/what-is-weave.md): Learn about W&B Weave and how it helps you build, evaluate, and improve LLM applications
+- [Manage Weave projects](https://docs.coreweave.com/products/wandb/weave/guides/platform/weave-projects.md): Use Weave projects to organize related assets like traces, prompts, evaluations, models, and dashboards.
+- [Configure Weave environment variables](https://docs.coreweave.com/products/wandb/weave/guides/core-types/env-vars.md): Configure Weave's behavior at runtime using environment variables
+
+##### Trace your agents
+
+- [Trace your agents](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-agents.md): Use the Weave SDK to instrument multi-turn agentic applications and view them in the Agents tab.
+- [Send OpenTelemetry spans to the Agents view](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-agents-otel.md): Send OTLP trace data from any OpenTelemetry pipeline to the Weave agents endpoint, with no Weave SDK required.
+- [View agent activity](https://docs.coreweave.com/products/wandb/weave/guides/tracking/view-agent-activity.md): Use Weave's Agents view to understand what your agent did, how much it cost, and exactly where things went right or wrong.
+- [Monitor your agents with signals](https://docs.coreweave.com/products/wandb/weave/guides/tracking/view-agent-signals.md): Use Weave signals to score agent turns, apply tags, and surface quality and safety issues in production.
+- [Create a custom signal](https://docs.coreweave.com/products/wandb/weave/guides/tracking/create-custom-signal.md): Create a custom Weave signal to tag agent turns for a behavior you define.
+- [Score agent turns with a remote scorer](https://docs.coreweave.com/products/wandb/weave/guides/tracking/remote-scorer-signals.md): Score Weave agent turns with your own HTTP endpoint and see the results as tags or ratings on the Signals tab.
+- [Set attributes and events on agent spans](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-agents-attributes.md): Attach custom attributes and record events on agent spans (Turn, LLM, Tool, and SubAgent) to filter and analyze agent activity in Weave.
+- [Batch logging for your agent](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-agents-batch.md): Manually log agent traces for frameworks that have already completed the LLM call and need to record it.
+- [Trace sub-agents](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-sub-agents.md): Use Weave's sub-agent span to trace sub-agent delegations and view nested agent invocations.
+- [Reference media in your own bucket (BYOB) using agent spans](https://docs.coreweave.com/products/wandb/weave/guides/tracking/agents-byob-references.md): Render images and video that live in your own cloud bucket in the Weave Agents view by returning their URIs from agent tool spans, without importing the bytes into Weave.
+
+###### Integrate Weave with agents
+
+- [Google ADK](https://docs.coreweave.com/products/wandb/weave/guides/integrations/agents/google-adk.md): Trace an agent built with Google's Agent Development Kit (ADK) using Weave.
+- [OpenAI Agents SDK](https://docs.coreweave.com/products/wandb/weave/guides/integrations/agents/openai-agents-sdk.md): Trace an agent built with the OpenAI Agents SDK using Weave.
+- [Claude Agent SDK](https://docs.coreweave.com/products/wandb/weave/guides/integrations/agents/claude-agents-sdk.md): Trace an agent built with the Claude Agent SDK using Weave.
+- [Claude Code plugin](https://docs.coreweave.com/products/wandb/weave/guides/integrations/agents/claude-code-harness.md): Track Claude Code sessions in Weave for observability and debugging.
+- [Codex plugin](https://docs.coreweave.com/products/wandb/weave/guides/integrations/agents/codex-harness.md): Trace Codex agentic sessions, LLM calls, and tool executions in Weave.
+- [OpenClaw plugin](https://docs.coreweave.com/products/wandb/weave/guides/integrations/agents/openclaw-harness.md): Track OpenClaw agent sessions in Weave for observability and debugging.
+- [Pi extension](https://docs.coreweave.com/products/wandb/weave/guides/integrations/agents/pi-dev-harness.md): Trace Pi agentic sessions, LLM calls, and tool executions in Weave.
+
+##### Trace functions with Ops and Calls
+
+- [Track costs](https://docs.coreweave.com/products/wandb/weave/guides/tracking/costs.md): Understand automatic and custom cost tracking for LLM operations in Weave
+- [Create and manage saved views](https://docs.coreweave.com/products/wandb/weave/guides/tools/saved-views.md): Customize how you interact with traced function calls and evaluations
+- [Use trace plots](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-plots.md): Visualize trace-level metrics with interactive charts in Weave to explore latency, cost, and token usage patterns for LLM applications.
+- [Use Weave with Weights & Biases training runs](https://docs.coreweave.com/products/wandb/weave/guides/tools/weave-in-workspaces.md): Integrate Weave traces with Weights & Biases training runs to inspect function calls alongside ML metrics.
+
+###### Integrate with your LLM provider and frameworks
+
+- [Integrations overview](https://docs.coreweave.com/products/wandb/weave/guides/integrations.md): Trace agents and LLM applications with Weave's integrations for agent SDKs, harnesses, LLM providers, and orchestration frameworks.
+- [Control automatic LLM call tracking](https://docs.coreweave.com/products/wandb/weave/guides/integrations/autopatching.md): Control how Weave automatically records calls to OpenAI, Anthropic, and other LLM libraries
+- [TypeScript SDK: third-party integration guide](https://docs.coreweave.com/products/wandb/weave/guides/integrations/js.md): Integrate third-party libraries with the Weave TypeScript SDK
+- [Local Models](https://docs.coreweave.com/products/wandb/weave/guides/integrations/local_models.md): Run open source models locally with Ollama, LMStudio, or GPT4All and trace them with Weave using OpenAI SDK compatibility.
+
+###### LLM Providers
+
+- [Serverless Inference](https://docs.coreweave.com/products/wandb/weave/guides/integrations/inference.md): Use Serverless Inference with Weave to trace and monitor open source foundation model calls through the OpenAI-compatible API.
+- [Bedrock](https://docs.coreweave.com/products/wandb/weave/guides/integrations/bedrock.md): Track and monitor Amazon Bedrock LLM calls with Weave, capturing foundation model interactions and converse API usage.
+- [Anthropic](https://docs.coreweave.com/products/wandb/weave/guides/integrations/anthropic.md): Use Weave to automatically track and log LLM calls made with the Anthropic SDK
+- [Cerebras](https://docs.coreweave.com/products/wandb/weave/guides/integrations/cerebras.md): Use Weave to trace and log LLM calls made via the Cerebras Cloud SDK
+- [Cohere](https://docs.coreweave.com/products/wandb/weave/guides/integrations/cohere.md): Use Weave to automatically track and log LLM calls made through the Cohere Python library
+- [Google](https://docs.coreweave.com/products/wandb/weave/guides/integrations/google.md): Use Weave to trace and log Google GenAI model calls
+- [Groq](https://docs.coreweave.com/products/wandb/weave/guides/integrations/groq.md): Track and monitor Groq LPU inference with Weave, capturing model calls, performance metrics, and function chains for LLM applications.
+- [Hugging Face Hub](https://docs.coreweave.com/products/wandb/weave/guides/integrations/huggingface.md): Integrate Hugging Face Hub with Weave to track and analyze your machine learning applications
+- [LiteLLM](https://docs.coreweave.com/products/wandb/weave/guides/integrations/litellm.md): Automatically track and log LLM calls made through LiteLLM
+- [Microsoft Azure](https://docs.coreweave.com/products/wandb/weave/guides/integrations/azure.md): Integrate Weave with Microsoft Azure OpenAI services
+- [MistralAI](https://docs.coreweave.com/products/wandb/weave/guides/integrations/mistral.md): Track and monitor MistralAI model calls with Weave's automatic tracing for chat completions, function calling, and model interactions.
+- [Neon AI Gateway](https://docs.coreweave.com/products/wandb/weave/guides/integrations/neon.md): Trace calls to Neon AI Gateway, the OpenAI-compatible inference endpoint provided by Neon
+- [NVIDIA NIM](https://docs.coreweave.com/products/wandb/weave/guides/integrations/nvidia_nim.md): Use Weave to trace and log LLM calls made through the ChatNVIDIA library
+- [OpenAI](https://docs.coreweave.com/products/wandb/weave/guides/integrations/openai.md): Integrate OpenAI with Weave for tracing, evaluation, and monitoring
+- [OpenRouter](https://docs.coreweave.com/products/wandb/weave/guides/integrations/openrouter.md): Use OpenRouter's unified interface for many LLMs with automatic Weave integration
+- [Together AI](https://docs.coreweave.com/products/wandb/weave/guides/integrations/together_ai.md): Track Together AI's open-source LLMs with Weave using OpenAI SDK compatibility for seamless tracing and evaluation of model calls.
+
+###### Frameworks
+
+- [OpenAI Realtime API](https://docs.coreweave.com/products/wandb/weave/guides/integrations/openai-realtime-audio.md): Use Weave to automatically trace your calls to the OpenAI Realtime API.
+- [Bedrock Agents](https://docs.coreweave.com/products/wandb/weave/guides/integrations/bedrock_agents.md): Trace Amazon Bedrock Agents invocations with Weave, capturing agent inputs, foundation model usage, and completion output.
+- [LangChain](https://docs.coreweave.com/products/wandb/weave/guides/integrations/langchain.md): Use Weave to track and log all calls made through the LangChain Python library
+- [LlamaIndex](https://docs.coreweave.com/products/wandb/weave/guides/integrations/llamaindex.md): Trace and debug LlamaIndex applications with Weave, capturing LLM calls, RAG pipelines, agent steps, and evaluations automatically.
+- [DSPy](https://docs.coreweave.com/products/wandb/weave/guides/integrations/dspy.md): Use Weave to automatically track and log calls made using DSPy modules and functions
+- [Instructor](https://docs.coreweave.com/products/wandb/weave/guides/integrations/instructor.md): Trace structured data extraction from LLMs with Weave's Instructor integration, capturing Pydantic validation and retry logic.
+- [CrewAI](https://docs.coreweave.com/products/wandb/weave/guides/integrations/crewai.md): Integrate CrewAI with Weave for monitoring and tracing multi-agent applications
+- [Smolagents](https://docs.coreweave.com/products/wandb/weave/guides/integrations/smolagents.md): Track Smolagents applications with Weave's automatic tracing, capturing tool calls, model inferences, and multi-step agent workflows.
+- [PydanticAI](https://docs.coreweave.com/products/wandb/weave/guides/integrations/pydantic_ai.md): Trace PydanticAI agent and tool calls in Weave using OpenTelemetry
+- [Vercel AI SDK](https://docs.coreweave.com/products/wandb/weave/guides/integrations/vercel_ai_sdk.md): Trace Vercel AI SDK calls in Weave using OpenTelemetry
+- [Haystack](https://docs.coreweave.com/products/wandb/weave/guides/integrations/haystack.md): Trace Deepset Haystack pipelines with Weave using the WeaveConnector integration.
+- [Agno](https://docs.coreweave.com/products/wandb/weave/guides/integrations/agno.md): Trace Agno multi-agent systems with Weave using OpenTelemetry to capture agent interactions, tool calls, and multi-modal workflows.
+- [Koog](https://docs.coreweave.com/products/wandb/weave/guides/integrations/koog.md): Trace Kotlin-based Koog agents with Weave using OpenTelemetry to capture tool calls, prompts, and completions for AI applications.
+- [AutoGen](https://docs.coreweave.com/products/wandb/weave/guides/integrations/autogen.md): Use Weave to track and monitor AutoGen agents and multi-agent systems
+- [Verdict](https://docs.coreweave.com/products/wandb/weave/guides/integrations/verdict.md): Use Verdict evaluation framework with Weave to trace and monitor your LLM evaluation pipelines
+- [Verifiers](https://docs.coreweave.com/products/wandb/weave/guides/integrations/verifiers.md): Track Verifiers RL environments and LLM agent training with Weave, capturing multi-round conversations and evaluation rollouts.
+- [VERL](https://docs.coreweave.com/products/wandb/weave/guides/integrations/verl.md): Trace VERL rollouts in Weave to inspect multi-turn conversations, tool calls, and reward scoring during RL fine-tuning.
+
+###### Protocols
+
+- [Model Context Protocol (MCP) and Weave](https://docs.coreweave.com/products/wandb/weave/guides/integrations/mcp.md): Trace activity between your MCP client and MCP server with Weave
+- [Send OpenTelemetry Traces to Weave](https://docs.coreweave.com/products/wandb/weave/guides/tracking/otel.md): Import OpenTelemetry compatible trace data through a dedicated endpoint
+
+###### Tracing basics
+
+- [Quickstart: Instrument and trace functions](https://docs.coreweave.com/products/wandb/weave/quickstart.md): Get started with W&B Weave by adding tracing to your LLM application to debug and monitor model interactions.
+- [Understand Ops, Calls, and Traces](https://docs.coreweave.com/products/wandb/weave/guides/tracking/tracing.md): Learn how Ops, Calls, and Traces create the foundation of Weave's tracing system.
+- [Trace your code](https://docs.coreweave.com/products/wandb/weave/guides/tracking/create-call.md): Instrument your running code so its execution appears as detailed traces in Weave.
+- [Navigate the Weave Trace view](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-tree.md): Use Weave's Trace view to make sense of complex execution paths in your LLM and agentic apps.
+- [Compare traces and other logged information](https://docs.coreweave.com/products/wandb/weave/guides/tools/comparison.md): Visually compare and diff code, traces, prompts, models, and configurations
+- [Query and export Calls](https://docs.coreweave.com/products/wandb/weave/guides/tracking/querying-calls.md): Filter, sort, and export Weave call data using the Python SDK, REST API, or the Weights & Biases UI for custom analysis.
+
+###### Advanced Ops
+
+- [Trace generator functions](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-generator-func.md): Track sync and async generator functions with Weave tracing
+- [Trace nested functions](https://docs.coreweave.com/products/wandb/weave/tutorial-tracing_2.md): Learn how to track deeply nested Call structures with W&B Weave tracing
+- [Trace threads](https://docs.coreweave.com/products/wandb/weave/guides/tracking/threads.md): Trace and analyze multi-turn conversations in your LLM applications using threads.
+- [Customize Ops](https://docs.coreweave.com/products/wandb/weave/guides/tracking/ops.md): Learn how to color your Ops for better visibility, how to modify what's logged, and how to control the sampling rate
+- [Define and log attributes](https://docs.coreweave.com/products/wandb/weave/guides/tools/attributes.md): Use attributes to add metadata to your traces and evaluations.
+- [Log media](https://docs.coreweave.com/products/wandb/weave/guides/core-types/media.md): Log media returned in your traces, such as images and videos.
+- [Reference media in your own bucket (BYOB) using Weave Op](https://docs.coreweave.com/products/wandb/weave/guides/tracking/byob-references.md): Render images and video that live in your own cloud bucket in Weave traces by logging their URIs, without importing the bytes into Weave.
+- [View and customize trace display](https://docs.coreweave.com/products/wandb/weave/guides/tracking/view-call.md): View Calls in the UI and customize how trace data is displayed
+- [Disable tracing](https://docs.coreweave.com/products/wandb/weave/guides/tracking/trace-disable.md): Learn options to disable or conditionally turn off Weave tracing
+- [Write-ahead log](https://docs.coreweave.com/products/wandb/weave/guides/tracking/write-ahead-log.md): Improve the resilience of Weave trace data capture with the write-ahead log
+
+###### Work with Calls
+
+- [Update and delete Calls](https://docs.coreweave.com/products/wandb/weave/guides/tracking/update-call.md): Modify display names, add feedback, and delete Calls in Weave
+- [Call schema reference](https://docs.coreweave.com/products/wandb/weave/guides/tracking/call-schema-reference.md): Reference for the Call object structure and properties
+- [Get a handle to the Call object during execution](https://docs.coreweave.com/products/wandb/weave/guides/tracking/get-call-object.md): Access the Weave `Call` object at runtime for feedback, display names, and other metadata
+- [Set Call display name](https://docs.coreweave.com/products/wandb/weave/guides/tracking/set-call-display.md): Set or override the display name for a Call in Weave tracing
+
+##### Evaluate your agents and functions
+
+- [Evaluations overview](https://docs.coreweave.com/products/wandb/weave/guides/core-types/evaluations.md): Evaluation-driven LLM application development to systematically improve applications
+- [Build an evaluation](https://docs.coreweave.com/products/wandb/weave/tutorial-eval.md): Learn how to build an evaluation pipeline with Weave Models and Evaluations
+- [Evaluate RAG applications](https://docs.coreweave.com/products/wandb/weave/tutorial-rag.md): Build and evaluate RAG applications using Weave with LLM judges
+- [Collect and track datasets](https://docs.coreweave.com/products/wandb/weave/guides/core-types/datasets.md): Organize, collect, track, and version examples for LLM application evaluation
+- [Scoring overview](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/scorers.md): Evaluate AI outputs and return evaluation metrics with Weave Scorers
+- [Use builtin scorers](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/builtin_scorers.md): Use Weave's predefined scorers for evaluating your AI applications
+- [Evaluate using local scorers](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/weave_local_scorers.md): Small language models that run locally to evaluate AI system safety and quality
+- [Log evaluation data from your code](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/evaluation_logger.md): Flexible, incremental way to log evaluation data from Python and TypeScript code
+- [Export evaluation data](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/export_eval.md): Programmatically export evaluation results using the Evaluation REST API.
+- [Compare evaluations](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/compare_evals.md): Visually compare two or more evaluations to spot regressions, improvements, and scoring differences across runs
+- [Compare and rank models](https://docs.coreweave.com/products/wandb/weave/guides/core-types/leaderboards.md): Compare and rank different model versions based on evaluation metrics
+- [Map columns in datasets](https://docs.coreweave.com/products/wandb/weave/guides/tools/column-mapping.md): Map columns in datasets to different names. This helps you align the column names in your dataset with the column names expected by the scorer.
+- [Create dynamic Leaderboards in Evaluations](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/dynamic_leaderboards.md): Dynamic Leaderboards let you configure, customize, save, and update Leaderboard views directly from an evaluation.
+
+##### Experiment with prompts and models
+
+- [Use the Playground to experiment with prompts](https://docs.coreweave.com/products/wandb/weave/guides/tools/playground.md): Simplify the process of iterating on LLM prompts and responses
+- [Compare model performance using the Evaluation Playground](https://docs.coreweave.com/products/wandb/weave/guides/tools/evaluation_playground.md): Compare and evaluate model performance without code using Weave's Evaluation Playground with custom datasets and LLM judges.
+- [Add custom runtimes](https://docs.coreweave.com/products/wandb/weave/guides/tools/custom-runtimes.md): Connect OpenAI-compatible inference endpoints to a Weave project as custom runtimes, and manage them from the UI or the Python and TypeScript SDKs.
+- [Learn Weave with Serverless Inference](https://docs.coreweave.com/products/wandb/weave/quickstart-inference.md): Learn Weave fundamentals using Serverless Inference to trace model calls, compare outputs, and run evaluations.
+
+##### Version your work
+
+- [Tutorial: App versioning](https://docs.coreweave.com/products/wandb/weave/tutorial-weave_models.md): Learn how to use Weave Model to track and version your application and its parameters
+- [Track application versions with models](https://docs.coreweave.com/products/wandb/weave/guides/core-types/models.md): Track versions of your application with structured models that combine data and code.
+- [Create prompt objects](https://docs.coreweave.com/products/wandb/weave/guides/core-types/prompts.md): Create, publish, and use prompt objects for LLM applications
+- [Store and track versions of prompts](https://docs.coreweave.com/products/wandb/weave/guides/core-types/prompts-version.md): Retrieve and manage versions of your prompts for LLM applications
+- [Track and version objects](https://docs.coreweave.com/products/wandb/weave/guides/tracking/objects.md): Track and version any JSON-serializable object in Weave
+
+##### Monitor and collect feedback
+
+- [Redact PII from traces](https://docs.coreweave.com/products/wandb/weave/guides/tracking/redact-pii.md): Automatically redact Personally Identifiable Information from traces
+- [Score Calls with remote scorers](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/remote-scorers.md): Score Weave Calls with a scorer that runs on your own infrastructure and records the result as Call feedback.
+- [Set up automations](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/automations.md): Create event-driven automations that trigger actions based on trace metrics and activity.
+- [Set up guardrails](https://docs.coreweave.com/products/wandb/weave/guides/evaluation/guardrails.md): Ensure LLM safety and measure output quality in production applications
+
+###### Annotate
+
+- [Set up annotation queues](https://docs.coreweave.com/products/wandb/weave/guides/tracking/annotation-queues.md): Create annotation queues, route traces to domain experts, and export structured feedback.
+- [Review items in an annotation queue](https://docs.coreweave.com/products/wandb/weave/guides/tracking/annotation-review.md): Evaluate trace items and submit structured feedback using a simplified review interface.
+- [Collect feedback and use annotations](https://docs.coreweave.com/products/wandb/weave/guides/tracking/feedback.md): Collect and analyze feedback for LLM applications through UI and SDK
+
+##### Deploy and scale
+
+- [Deployment options and security features](https://docs.coreweave.com/products/wandb/weave/guides/platform.md): Learn about Weave's deployment options, IAM management, and data security features.
+- [Set up a self-managed Weave instance](https://docs.coreweave.com/products/wandb/weave/guides/platform/weave-self-managed.md): Deploy and manage Weave on your own infrastructure
+- [Configure ingest sampling for Weave Self-Managed](https://docs.coreweave.com/products/wandb/weave/guides/platform/ingest-sampling.md): Keep only a share of incoming traces to control storage and LLM scoring costs on a self-managed Weave instance
+- [Server response caching](https://docs.coreweave.com/products/wandb/weave/guides/platform/server-caching.md): Improve performance with Weave server response caching for repeated queries and limited bandwidth
+
+### Integrations
+
+- [Integrations overview](https://docs.coreweave.com/products/wandb/integrations.md): Explore Weights & Biases integrations with ML frameworks, cloud platforms, and workflow orchestration tools
+- [Add Weights & Biases to a Python library](https://docs.coreweave.com/products/wandb/integrations/add-wandb-to-any-library.md): Add Weights & Biases to your Python library for experiment tracking, system monitoring, and model management.
+
+#### ML Frameworks and Libraries
+
+##### ML Frameworks
+
+- [Keras](https://docs.coreweave.com/products/wandb/integrations/keras.md): Use W&B Keras callbacks to track experiments, checkpoint models, and visualize predictions during training.
+- [PyTorch](https://docs.coreweave.com/products/wandb/integrations/pytorch.md): Use Weights & Biases with PyTorch to track experiments, version datasets, and log metrics, gradients, and models.
+- [PyTorch Lightning](https://docs.coreweave.com/products/wandb/integrations/lightning.md): Use Weights & Biases with PyTorch Lightning's WandbLogger for experiment tracking and model checkpointing.
+- [PyTorch Ignite](https://docs.coreweave.com/products/wandb/integrations/ignite.md): Use Weights & Biases with PyTorch Ignite to automatically log metrics, model parameters, and experiment configs.
+- [TensorFlow](https://docs.coreweave.com/products/wandb/integrations/tensorflow.md): Use Weights & Biases with TensorFlow for custom metrics, estimator hooks, and TensorBoard log synchronization.
+- [XGBoost](https://docs.coreweave.com/products/wandb/integrations/xgboost.md): Use Weights & Biases with XGBoost to automatically log gradient boosting metrics, feature importance, and performance.
+
+##### ML Libraries
+
+- [Hugging Face](https://docs.coreweave.com/products/wandb/integrations/huggingface.md): Track Hugging Face models with Weights & Biases to visualize hyperparameters, metrics, and GPU utilization.
+- [Hugging Face Accelerate](https://docs.coreweave.com/products/wandb/integrations/accelerate.md): Training and inference at scale made simple, efficient, and adaptable
+- [Hugging Face Diffusers](https://docs.coreweave.com/products/wandb/integrations/diffusers.md): Use Weights & Biases autolog with Diffusers to track prompts, generated media, configs, and pipeline architecture.
+- [Hugging Face Simple Transformers](https://docs.coreweave.com/products/wandb/integrations/simpletransformers.md): How to integrate Weights & Biases with the Transformers library by Hugging Face.
+- [Hugging Face Transformers](https://docs.coreweave.com/products/wandb/integrations/huggingface_transformers.md): Use Weights & Biases with Transformers Trainer for experiment tracking, model checkpointing, and dataset versioning.
+- [OpenAI Gym](https://docs.coreweave.com/products/wandb/integrations/openai-gym.md): Use Weights & Biases with OpenAI Gym to track reinforcement learning experiments and record episode performance videos.
+- [PyTorch Geometric](https://docs.coreweave.com/products/wandb/integrations/pytorch-geometric.md): Use Weights & Biases with PyTorch Geometric for graph visualization and experiment tracking in geometric deep learning.
+- [PyTorch torchtune](https://docs.coreweave.com/products/wandb/integrations/torchtune.md): Use Weights & Biases in PyTorch torchtune to track LLM fine-tuning experiments with the WandBLogger metric logger.
+
+#### Cloud Platforms
+
+- [Azure OpenAI fine-tuning](https://docs.coreweave.com/products/wandb/integrations/azure-openai-fine-tuning.md): Fine-tune Azure OpenAI models with Weights & Biases to log metrics, hyperparameters, and training progress.
+- [OpenAI fine-tuning](https://docs.coreweave.com/products/wandb/integrations/openai-fine-tuning.md): Fine-tune OpenAI models with Weights & Biases to log metrics, monitor jobs, and compare model performance over time.
+- [OpenAI API](https://docs.coreweave.com/products/wandb/integrations/openai-api.md): Use Weights & Biases with the OpenAI API to log and monitor chat completions, fine-tuning jobs, and token usage metrics.
+
+#### Other
+
+- [Hydra](https://docs.coreweave.com/products/wandb/integrations/hydra.md): Use Weights & Biases with Hydra to manage ML experiment configurations and log hyperparameters automatically.
+- [YOLOX](https://docs.coreweave.com/products/wandb/integrations/yolox.md): Use Weights & Biases with YOLOX to track object detection training, log metrics, and visualize detection results.
+- [YOLOv5](https://docs.coreweave.com/products/wandb/integrations/yolov5.md): Use Weights & Biases in YOLOv5 for experiment tracking, model versioning, and prediction visualization.
+
+### Support
+
+- [Support: Models](https://docs.coreweave.com/products/wandb/support-models.md)
+- [Support: Weave](https://docs.coreweave.com/products/wandb/weave/details/support-weave.md)
+
+## OpenAPI Specs
+
+- [openapi](/products/wandb/weave/reference/service-api/openapi.json)

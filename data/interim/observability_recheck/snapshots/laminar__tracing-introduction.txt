@@ -1,0 +1,30 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://laminar.sh/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Tracing
+
+Tracing records what your agent does (LLM calls, tool use, and control flow) so you can debug individual runs and understand behavior over time. Laminar also [extracts the task from every agent run](https://laminar.sh/docs/tracing/task-extraction.md), so the traces table lists what each run was asked to do and SQL can group runs by it. It also [versions each agent](https://laminar.sh/docs/tracing/agent-versions.md) as its system prompt and tools change, and tags every trace with the version and release that produced it.
+
+Tracing is also the entry point into Laminar: it’s how production runs become data in the platform. Once you’re tracing, you can read each run as a transcript in the [trace view](https://laminar.sh/docs/platform/viewing-traces.md), define [Signals](https://laminar.sh/docs/signals) to extract outcomes and failures across traces, and replay runs in the [Debugger](https://laminar.sh/docs/debugger/introduction.md) to reproduce and fix what went wrong. From there, turn real failures into [Datasets](https://laminar.sh/docs/datasets) and run comprehensive [Evaluations](https://laminar.sh/docs/evaluations).
+
+![Laminar trace view showing the traces list, transcript view, and an extracted signal](https://mintcdn.com/laminarai/OhGMtzTFdQqw5xso/images/trace-screenshot.png?fit=max\&auto=format\&n=OhGMtzTFdQqw5xso\&q=85\&s=7d5b5f31e2968039160a52a6418cca6f)
+
+Trace view with the transcript and extracted signals
+
+## Where to Start
+
+> [card] [Integrations](https://laminar.sh/docs/integrations.md)
+>
+> You’re already using supported libraries. Learn what’s captured and how to configure instrumentation (including Browser Use and Stagehand).
+
+> [card] [Tracing Structure](https://laminar.sh/docs/tracing/structure/overview.md)
+>
+> You want deeper visibility into your own code. Trace your functions, create manual spans, add context, and control what’s captured.
+
+> [card] [Troubleshooting](https://laminar.sh/docs/tracing/troubleshooting.md)
+>
+> You’re not seeing what you expect. Debug missing spans, auto-instrumentation issues, and common setup pitfalls.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

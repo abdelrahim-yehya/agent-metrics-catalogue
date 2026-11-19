@@ -1,0 +1,31 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.galileo.ai/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Model Pricing Settings
+
+Galileo's model pricing allows admins to configure model prices that will be used to calculate app and metric costs. Other organization users can view model pricing in read-only mode. With this feature, teams have more accurate views of how their AI agents are impacting budgets.
+
+In the Galileo console UI, navigate to the [Model Pricing settings page](https://app.galileo.ai/settings/model-pricing) by opening the user menu on the bottom-left corner, and then selecting **Model Pricing**.
+
+![Model Pricing menu item](https://mintcdn.com/v2galileo/4NX7FELGkgBvMQWI/images/console-ui/model-pricing-menu-item.png?fit=max\&auto=format\&n=4NX7FELGkgBvMQWI\&q=85\&s=774d6c83848cd1a864dd2d0495d4bd31)
+
+Model Pricing settings are visible to all users in the organization. Admins can add, edit, and reset model prices. Non-admin users have read-only access.
+
+Admins can:
+
+* Browse and search the models found in Galileo projects
+* View the current prices used to compute app and metric costs
+* Provide updated prices for any existing model -- or revert to the default price
+* Add a new model and price
+
+Non-admin users can:
+
+* Browse and search the models found in Galileo projects
+* View the current prices used to compute app and metric costs
+
+![Model Pricing table](https://mintcdn.com/v2galileo/bZTy0tPZ20JWcXTN/images/console-ui/model-pricing-prices-table.png?fit=max\&auto=format\&n=bZTy0tPZ20JWcXTN\&q=85\&s=c5fa5691d19845eee06b1a3e532b802c)
+
+> [!NOTE]
+>
+> Updated prices will apply to new logs and experiments using that model. App and metric cost for historical logs and experiments remain unchanged.

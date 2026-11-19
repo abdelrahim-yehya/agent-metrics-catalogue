@@ -1,0 +1,78 @@
+---
+title: Agent Graphs
+description: Visualize and analyze complex agent workflows with Langfuse's agent graph view — as an aggregated overview or an expanded, as-it-ran DAG.
+sidebarTitle: Agent Graphs
+---
+
+# Agent Graphs
+
+Agent graphs in Langfuse provide a visual representation of complex AI agent workflows, helping you understand and debug multi-step reasoning processes and agent interactions.
+
+_Example trace with agent graph view ([public link](https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/8ed12d68-353f-464f-bc62-720984c3b6a0))_
+
+_[Video: Switch the agent graph between aggregated and expanded](https://static.langfuse.com/changelog-videos/2026-07-13-graph-view-modes.mp4): Trace detail of an agent trace, “Graph” tab next to Tree and Timeline. In the default Aggregated mode, repeated steps collapse into one node such as “llm.chat (3/3)”; select it to see its observations. Switch the toggle to Expanded to see the run as it happened, click a tool call node, then switch back to Aggregated._
+
+## Get Started
+
+There are two ways a graph appears for a trace:
+
+1. **Inferred from observations.** Have an observation with any observation type except `span`, `event`, or `generation` in your trace. Langfuse then interprets the trace as agentic and shows a graph, inferred automatically from the observations' timings and nesting.
+2. **From the LangGraph integration.** When you use the LangGraph integration, the graph shows automatically.
+
+**Observation Types**: See all available [Observation Types](/docs/observability/features/observation-types) and how to set them.
+**LangGraph**: See the [LangGraph integration guide](/integrations/frameworks/langgraph) for an end-to-end example on how to natively integrate LangGraph with Langfuse for LLM Agent tracing.
+
+## View modes: Aggregated and Expanded
+
+The same trace can be drawn two ways. Switch between them with the **Aggregated / Expanded** toggle in the top-left corner of the graph; your choice is remembered across traces.
+
+The distinction is how repeated steps are treated — one node **per step name** vs. one node **per call**:
+
+|                | **Aggregated** (default)                    | **Expanded** ("as it ran")                  |
+| -------------- | ------------------------------------------- | ------------------------------------------- |
+| A node is…     | one **unique step name**                    | one **individual call**                     |
+| Repeated calls | collapse into a single node with a counter  | appear as separate nodes                    |
+| Loops / cycles | drawn as **cycles** (edges loop back)       | **unrolled into an acyclic graph (DAG)**    |
+| Reads like     | the agent's overall _shape_                 | the exact _run_, step by step               |
+| Best for       | grasping structure & complexity at a glance | following or debugging a specific execution |
+
+### Aggregated
+
+The **Aggregated** view is a compact overview. Steps that share a name are merged into a single node with a counter — `retrieve_docs (3/3)` means that step ran three times — and a loop that calls the same tool repeatedly is drawn as a cycle rather than a long chain. This keeps even a busy agent readable: you see how many _distinct_ steps there are and how they connect, without every individual call on screen. It's the fastest way to answer "what does this agent do, and how complex is it?"
+
+### Expanded
+
+The **Expanded** view shows the full process **as it ran**. Every call is its own node, so three `litellm_request` calls are three distinct nodes, and loops unroll into a directed acyclic graph in execution order. It's more literal and closer to the trace tree — the right view when you want to follow a specific run end to end or pin down exactly where something happened. Larger traces naturally produce more nodes here than in the aggregated view.
+
+Neither is "correct" — they answer different questions. Reach for **Aggregated** to understand an agent's structure, and **Expanded** to walk through a single run.
+
+## GitHub Discussions
+
+<!-- agent-instructions -->
+
+---
+
+## Agent Instructions
+
+This page is part of the [Langfuse](https://langfuse.com) documentation, published as plain Markdown for AI agents. Every page is available as Markdown by appending `.md` to its URL, or by sending an `Accept: text/markdown` header. This page: `https://langfuse.com/docs/observability/features/agent-graphs.md`.
+
+### Querying these docs
+
+If the answer is not on this page, query the documentation instead of guessing:
+
+- **Semantic search** across all Langfuse docs, returning an answer with the relevant pages and excerpts. Ask a specific, self-contained question:
+
+  ```bash
+  curl -sG "https://langfuse.com/api/search-docs" --data-urlencode "query=How do I trace a LangGraph agent?"
+  ```
+
+- **Index of every page**: <https://langfuse.com/llms.txt>, with per-section indexes [llms-docs.txt](https://langfuse.com/llms-docs.txt), [llms-integrations.txt](https://langfuse.com/llms-integrations.txt), and [llms-self-hosting.txt](https://langfuse.com/llms-self-hosting.txt).
+
+### Before writing Langfuse code
+
+- **Install the [Langfuse Agent Skill](https://langfuse.com/docs/api-and-data-platform/features/agent-skill).** It encodes Langfuse's own best practices for instrumentation, prompt management, and evaluation, and materially improves results.
+- **Read [What does a good trace look like?](https://langfuse.com/docs/observability/best-practices.md)** before instrumenting an application.
+- **Verify endpoints, parameters, and response fields** against the [API reference](https://api.reference.langfuse.com) instead of inferring them from code examples.
+- **Use the [Langfuse CLI](https://langfuse.com/docs/api-and-data-platform/features/cli)** (`npx @langfuse/cli api <resource> <action>`) to read or write traces, prompts, datasets, and scores from the terminal.
+
+Found an error in these docs? Please open an issue at <https://github.com/langfuse/langfuse-docs/issues>.

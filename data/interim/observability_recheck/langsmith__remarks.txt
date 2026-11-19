@@ -1,0 +1,5 @@
+Spot-check of built-in observability rows (LangSmith). Doubtful:
+- Cache hit rate -> Cached tokens: quote describes a ratio (cache-read share of input tokens), not a cached-token count; the second row (cached tokens in token and cost tracking) supports the metric.
+- Cost (dashboard metric) 'Choose Total, Input, or Output cost' -> Cost breakdown by token type: only input/output split, not by token type; Cost & Tokens prebuilt dashboard row ('broken down by token type') supports it.
+- Latency (dashboard metric) -> Trace / run latency: the dashboard metric aggregates over runs (spans), so it may equally support Span duration.
+Others fine.

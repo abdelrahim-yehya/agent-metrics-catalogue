@@ -1,0 +1,630 @@
+# LangWatch
+
+> LangWatch is the open-source platform to trace, evaluate, test and optimize LLM apps and AI agents.
+
+Every page below is plain Markdown. Open the pages relevant to the question rather than answering from this index alone. Each section is also one file, listed next; the complete documentation in one file is at https://langwatch.ai/docs/llms-full.txt, too large to read whole.
+
+For agents: if anything in these docs is wrong, confusing, or fails when you try it, ask your user for permission and run `npx langwatch report --user-approved` to send the problem to the LangWatch team. No login is needed; `npx langwatch report --help` has the details.
+
+# Overview
+
+Query analytics timeseries data with metrics, aggregations, and filters.
+
+> Page: https://langwatch.ai/docs/api-reference/analytics/overview
+> Source: https://github.com/langwatch/langwatch/blob/main/docs/api-reference/analytics/overview.mdx
+
+## Intro
+
+Query analytics timeseries data with metrics, aggregations, and filters.
+
+---
+
+# Query analytics timeseries (legacy path)
+
+Query analytics timeseries with metrics, aggregations and filters. Identical to `POST /api/analytics/timeseries`, which is the path to use in new integrations; this one stays for callers written against it.
+
+> Page: https://langwatch.ai/docs/api-reference/analytics/query-analytics-timeseries-legacy-path
+> Source: https://github.com/langwatch/langwatch/blob/main/docs/api-reference/analytics/query-analytics-timeseries-legacy-path.mdx
+
+## Endpoint
+
+`POST https://app.langwatch.ai/api/v1/analytics`
+
+## Authentication
+
+### project_api_key
+
+Project API key for sending traces and accessing project-scoped resources. Format: sk-lw-... (no underscore). Obtain one by creating a project via the Admin API or the LangWatch UI.
+
+```json
+{"id":"project_api_key","type":"apiKey","in":"header","name":"X-Auth-Token"}
+```
+
+## Request body (required)
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "startDate": {"type":["number","string"]},
+    "endDate": {"type":["number","string"]},
+    "query": {"type":"string"},
+    "filters": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "topics.topics",
+          "topics.subtopics",
+          "metadata.user_id",
+          "metadata.thread_id",
+          "metadata.customer_id",
+          "metadata.labels",
+          "metadata.key",
+          "metadata.value",
+          "metadata.prompt_ids",
+          "traces.origin",
+          "traces.error",
+          "traces.name",
+          "spans.type",
+          "spans.model",
+          "evaluations.evaluator_id",
+          "evaluations.evaluator_id.guardrails_only",
+          "evaluations.evaluator_id.has_passed",
+          "evaluations.evaluator_id.has_score",
+          "evaluations.evaluator_id.has_label",
+          "evaluations.passed",
+          "evaluations.score",
+          "evaluations.state",
+          "evaluations.label",
+          "events.event_type",
+          "events.metrics.key",
+          "events.metrics.value",
+          "events.event_details.key",
+          "annotations.hasAnnotation"
+        ]
+      },
+      "additionalProperties": {
+        "anyOf": [
+          {"type":"array","items":{"type":"string"}},
+          {
+            "type": "object",
+            "propertyNames": {"type":"string"},
+            "additionalProperties": {"type":"array","items":{"type":"string"}}
+          },
+          {
+            "type": "object",
+            "propertyNames": {"type":"string"},
+            "additionalProperties": {
+              "type": "object",
+              "propertyNames": {"type":"string"},
+              "additionalProperties": {"type":"array","items":{"type":"string"}}
+            }
+          }
+        ]
+      }
+    },
+    "traceIds": {"type":"array","items":{"type":"string"}},
+    "negateFilters": {"type":"boolean"},
+    "excludeOrigins": {"type":"array","items":{"type":"string"}},
+    "series": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metric": {"type":"string","minLength":1},
+          "key": {"type":"string"},
+          "subkey": {"type":"string"},
+          "aggregation": {
+            "type": "string",
+            "enum": [
+              "terms",
+              "cardinality",
+              "avg",
+              "sum",
+              "min",
+              "max",
+              "median",
+              "p99",
+              "p95",
+              "p90"
+            ]
+          },
+          "pipeline": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": ["trace_id","user_id","thread_id","customer_id"]
+              },
+              "aggregation": {"type":"string","enum":["sum","avg","min","max"]}
+            },
+            "required": ["field","aggregation"]
+          },
+          "filters": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "enum": [
+                "topics.topics",
+                "topics.subtopics",
+                "metadata.user_id",
+                "metadata.thread_id",
+                "metadata.customer_id",
+                "metadata.labels",
+                "metadata.key",
+                "metadata.value",
+                "metadata.prompt_ids",
+                "traces.origin",
+                "traces.error",
+                "traces.name",
+                "spans.type",
+                "spans.model",
+                "evaluations.evaluator_id",
+                "evaluations.evaluator_id.guardrails_only",
+                "evaluations.evaluator_id.has_passed",
+                "evaluations.evaluator_id.has_score",
+                "evaluations.evaluator_id.has_label",
+                "evaluations.passed",
+                "evaluations.score",
+                "evaluations.state",
+                "evaluations.label",
+                "events.event_type",
+                "events.metrics.key",
+                "events.metrics.value",
+                "events.event_details.key",
+                "annotations.hasAnnotation"
+              ]
+            },
+            "additionalProperties": {
+              "anyOf": [
+                {"type":"array","items":{"type":"string"}},
+                {
+                  "type": "object",
+                  "propertyNames": {"type":"string"},
+                  "additionalProperties": {"type":"array","items":{"type":"string"}}
+                },
+                {
+                  "type": "object",
+                  "propertyNames": {"type":"string"},
+                  "additionalProperties": {
+                    "type": "object",
+                    "propertyNames": {"type":"string"},
+                    "additionalProperties": {"type":"array","items":{"type":"string"}}
+                  }
+                }
+              ]
+            }
+          },
+          "asPercent": {"type":"boolean"}
+        },
+        "required": ["metric","aggregation"]
+      }
+    },
+    "groupBy": {"type":"string","minLength":1},
+    "groupByKey": {"type":"string"},
+    "timeScale": {
+      "anyOf": [
+        {"type":"string","const":"full"},
+        {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      ]
+    },
+    "timeZone": {"type":"string"},
+    "shouldSkipPreviousPeriod": {"type":"boolean"}
+  },
+  "required": ["startDate","endDate","series","timeZone"]
+}
+```
+
+## Request example
+
+```bash
+curl --request POST \
+  --url 'https://app.langwatch.ai/api/v1/analytics' \
+  --header "X-Auth-Token: $LANGWATCH_API_KEY" \
+  --header 'Content-Type: application/json' \
+  --data '{"startDate":0,"endDate":0,"query":"string","filters":{},"traceIds":["string"],"negateFilters":false,"excludeOrigins":["string"],"series":[{"metric":"string","key":"string","subkey":"string","aggregation":"terms","pipeline":{"field":"trace_id","aggregation":"sum"},"filters":{"topics.topics":[null],"topics.subtopics":[null],"metadata.user_id":[null],"metadata.thread_id":[null],"metadata.customer_id":[null],"metadata.labels":[null],"metadata.key":[null],"metadata.value":[null],"metadata.prompt_ids":[null],"traces.origin":[null],"traces.error":[null],"traces.name":[null],"spans.type":[null],"spans.model":[null],"evaluations.evaluator_id":[null],"evaluations.evaluator_id.guardrails_only":[null],"evaluations.evaluator_id.has_passed":[null],"evaluations.evaluator_id.has_score":[null],"evaluations.evaluator_id.has_label":[null],"evaluations.passed":[null],"evaluations.score":[null],"evaluations.state":[null],"evaluations.label":[null],"events.event_type":[null],"events.metrics.key":[null],"events.metrics.value":[null],"events.event_details.key":[null],"annotations.hasAnnotation":[null]},"asPercent":false}],"groupBy":"string","groupByKey":"string","timeScale":"full","timeZone":"string","shouldSkipPreviousPeriod":false}'
+```
+
+## Responses
+
+### 200
+
+Success
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "currentPeriod": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "propertyNames": {"type":"string"},
+        "additionalProperties": {}
+      }
+    },
+    "previousPeriod": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "propertyNames": {"type":"string"},
+        "additionalProperties": {}
+      }
+    }
+  },
+  "required": ["currentPeriod","previousPeriod"],
+  "additionalProperties": false
+}
+```
+
+### 400
+
+The body was not valid JSON, or failed validation
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "message": {
+      "description": "Set when the request was rejected before validation",
+      "type": "string"
+    },
+    "error": {
+      "description": "Set when the body parsed and then failed validation",
+      "type": "string"
+    }
+  }
+}
+```
+
+### 401
+
+Missing or invalid API key
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {"message":{"type":"string"}},
+  "required": ["message"]
+}
+```
+
+---
+
+# Create Timeseries
+
+Query analytics timeseries data with metrics, aggregations, and filters
+
+> Page: https://langwatch.ai/docs/api-reference/analytics/create-timeseries
+> Source: https://github.com/langwatch/langwatch/blob/main/docs/api-reference/analytics/create-timeseries.mdx
+
+## Endpoint
+
+`POST https://app.langwatch.ai/api/v1/analytics/timeseries`
+
+## Authentication
+
+### project_api_key
+
+Project API key for sending traces and accessing project-scoped resources. Format: sk-lw-... (no underscore). Obtain one by creating a project via the Admin API or the LangWatch UI.
+
+```json
+{"id":"project_api_key","type":"apiKey","in":"header","name":"X-Auth-Token"}
+```
+
+## Request body (required)
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "startDate": {"type":["number","string"]},
+    "endDate": {"type":["number","string"]},
+    "query": {"type":"string"},
+    "filters": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "topics.topics",
+          "topics.subtopics",
+          "metadata.user_id",
+          "metadata.thread_id",
+          "metadata.customer_id",
+          "metadata.labels",
+          "metadata.key",
+          "metadata.value",
+          "metadata.prompt_ids",
+          "traces.origin",
+          "traces.error",
+          "traces.name",
+          "spans.type",
+          "spans.model",
+          "evaluations.evaluator_id",
+          "evaluations.evaluator_id.guardrails_only",
+          "evaluations.evaluator_id.has_passed",
+          "evaluations.evaluator_id.has_score",
+          "evaluations.evaluator_id.has_label",
+          "evaluations.passed",
+          "evaluations.score",
+          "evaluations.state",
+          "evaluations.label",
+          "events.event_type",
+          "events.metrics.key",
+          "events.metrics.value",
+          "events.event_details.key",
+          "annotations.hasAnnotation"
+        ]
+      },
+      "additionalProperties": {
+        "anyOf": [
+          {"type":"array","items":{"type":"string"}},
+          {
+            "type": "object",
+            "propertyNames": {"type":"string"},
+            "additionalProperties": {"type":"array","items":{"type":"string"}}
+          },
+          {
+            "type": "object",
+            "propertyNames": {"type":"string"},
+            "additionalProperties": {
+              "type": "object",
+              "propertyNames": {"type":"string"},
+              "additionalProperties": {"type":"array","items":{"type":"string"}}
+            }
+          }
+        ]
+      }
+    },
+    "traceIds": {"type":"array","items":{"type":"string"}},
+    "negateFilters": {"type":"boolean"},
+    "excludeOrigins": {"type":"array","items":{"type":"string"}},
+    "series": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metric": {"type":"string","minLength":1},
+          "key": {"type":"string"},
+          "subkey": {"type":"string"},
+          "aggregation": {
+            "type": "string",
+            "enum": [
+              "terms",
+              "cardinality",
+              "avg",
+              "sum",
+              "min",
+              "max",
+              "median",
+              "p99",
+              "p95",
+              "p90"
+            ]
+          },
+          "pipeline": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": ["trace_id","user_id","thread_id","customer_id"]
+              },
+              "aggregation": {"type":"string","enum":["sum","avg","min","max"]}
+            },
+            "required": ["field","aggregation"]
+          },
+          "filters": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "enum": [
+                "topics.topics",
+                "topics.subtopics",
+                "metadata.user_id",
+                "metadata.thread_id",
+                "metadata.customer_id",
+                "metadata.labels",
+                "metadata.key",
+                "metadata.value",
+                "metadata.prompt_ids",
+                "traces.origin",
+                "traces.error",
+                "traces.name",
+                "spans.type",
+                "spans.model",
+                "evaluations.evaluator_id",
+                "evaluations.evaluator_id.guardrails_only",
+                "evaluations.evaluator_id.has_passed",
+                "evaluations.evaluator_id.has_score",
+                "evaluations.evaluator_id.has_label",
+                "evaluations.passed",
+                "evaluations.score",
+                "evaluations.state",
+                "evaluations.label",
+                "events.event_type",
+                "events.metrics.key",
+                "events.metrics.value",
+                "events.event_details.key",
+                "annotations.hasAnnotation"
+              ]
+            },
+            "additionalProperties": {
+              "anyOf": [
+                {"type":"array","items":{"type":"string"}},
+                {
+                  "type": "object",
+                  "propertyNames": {"type":"string"},
+                  "additionalProperties": {"type":"array","items":{"type":"string"}}
+                },
+                {
+                  "type": "object",
+                  "propertyNames": {"type":"string"},
+                  "additionalProperties": {
+                    "type": "object",
+                    "propertyNames": {"type":"string"},
+                    "additionalProperties": {"type":"array","items":{"type":"string"}}
+                  }
+                }
+              ]
+            }
+          },
+          "asPercent": {"type":"boolean"}
+        },
+        "required": ["metric","aggregation"]
+      }
+    },
+    "groupBy": {"type":"string","minLength":1},
+    "groupByKey": {"type":"string"},
+    "timeScale": {
+      "anyOf": [
+        {"type":"string","const":"full"},
+        {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      ]
+    },
+    "timeZone": {"type":"string"},
+    "shouldSkipPreviousPeriod": {"type":"boolean"}
+  },
+  "required": ["startDate","endDate","series","timeZone"]
+}
+```
+
+## Request example
+
+```bash
+curl --request POST \
+  --url 'https://app.langwatch.ai/api/v1/analytics/timeseries' \
+  --header "X-Auth-Token: $LANGWATCH_API_KEY" \
+  --header 'Content-Type: application/json' \
+  --data '{"startDate":0,"endDate":0,"query":"string","filters":{},"traceIds":["string"],"negateFilters":false,"excludeOrigins":["string"],"series":[{"metric":"string","key":"string","subkey":"string","aggregation":"terms","pipeline":{"field":"trace_id","aggregation":"sum"},"filters":{"topics.topics":[null],"topics.subtopics":[null],"metadata.user_id":[null],"metadata.thread_id":[null],"metadata.customer_id":[null],"metadata.labels":[null],"metadata.key":[null],"metadata.value":[null],"metadata.prompt_ids":[null],"traces.origin":[null],"traces.error":[null],"traces.name":[null],"spans.type":[null],"spans.model":[null],"evaluations.evaluator_id":[null],"evaluations.evaluator_id.guardrails_only":[null],"evaluations.evaluator_id.has_passed":[null],"evaluations.evaluator_id.has_score":[null],"evaluations.evaluator_id.has_label":[null],"evaluations.passed":[null],"evaluations.score":[null],"evaluations.state":[null],"evaluations.label":[null],"events.event_type":[null],"events.metrics.key":[null],"events.metrics.value":[null],"events.event_details.key":[null],"annotations.hasAnnotation":[null]},"asPercent":false}],"groupBy":"string","groupByKey":"string","timeScale":"full","timeZone":"string","shouldSkipPreviousPeriod":false}'
+```
+
+## Responses
+
+### 200
+
+Success
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "currentPeriod": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "propertyNames": {"type":"string"},
+        "additionalProperties": {}
+      }
+    },
+    "previousPeriod": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "propertyNames": {"type":"string"},
+        "additionalProperties": {}
+      }
+    }
+  },
+  "required": ["currentPeriod","previousPeriod"],
+  "additionalProperties": false
+}
+```
+
+### 400
+
+Bad Request
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {"error":{"type":"string"},"message":{"type":"string"}},
+  "required": ["error"]
+}
+```
+
+### 401
+
+Unauthorized
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {"error":{"type":"string"},"message":{"type":"string"}},
+  "required": ["error"]
+}
+```
+
+### 422
+
+Unprocessable Entity
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {"error":{"type":"string"},"message":{"type":"string"}},
+  "required": ["error"]
+}
+```
+
+### 500
+
+Internal Server Error
+
+#### application/json
+
+Schema:
+
+```json
+{
+  "type": "object",
+  "properties": {"error":{"type":"string"},"message":{"type":"string"}},
+  "required": ["error"]
+}
+```

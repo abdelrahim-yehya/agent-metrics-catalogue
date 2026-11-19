@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1170" width="1100" height="1170" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif" role="img" aria-label="Flow diagram of the tool selection strategy from 2026-11-09"><rect width="1100" height="1170" fill="#ffffff"/><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a8f94"/></marker></defs>
+<text x="30" y="34" font-size="21" font-family="Georgia,serif" fill="#1d2328">Search strategy from 2026-11-09 (post-hoc amendment)</text>
+<text x="30" y="55" font-size="12" fill="#5d666d">Open-source tools are selected by adoption (C2), closed-source tools by Google corroboration (C1). E1 to E6, S1, S2 and A1 are unchanged. Green: new rule; orange: Google-based.</text>
+<rect x="30" y="80" width="330" height="87" rx="9" fill="#e8f1f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="42" y="101" font-size="13" font-weight="700" fill="#1d2328">1 · GitHub search (open source)</text>
+<text x="42" y="120" font-size="11.5" fill="#1d2328">10 topic and 7 keyword queries, sorted by stars</text>
+<text x="42" y="135" font-size="11.5" fill="#1d2328">I2 in the query: at least 1,000 stars, not archived,</text>
+<text x="42" y="150" font-size="11.5" fill="#1d2328">a push in the last 6 months</text>
+<rect x="385" y="80" width="330" height="87" rx="9" fill="#e8f1f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="397" y="101" font-size="13" font-weight="700" fill="#1d2328">2 · Google search (closed source, and discovery)</text>
+<text x="397" y="120" font-size="11.5" fill="#1d2328">6 queries, first 30 results each (173 results)</text>
+<text x="397" y="135" font-size="11.5" fill="#1d2328">titles and snippets only, one day, signed out</text>
+<text x="397" y="150" font-size="11.5" fill="#1d2328">evidence for closed-source tools (I3, C1)</text>
+<rect x="740" y="80" width="330" height="72" rx="9" fill="#e8f1f5" stroke="#1f6f8b" stroke-width="1.4"/>
+<text x="752" y="101" font-size="13" font-weight="700" fill="#1d2328">3 · Standards</text>
+<text x="752" y="120" font-size="11.5" fill="#1d2328">OpenTelemetry GenAI conventions as the</text>
+<text x="752" y="135" font-size="11.5" fill="#1d2328">vendor-neutral reference (also named by Google)</text>
+<rect x="30" y="200" width="330" height="87" rx="9" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="42" y="221" font-size="13" font-weight="700" fill="#1d2328">Manual check of the 182 repositories</text>
+<text x="42" y="240" font-size="11.5" fill="#1d2328">I1 purpose; not E1 gateway, E2 agent framework,</text>
+<text x="42" y="255" font-size="11.5" fill="#1d2328">E3 benchmark harness, E4 tutorial or list</text>
+<text x="42" y="270" font-size="12" font-weight="700" fill="#5d666d">37 kept  (145 removed)</text>
+<rect x="385" y="200" width="330" height="72" rx="9" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="397" y="221" font-size="13" font-weight="700" fill="#1d2328">Screening of the 68 tools named</text>
+<text x="397" y="240" font-size="11.5" fill="#1d2328">I1 purpose; E1 to E6 (E6 drops general-purpose</text>
+<text x="397" y="255" font-size="11.5" fill="#1d2328">platforms such as Datadog and Grafana)</text>
+<path d="M195.0,167 L195.0,200" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M550.0,167 L550.0,200" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="220" y="340" width="660" height="72" rx="9" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="232" y="361" font-size="13" font-weight="700" fill="#1d2328">Merge the lists (E5: an SDK and its platform count as one tool)</text>
+<text x="232" y="380" font-size="11.5" fill="#1d2328">37 from GitHub + 5 found only by Google (LangSmith, Braintrust, Galileo, Weave, OpenTelemetry)</text>
+<text x="232" y="395" font-size="12" font-weight="700" fill="#5d666d">42 candidates (unchanged)</text>
+<path d="M195.0,287 L195.0,313.5 L385.0,313.5 L385.0,340" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="203" y="332" font-size="11" fill="#5d666d" >37</text>
+<path d="M550.0,272 L550.0,306.0 L715.0,306.0 L715.0,340" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="560" y="330" font-size="11" fill="#5d666d" >5 closed-source</text>
+<path d="M905,152 L905,376 L880,376" fill="none" stroke="#8a8f94" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ah)"/>
+<rect x="220" y="450" width="660" height="87" rx="9" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="232" y="471" font-size="13" font-weight="700" fill="#1d2328">S1 scope  ·  S2 role label  ·  A1 agent relevance (unchanged)</text>
+<text x="232" y="490" font-size="11.5" fill="#1d2328">S1 keeps tools whose primary purpose is observability or evaluation of LLM apps or agents (31 kept, 11 removed);</text>
+<text x="232" y="505" font-size="11.5" fill="#1d2328">S2 labels standard, platform or framework; A1 needs official docs that cover agents, tool calls or multi-step traces.</text>
+<text x="232" y="520" font-size="12" font-weight="700" fill="#5d666d">31 candidates: 26 open source with a repository, 5 without</text>
+<rect x="60" y="580" width="480" height="117" rx="9" fill="#e6f6f1" stroke="#1e8e6e" stroke-width="2.2"/>
+<text x="72" y="601" font-size="13" font-weight="700" fill="#1d2328">C2 adoption  (open-source tools)</text>
+<text x="72" y="620" font-size="11.5" fill="#1d2328">I2: at least 1,000 stars, not archived, push in the last 6 months</text>
+<text x="72" y="635" font-size="11.5" fill="#1d2328">and at least 5,000 stars, or at least 1M downloads in 30 days</text>
+<text x="72" y="650" font-size="11.5" fill="#1d2328">(larger of PyPI and npm); with a package, at least 100k downloads</text>
+<text x="72" y="665" font-size="11.5" fill="#1d2328">Stars, push and downloads read on one date (2026-11-06)</text>
+<text x="72" y="680" font-size="12" font-weight="700" fill="#1e8e6e">14 pass  ·  12 fail (11 adoption, 1 activity)</text>
+<rect x="590" y="580" width="450" height="117" rx="9" fill="#fff4ea" stroke="#d9822b" stroke-width="2.2"/>
+<text x="602" y="601" font-size="13" font-weight="700" fill="#1d2328">C1 corroboration  (closed-source tools)</text>
+<text x="602" y="620" font-size="11.5" fill="#1d2328">At least 2 independent sources in the Google log;</text>
+<text x="602" y="635" font-size="11.5" fill="#1d2328">own website does not count; a competitor&#x27;s comparison</text>
+<text x="602" y="650" font-size="11.5" fill="#1d2328">post does count</text>
+<text x="602" y="665" font-size="11.5" fill="#1d2328">LangSmith 13, Braintrust 5, Galileo 3, W&amp;B Weave 2</text>
+<text x="602" y="680" font-size="12" font-weight="700" fill="#d9822b">4 pass</text>
+<path d="M550.0,412 L550.0,450" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="558.0" y="435.0" font-size="11" fill="#5d666d" >42</text>
+<path d="M550.0,537 L550.0,558.5 L300.0,558.5 L300.0,580" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M550.0,537 L550.0,558.5 L815.0,558.5 L815.0,580" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="60" y="735" width="480" height="117" rx="9" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="72" y="756" font-size="13" font-weight="700" fill="#1d2328">E1 to E6 re-applied to tools new to the study</text>
+<text x="72" y="775" font-size="11.5" fill="#1d2328">Pydantic Logfire: out (E6, general observability platform)</text>
+<text x="72" y="790" font-size="11.5" fill="#1d2328">Evidently: out (E6, general ML monitoring)  ·  Harbor: out (S1/E3, benchmark runner)</text>
+<text x="72" y="805" font-size="11.5" fill="#1d2328">MLflow: in, E6 exception (mlflow-tracing is an LLM-specific package</text>
+<text x="72" y="820" font-size="11.5" fill="#1d2328">distributed on its own)</text>
+<text x="72" y="835" font-size="12" font-weight="700" fill="#5d666d">Laminar, LangWatch and MLflow pass</text>
+<path d="M300.0,697 L300.0,735" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="190" y="880" width="720" height="87" rx="9" fill="#e9f4ea" stroke="#3c8a4a" stroke-width="1.4"/>
+<text x="202" y="901" font-size="13" font-weight="700" fill="#1d2328">Result</text>
+<text x="202" y="920" font-size="11.5" fill="#1d2328">Kept: 6 open-source tools (Langfuse, Opik, Helicone, promptfoo, DeepEval, Arize Phoenix) + 4 closed-source tools = 10 tools</text>
+<text x="202" y="935" font-size="11.5" fill="#1d2328">Added under C2: MLflow, Laminar, LangWatch  =  13 tools (12 platforms, 1 framework)</text>
+<text x="202" y="950" font-size="11.5" fill="#1d2328">Standards: OpenLLMetry and OpenInference (pass C2) and OpenTelemetry (Channel 3), reported apart</text>
+<path d="M300.0,852 L300.0,866.0 L550.0,866.0 L550.0,880" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M815.0,697 L815.0,788.5 L550.0,788.5 L550.0,880" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="30" y="1030" width="240" height="87" rx="9" fill="#f3eefa" stroke="#6f4fa0" stroke-width="1.4"/>
+<text x="42" y="1051" font-size="13" font-weight="700" fill="#1d2328">S3 built-in metrics</text>
+<text x="42" y="1070" font-size="11.5" fill="#1d2328">Metrics the tool ships, read from</text>
+<text x="42" y="1085" font-size="11.5" fill="#1d2328">official docs: URL, verbatim quote,</text>
+<text x="42" y="1100" font-size="11.5" fill="#1d2328">saved page, access date</text>
+<rect x="300" y="1030" width="240" height="87" rx="9" fill="#f3eefa" stroke="#6f4fa0" stroke-width="1.4"/>
+<text x="312" y="1051" font-size="13" font-weight="700" fill="#1d2328">M1 metric scope</text>
+<text x="312" y="1070" font-size="11.5" fill="#1d2328">Keep how a run executes or how good</text>
+<text x="312" y="1085" font-size="11.5" fill="#1d2328">its output is; drop text match, retrieval,</text>
+<text x="312" y="1100" font-size="11.5" fill="#1d2328">audio, image, task-specific, custom-only</text>
+<rect x="570" y="1030" width="240" height="87" rx="9" fill="#f3eefa" stroke="#6f4fa0" stroke-width="1.4"/>
+<text x="582" y="1051" font-size="13" font-weight="700" fill="#1d2328">Collected 2026-11-09</text>
+<text x="582" y="1070" font-size="11.5" fill="#1d2328">33 built-in rows for the three added</text>
+<text x="582" y="1085" font-size="11.5" fill="#1d2328">tools (MLflow 16, LangWatch 13,</text>
+<text x="582" y="1100" font-size="11.5" fill="#1d2328">Laminar 4); one new metric: Fluency</text>
+<rect x="840" y="1030" width="240" height="87" rx="9" fill="#f3eefa" stroke="#6f4fa0" stroke-width="1.4"/>
+<text x="852" y="1051" font-size="13" font-weight="700" fill="#1d2328">Mapping to unique metrics</text>
+<text x="852" y="1070" font-size="11.5" fill="#1d2328">Hand-made, one row per pair:</text>
+<text x="852" y="1085" font-size="11.5" fill="#1d2328">46 unique metrics (18 + 28) and 1</text>
+<text x="852" y="1100" font-size="11.5" fill="#1d2328">that only standards document</text>
+<path d="M550.0,967 L550.0,998.5 L150.0,998.5 L150.0,1030" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M270,1073.5 L300,1073.5" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M540,1073.5 L570,1073.5" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M810,1073.5 L840,1073.5" fill="none" stroke="#8a8f94" stroke-width="1.5" marker-end="url(#ah)"/>
+<rect x="30" y="1134" width="22" height="12" rx="3" fill="#e6f6f1" stroke="#1e8e6e" stroke-width="2.2"/>
+<text x="60" y="1144" font-size="11" fill="#5d666d">new rule (C2)</text>
+<rect x="230" y="1134" width="22" height="12" rx="3" fill="#fff4ea" stroke="#d9822b" stroke-width="2.2"/>
+<text x="260" y="1144" font-size="11" fill="#5d666d">depends on Google source counts (C1)</text>
+<rect x="560" y="1134" width="22" height="12" rx="3" fill="#ffffff" stroke="#5d666d" stroke-width="1.4"/>
+<text x="590" y="1144" font-size="11" fill="#5d666d">other rule (I1, E1 to E6, S1, S2, A1, M1)</text></svg>

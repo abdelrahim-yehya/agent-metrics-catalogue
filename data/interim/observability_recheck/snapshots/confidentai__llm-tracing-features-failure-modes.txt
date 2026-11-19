@@ -1,0 +1,143 @@
+# Failure Modes
+
+Group the traces your classifiers flag into named failure patterns, each with evidence, a suggested fix, and a metric to monitor it.
+
+## Overview
+
+**Failure Modes** are the recurring patterns behind your AI's failures. Each one is written up as a document with what's happening, its impact, the evidence behind it, a suggested fix and a metric to monitor it. Instead of reading every trace your [classifiers](/docs/metrics/classifiers) flag, you get a short list of named problems, such as "Dead Air / Audio Dropout", ranked by severity and tied to the traces that show them.
+
+For voice agents, that includes problems you can only hear. [Audio classifiers](/docs/metrics/custom-classifiers#audio-classifiers) listen to each call, so dead air, the agent talking over a caller or a misheard date become failure modes, with the moment in each recording marked.
+
+Product preview: The Dead Air / Audio Dropout failure mode: high severity, needs review, monitored by Audio Glitch, found in 2 analyses, with its suggested fix and how to monitor it
+
+*A failure mode*
+
+Open **Failure Modes** from the project sidebar. The list on the left holds every failure mode in the project, which you can sort and filter by severity and status.
+
+## Why Use Failure Modes?
+
+- **Read a handful of problems, not hundreds of traces.** Flagged traces are grouped into named patterns, ranked by severity, with the quotes that show each one.
+- **Know what to fix.** Every failure mode comes with what's happening, its impact on users and a suggested fix.
+- **Hear the evidence.** For voice calls, the evidence marks the part of each recording where the failure happened, so you can listen to it instead of reading transcripts.
+- **Make sure it stays fixed.** Each one suggests a metric, so the same failure is caught automatically from then on.
+
+## How Failure Modes Work
+
+Failure modes come from three places: an analysis of the traces your classifiers flagged, [Error Analysis](/docs/human-in-the-loop/error-analysis) of an annotation queue, or one you write yourself. New failure modes start as **Needs review**. Once you accept one, it becomes **Tracked** and can be monitored by a metric.
+
+```mermaid
+graph TD
+    A[Traces] --> B[Classifiers]
+    B -->|Less is better labels| C[Generate from traces]
+    D[Annotation queues] --> E[Error Analysis]
+    C --> F[Failure mode: Needs review]
+    E --> F
+    G[New Failure Mode] --> H
+    F -->|Accept| H[Failure mode: Tracked]
+    H --> I[Metric suggestion]
+    I -->|Online evaluation| J[Monitoring]
+
+    style A fill:#e1f5fe,color:#1e293b
+    style D fill:#e1f5fe,color:#1e293b
+    style G fill:#e1f5fe,color:#1e293b
+    style B fill:#f3e5f5,color:#1e293b
+    style C fill:#f3e5f5,color:#1e293b
+    style E fill:#f3e5f5,color:#1e293b
+    style F fill:#fff3e0,color:#1e293b
+    style H fill:#e8f5e8,color:#1e293b
+    style I fill:#e8f5e8,color:#1e293b
+    style J fill:#e8f5e8,color:#1e293b
+```
+
+## Generate Failure Modes
+
+> Generation reads classifier labels set to **Less is better**, so your project
+> needs at least one classifier with such a label, and a generation model set
+> in [Model Settings](/docs/settings/project/model-settings). See
+> [Labels](/docs/metrics/classifiers#labels).
+
+### Generate From Traces
+
+Click **Generate from traces** at the top of the list to run an analysis. It groups the traces your classifiers flagged by what went wrong, and writes up each group as a failure mode with its sub-patterns and a suggested metric.
+
+Use **Generation Settings**, next to the button, to choose whether to read traces, spans or threads, the time period, and how many flagged items each run reads.
+
+Product preview: The Failure Modes page with Generation Settings open: Data model, Period, Sampling and how many flagged traces to analyse, with a preview of how many were flagged
+
+*Generation Settings*
+
+### Scheduled Generation
+
+Use **Automatic Generation** to generate failure modes on a schedule. Choose how often to check for new flagged traces, and how many must build up before a run starts. Failure modes found this way are highlighted in the list until you open them.
+
+Product preview: The Failure Modes page with Automatic Generation open: Generate automatically, Run after a number of flagged traces, Check for them every, and Sampling
+
+*Automatic Generation*
+
+### Create a Failure Mode Manually
+
+If you already know a failure you want to track, click **New Failure Mode** and enter its name, a description of how to recognize it, its severity, and any sub-modes.
+
+A failure mode you create is tracked straight away, but it only holds what you entered: there's no document, evidence or suggested metric until you give it some. To add evidence, tag items with it while annotating in an [annotation queue](/docs/human-in-the-loop/annotation-queues).
+
+Product preview: The Failure Modes page with the New Failure Mode form open: Name, Description, Severity and Sub Modes
+
+*New Failure Mode*
+
+## Connect Your Codebase
+
+Connecting your codebase doesn't create failure modes. It gives generation context about your AI app, so its results are more accurate.
+
+Use **Codebase** at the top of the list to connect the GitHub repository with your AI app's code, and optionally the branch and the file your agent starts in. Confident AI reads the code to learn what your app was built to do, so behavior you designed on purpose, such as scripted replies, handoffs or retries, isn't reported as a failure. Failure mode documents can also link to the code behind each failure.
+
+Product preview: The Failure Modes page with Codebase open and its Connect GitHub button
+
+*Codebase*
+
+## Failure Mode Features
+
+#### Document
+
+Each failure mode is a document. The header shows its severity, whether it's been reviewed, whether it applies to traces or threads, the metric that monitors it, how often and when it was found, and its sub-patterns.
+
+Below the header are a suggested fix, how to monitor it, what's happening and its impact, the evidence behind it, where it was found, and the traces and spans it shows up in most.
+
+Product preview: The Dead Air / Audio Dropout failure mode's What's happening section: its lead, a diagram of where the call goes silent, and Impact
+
+*What's happening*
+
+You can edit any section. Click **Lock document** to keep your edits, or **Regenerate document** to rewrite it from the latest evidence.
+
+#### Evidence
+
+The evidence section explains why the failure happens, then groups the traces and annotations behind it with the quotes that show it. For voice calls, the part of the recording with the issue is marked. Click any item to open it.
+
+Product preview: The Dead Air / Audio Dropout failure mode's Evidence: why it happens, then grouped voice calls with their quotes and the silent stretch of each recording marked
+
+*Evidence*
+
+#### Metric
+
+Each failure mode suggests a metric to monitor it, and explains why. Depending on the suggestion, click **Create metric**, **Go to metric** or **Review & update**. The failure mode shows **Monitoring** once that metric runs on your production traces through an [online evaluation](/docs/llm-tracing/online-evals).
+
+Product preview: The Dead Air / Audio Dropout failure mode's How to monitor: the suggested Audio Glitch metric, why it fits, its button and the monitoring pill
+
+*How to monitor*
+
+#### Review
+
+Failure modes and sub-patterns found by an analysis start as **Needs review**. Click **Accept** to keep tracking one, or **Reject** to delete it. A later analysis may suggest a rejected one again. Filter the list by **Needs review** to see what's waiting.
+
+Product preview: A suggested failure mode's notice: An analysis suggested this failure mode. Accept it to keep tracking it., with Accept and Reject
+
+*Review a suggested failure mode*
+
+## Next Steps
+
+#### [Signals](/docs/llm-tracing/features/signals)
+
+See the classifier labels failure modes are generated from.
+
+#### [Error Analysis](/docs/human-in-the-loop/error-analysis)
+
+Find failure modes in your annotation queues' feedback.

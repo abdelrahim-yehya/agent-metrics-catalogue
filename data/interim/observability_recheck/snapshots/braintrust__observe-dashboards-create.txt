@@ -1,0 +1,102 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.braintrust.dev/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Create dashboards
+
+> Create a dashboard by cloning the built-in one, starting empty, or duplicating an existing dashboard, then rename, delete, or copy it between projects.
+
+The built-in **Cost and quality** dashboard covers all data in your project, but it is read-only. To change what a dashboard shows, create one of your own.
+
+Creating, editing, renaming, and deleting dashboards requires the project-level **Projects > Update** [permission](https://docs.braintrust.dev/admin/access-control.md).
+
+> [!NOTE]
+>
+> Creating dashboards is only available on [Pro and Enterprise plans](https://docs.braintrust.dev/plans-and-limits.md#plans).
+
+## Create a dashboard
+
+You have three starting points:
+
+* **Clone the built-in dashboard**: Open **Cost and quality** and click **Clone dashboard** to copy its charts into an editable dashboard. Use this when the preset charts are close to what you want.
+* **Start empty**: On the [** Dashboards**](https://www.braintrust.dev/app/~/dashboards) page, click  **Dashboard** to create a dashboard with no charts. From an open dashboard, click  **Dashboard actions** > **New dashboard** to create an empty dashboard and open it.
+* **Duplicate an existing dashboard**: Click  **Dashboard actions** > **Duplicate dashboard**.
+
+On a dashboard you can edit, chart additions, edits, and removals save automatically. Changes to filters, filter scope, grouping, time range, and timezone stay unsaved until you [save them](https://docs.braintrust.dev/observe/dashboards.md#filter-and-group-data).
+
+## Rename or delete a dashboard
+
+Click  **Dashboard actions**, then choose **Rename dashboard** or **Delete**.
+
+To remove several at once, select them on the dashboards list and choose **Delete selected dashboards**. Built-in dashboards cannot be selected or deleted.
+
+Dashboards created before dashboards became project-scoped are also stored at the organization level. Deleting one requires the organization-level **Update** [permission](https://docs.braintrust.dev/admin/access-control.md), even when it appears alongside your project dashboards. Without that permission, **Delete** does not appear for those dashboards.
+
+> [!WARNING]
+>
+> Deleting a dashboard is permanent. For a dashboard that is also stored at the organization level, deleting it removes both copies. This action cannot be undone.
+
+## Copy a dashboard to another project
+
+If you have built a useful dashboard in one project, copy it to another rather than recreating it.
+
+> [tab] UI
+>
+> 1. Go to the [\*\* Dashboards\*\*](https://www.braintrust.dev/app/~/dashboards) page in your source project and open the dashboard you want to copy.
+> 2. Click  **Dashboard config** in the page header and choose \*\* Export dashboard config\*\* to download a JSON file, or \*\* Copy dashboard config\*\* to copy the configuration to your clipboard.
+> 3. Go to the [\*\* Dashboards\*\*](https://www.braintrust.dev/app/~/dashboards) page in your destination project and open the dashboard you want to import into.
+> 4. Click  **Dashboard config** and choose \*\* Import dashboard config\*\* to upload the JSON file, or paste the copied configuration anywhere on the page using your keyboard.
+>    * On a dashboard you can edit, choose **Replace current dashboard**.
+>
+>    * On the built-in **Cost and quality** dashboard, which is read-only, choose **Create new dashboard** and give it a name.
+>
+> > [!WARNING]
+> >
+> > **Replace current dashboard** permanently overwrites that dashboard's charts, notes, filters, and settings. This action cannot be undone.
+
+> [tab] API
+>
+> 1. Use the [list views](https://docs.braintrust.dev/api-reference/views/list-views.md) API endpoint to fetch the "monitor" views in your source project. Pass the following query parameters:
+>
+>    * `object_type=project`
+>    * `object_id=<source-project-id>`
+>    * `view_type=monitor`
+>
+>    ```bash theme={null}
+>    curl --request GET \
+>      --url 'https://api.braintrust.dev/v1/view?object_type=project&object_id=<source-project-id>&view_type=monitor' \
+>      --header 'Authorization: Bearer <your-api-key>'
+>    ```
+>
+>    Older org-owned views are stored at the organization level. To include them, list with `object_type=org_project` and `object_id=<your-org-id>`.
+> 2. In the response, find the view you want to copy and copy its `view_data` and `options` payloads.
+> 3. Use the [create view](https://docs.braintrust.dev/api-reference/views/create-view.md) API endpoint to create the view in the destination project. Set `object_id` to the destination project ID. In the `options` payload, be sure to set `projectId` to the destination project ID as well.
+>
+>    ```bash theme={null}
+>    curl --request POST \
+>      --url https://api.braintrust.dev/v1/view \
+>      --header 'Authorization: Bearer <your-api-key>' \
+>      --header 'Content-Type: application/json' \
+>      --data '
+>      {
+>        "object_type": "project",
+>        "object_id": "<destination-project-id>",
+>        "view_type": "monitor",
+>        "name": "<new-view-name>",
+>        "view_data": <view-data-payload>,
+>        "options": <options-payload>
+>      }'
+>    ```
+
+> [!TIP]
+>
+> To copy a single chart instead of a full dashboard, see [Move and copy charts](https://docs.braintrust.dev/observe/dashboards/build-charts.md#move-and-copy-charts).
+
+## Next steps
+
+* [Build charts](https://docs.braintrust.dev/observe/dashboards/build-charts.md) to fill your new dashboard.
+* [Filter and group data](https://docs.braintrust.dev/observe/dashboards.md#filter-and-group-data) across every chart at once.
+* [Set up alerts](https://docs.braintrust.dev/observe/alerts.md) to be notified when a metric crosses a threshold.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

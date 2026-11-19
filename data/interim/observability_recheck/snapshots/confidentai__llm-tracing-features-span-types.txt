@@ -1,0 +1,332 @@
+# Configure Span Types
+
+Categorize your spans by type and set type-specific attributes
+
+> `confident-trace`'s `init()` already assigns the correct span types to calls captured by supported
+> integrations. This page is for choosing a type for spans you create yourself.
+
+## Overview
+
+Span types are *optional* but allow you to classify the most common types of components in AI apps, which includes:
+
+- **LLMs**: Track the model and provider used, token usage, and cost per token.
+- **Retrievers**: Track the retrieval context (the chunks returned from your vector store or knowledge base).
+- **Tools**: Track function calling behavior — which tool ran, with what arguments, and what it returned.
+- **Agents**: Group the orchestration around a request, agent run, or hand-off so nested LLM, retriever, and tool spans roll up underneath it.
+
+This is set via the `type` parameter when creating a span. By classifying span types you can create more tailored UIs on Confident AI, view online evals specific to each span type, and set type-specific attributes instead of using generalized [`metadata`](/docs/llm-tracing/features/metadata).
+
+| Type        | Use for                                     | Type-specific fields                                                               |
+| ----------- | ------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `agent`     | Request handlers, orchestration, agent runs | —                                                                                  |
+| `llm`       | Model calls not covered by an integration   | `model`, `provider`, `input_token_count`, `output_token_count`, `cost_per_*_token` |
+| `retriever` | Search, vector lookups, document fetches    | `retrieval_context`                                                                |
+| `tool`      | Function or API execution                   | Also sets the GenAI tool operation and name                                        |
+| `custom`    | Anything else (the default)                 | —                                                                                  |
+
+Every type accepts the shared fields `input`, `output`, `metadata`, `context`, `retrieval_context`, `expected_output`, `tools_called`, and `expected_tools`. There is one `update_span()` / `updateSpan()` for all types — you don't need a different update function for each.
+
+> Confident AI has tailored displays for different span types on the UI, such as displaying prompts for LLMs and retrieved chunks for retrievers.
+>
+> Product preview: Spans page for retriever spans, each with its embedder, top K and chunk size
+>
+> *Span Types on Confident AI*
+
+## Create Typed Spans
+
+Pass `type` when creating the span. You can either wrap a whole function (as a decorator or reusable wrapper) or trace an inline block of code — both create a nested span under whatever is currently active.
+
+#### Python
+
+```python title="main.py" {5,10}
+from confident_trace import init, span, shutdown
+
+init()
+
+@span(type="tool", name="lookup-order")
+def lookup_order(order_id: str):
+    return {"order_id": order_id, "status": "shipped"}
+
+def handle_request(order_id: str):
+    with span("support-request", type="agent"):
+        return lookup_order(order_id)
+
+try:
+    handle_request("order-42")
+finally:
+    shutdown()
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {6,11} maxLines={0}
+import { init, span, withSpan } from "confident-trace";
+
+const runtime = init();
+
+const lookupOrder = span(
+  { name: "lookup-order", type: "tool" },
+  (orderId: string) => ({ orderId, status: "shipped" }),
+);
+
+const handleRequest = async (orderId: string) =>
+  withSpan({ name: "support-request", type: "agent" }, async () => lookupOrder(orderId));
+
+try {
+  await handleRequest("order-42");
+} finally {
+  await runtime.shutdown();
+}
+```
+
+Remember to launch your entry point with the [Node preload](/docs/llm-tracing/quickstart#instrument-your-ai-app) so integrations are hooked as packages load.
+
+Decorators and wrappers capture the function's arguments as the span `input` and its return value as the span `output`; `withSpan` callbacks capture only the return value. Anything you set explicitly through `update_span()` / `updateSpan()` always wins over what was captured automatically, and you can turn automatic capture off for a single span with `capture_content=False` / `captureContent: false`.
+
+> **Call `init()` once at startup before any traced work.** On their own, `@span`, `span()`, and `withSpan()` create no spans and export nothing — without an initialized runtime the decorated function simply runs unchanged and the update helpers do nothing. If your typed spans aren't showing up, this is the first thing to check. See [initialize once](/docs/llm-tracing/quickstart#configure-init).
+
+The sections below go through each type. The examples omit `init()` / `shutdown()` for brevity — in a real app they run once at the entry point and once at exit, exactly as above.
+
+## LLM Spans
+
+An LLM span represents a call to a language model. It tracks the input, output, model, and token usage of the call, which is what powers [cost tracking](/docs/llm-tracing/features/token-usage-cost) on Confident AI.
+
+> Prefer a [provider integration](/docs/integrations) for model calls whenever one exists. It records messages, model, and usage automatically, and adding a second `llm` span around the same call would duplicate it on the UI. Use `type="llm"` yourself only for model calls no integration covers — a self-hosted model, a custom gateway, and so on.
+
+#### Python
+
+```python title="main.py" {3,6-11}
+from confident_trace import span, update_span
+
+@span(type="llm", name="custom-model", model="my-model", provider="custom")
+def call_model(prompt: str) -> str:
+    completion = my_gateway.generate(prompt)
+    update_span(
+        input=prompt, output=completion.text,
+        input_token_count=completion.usage.input_tokens,
+        output_token_count=completion.usage.output_tokens,
+        cost_per_input_token=0.000001, cost_per_output_token=0.000002,
+    )
+    return completion.text
+```
+
+There are **FIVE** optional LLM-specific fields, which you can pass either on `@span(...)` or to `update_span()`:
+
+- \[Optional] `model`: The model used, of type `str`.
+- \[Optional] `provider`: The provider of the model, of type `str`.
+- \[Optional] `input_token_count`: The number of tokens in the input, of type `int`.
+- \[Optional] `output_token_count`: The number of tokens in the generated response, of type `int`.
+- \[Optional] `cost_per_input_token` / `cost_per_output_token`: The cost per token in **USD per token** (not per million), of type `float`.
+
+#### TypeScript
+
+```typescript title="src/index.ts" {4,7-12} maxLines={0}
+import { span, updateSpan } from "confident-trace";
+
+const callModel = span(
+  { name: "custom-model", type: "llm", model: "my-model", provider: "custom" },
+  async (prompt: string) => {
+    const completion = await myGateway.generate(prompt);
+    updateSpan({
+      input: prompt, output: completion.text,
+      inputTokenCount: completion.usage.inputTokens,
+      outputTokenCount: completion.usage.outputTokens,
+      costPerInputToken: 0.000001, costPerOutputToken: 0.000002,
+    });
+    return completion.text;
+  },
+);
+```
+
+There are **FIVE** optional LLM-specific fields, which you can pass either in the `span` options or to `updateSpan()`:
+
+- \[Optional] `model`: The model used, of type `string`.
+- \[Optional] `provider`: The provider of the model, of type `string`.
+- \[Optional] `inputTokenCount`: The number of tokens in the input, of type `number`.
+- \[Optional] `outputTokenCount`: The number of tokens in the generated response, of type `number`.
+- \[Optional] `costPerInputToken` / `costPerOutputToken`: The cost per token in **USD per token** (not per million), of type `number`.
+
+If a per-token cost isn't set, providing a token count alone won't calculate the cost for that side — Confident AI will fall back to your project's [model costs](/docs/llm-tracing/features/model-costs) or automatic price lookup instead. Input and output are resolved independently.
+
+> The LLM fields only make sense on an LLM span. If you pass them to `update_span()` while a different span type is active, the general fields (`input`, `output`, `metadata`, …) are still applied but the LLM fields are skipped with a one-time warning. For more information on token cost tracking, [click here.](/docs/llm-tracing/features/token-usage-cost)
+
+## Retriever Spans
+
+A Retriever span represents a component that fetches relevant information from a vector store or knowledge base. It's a crucial part of RAG (Retrieval-Augmented Generation) pipelines, and recording what was retrieved is what lets you run metrics like contextual relevancy and faithfulness on the span later.
+
+#### Python
+
+```python title="main.py" {3,6}
+from confident_trace import span, update_span
+
+@span(type="retriever", name="search-docs")
+def search_docs(query: str) -> list[str]:
+    documents = vector_store.similarity_search(query, k=3)
+    update_span(input=query, retrieval_context=documents)
+    return documents
+```
+
+There is **ONE** optional retriever-specific field:
+
+- \[Optional] `retrieval_context`: The retrieved chunks, of type `list[str]`.
+
+#### TypeScript
+
+```typescript title="src/index.ts" {4,7} maxLines={0}
+import { span, updateSpan } from "confident-trace";
+
+const searchDocs = span(
+  { name: "search-docs", type: "retriever" },
+  async (query: string) => {
+    const documents = await vectorStore.similaritySearch(query, 3);
+    updateSpan({ input: query, retrievalContext: documents });
+    return documents;
+  },
+);
+```
+
+There is **ONE** optional retriever-specific field:
+
+- \[Optional] `retrievalContext`: The retrieved chunks, of type `string[]`.
+
+> Pass `retrieval_context` / `retrievalContext` as a plain list of strings — one entry per chunk — so Confident AI can display each chunk separately and feed them to RAG metrics as-is.
+
+## Tool Spans
+
+A Tool span represents a function that an agent can call to perform a specific task. It's commonly used for function calling in LLM applications. A tool span also sets the GenAI `execute_tool` operation and tool name from the span name, so it renders as a tool call on the UI.
+
+#### Python
+
+```python title="main.py" {3,6-7}
+from confident_trace import span, update_span, update_trace
+
+@span(type="tool", name="lookup-order")
+def lookup_order(order_id: str) -> dict:
+    result = orders_db.get(order_id)
+    update_span(input={"order_id": order_id}, output=result)
+    update_trace(tools_called=[{"name": "lookup-order", "input": {"order_id": order_id}, "output": result}])
+    return result
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {4,7-8} maxLines={0}
+import { span, updateSpan, updateTrace } from "confident-trace";
+
+const lookupOrder = span(
+  { name: "lookup-order", type: "tool" },
+  async (orderId: string) => {
+    const result = await ordersDb.get(orderId);
+    updateSpan({ input: { orderId }, output: result });
+    updateTrace({ toolsCalled: [{ name: "lookup-order", input: { orderId }, output: result }] });
+    return result;
+  },
+);
+```
+
+There is **ONE** mandatory and **ONE** optional parameter for the tool span type:
+
+- `type`: The type of span. Must be `"tool"` for tool spans.
+- \[Optional] `name`: A string specifying the display name on Confident AI (and the GenAI tool name). Defaulted to the name of the wrapped function.
+
+Set `input` and `output` to the tool's arguments and result. If you also want to record which tools an agent invoked at the **trace** level — which is what tool-correctness metrics read — pass `tools_called` / `toolsCalled` to `update_trace()` / `updateTrace()` as plain JSON objects, as shown above.
+
+## Agent Spans
+
+An Agent span represents an autonomous entity that can make decisions and interact with other components. It's particularly useful for implementing thinking agents or multi-agent systems, and it's the natural type for the outermost span of a request so that every LLM, retriever, and tool span nests underneath it.
+
+#### Python
+
+```python title="main.py" {3,5,8}
+from confident_trace import span, update_span
+
+@span(type="agent", name="support-agent")
+def support_agent(query: str) -> str:
+    update_span(input=query, metadata={"channel": "web"})
+    context = search_docs(query)
+    answer = generate(query, context)
+    update_span(output=answer)
+    return answer
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {4,6,9} maxLines={0}
+import { span, updateSpan } from "confident-trace";
+
+const supportAgent = span(
+  { name: "support-agent", type: "agent" },
+  async (query: string) => {
+    updateSpan({ input: query, metadata: { channel: "web" } });
+    const context = await searchDocs(query);
+    const answer = await generate(query, context);
+    updateSpan({ output: answer });
+    return answer;
+  },
+);
+```
+
+There is **ONE** mandatory and **ONE** optional parameter for the agent span type:
+
+- `type`: The type of span. Must be `"agent"` for agent spans.
+- \[Optional] `name`: A string specifying the display name on Confident AI. Defaulted to the name of the wrapped function.
+
+Agents can be nested within other agents, which is useful for implementing hierarchical agent architectures. For instance, a "supervisor" agent might coordinate communication between specialized agents — each one its own `agent` span, nested under the supervisor.
+
+## Custom Spans
+
+The most flexible `type` out of all (and the default type if `type` is not provided), custom spans are essential for creating hierarchical structures or grouping related spans together. They provide flexibility in organizing your tracing data and accept the shared fields only.
+
+#### Python
+
+```python title="main.py" {3}
+from confident_trace import span, update_span
+
+@span(name="postprocess")
+def postprocess(answer: str) -> str:
+    cleaned = strip_citations(answer)
+    update_span(output=cleaned, metadata={"step": "postprocess"})
+    return cleaned
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {3} maxLines={0}
+import { span, updateSpan } from "confident-trace";
+
+const postprocess = span({ name: "postprocess" }, (answer: string) => {
+  const cleaned = stripCitations(answer);
+  updateSpan({ output: cleaned, metadata: { step: "postprocess" } });
+  return cleaned;
+});
+```
+
+There is **ONE** optional parameter for the custom span type:
+
+- \[Optional] `name`: A string specifying how this custom span is displayed on Confident AI. Defaulted to the name of the wrapped function.
+
+The `input` and `output` of a custom span default to the function's input arguments and return value, but you can also [set them dynamically.](/docs/llm-tracing/features/input-output#set-span-io)
+
+## Update the Active Span
+
+`update_span()` / `updateSpan()` writes to whichever span is currently active, so call it from inside the span's body. You can call it as many times as you like — omitted fields stay unchanged, with one exception: a supplied `metadata` object replaces the previous one rather than merging into it.
+
+> Both update helpers need an active span to write to — outside of any `span` (or after the span has ended) they silently do nothing, so if your fields aren't showing up, check that the call is inside the span body. If you have no span to call `update_trace` from, open a `trace_context` / `traceContext` around the call instead; see [set trace attributes without a span](/docs/llm-tracing/features/trace-context#update-trace-properties).
+
+### Trace-Level Fields
+
+`update_span()` never writes trace fields. Use `update_trace()` / `updateTrace()` for `name`, [`tags`](/docs/llm-tracing/features/tags), [`user_id` or `user`](/docs/llm-tracing/features/users), [`customer_id` or `customer`](/docs/llm-tracing/features/customers), [`thread_id` and `turn_id`](/docs/llm-tracing/features/threads), [`environment`](/docs/llm-tracing/features/environment), and trace-level `input` / `output` and evaluation fields. It targets the entry span of the current trace, so you can call it from any nested span. See [input and output](/docs/llm-tracing/features/input-output) for more details.
+
+## Next Steps
+
+Now that your spans are typed, enrich them further with prompt tracking and custom I/O.
+
+#### [Log Prompts](/docs/llm-tracing/features/log-prompts)
+
+Log versioned prompts to LLM spans so you can track which prompt was used
+for each call in production.
+
+#### [Set Input/Output](/docs/llm-tracing/features/input-output)
+
+Override the default input and output on traces and spans for better
+visualization and evaluation.

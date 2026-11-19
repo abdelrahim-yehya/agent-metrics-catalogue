@@ -1,0 +1,71 @@
+# Observability Workflows
+
+Run tasks on your traces, spans, and threads automatically after they hit the platform.
+
+## Overview
+
+Observability workflows decide what happens to your traces, spans, and threads after they reach Confident AI: which become dataset goldens, which go to human reviewers, which get evaluated, and how they're labeled. Each workflow runs a set of tasks whenever its trigger fires, with no code changes.
+
+Product preview: Workflows page on Traces: the Production traces workflow's graph branching into dataset ingestion, queue ingestion, evaluation rules and classifiers, with the actions panel beside it
+
+*A workflow's trigger and tasks, drawn as a graph*
+
+## How It Works
+
+1. A **trigger** fires: a trace, span, or thread is ingested, or an end user annotates one.
+2. Every enabled workflow for that trigger checks the item against its **trigger filters** (leave them empty to match everything).
+3. The workflow runs its **tasks** on the items that match: ingesting them into a dataset or an annotation queue, evaluating them, or classifying them.
+4. A task can be **chained** after a classifier, so it only runs on traces that got particular labels.
+
+Open **Workflows** under **Configure** in the Observatory's side navigation. Pick **Traces**, **Spans**, or **Threads** at the top, then a trigger tab. Each workflow is drawn as a graph, from its trigger to its tasks, with every task listed in the panel below it.
+
+## Available Tasks
+
+A workflow can run four kinds of task:
+
+| Task                                                                    | What it does                                                                                                      | Available for          |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| [Dataset Ingestion Task](/docs/llm-tracing/workflows/dataset-ingestion) | Adds matching items to a dataset as goldens                                                                       | Traces, Spans, Threads |
+| [Queue Ingestion Task](/docs/llm-tracing/workflows/queue-ingestion)     | Routes matching items into an annotation queue for review                                                         | Traces, Spans, Threads |
+| [Evaluation Task](/docs/llm-tracing/workflows/evaluation)               | Runs a metric collection on matching items                                                                        | Traces, Spans, Threads |
+| [Classifier Task](/docs/llm-tracing/workflows/classifier)               | Labels matching items with an LLM classifier; the labels surface as [Signals](/docs/llm-tracing/features/signals) | Traces, Threads        |
+
+Add a task to a workflow from the graph's **Add action** node (pick an existing one or **Create new**), or from a task's **…** menu → **Manage workflows**. One task can belong to several workflows, and an item that matches more than one of them is still only ingested once. A task only runs while it belongs to a workflow: tasks in none are listed under **Not in any workflow** and do nothing until you attach them.
+
+## Chaining Tasks
+
+On **Traces**, a dataset or queue ingestion task can run after a classifier task. The ingestion task then only picks up traces the classifier gives one of the labels you choose, so you can, for example, send every trace labeled *Escalation to Human* straight to a review queue.
+
+To chain a task, click **Add action** under a classifier in the graph and pick **Queue Ingestion** or **Dataset Ingestion**, or set **Runs after** (a classifier and its labels) when you create the task. For an existing task, open **Manage workflows** from its **…** menu and use **Add parent**. A chained task shows up under its classifier in the graph, marked with a `When <classifier> = <labels>` pill.
+
+A chained task waits for the classification: it runs as soon as the classifier's results are written, instead of on its usual five-minute sweep. A task can run after several classifiers, and removing a classifier from a workflow also removes the tasks chained only to it.
+
+> Chaining is available for continuous tasks on traces. Evaluation tasks can't
+> be chained, and recurring queue ingestion tasks can't run after a classifier.
+
+## Workflow Triggers
+
+| Trigger                 | Runs when                                                                                           | Available for          |
+| ----------------------- | --------------------------------------------------------------------------------------------------- | ---------------------- |
+| **Ingested**            | A trace, span, or thread arrives on the platform, before anything else has looked at it             | Traces, Spans, Threads |
+| **End-user annotation** | An end user leaves feedback through the [annotations API](/docs/human-in-the-loop/collect-feedback) | Traces, Spans, Threads |
+
+Each trigger has a default workflow per data type (**Ingest** and **End-user annotation**). Tasks created without picking a workflow, such as from the API or from a dataset or annotation queue page, land in the default **Ingest** workflow. Create more with **New workflow** (up to 20 per data type and trigger), and give each its own **Trigger filters**. An End-user annotation workflow can filter on the annotation itself: thumbs or star rating, annotation name, and end user.
+
+## Next Steps
+
+#### [Dataset Ingestion Task](/docs/llm-tracing/workflows/dataset-ingestion)
+
+Turn production traces into goldens automatically.
+
+#### [Queue Ingestion Task](/docs/llm-tracing/workflows/queue-ingestion)
+
+Route traces, spans, and threads to reviewers.
+
+#### [Evaluation Task](/docs/llm-tracing/workflows/evaluation)
+
+Run metrics on incoming data without code changes.
+
+#### [Classifier Task](/docs/llm-tracing/workflows/classifier)
+
+Label traces and threads as they arrive.

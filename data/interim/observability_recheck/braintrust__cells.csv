@@ -1,0 +1,5 @@
+tool,metric,verdict,tool_specific_name,doc_url,snapshot_file,quote,note,confidence
+Braintrust,Tool execution latency,not found,,,,,"Searched braintrust__observe-*, instrument-*, deploy-monitor, doc_snapshots build_charts/trace_llm_calls for tool latency/duration. deploy-monitor lists Tools: tool call frequency and success rates only; span rows show duration for any span.",high
+Braintrust,Step count,not found,,,,,"Searched same files for step, steps, count. Only span-type and grouping descriptions.",high
+Braintrust,Reasoning tokens,not found,,,,,Searched all braintrust snapshots (both folders) for reasoning; no token field. Changelog gemini reasoning line was reviewed and not added.,high
+Braintrust,Trace / span count,built-in,Spans (preset chart); Request count,https://docs.braintrust.dev/observe/dashboards/build-charts,braintrust__observe-dashboards-build-charts.txt,"Some preset charts (Spans, Latency, Total LLM cost, Token count, and Time to first token) automatically exclude internal scorer spans",Preset chart named Spans; deploy-monitor also lists Request count.,low

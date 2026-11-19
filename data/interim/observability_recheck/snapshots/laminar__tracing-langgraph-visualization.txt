@@ -1,0 +1,63 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://laminar.sh/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# LangGraph Visualization
+
+When Laminar traces a [LangGraph](https://www.langchain.com/langgraph) run, it records the graph's structure along with the run: every node and every edge, with conditional edges marked. Open the trace and click **Show LangGraph** in the trace view to see the graph next to the spans of the run.
+
+![Example trace with LangGraph visualization and arrow indicating the location of the button to enable trace visualization](https://mintcdn.com/laminarai/RPYdoMdfsv6y-QUL/images/traces/langgraph-visualization.png?fit=max\&auto=format\&n=RPYdoMdfsv6y-QUL\&q=85\&s=6e8ee29491f7ff8d340a69af9d37dd97)
+
+## Set up
+
+Graph visualization comes with the [LangChain and LangGraph integration](https://laminar.sh/docs/integrations/langchain.md). There's nothing to add to your graph code.
+
+> [tab] TypeScript
+>
+> Pass the `@langchain/langgraph` module as `langgraphModule`, next to the other LangChain modules in `instrumentModules`:
+>
+> ```typescript instrumentation.ts {6,17} theme={null}
+> import { Laminar } from '@lmnr-ai/lmnr';
+> import * as callbackManagerModule from '@langchain/core/callbacks/manager';
+> import * as chatModelsModule from '@langchain/core/language_models/chat_models';
+> import * as llmsModule from '@langchain/core/language_models/llms';
+> import * as singletonsModule from '@langchain/core/singletons';
+> import * as langgraphModule from '@langchain/langgraph';
+> import OpenAI from 'openai';
+>
+> Laminar.initialize({
+>   instrumentModules: {
+>     OpenAI,
+>     langchain: {
+>       callbackManagerModule,
+>       chatModelsModule,
+>       llmsModule,
+>       singletonsModule,
+>       langgraphModule,
+>     },
+>   },
+> });
+> ```
+>
+> Without `langgraphModule`, the graph's runs are still traced, but the trace has no graph to show.
+
+> [tab] Python
+>
+> Call `Laminar.initialize()` before your graph runs. LangGraph is instrumented automatically.
+>
+> ```python theme={null}
+> from lmnr import Laminar
+>
+> Laminar.initialize()
+> ```
+
+Then invoke or stream any compiled graph as usual. For a complete agent with a tool node, see the [LangChain and LangGraph getting started](https://laminar.sh/docs/integrations/langchain.md#getting-started).
+
+## What the trace contains
+
+* The graph is recorded on the run's root span, so a trace has one graph view. A subgraph run inside a node doesn't replace the outer graph.
+* Every node that runs is an `execute_task <node>` span under the graph's root, with its input and output state, so the graph view and the span list describe the same run.
+* Tool calls and LLM calls made inside a node nest under that node's span. See [What Laminar records](https://laminar.sh/docs/integrations/langchain.md#what-laminar-records) for the full span list.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

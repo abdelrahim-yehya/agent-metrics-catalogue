@@ -1,0 +1,91 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.braintrust.dev/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Dashboards
+
+> Browse the dashboards in your project, then filter, group, and drill into aggregated metrics across your logs and experiments over time.
+
+A dashboard aggregates metrics across the logs and experiments in a project. Use dashboards to track request counts, latency, token usage, costs, scores, topics, and custom metrics over time.
+
+Dashboards are scoped to a project. Every project starts with a built-in dashboard called **Cost and quality**, so you can explore your data before building anything of your own. The built-in dashboard at ** Dashboards** > [**Coding agent insights**](https://www.braintrust.dev/app/~/agent-insights) shows coding-agent usage and cost. It's in [public preview](https://docs.braintrust.dev/feature-lifecycle.md). Read [Coding agent insights dashboard](https://docs.braintrust.dev/observe/dashboards/coding-agent-insights.md).
+
+![Dashboards page](https://mintcdn.com/braintrust/SX2mi9f0YsPt6ry_/images/observe/cost-quality-dashboard.png?fit=max\&auto=format\&n=SX2mi9f0YsPt6ry_\&q=85\&s=a2e3e7e2f78c8b7cda834b732881f58f)
+
+## Browse dashboards
+
+The [** Dashboards**](https://www.braintrust.dev/app/~/dashboards) page lists every dashboard in the project. Select a row to open that dashboard on its own page.
+
+Each row shows:
+
+* **Name**: The dashboard's name. Rows you cannot edit, such as the built-in dashboards, are not selectable.
+* **Type**: Whether the dashboard aggregates **Logs** or **Experiments**.
+* **Created by** and **Created**: Who added the dashboard, and when.
+* **Last updated at**: When the dashboard's charts or settings last changed.
+* **Charts**: How many charts the dashboard holds.
+
+Search the list by name, or narrow it with the time range filter to find dashboards created in a given period.
+
+To keep a dashboard close at hand, click  **Dashboard actions** > **Star dashboard**. Starred dashboards are marked in the star column. Without edit access, you can see which dashboards are starred but cannot change them. Built-in dashboards, such as **Cost and quality** and **Coding agent insights**, are the exception: anyone can star or unstar them from the star column or the **Dashboards** breadcrumb menu. These stars are personal to you and saved in your browser, so other project members don't see them.
+
+To switch dashboards from an open dashboard, select **Dashboards** in the breadcrumbs at the top of the page. The menu lists starred dashboards first, then the rest of the project's dashboards. Use the **Find dashboard** search box to filter by name, or select  **View all dashboards** to return to the full list. With edit access, you can also star or unstar dashboards from this menu, except dashboards created before dashboards became project-scoped.
+
+## Filter and group data
+
+Apply filters and groupings at the top of a dashboard to affect all of its charts at once. This lets you focus on a subset of your data or compare segments side by side.
+
+When a dashboard has filters or a text search, a **Span** or **Trace** dropdown appears in the filter bar after the time range. Click it to choose how all of the dashboard's filters and searches apply to its charts. Each option shows how many spans it includes. For cross-trace filtering, that count covers every span in the matching traces, along with how many traces match.
+
+* **Span filtering**: Only spans that match the filters contribute to each chart. Span filtering is the default and is faster than cross-trace filtering.
+* **Cross-trace filtering**: Charts include spans from any trace where at least one span matches, even if the chart measures other spans. Use this when the filtered field is on a different span than the one the chart measures, such as filtering by root span metadata while charting LLM spans.
+
+Dashboards whose filters were saved without a scope use cross-trace filtering, so their charts don't change. They switch to span filtering when you select it or remove every filter. Groups always apply per span.
+
+![Filter and group dashboard data](https://mintcdn.com/braintrust/SX2mi9f0YsPt6ry_/images/observe/filter-group-dashboard.png?fit=max\&auto=format\&n=SX2mi9f0YsPt6ry_\&q=85\&s=5e2144159dd7455a72d669ecafd07b0f)
+
+On a dashboard you can edit, changes to filters, filter scope, grouping, time range, and timezone stay unsaved until you save them, so you can explore without changing the dashboard for other viewers. While you have unsaved changes, **Reset** and **Save** buttons appear. Hover over either button to see which settings changed. Click **Reset** to return to the saved values, or **Save** to save your changes to the dashboard. Adding, editing, or removing a chart saves the chart but leaves these changes unsaved.
+
+The built-in **Cost and quality** dashboard is read-only, so changes there last only for your current session.
+
+## Select timeframes
+
+Choose from preset timeframes, or click and drag horizontally on a time series chart to zoom into a specific period. Double-click to zoom out.
+
+> [!TIP]
+>
+> To refresh charts automatically as new data arrives, toggle **LIVE updates** on in the time range selector dropdown. When live mode is off, click the  refresh button next to the time range selector to reload all charts.
+
+![Dashboard timeframe selector](https://mintcdn.com/braintrust/SX2mi9f0YsPt6ry_/images/observe/timeframes-dashboard.png?fit=max\&auto=format\&n=SX2mi9f0YsPt6ry_\&q=85\&s=a8d0f7aca23c9bd74866a0373eb7ef72)
+
+## Interact with chart data
+
+Click a data point on a chart to open a menu of actions for that point. Use the menu to move from an aggregate trend to the traces behind it, or to narrow the dashboard to one series. Charts that open the menu show **Click for actions** in their tooltip.
+
+A point's time range is the time bucket you clicked on a time series chart, or the chart's whole timeframe on top list and big number charts. If the chart is grouped, the point also belongs to one series, such as a single model. The menu lists only the actions that apply to the chart and the point you clicked:
+
+* **See traces in logs page**: Opens [** Logs**](https://www.braintrust.dev/app/~/logs) in a new tab, filtered to the point's time range, the chart and dashboard filters, and the clicked series. Available on charts that aggregate logs.
+* **See experiments at this time**: Opens [** Experiments**](https://www.braintrust.dev/app/~/experiments) in a new tab, filtered to experiments that were active during the point's time range: created before it ends and last updated after it starts. It doesn't apply chart filters, dashboard filters, or the clicked series. Available on charts that aggregate experiments.
+* **Run in query page**: Opens the [** Query**](https://www.braintrust.dev/app/~/sql) page in a new tab, with a query that returns up to 100 of the rows behind the point. Not available on [preset charts](https://docs.braintrust.dev/observe/dashboards/build-charts.md#chart-editor-options), such as the charts on the built-in **Cost and quality** dashboard.
+* **Open sample traces**: Opens matching traces in a side panel without leaving the page. The panel header shows how many spans and traces match, and the  and  buttons step through the traces. Available on charts that aggregate logs. On [table charts](https://docs.braintrust.dev/observe/dashboards/sql-charts.md#read-a-table) that return raw rows of spans, this action appears as **Open trace** and opens the clicked row's trace at that span.
+* **Copy "\[label]" to clipboard**: Copies the label of the clicked series, including any text cut off on screen.
+* **Filter to \[value]**: Filters to the values that define the clicked series, such as its model. Appears on dashboards, where it adds [dashboard filters](#filter-and-group-data), and on pages whose charts can filter the page, such as **Logs**.
+* **Group by \[field]**: Groups the whole dashboard by a field that splits the chart into series, such as `metadata.model`. Appears only on dashboards, and only for fields under `metadata`.
+* **Export data**: Downloads the chart's data as a JSON or CSV file. Available on charts with data, including SQL charts and table charts. See [Export chart data](https://docs.braintrust.dev/observe/dashboards/build-charts.md#export-chart-data).
+* **Export to dashboard**: Copies the chart to another dashboard. See [Move and copy charts](https://docs.braintrust.dev/observe/dashboards/build-charts.md#move-and-copy-charts).
+
+When a chart is open in fullscreen or in the chart editor's preview, the menu leaves out actions that open a side panel or change the page's filters or grouping: **Open sample traces**, **Open trace**, **Filter to \[value]**, and **Group by \[field]**. To use them, close fullscreen or the editor and click the point on the dashboard.
+
+Charts elsewhere in Braintrust, such as the charts Loop shows in a thread and the [logs chart](https://docs.braintrust.dev/observe/view-logs.md#explore-the-logs-chart), open the same menu with the actions that apply to that page.
+
+The built-in **Topics** chart doesn't open the menu. Clicking one of its data points opens [** Logs**](https://www.braintrust.dev/app/~/logs) in a new tab, filtered to the point's time range and to every trace classified under the clicked topic's [facet](https://docs.braintrust.dev/observe/topics.md#built-in-facets), not only the topic you clicked.
+
+## Next steps
+
+* [Create dashboards](https://docs.braintrust.dev/observe/dashboards/create.md) of your own, or copy one between projects.
+* [Build charts](https://docs.braintrust.dev/observe/dashboards/build-charts.md) to plot the metrics you care about.
+* [Organize charts into sections](https://docs.braintrust.dev/observe/dashboards/build-charts.md#organize-charts-into-sections) to group, collapse, and reorder related charts.
+* [Set up alerts](https://docs.braintrust.dev/observe/alerts.md) to be notified when a metric crosses a threshold.
+* [Use Loop](https://docs.braintrust.dev/loop.md) to ask questions about your data in natural language.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

@@ -1,0 +1,25 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://arizeai-433a7140.mintlify.site/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Advanced
+
+> [card] [Mask Span Attributes](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/masking-span-attributes.md)
+>
+> Learn how to block PII from logging to Phoenix
+
+> [card] [Suppress Tracing](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/suppress-tracing.md)
+>
+> Learn how to selectively block or turn off tracing
+
+> [card] [Filter Spans to Export](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/modifying-spans.md)
+>
+> Learn how to send only certain spans to Phoenix
+
+> [card] [Capture Multimodal Traces](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/multimodal-tracing.md)
+>
+> Learn how to trace images
+
+> [card] [Construct Shareable URLs](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/constructing-urls)
+>
+> Link to projects, traces, spans, and sessions by name or ID

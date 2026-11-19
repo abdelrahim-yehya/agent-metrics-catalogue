@@ -1,0 +1,3 @@
+Spot-check of 14 built-in observability rows (Arize Phoenix): all quotes support their mapped metric. Minor:
+- Top models by tokens -> Total tokens: ranking chart, only weakly a total-token metric (llm.token_count.total row supports it independently).
+- Top models by cost -> Estimated cost: same, ranking view; Cost row supports it.

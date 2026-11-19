@@ -1,0 +1,68 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.coreweave.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Get a handle to the Call object during execution
+
+> Access the Weave `Call` object at runtime for feedback, display names, and other metadata
+
+This guide shows how to get a handle to the Weave `Call` object while your code runs, so you can inspect inputs and outputs, update metadata, or attach feedback at runtime. It's intended for developers who already use Weave Ops and want to interact with the underlying `Call` object programmatically.
+
+When you use an Op in Weave, you can call it directly as you would any function:
+
+```python Python lines theme={"system"}
+@weave.op
+def my_op():
+    ...
+
+my_op()
+```
+
+```typescript twoslash TypeScript lines theme={"system"}
+// @noErrors
+function myFunction() {
+    ...
+}
+
+const myFunctionOp = weave.op(myFunction)
+```
+
+To access the `Call` object directly, invoke the `op.call` method, which returns both the result and the `Call` object:
+
+> [tab] Python
+>
+> ```python lines theme={"system"}
+> @weave.op
+> def my_op():
+>     ...
+>
+> output, call = my_op.call()
+> ```
+>
+> The `call` object contains all the information about the `Call`, including the inputs, outputs, and other metadata. Use `call` to set, update, fetch additional properties, or add feedback.
+>
+> If your Op is a method on a class, pass the class instance as the first argument to `call`:
+>
+> ```python lines theme={"system"}
+> import weave
+>
+> # Initialize Weave Tracing
+> weave.init("intro-example")
+>
+> class MyClass:
+>     # Decorate your method
+>     @weave.op
+>     def my_method(self, name: str):
+>         return f"Hello, {name}!"
+>
+> instance = MyClass()
+>
+> # Pass `instance` as the first argument to `call`.
+> result, call = instance.my_method.call(instance, "World")
+> ```
+
+> [tab] TypeScript
+>
+> ```text theme={"system"}
+> This feature is not available in the TypeScript SDK yet.
+> ```

@@ -1,0 +1,12 @@
+tool,metric,verdict,tool_specific_name,doc_url,snapshot_file,quote,note,confidence
+OpenLLMetry,Tool execution errors,built-in,error.type on MCP tool errors (changelog),https://github.com/traceloop/openllmetry/blob/main/CHANGELOG.md,../../raw/doc_snapshots/openllmetry__changelog.txt,**mcp**: set error.type attribute on protocol-level tool errors (#4103),"Changelog entry, not in the semconv_ai constants; only MCP instrumentation, protocol-level errors. Doubtful fit; candidate for review_decisions.",low
+OpenLLMetry,Tool call count,not found,,,,,"Searched openllmetry__semconv_ai.txt and openllmetry__changelog.txt for tool, count, step, cost, error, duration; no matching constant or meter.",high
+OpenLLMetry,Tool execution latency,not found,,,,,"Searched semconv_ai and changelog for tool and duration; only the TOOL span kind value, no duration instrument.",high
+OpenLLMetry,Step count,not found,,,,,"Searched openllmetry__semconv_ai.txt and openllmetry__changelog.txt for tool, count, step, cost, error, duration; no matching constant or meter.",high
+OpenLLMetry,Estimated cost,not found,,,,,"Searched openllmetry__semconv_ai.txt and openllmetry__changelog.txt for tool, count, step, cost, error, duration; no matching constant or meter.",high
+OpenLLMetry,Cost breakdown by token type,not found,,,,,No cost constants; GEN_AI_USAGE_TOKEN_TYPE splits token counts only.,high
+OpenLLMetry,Trace / run latency,not found,,,,,"Only LLM_OPERATION_DURATION (single model call, gen_ai.client.operation.duration) defined.",high
+OpenLLMetry,Span duration,not found,,,,,"Searched openllmetry__semconv_ai.txt and openllmetry__changelog.txt for tool, count, step, cost, error, duration; no matching constant or meter.",high
+OpenLLMetry,Time to first token,not found,,,,,"Only LLM_STREAMING_TIME_TO_GENERATE (already mapped to generation time); searched first token, ttft, time_to_first.",high
+OpenLLMetry,Trace / span count,not found,,,,,"Searched openllmetry__semconv_ai.txt and openllmetry__changelog.txt for tool, count, step, cost, error, duration; no matching constant or meter.",high
+OpenLLMetry,LLM call count,not found,,,,,"Meters LLM_GENERATION_CHOICES counts choices, not calls; no call count instrument.",high

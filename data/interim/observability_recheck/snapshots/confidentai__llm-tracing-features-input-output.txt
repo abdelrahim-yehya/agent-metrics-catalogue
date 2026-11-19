@@ -1,0 +1,175 @@
+# Set Input/Output
+
+Learn how to supply input and output of your LLM application in a trace
+
+## Overview
+
+Both traces and spans have inputs and outputs. In most apps, `init()` captures
+them automatically from supported provider and framework integrations.
+
+Use a [trace context](/docs/llm-tracing/features/trace-context) when you want to
+override trace I/O without creating another span. For spans you create yourself,
+use the span update helper to override the values captured from the function's
+arguments and return value.
+
+> Setting the I/O on traces is also important for the threads view on Confident AI, and it's what [online evaluations](/docs/llm-tracing/online-evals) read as the test case's `input` and `actual_output`.
+
+## Set Trace I/O
+
+By default, a trace inherits the input and output captured on its root span. To
+set trace properties without introducing a wrapper span, open a trace context
+around the instrumented call:
+
+#### Python
+
+```python title="main.py" {2,4,8}
+from langchain_openai import ChatOpenAI
+from confident_trace import init, trace_context
+
+init()
+model = ChatOpenAI(model="gpt-4o")
+
+def llm_app(query: str):
+    with trace_context(input=query):
+        return model.invoke(query)
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {2,4,8} maxLines={0}
+import { ChatOpenAI } from "@langchain/openai";
+import { init, traceContext } from "confident-trace";
+
+init();
+const model = new ChatOpenAI({ model: "gpt-4o" });
+
+const llmApp = (query: string) =>
+  traceContext({ input: query }, () => model.invoke(query));
+```
+
+Remember to launch your entry point with the [Node
+preload](/docs/llm-tracing/quickstart#instrument-your-ai-app) so the LangChain
+call is instrumented.
+
+Here, the trace context sets the raw user text as the trace input while `init()`
+captures the LangChain call and its output automatically. The context creates
+neither a trace nor a span; the instrumented call starts the trace.
+
+The `input` and `output` can be **any JSON-serializable type**, though strings
+usually produce the clearest display for [conversation
+threads](/docs/llm-tracing/features/threads).
+
+> A trace context can only supply values you know before the trace starts. If
+> you intentionally created an outer span and need to set a value afterwards,
+> update the active trace from inside that span. Don't add a wrapper span solely
+> to set I/O. See [Update Trace
+> Properties](/docs/llm-tracing/features/trace-context#update-trace-properties)
+> for both patterns.
+
+## Set Span I/O
+
+By default, a wrapped function's arguments become the span input and its return
+value becomes the output (`withSpan` callbacks capture only the return value).
+You can override either value while the span is active.
+
+> Each [span type](/docs/llm-tracing/features/span-types) has expectations about its I/O. For example, the `"retriever"` span `type` expects a string as the `input` and a list of strings as the `retrieval_context`, which you might violate if setting I/O yourself. Sticking to these shapes will decrease the chances that you run into an error when running metrics on the span.
+
+#### Python
+
+```python title="main.py" {1,3,8}
+from confident_trace import init, span, update_span
+
+init()
+
+@span(type="retriever", name="retrieve")
+def retrieve(query: str) -> list[str]:
+    documents = vector_store.similarity_search(query, k=3)
+    update_span(input=query, output=documents, retrieval_context=documents)
+    return documents
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {1,3,10} maxLines={0}
+import { init, span, updateSpan } from "confident-trace";
+
+init();
+
+const retrieve = span(
+  { name: "retrieve", type: "retriever" },
+  async (query: string) => {
+    const documents = await vectorStore.similaritySearch(query, 3);
+    updateSpan({ input: query, output: documents, retrievalContext: documents });
+    return documents;
+  },
+);
+```
+
+The span update helper writes to the **current** span. In this example, it
+replaces the retriever function's default I/O and also records the returned
+documents as retrieval context.
+
+Beyond `input` and `output`, both helpers accept the evaluation fields you'd normally put on a test case — `metadata`, `context`, `retrieval_context`, `expected_output`, `tools_called`, and `expected_tools` — as JSON-compatible data. Setting them doesn't run any metrics by itself; it makes the values available so your [online evals](/docs/llm-tracing/online-evals) have what they need.
+
+> Explicit values always override automatic capture. Omitted fields stay unchanged between calls, except `metadata`, where a supplied object replaces the previous one. Everything you set here passes through your [content controls](/docs/llm-tracing/features/masking) — redaction and size limits apply to explicit I/O too.
+
+## I/O for Streamed Responses
+
+If your function streams its response, the trace output won't be captured automatically — what your function returns is a generator, not the final text. Collect the streamed chunks and set the output explicitly once the stream is done:
+
+#### Python
+
+```python title="main.py" {1,3,12}
+from confident_trace import init, span, update_trace
+
+init()
+
+def stream_response(query: str):
+    with span("stream_response", type="agent"):
+        chunks = []
+        for chunk in llm.stream(query):
+            chunks.append(chunk)
+            yield chunk
+
+        update_trace(input=query, output="".join(chunks))
+```
+
+#### TypeScript
+
+```typescript title="src/index.ts" {1,3,12} maxLines={0}
+import { init, span, updateTrace } from "confident-trace";
+
+init();
+
+const streamResponse = span({ name: "stream_response", type: "agent" }, async function* (query: string) {
+  const chunks: string[] = [];
+  for await (const chunk of llm.stream(query)) {
+    chunks.push(chunk);
+    yield chunk;
+  }
+
+  updateTrace({ input: query, output: chunks.join("") });
+});
+```
+
+Without this, the trace will appear on Confident AI with no output. If you're running in a serverless environment, also make sure the stream has finished before you call `flush()` — see [flush and shutdown](/docs/llm-tracing/quickstart#flush-and-shutdown).
+
+## I/O for Threads
+
+For multi-turn AI apps that [create a thread](/docs/llm-tracing/features/threads) from the traces, it is highly recommended that you provide **strings** instead, where the `input` will represent the user input, and `output` representing the AI generated output. You can also leave out any `input` or `output` for consecutive user/LLM behaviors.
+
+You will also need the `input` and `output` to run [online evaluations on a thread](/docs/llm-tracing/evaluate-threads), as these will be used as the turns for a conversational test case.
+
+## Next Steps
+
+With your trace and span I/O configured, connect traces into conversations or start evaluating them.
+
+#### [Thread Traces](/docs/llm-tracing/features/threads)
+
+Group traces into threads to track multi-turn conversations and evaluate
+entire workflows.
+
+#### [Online Evaluations](/docs/llm-tracing/online-evals)
+
+Run evaluations on traces, spans, and threads in real-time as they're
+ingested into Confident AI.

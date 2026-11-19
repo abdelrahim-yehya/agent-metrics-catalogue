@@ -1,0 +1,177 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://arizeai-433a7140.mintlify.site/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# How to: Tracing
+
+> Guides on how to use traces
+
+## Setup Tracing
+
+Get started sending traces to Phoenix from your application.
+
+> [card] [Setup Tracing](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/setup-tracing/setup-using-phoenix-otel.md)
+>
+> Configure tracing for Python and TypeScript applications
+
+> [card] [Auto Instrumentation](https://arizeai-433a7140.mintlify.site/docs/phoenix/integrations.md)
+>
+> Automatically capture traces from popular frameworks and LLM providers
+
+> [card] [Setup Projects](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/setup-tracing/setup-projects.md)
+>
+> Organize traces into projects for different applications
+
+> [card] [Setup Sessions](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/setup-tracing/setup-sessions.md)
+>
+> Group related traces into sessions for conversation tracking
+
+***
+
+## Customize Traces & Spans
+
+Add metadata, tags, and custom attributes to your traces for better organization and filtering.
+
+> [card] [Add Metadata, Tags & Users](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/add-metadata/customize-spans.md)
+>
+> Set custom attributes on spans created by auto-instrumentors
+
+> [card] [Prompt Templates](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/add-metadata/instrumenting-prompt-templates-and-prompt-variables.md)
+>
+> Track prompt templates and variables in your traces
+
+***
+
+## Manual Instrumentation
+
+Create and customize spans for full control over your tracing.
+
+> [card] [Using Tracing Helpers](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/setup-tracing/instrument.md)
+>
+> Use decorators and helpers to easily instrument specific methods in Python
+
+***
+
+## Querying Spans
+
+Extract span data for analysis, evaluation, or export.
+
+> [card] [Extract Data from Spans](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/extract-data-from-spans.md)
+>
+> Query spans to construct DataFrames for evaluation and analysis
+
+> [card] [Run a Query](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/extract-data-from-spans.md#running-span-queries)
+>
+> Span query examples
+
+> [card] [Specify a Project](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/extract-data-from-spans.md#how-to-specify-a-project)
+>
+> Project-scoped queries
+
+> [card] [Query for Documents](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/extract-data-from-spans.md#querying-for-retrieved-documents)
+>
+> Document retrieval queries
+
+> [card] [Filter Expressions](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/filter-expressions.md)
+>
+> Filter spans and sessions with expressions
+
+> [card] [Extract Attributes](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/extract-data-from-spans.md#how-to-extract-attributes)
+>
+> Attribute extraction tips
+
+> [card] [Use Pre-defined Queries](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/extract-data-from-spans.md#pre-defined-queries)
+>
+> Prebuilt query patterns
+
+***
+
+## Annotate Traces
+
+Add feedback, labels, and evaluation results to your traces.
+
+> [card] [Annotating in the UI](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/feedback-and-annotations/annotating-in-the-ui.md)
+>
+> Manually annotate traces through the Phoenix interface
+
+> [card] [Annotating via Code](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/feedback-and-annotations/capture-feedback.md)
+>
+> Programmatically log annotations using the Phoenix client
+
+> [card] [Log Evaluation Results](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/feedback-and-annotations/llm-evaluations.md)
+>
+> Attach LLM evaluation scores to spans and documents
+
+> [card] [Evaluating Traces](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/feedback-and-annotations/evaluating-phoenix-traces.md)
+>
+> Run evaluations on trace data
+
+***
+
+## Import & Export Traces
+
+Save, load, and transfer trace data.
+
+> [card] [Export Traces](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/extract-data-from-spans.md)
+>
+> Export trace data for analysis or backup
+
+> [card] [Import Traces](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/importing-existing-traces.md)
+>
+> Load existing traces into Phoenix
+
+> [card] [Export Annotated Spans](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/importing-and-exporting-traces/exporting-annotated-spans.md)
+>
+> Export spans with their annotations
+
+***
+
+## Cost Tracking
+
+Monitor token usage and costs for your LLM applications.
+
+> [card] [Cost Tracking](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/cost-tracking.md)
+>
+> Track token-based costs across your traces
+
+> [card] [Setup Cost Tracking](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/cost-tracking.md#send-token-counts)
+>
+> Enable cost tracking
+
+> [card] [Model Pricing](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/cost-tracking.md#model-pricing-configuration)
+>
+> Pricing configuration
+
+> [card] [Viewing Costs](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/cost-tracking.md#viewing-cost-data)
+>
+> Cost visibility guide
+
+> [card] [Session & Experiment Costs](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/cost-tracking.md#session-level-costs)
+>
+> Session/experiment costs
+
+***
+
+## Advanced
+
+Advanced tracing configuration and techniques.
+
+> [card] [Mask Span Attributes](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/masking-span-attributes.md)
+>
+> Hide sensitive data in your traces
+
+> [card] [Modify Spans](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/modifying-spans.md)
+>
+> Transform spans before they are exported
+
+> [card] [Multimodal Tracing](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/multimodal-tracing.md)
+>
+> Trace applications with images and other media
+
+> [card] [Suppress Tracing](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/suppress-tracing.md)
+>
+> Disable tracing for specific code blocks
+
+> [card] [Construct Shareable URLs](https://arizeai-433a7140.mintlify.site/docs/phoenix/tracing/how-to-tracing/advanced/constructing-urls)
+>
+> Link to projects, traces, spans, and sessions by name or ID

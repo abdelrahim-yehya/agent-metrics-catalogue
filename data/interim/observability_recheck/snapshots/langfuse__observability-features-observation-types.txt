@@ -1,0 +1,508 @@
+---
+title: Observation Types
+description: Structured tracing with observation types in Langfuse
+---
+
+# Observation Types
+
+Langfuse supports different observation types to provide more context to your [observations](/docs/observability/data-model#observations-traces-and-sessions) and allow efficient filtering. (Langfuse calls spans observations; `span` is also a specific observation type.)
+
+_[Video: Observation types in an agent trace](https://static.langfuse.com/docs-videos/observation-types.mp4): LangGraph agent trace. The tree shows the agent, its chain steps, model generations and the lookup_order tool, each with its own icon. Click the agent and the tool to see their inputs and outputs, switch to Graph, then open Tracing and click “Only” next to TOOL under Type in the filter sidebar._
+
+## Available Types
+
+-  `event` is the
+basic building block. An event is used to track discrete events in a trace.
+-  `span` is the
+generic observation type for durations of units of work in a trace.
+-  `generation` logs
+generations of AI models incl. prompts, [token usage and costs](/docs/observability/features/token-and-cost-tracking).
+-  `agent` decides on the
+application flow and can for example use tools with the guidance of a LLM.
+-  `tool` represents
+a single action that does something, such as a function or API call (for example a
+weather API).
+-  `chain` is a link between
+different application steps, like passing context from a retriever to a LLM call.
+-  `retriever` represents
+a data-retrieval step that only looks something up rather than changing state, such
+as a call to a vector store, database, or other knowledge source.
+-  `evaluator`
+represents functions that assess relevance/correctness/helpfulness of a LLM's outputs.
+-  `embedding` is a call
+to a LLM to generate embeddings and can include model, [token usage and costs](/docs/observability/features/token-and-cost-tracking)
+-  `guardrail` is a
+component that protects against malicious content or jailbreaks.
+
+## How to Use Observation Types
+
+The [integrations with agent frameworks](/docs/integrations) automatically set the observation types. For example, marking a method with `@tool` in langchain will automatically set the Langfuse observation type to `tool`.
+
+You can also manually set the observation types for your application within the Langfuse SDK. Set the `as_type` parameter (Python) or `asType` parameter (TypeScript) to the desired observation type when creating an observation.
+
+**Python SDK**
+
+  Observation types require Python SDK `version>=3.3.1`.
+
+Using `@observe` decorator:
+
+```python /as_type="agent"/ /as_type="tool"/
+from langfuse import observe
+
+# Agent workflow
+@observe(as_type="agent")
+def run_agent_workflow(query):
+    # Agent reasoning and tool orchestration
+    return process_with_tools(query)
+
+# Tool calls
+@observe(as_type="tool")
+def call_weather_api(location):
+    # External API call
+    return weather_service.get_weather(location)
+```
+
+Calling the `start_as_current_observation` or `start_observation` method:
+
+```python /as_type="embedding"/ /as_type="chain"/
+from langfuse import get_client
+
+langfuse = get_client()
+
+# Start observation with specific type
+with langfuse.start_as_current_observation(
+    as_type="embedding",
+    name="embedding-generation"
+) as obs:
+    embeddings = model.encode(["text to embed"])
+    obs.update(output=embeddings)
+
+# Start observation with specific type
+transform_span = langfuse.start_observation(
+    as_type="chain",
+    name="transform-text"
+)
+transformed_text = transform_text(["text to transform"])
+transform_span.update(output=transformed_text)
+```
+
+**JavaScript/TypeScript SDK**
+
+Observation types are available since Typescript SDK `version>=4.0.0`.
+
+**Context Managers**
+
+Use `startActiveObservation` with the `asType` option to specify observation types in context managers:
+
+```typescript /asType: "agent"/ /asType: "tool"/ /asType: "chain"/ /asType: "generation"/ /asType: "embedding"/ /asType: "retriever"/ /asType: "evaluator"/ /asType: "guardrail"/
+import { startActiveObservation } from "@langfuse/tracing";
+
+// Agent workflow
+await startActiveObservation(
+  "agent-workflow",
+  async (agentObservation) => {
+    agentObservation.update({
+      input: { query: "What's the weather in Paris?" },
+      metadata: { strategy: "tool-calling" }
+    });
+
+    // Agent reasoning and tool orchestration
+    const result = await processWithTools(query);
+    agentObservation.update({ output: result });
+  },
+  { asType: "agent" }
+);
+
+// Tool call
+await startActiveObservation(
+  "weather-api-call",
+  async (toolObservation) => {
+    toolObservation.update({
+      input: { location: "Paris", units: "metric" },
+    });
+
+    const weather = await weatherService.getWeather("Paris");
+    toolObservation.update({ output: weather });
+  },
+  { asType: "tool" }
+);
+
+// Chain operation
+await startActiveObservation(
+  "retrieval-chain",
+  async (chainObservation) => {
+    chainObservation.update({
+      input: { query: "AI safety principles" },
+    });
+
+    const docs = await retrieveDocuments(query);
+    const context = await processDocuments(docs);
+    chainObservation.update({ output: { context, documentCount: docs.length } });
+  },
+  { asType: "chain" }
+);
+```
+
+Examples for other observation types:
+
+```typescript /asType: "generation"/ /asType: "embedding"/ /asType: "retriever"/
+// LLM Generation
+await startActiveObservation(
+  "llm-completion",
+  async (generationObservation) => {
+    generationObservation.update({
+      input: [{ role: "user", content: "Explain quantum computing" }],
+      model: "gpt-4",
+    });
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [{ role: "user", content: "Explain quantum computing" }],
+    });
+
+    generationObservation.update({
+      output: completion.choices[0].message.content,
+      usageDetails: {
+        input: completion.usage.prompt_tokens,
+        output: completion.usage.completion_tokens,
+      },
+    });
+  },
+  { asType: "generation" }
+);
+
+// Embedding generation
+await startActiveObservation(
+  "text-embedding",
+  async (embeddingObservation) => {
+    const texts = ["Hello world", "How are you?"];
+    embeddingObservation.update({
+      input: texts,
+      model: "text-embedding-ada-002",
+    });
+
+    const embeddings = await openai.embeddings.create({
+      model: "text-embedding-ada-002",
+      input: texts,
+    });
+
+    embeddingObservation.update({
+      output: embeddings.data.map(e => e.embedding),
+      usageDetails: { input: embeddings.usage.prompt_tokens },
+    });
+  },
+  { asType: "embedding" }
+);
+
+// Document retrieval
+await startActiveObservation(
+  "vector-search",
+  async (retrieverObservation) => {
+    retrieverObservation.update({
+      input: { query: "machine learning", topK: 5 },
+    });
+
+    const results = await vectorStore.similaritySearch(query, 5);
+    retrieverObservation.update({
+      output: results,
+      metadata: { vectorStore: "pinecone", similarity: "cosine" },
+    });
+  },
+  { asType: "retriever" }
+);
+```
+
+**Observe Wrapper**
+
+Use the `observe` wrapper with the `asType` option to automatically trace functions:
+
+```typescript /asType: "agent"/ /asType: "tool"/ /asType: "evaluator"/
+import { observe, updateActiveObservation } from "@langfuse/tracing";
+
+// Agent function
+const runAgentWorkflow = observe(
+  async (query: string) => {
+    updateActiveObservation({
+      metadata: { strategy: "react", maxIterations: 5 }
+    });
+
+    // Agent logic here
+    return await processQuery(query);
+  },
+  {
+    name: "agent-workflow",
+    asType: "agent"
+  }
+);
+
+// Tool function
+const callWeatherAPI = observe(
+  async (location: string) => {
+    updateActiveObservation({
+      metadata: { provider: "openweather", version: "2.5" }
+    });
+
+    return await weatherService.getWeather(location);
+  },
+  {
+    name: "weather-tool",
+    asType: "tool"
+  }
+);
+
+// Evaluation function
+const evaluateResponse = observe(
+  async (question: string, answer: string) => {
+    updateActiveObservation({
+      metadata: { criteria: ["relevance", "accuracy", "completeness"] }
+    });
+
+    const score = await llmEvaluator.evaluate(question, answer);
+    return { score, feedback: "Response is accurate and complete" };
+  },
+  {
+    name: "response-evaluator",
+    asType: "evaluator"
+  }
+);
+```
+
+More examples with different observation types:
+
+```typescript /asType: "generation"/ /asType: "chain"/ /asType: "guardrail"/
+// Generation wrapper
+const generateCompletion = observe(
+  async (messages: any[], model: string = "gpt-4") => {
+    updateActiveObservation({
+      model,
+      metadata: { temperature: 0.7, maxTokens: 1000 }
+    }, { asType: "generation" });
+
+    const completion = await openai.chat.completions.create({
+      model,
+      messages,
+      temperature: 0.7,
+      max_tokens: 1000,
+    });
+
+    updateActiveObservation({
+      usageDetails: {
+        input: completion.usage.prompt_tokens,
+        output: completion.usage.completion_tokens,
+      }
+    }, { asType: "generation" });
+
+    return completion.choices[0].message.content;
+  },
+  {
+    name: "llm-completion",
+    asType: "generation"
+  }
+);
+
+// Chain wrapper
+const processDocumentChain = observe(
+  async (documents: string[]) => {
+    updateActiveObservation({
+      metadata: { documentCount: documents.length }
+    });
+
+    const summaries = await Promise.all(
+      documents.map(doc => summarizeDocument(doc))
+    );
+
+    return await combineAndRank(summaries);
+  },
+  {
+    name: "document-processing-chain",
+    asType: "chain"
+  }
+);
+
+// Guardrail wrapper
+const contentModerationCheck = observe(
+  async (content: string) => {
+    updateActiveObservation({
+      metadata: { provider: "openai-moderation", version: "stable" }
+    });
+
+    const moderation = await openai.moderations.create({
+      input: content,
+    });
+
+    const flagged = moderation.results[0].flagged;
+    updateActiveObservation({
+      output: { flagged, categories: moderation.results[0].categories }
+    });
+
+    if (flagged) {
+      throw new Error("Content violates usage policies");
+    }
+
+    return { safe: true, content };
+  },
+  {
+    name: "content-guardrail",
+    asType: "guardrail"
+  }
+);
+```
+
+**Manual Observations**
+
+Use `startObservation` with the `asType` option for manual observation management:
+
+```typescript /asType: "agent"/ /asType: "tool"/ /asType: "generation"/
+import { startObservation } from "@langfuse/tracing";
+
+// Agent observation
+const agentSpan = startObservation(
+  "multi-step-agent",
+  {
+    input: { task: "Book a restaurant reservation" },
+    metadata: { agentType: "planning", tools: ["search", "booking"] }
+  },
+  { asType: "agent" }
+)
+
+// Nested tool calls within the agent
+const searchTool = agentSpan.startObservation(
+  "restaurant-search",
+  {
+    input: { location: "New York", cuisine: "Italian", date: "2024-01-15" }
+  },
+  { asType: "tool" }
+);
+
+searchTool.update({
+  output: { restaurants: ["Mario's", "Luigi's"], count: 2 }
+});
+searchTool.end();
+
+const bookingTool = agentSpan.startObservation(
+  "make-reservation",
+  {
+    input: { restaurant: "Mario's", time: "7:00 PM", party: 4 }
+  },
+  { asType: "tool" }
+);
+
+bookingTool.update({
+  output: { confirmed: true, reservationId: "RES123" }
+});
+bookingTool.end();
+
+agentSpan.update({
+  output: { success: true, reservationId: "RES123" }
+});
+agentSpan.end();
+```
+
+Examples with other observation types:
+
+```typescript /asType: "embedding"/ /asType: "retriever"/ /asType: "evaluator"/
+// Embedding observation
+const embeddingObs = startObservation(
+  "document-embedding",
+  {
+    input: ["Document 1 content", "Document 2 content"],
+    model: "text-embedding-ada-002"
+  },
+  { asType: "embedding" }
+);
+
+const embeddings = await generateEmbeddings(documents);
+embeddingObs.update({
+  output: embeddings,
+  usageDetails: { input: 150 }
+});
+embeddingObs.end();
+
+// Retriever observation
+const retrieverObs = startObservation(
+  "semantic-search",
+  {
+    input: { query: "What is machine learning?", topK: 10 },
+    metadata: { index: "knowledge-base", similarity: "cosine" }
+  },
+  { asType: "retriever" }
+);
+
+const searchResults = await vectorDB.search(query, 10);
+retrieverObs.update({
+  output: { documents: searchResults, scores: searchResults.map(r => r.score) }
+});
+retrieverObs.end();
+
+// Evaluator observation
+const evalObs = startObservation(
+  "hallucination-check",
+  {
+    input: {
+      context: "The capital of France is Paris.",
+      response: "The capital of France is London."
+    },
+    metadata: { evaluator: "llm-judge", model: "gpt-4" }
+  },
+  { asType: "evaluator" }
+);
+
+const evaluation = await checkHallucination(context, response);
+evalObs.update({
+  output: {
+    score: 0.1,
+    reasoning: "Response contradicts the provided context",
+    verdict: "hallucination_detected"
+  }
+});
+evalObs.end();
+
+// Guardrail observation
+const guardrailObs = startObservation(
+  "safety-filter",
+  {
+    input: { userMessage: "How to make explosives?" },
+    metadata: { policy: "content-safety-v2" }
+  },
+  { asType: "guardrail" }
+);
+
+const safetyCheck = await contentFilter.check(userMessage);
+guardrailObs.update({
+  output: {
+    blocked: true,
+    reason: "harmful_content",
+    category: "dangerous_instructions"
+  }
+});
+guardrailObs.end();
+```
+
+<!-- agent-instructions -->
+
+---
+
+## Agent Instructions
+
+This page is part of the [Langfuse](https://langfuse.com) documentation, published as plain Markdown for AI agents. Every page is available as Markdown by appending `.md` to its URL, or by sending an `Accept: text/markdown` header. This page: `https://langfuse.com/docs/observability/features/observation-types.md`.
+
+### Querying these docs
+
+If the answer is not on this page, query the documentation instead of guessing:
+
+- **Semantic search** across all Langfuse docs, returning an answer with the relevant pages and excerpts. Ask a specific, self-contained question:
+
+  ```bash
+  curl -sG "https://langfuse.com/api/search-docs" --data-urlencode "query=How do I trace a LangGraph agent?"
+  ```
+
+- **Index of every page**: <https://langfuse.com/llms.txt>, with per-section indexes [llms-docs.txt](https://langfuse.com/llms-docs.txt), [llms-integrations.txt](https://langfuse.com/llms-integrations.txt), and [llms-self-hosting.txt](https://langfuse.com/llms-self-hosting.txt).
+
+### Before writing Langfuse code
+
+- **Install the [Langfuse Agent Skill](https://langfuse.com/docs/api-and-data-platform/features/agent-skill).** It encodes Langfuse's own best practices for instrumentation, prompt management, and evaluation, and materially improves results.
+- **Read [What does a good trace look like?](https://langfuse.com/docs/observability/best-practices.md)** before instrumenting an application.
+- **Verify endpoints, parameters, and response fields** against the [API reference](https://api.reference.langfuse.com) instead of inferring them from code examples.
+- **Use the [Langfuse CLI](https://langfuse.com/docs/api-and-data-platform/features/cli)** (`npx @langfuse/cli api <resource> <action>`) to read or write traces, prompts, datasets, and scores from the terminal.
+
+Found an error in these docs? Please open an issue at <https://github.com/langfuse/langfuse-docs/issues>.

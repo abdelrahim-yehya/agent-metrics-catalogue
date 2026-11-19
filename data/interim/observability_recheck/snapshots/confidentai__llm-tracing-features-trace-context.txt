@@ -1,0 +1,291 @@
+# Manage Trace Context
+
+Create spans, update traces and spans, and set trace properties manually.
+
+## Overview
+
+For most apps, `init()` is all you need. It automatically traces supported
+providers and frameworks, including the relationships between their calls.
+
+Use the APIs on this page when you need more control over that trace:
+
+- Add spans for your own functions, tools, and application steps.
+- Set trace-level details such as input, output, users, customers, and threads.
+- Add data to a specific span.
+- Keep auto-instrumented framework calls attached to the right trace.
+- Supply trace details before the first span starts.
+
+The sections below show how to make these changes without replacing the
+instrumentation that `init()` already provides.
+
+## Create Spans
+
+Auto-instrumentation captures everything the framework integrations know about, but it can't know where your *request* begins or which of your own functions count as tools. To mark those boundaries you create a span yourself, either around a whole function or around a specific block of code.
+
+### Around a function
+
+#### Python
+
+```python highlight={5,9}
+from confident_trace import init, span
+
+init()
+
+@span(type="retriever")
+def retriever(query: str):
+    return retrieve(query)
+
+@span("llm_app", type="agent")
+def llm_app(query: str):
+    context = retriever(query)
+    return generate(query, context)
+```
+
+`@span` takes an optional positional name (defaulting to the function name), a `type`, and any type-specific or shared fields up front — for example `@span(type="llm", model="gpt-4o")`. It works on sync and async functions alike.
+
+#### TypeScript
+
+```typescript highlight={5,9} maxLines={0}
+import { init, span } from "confident-trace";
+
+const runtime = init();
+
+const retriever = span({ name: "retriever", type: "retriever" }, (query: string) => {
+  return retrieve(query);
+});
+
+const llmApp = span({ name: "llm_app", type: "agent" }, async (query: string) => {
+  const context = await retriever(query);
+  return generate(query, context);
+});
+```
+
+`span(options, fn)` returns a wrapped function with the same signature. `name` defaults to the function's name, and you can pass `type` plus any type-specific or shared fields alongside it — for example `{ name: "generate", type: "llm", model: "gpt-4o" }`. It works with sync and async functions alike.
+
+Remember to run your entry point with the [Node preload](/docs/llm-tracing/quickstart#instrument-your-ai-app) so auto-instrumented spans nest inside the ones you create here.
+
+### Around a block of code
+
+You don't have to wrap an entire function. When you can't change a function's definition, or only want part of it to show up, trace just that block with the same arguments:
+
+#### Python
+
+```python highlight={4}
+from confident_trace import span
+
+def generate(prompt: str) -> str:
+    with span("generate", type="llm", model="gpt-4o"):
+        return call_llm(prompt)
+```
+
+`span()` works as a sync or async context manager (`with` / `async with`) as well as a decorator. Everything that applies to `@span` applies here too.
+
+#### TypeScript
+
+```typescript highlight={4}
+import { withSpan } from "confident-trace";
+
+const generate = async (prompt: string) => {
+  return withSpan({ name: "generate", type: "llm", model: "gpt-4o" }, async () => {
+    return callLlm(prompt);
+  });
+};
+```
+
+`withSpan(options, callback)` runs the callback inside a new span and ends the span when the callback settles. It takes the same options as `span()` — the only difference is that `span()` gives you a reusable wrapped function while `withSpan()` traces an inline block.
+
+Each span nests under whatever is currently active. If nothing is active it becomes the root of a **new trace**, so the outermost span you create in a request handler is usually the trace itself. The `type` tells Confident AI how to render the span and which type-specific fields it accepts — see [span types](/docs/llm-tracing/features/span-types) for the full list.
+
+> Spans capture the function's arguments as `input` and its return value as `output` by default, so for most steps you don't need to set I/O manually. If you'd rather not export payloads at all, pass `capture_content=False` / `captureContent: false`, or see [masking](/docs/llm-tracing/features/masking).
+
+## Update Span Properties
+
+`update_span()` / `updateSpan()` writes **span-level** fields to the span that is current at the moment you call it. Reach for it when a step's default I/O isn't what you want to see, or when you have step-specific data like retrieved chunks or token counts:
+
+#### Python
+
+```python highlight={6}
+from confident_trace import span, update_span
+
+@span(type="retriever")
+def retriever(query: str):
+    chunks = retrieve(query)
+    update_span(input=query, output=chunks, retrieval_context=chunks)
+    return chunks
+```
+
+#### TypeScript
+
+```typescript highlight={5}
+import { span, updateSpan } from "confident-trace";
+
+const retriever = span({ name: "retriever", type: "retriever" }, async (query: string) => {
+  const chunks = await retrieve(query);
+  updateSpan({ input: query, output: chunks, retrievalContext: chunks });
+  return chunks;
+});
+```
+
+There's one `update_span()` for every [span type](/docs/llm-tracing/features/span-types). It accepts the shared fields (`name`, `input`, `output`, `metadata`, `retrieval_context`, `context`, `expected_output`, `tools_called`, `expected_tools`) plus the LLM-only fields (`model`, `provider`, token counts, and per-token [costs](/docs/llm-tracing/features/token-usage-cost)) — the LLM fields only take effect on an `llm` span.
+
+> `update_span()` never writes trace-level fields, and `update_trace()` never writes to a nested span. If you set `tags`, `user_id`, or `customer_id` and they aren't showing up, you almost certainly called the wrong one — see [`update_trace` vs `update_span`](/docs/llm-tracing/troubleshooting#update_trace-vs-update_span) in troubleshooting.
+
+Both update helpers need an **active, recording span** to write to. Outside of
+any span, or after the span has ended, they silently do nothing. That's why a
+trace context must wrap an auto-instrumented call rather than an update helper
+being called after the call returns.
+
+## Update Trace Properties
+
+When `init()` already instruments a framework call, you don't need to create a
+span just to add details to its trace. Open a trace context around the call
+instead. It doesn't create a span; it supplies fields to the trace that the
+instrumented call starts:
+
+#### Python
+
+```python highlight={7}
+from langchain_openai import ChatOpenAI
+from confident_trace import trace_context
+
+model = ChatOpenAI(model="gpt-4o")
+
+def chat(message: str, user_id: str, customer_id: str, thread_id: str):
+    with trace_context(
+        user_id=user_id,
+        customer_id=customer_id,
+        thread_id=thread_id,
+        input=message,
+    ):
+        return model.invoke(message)
+```
+
+The context works with `with` or `async with`. Every instrumented call inside
+it receives the fields you provide.
+
+#### TypeScript
+
+```typescript highlight={7} maxLines={0}
+import { ChatOpenAI } from "@langchain/openai";
+import { traceContext } from "confident-trace";
+
+const model = new ChatOpenAI({ model: "gpt-4o" });
+
+const chat = (message: string, userId: string, customerId: string, threadId: string) =>
+  traceContext({ userId, customerId, threadId, input: message }, () =>
+    model.invoke(message),
+  );
+```
+
+The callback can be synchronous or asynchronous. Every instrumented call
+inside it receives the fields you provide.
+
+A trace context is best for details you know **before** the call starts, such as
+the user, customer, thread, input, environment, tags, and metadata. Calls using the same
+thread ID are grouped into the same [thread](/docs/llm-tracing/features/threads)
+while each call still creates its own trace.
+
+You'll use this same scoped pattern later to [drop tracing for selected
+requests](/docs/llm-tracing/features/dropping-traces) and to [route traces
+dynamically to different projects](/docs/llm-tracing/features/projects).
+
+> A trace context creates neither a trace nor a span. It only supplies fields to
+> traces started inside its scope. To explicitly start a new trace for each turn
+> in a conversation, use [`turn()`](/docs/llm-tracing/features/threads).
+
+> Don't wrap an already-instrumented framework call in a custom span solely to
+> set trace fields. A trace context adds those fields without introducing
+> another span into the trace.
+
+### Update from Inside a Span
+
+If you've already created a custom span, adding a trace context around it would
+be redundant: the span has already started the trace. Update that active trace
+directly instead. This also lets you set values you only know after the work
+finishes, such as its final output:
+
+#### Python
+
+```python highlight={7-13}
+from confident_trace import span, update_trace
+
+@span("llm_app", type="agent")
+def llm_app(query: str, user_id: str, customer_id: str):
+    context = retriever(query)
+    res = generate(query, context)
+    update_trace(
+        input=query,
+        output=res,
+        user_id=user_id,
+        customer_id=customer_id,
+        tags=["production"],
+        metadata={"app_version": "1.2.3"},
+    )
+    return res
+```
+
+#### TypeScript
+
+```typescript highlight={6-12} maxLines={0}
+import { span, updateTrace } from "confident-trace";
+
+const llmApp = span({ name: "llm_app", type: "agent" }, async (
+  query: string,
+  userId: string,
+  customerId: string,
+) => {
+  const context = await retriever(query);
+  const res = await generate(query, context);
+  updateTrace({
+    input: query,
+    output: res,
+    userId,
+    customerId,
+    tags: ["production"],
+    metadata: { appVersion: "1.2.3" },
+  });
+  return res;
+});
+```
+
+The trace update helper always targets the root span of the current trace, so
+you can call it from any nested span. Use it for:
+
+- [Input and output](/docs/llm-tracing/features/input-output) of the whole request
+- [`name`](/docs/llm-tracing/features/name), [`tags`](/docs/llm-tracing/features/tags), and [`metadata`](/docs/llm-tracing/features/metadata)
+- [`user_id` or `user`](/docs/llm-tracing/features/users), [`customer_id` or `customer`](/docs/llm-tracing/features/customers), [`thread_id` and `turn_id`](/docs/llm-tracing/features/threads), and [`environment`](/docs/llm-tracing/features/environment)
+- Trace-level evaluation fields like `expected_output`, `retrieval_context`, `context`, `tools_called`, and `expected_tools` for [online evals](/docs/llm-tracing/online-evals)
+
+You can call it as many times as you like; later calls override earlier ones
+field by field, and fields you leave out stay as they were. By contrast, a
+trace context supplies defaults: it fills fields that haven't already been set
+and doesn't overwrite existing values. Compound values such as `tags`,
+`metadata`, and `thread` are never merged between the two.
+
+## Which One Should I Use?
+
+| You want to…                                                  | Use                                            |
+| ------------------------------------------------------------- | ---------------------------------------------- |
+| Mark where a request, tool, or retrieval step begins and ends | `@span` / `span()` / `withSpan()`              |
+| Add known trace details without creating a span               | `trace_context()` / `traceContext()`           |
+| Set or replace trace details from inside an active span       | `update_trace()` / `updateTrace()`             |
+| Set a step's I/O, retrieval context, or LLM token usage       | `update_span()` / `updateSpan()`               |
+| Start a new trace per conversation turn                       | [`turn()`](/docs/llm-tracing/features/threads) |
+
+For an already-instrumented framework call, start with a trace context. If you
+intentionally add a custom span (or [`turn()`](/docs/llm-tracing/features/threads))
+around the request, update the active trace from inside that span instead.
+
+## Next Steps
+
+Now that you know how to shape the trace context, give your spans meaning with types and set the I/O that Confident AI evaluates on.
+
+#### [Configure Span Types](/docs/llm-tracing/features/span-types)
+
+Classify spans as LLM, retriever, tool, or agent — and set type-specific
+attributes like model name, token costs, and retrieval context.
+
+#### [Set Input/Output](/docs/llm-tracing/features/input-output)
+
+Override the default input and output on traces and spans for better
+visualization and evaluation.

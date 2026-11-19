@@ -1,0 +1,453 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.braintrust.dev/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Set up alerts
+
+> Configure log, time window, and environment alerts, and send notifications to Slack, PagerDuty, or webhooks
+
+Alerts notify you when events occur in Braintrust, such as errors, quality issues, usage changes, or prompt deployments. Send notifications to webhooks, Slack channels, or PagerDuty.
+
+> [!NOTE]
+>
+> [Enable the Slack integration](https://docs.braintrust.dev/admin/organizations.md#enable-slack-integration) before creating an alert to send to a Slack channel.
+
+## Alert types
+
+Braintrust supports three types of alerts:
+
+* **Log alerts**: Trigger when conditions are met on production logs.
+* **Time window alerts**: Trigger when a SQL calculation over a time window crosses a threshold.
+* **Environment alerts**: Trigger when prompt or dataset environments are assigned or removed.
+
+## Create a log alert
+
+1. Go to ** Settings** > [** Alerts**](https://www.braintrust.dev/app/~/configuration/automations/alerts).
+2. Click  **Alert**, or  **Create alert** if you don't have any alerts yet.
+3. Enter alert name.
+4. Select **Log event** as the event type.
+5. Configure alert conditions:
+   * **SQL filter**: Query that defines which logs trigger the alert. See [Write SQL filters](#common-alert-patterns) for examples. When Loop is enabled, select  **Generate** to create the filter from a natural-language description.
+
+     Braintrust validates the filter when you save the alert. It rejects a filter that has a syntax error, references an unknown function, or always evaluates to a non-boolean value, such as `metrics.latency`. For a key that contains dots, use a quoted key like `metadata."gen_ai.user.message"`, not brackets like `metadata['gen_ai.user.message']`. In the UI, a rejected filter shows a **Failed to create or update alert** error. The API returns a 400 error that starts with `Invalid BTQL filter for log alert`.
+
+   * **Notify interval**: The minimum time between notifications for this alert (5 min, 30 min, 1 hr, 4 hr, 12 hr, 24 hr).
+
+     > [!WARNING]
+     >
+     > Braintrust evaluates logs in batches, so alerts aren't instantaneous and a single alert can cover more than one matching log. When a batch triggers the alert, the notification counts only the matching logs in that batch, then the alert is suppressed for the length of the interval. Matching logs that arrive during that window don't trigger another alert and aren't reported later, so choose an interval short enough that you don't miss what you need to act on.
+6. Select an action type:
+   * **Webhook**: Enter the webhook URL to send a [JSON payload](#webhook-payloads) to. Click **Test** next to the **Webhook URL** field to verify the configuration. See [Test an alert](#test-an-alert).
+
+   * **Slack**: Select a Slack channel using the searchable dropdown.
+
+     The channel list refreshes automatically every 7 days. To trigger a manual refresh, click **Refresh channels**. If your channel does not appear, you can enter its channel ID (To find a channel ID in Slack: Right-click the channel name, click "View channel details", and scroll to the bottom and copy the channel ID.) manually.
+
+   * **PagerDuty**: Enter a 32-character **Events API v2 integration key** and choose **Critical**, **Error**, **Warning**, or **Info** severity. The default is **Critical**.
+7. Click **Create**.
+
+> [!TIP]
+>
+> You can also create log alerts directly from the [\*\* Logs\*\*](https://www.braintrust.dev/app/~/logs) or [\*\* Dashboards\*\*](https://www.braintrust.dev/app/~/dashboards) pages. Apply filters to your logs, then select  > **Create alert from filters** in the toolbar. The SQL filter automatically populates with your current filters.
+
+## Create a time window alert
+
+Time window alerts evaluate a scalar SQL calculation over a time window and notify you when the numeric result crosses a threshold. Use them for aggregate conditions that log alerts cannot express, such as an average score dropping below a target, an error count exceeding a limit, or a breach that must persist before notifying.
+
+1. Go to ** Settings** > [** Alerts**](https://www.braintrust.dev/app/~/configuration/automations/alerts).
+
+2. Click  **Alert**, or  **Create alert** if you don't have any alerts yet.
+
+3. Enter alert name.
+
+4. Select **Time window** as the event type.
+
+5. Configure the calculation with **Builder** or **Query**. The calculation must return one numeric value for each evaluated window. For example, to alert when errors exceed a count threshold:
+
+   ```sql theme={null}
+   SELECT COUNT(*) AS error_count
+   FROM project_logs('<PROJECT_ID>')
+   WHERE error IS NOT NULL
+   ```
+
+6. Set **Window length (minutes)** to the aggregation window.
+
+7. Set **Alert trigger** to the comparison that fires the alert. For example, value is `>` `100`.
+
+8. Optionally, configure **Advanced settings**.
+
+9. Select an action type:
+   * **Webhook**: Enter the webhook URL to send a JSON payload to.
+
+   * **Slack**: Select a Slack channel using the searchable dropdown.
+
+     The channel list refreshes automatically every 7 days. To trigger a manual refresh, click **Refresh channels**. If your channel does not appear, you can enter its channel ID (To find a channel ID in Slack: Right-click the channel name, click "View channel details", and scroll to the bottom and copy the channel ID.) manually.
+
+   * **PagerDuty**: Enter a 32-character **Events API v2 integration key** and choose **Critical**, **Error**, **Warning**, or **Info** severity. The default is **Critical**.
+
+10. Click **Create**.
+
+The **Query** editor must return at most one row. If it returns multiple numeric columns, select the **Numeric result column** to compare. If it returns one numeric column, Braintrust selects that column for you.
+
+**Advanced settings** include:
+
+| Setting | Purpose |
+| - | - |
+| **Trigger delay (seconds)** | Require the threshold condition to remain breached before sending a notification. |
+| **When no data is returned** | Choose whether an empty evaluation keeps the last state, resolves the alert, or triggers the alert. |
+| **Send a recovery notification** | Notify when the alert recovers after firing. For PagerDuty, this resolves the incident. Leave this enabled to resolve incidents automatically when the alert recovers. |
+| **Evaluation schedule** | Choose **Fixed interval** with **Evaluate every (seconds)**, or choose **Cron** with **Cron expression** and optional **Timezone**. |
+| **Wait for late data (seconds)** | Delay evaluation so late-arriving logs can land before the window is checked. |
+| **Renotify interval (seconds) (optional)** | Send repeat notifications while the alert continues firing. |
+
+> [!TIP]
+>
+> Use the **Recent evaluation preview** to confirm the calculation returns the expected value before saving the alert.
+
+## Create an environment alert
+
+Environment alerts notify you when prompt or dataset environments are updated. Use them to track deployments, monitor version changes, or trigger downstream workflows when prompts or datasets are promoted across environments.
+
+1. Go to ** Settings** > [** Alerts**](https://www.braintrust.dev/app/~/configuration/automations/alerts).
+2. Click  **Alert**, or  **Create alert** if you don't have any alerts yet.
+3. Enter alert name.
+4. Select **Environment update** as the event type.
+5. Optionally filter by specific environments (e.g., only alert on "production" changes).
+6. Select an action type:
+   * **Webhook**: Enter the webhook URL to send a [JSON payload](#webhook-payloads) to.
+
+   * **Slack**: Select a Slack channel using the searchable dropdown.
+
+     The channel list refreshes automatically every 7 days. To trigger a manual refresh, click **Refresh channels**. If your channel does not appear, you can enter its channel ID (To find a channel ID in Slack: Right-click the channel name, click "View channel details", and scroll to the bottom and copy the channel ID.) manually.
+
+   * **PagerDuty**: Enter a 32-character **Events API v2 integration key** and choose **Critical**, **Error**, **Warning**, or **Info** severity. The default is **Critical**.
+7. Click **Create**.
+
+> [!NOTE]
+>
+> Environment alerts trigger immediately when environments are updated. Unlike log alerts, they don't have intervals or SQL filters.
+
+## Test an alert
+
+Testing is available for log alerts that use the **Webhook** action. Click **Test** next to the **Webhook URL** field.
+
+Braintrust runs the SQL filter on recent logs. If matching logs exist, a test payload is sent. Check your webhook endpoint for the test message.
+
+Testing is not available for Slack or PagerDuty actions, or for environment alerts.
+
+## Pause an alert
+
+Pause an alert to stop its notifications while keeping its conditions and delivery targets intact.
+
+> [!WARNING]
+>
+> While an alert is paused, matching events don't trigger notifications and aren't reported later. Resuming the alert doesn't notify you about anything that happened during the pause.
+
+> [tab] UI
+>
+> 1. Go to \*\* Settings\*\* > [\*\* Alerts\*\*](https://www.braintrust.dev/app/~/configuration/automations/alerts).
+> 2. Select the alert you want to pause.
+> 3. Turn off **Enabled**.
+> 4. Click **Update**.
+>
+> To resume a paused alert, turn **Enabled** back on.
+>
+> The **Status** column shows **Paused** for a paused alert of any type. A running log alert or environment alert shows **Active**. A running time window alert shows a health state instead, such as **Healthy**. It shows **Failing** when it can't evaluate its condition or deliver its notifications. Hover over **Failing** to see the most recent error.
+
+> [tab] API
+>
+> Set `config.status` to `paused` with [`PATCH /v1/project_automation/{project_automation_id}`](https://docs.braintrust.dev/api-reference/projectautomations/partially-update-project-automation). Send the complete `config` object, because the request replaces it rather than merging into it.
+>
+> ```bash theme={null}
+> curl -X PATCH https://api.braintrust.dev/v1/project_automation/<project_automation_id> \
+>   -H "Authorization: Bearer $BRAINTRUST_API_KEY" \
+>   -H "Content-Type: application/json" \
+>   -d '{
+>     "config": {
+>       "event_type": "logs",
+>       "status": "paused",
+>       "btql_filter": "error IS NOT NULL",
+>       "interval_seconds": 3600,
+>       "action": {
+>         "type": "webhook",
+>         "url": "https://example.com/webhook"
+>       }
+>     }
+>   }'
+> ```
+>
+> To resume the alert, send the same request with `"status": "active"`.
+>
+> > [!WARNING]
+> >
+> > Because the request replaces `config`, a later config update that omits `status` clears it and the alert resumes. Include `status` in every config update for an alert you intend to keep paused.
+
+## Edit or delete an alert
+
+1. Go to ** Settings** > [** Alerts**](https://www.braintrust.dev/app/~/configuration/automations/alerts).
+2. Select the alert you want to change.
+3. Update the alert configuration, then click **Update**.
+
+If you close an alert with unsaved changes, Braintrust asks you to confirm before discarding them.
+
+Braintrust validates a log alert's SQL filter on every update, through the UI or the API. If an existing log alert has an invalid filter, you can't save any change to it, including renaming, pausing, or resuming it, until you correct the filter. You can still delete it.
+
+To delete an alert, open it and click **Delete** in the footer, or click the  delete icon in the alert's row. Confirm the deletion in the dialog that appears.
+
+> [!WARNING]
+>
+> Deleting an alert immediately stops its notifications. This cannot be undone.
+
+## Common alert patterns
+
+> [tab] Log alerts
+>
+> **Error monitoring**: Catch production issues immediately.
+>
+> * SQL filter: `error IS NOT NULL AND metadata.environment = 'production'`
+> * Action: Post to Slack #incidents channel or create tickets in issue trackers
+>
+> **Scorer failures**: Catch online scorers that throw or fail to run.
+>
+> * SQL filter: `span_attributes.name = '<Scorer name>' AND error IS NOT NULL`
+> * Action: Notify the team that owns the scorer
+>
+> **Quality thresholds**: Track when model performance drops below acceptable levels.
+>
+> * SQL filter: `scores.factuality < 0.8 AND metadata.environment = 'production'`
+> * Notify interval: 1 hr
+> * Action: Send to monitoring systems or trigger automated remediation
+>
+> **Cost monitoring**: Alert on expensive requests.
+>
+> * SQL filter: `estimated_cost() > 1.0`
+> * Action: Webhook to cost tracking systems or budget management tools
+>
+> **Model-specific issues**: Alert on problems with a particular model.
+>
+> * SQL filter: `metadata.model = 'gpt-4o' AND (error IS NOT NULL OR scores.accuracy < 0.8)`
+> * Action: Post to team channel for model performance investigation
+>
+> **Feature-specific monitoring**: Track specific workflows or user segments.
+>
+> * SQL filter: `metadata.user_tier = 'enterprise' AND metadata.feature = 'summarization'`
+> * Action: Post to team channel for priority investigation
+>
+> **Combined conditions**: Alert on multiple conditions for critical requests.
+>
+> * SQL filter: `(scores.accuracy < 0.7 OR error IS NOT NULL) AND metadata.priority = 'high'`
+> * Action: Immediate Slack notification to on-call team
+>
+> **Usage spikes**: Monitor when request volume exceeds normal levels.
+>
+> * Action: Use external systems to track historical rates and webhook alerts to capture spikes
+>
+> **Aggregate thresholds**: Log alerts trigger on individual matching logs. To alert when an aggregate crosses a threshold, such as an average score or an error count over a window, use a [time window alert](#create-a-time-window-alert) instead.
+
+> [tab] Environment alerts
+>
+> **Deployment tracking**: Monitor when prompts are promoted to production.
+>
+> * Environment filter: `production`
+> * Action: Post to Slack #deployments channel
+>
+> **Multi-environment monitoring**: Track changes across all environments.
+>
+> * Environment filter: Leave empty to monitor all environments
+> * Action: Webhook to deployment tracking system
+>
+> **Critical environment protection**: Get immediate notification of staging or production changes.
+>
+> * Environment filter: `staging, production`
+> * Action: Slack notification to team channel
+>
+> **Audit trail**: Log all environment changes to external systems.
+>
+> * Environment filter: Leave empty
+> * Action: Webhook to audit logging service
+
+## Webhook payloads
+
+Webhooks can route alerts to any third-party incident, on-call, or automation tool that accepts inbound webhooks (for example, PagerDuty's Events API, Opsgenie, or workflow platforms like Zapier). Braintrust delivers a fixed JSON payload (shown below) with the `Content-Type: application/json` header, and doesn't support custom headers or payload formats. If the destination requires a specific payload shape or authentication headers, add a lightweight forwarder that transforms the Braintrust webhook payload before delivering it.
+
+> [!NOTE]
+>
+> Webhook URLs must use `http` or `https`. To protect against [server-side request forgery (SSRF)](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html), Braintrust blocks webhook delivery to private, internal, or otherwise reserved network addresses. Use **Test** to confirm your endpoint is reachable.
+
+> [tab] Log alerts
+>
+> When a log alert triggers a webhook, it sends this JSON structure:
+>
+> ```json theme={null}
+> {
+>   "organization": {
+>     "id": "org_123",
+>     "name": "your-organization"
+>   },
+>   "project": {
+>     "id": "proj_456",
+>     "name": "your-project"
+>   },
+>   "automation": {
+>     "id": "c5b32408-8568-4bff-9299-8cdd56979b67",
+>     "name": "High-Priority Factuality",
+>     "description": "Alert on factuality scores for priority logs",
+>     "event_type": "logs",
+>     "btql_filter": "metadata.priority = 0 AND scores.Factuality < 0.9",
+>     "interval_seconds": 3600,
+>     "url": "https://braintrust.dev/app/your-org/p/your-project/configuration/alerts?aid=..."
+>   },
+>   "details": {
+>     "is_test": false,
+>     "message": "High-Priority Factuality: 5 logs triggered this alert. You won't be notified again for at least 1 hour.",
+>     "time_start": "2025-05-12T10:00:00.000Z",
+>     "time_end": "2025-05-12T11:00:00.000Z",
+>     "count": 5,
+>     "related_logs_url": "https://braintrust.dev/app/your-org/p/your-project/logs?search=..."
+>   }
+> }
+> ```
+
+> [tab] Time window alerts
+>
+> When a time window alert triggers a webhook, it sends this JSON structure:
+>
+> ```json theme={null}
+> {
+>   "version": 1,
+>   "organization": {
+>     "id": "org_123",
+>     "name": "your-organization"
+>   },
+>   "project": {
+>     "id": "proj_456",
+>     "name": "your-project"
+>   },
+>   "automation": {
+>     "id": "c5b32408-8568-4bff-9299-8cdd56979b67",
+>     "name": "Hourly Error Count",
+>     "description": "Alert when error volume is high",
+>     "event_type": "windowed",
+>     "threshold": {
+>       "calculation": {
+>         "type": "btql",
+>         "btql_query": "SELECT COUNT(*) AS error_count FROM project_logs('proj_456') WHERE error IS NOT NULL",
+>         "value_column": "error_count"
+>       },
+>       "policy": {
+>         "condition": {
+>           "type": "threshold",
+>           "operator": "gt",
+>           "threshold": 100
+>         },
+>         "pending_seconds": 0,
+>         "no_data_behavior": "keep_last",
+>         "renotify_interval_seconds": null,
+>         "notify_on_recovery": true
+>       }
+>     },
+>     "window": {
+>       "window_seconds": 3600,
+>       "schedule": {
+>         "type": "interval",
+>         "evaluation_interval_seconds": 300
+>       },
+>       "evaluation_delay_seconds": 0
+>     },
+>     "url": "https://braintrust.dev/app/your-org/p/your-project/configuration/alerts?aid=..."
+>   },
+>   "details": {
+>     "transition": "firing",
+>     "value": 125,
+>     "time_start": "2026-08-07T10:00:00.000Z",
+>     "time_end": "2026-08-07T11:00:00.000Z",
+>     "evaluation_error": null,
+>     "evaluation_failure_count": null,
+>     "message": "Hourly Error Count is firing for the evaluated window."
+>   }
+> }
+> ```
+>
+> The top-level `version` field indicates the time window payload schema version. The `details.transition` value describes why the notification was sent: `"scheduled"`, `"firing"`, `"recovery"`, `"renotify"`, `"evaluation_failed"`, or `"evaluation_recovered"`.
+
+> [tab] Environment alerts
+>
+> When an environment alert triggers a webhook, it sends this JSON structure:
+>
+> ```json theme={null}
+> {
+>   "organization": {
+>     "id": "org_123",
+>     "name": "your-organization"
+>   },
+>   "project": {
+>     "id": "proj_456",
+>     "name": "your-project"
+>   },
+>   "automation": {
+>     "id": "c5b32408-8568-4bff-9299-8cdd56979b67",
+>     "name": "Production Environment Changes",
+>     "description": "Alert when production environment is updated",
+>     "event_type": "environment_update"
+>   },
+>   "details": {
+>     "environment": {
+>       "slug": "production"
+>     },
+>     "object_type": "prompt",
+>     "prompt": {
+>       "id": "prompt_789",
+>       "slug": "summarizer"
+>     },
+>     "new_version": "8234923849293849...",
+>     "action": "update"
+>   }
+> }
+> ```
+>
+> For dataset environment changes, `object_type` is `"dataset"` and the payload includes a `dataset` field instead of `prompt`:
+>
+> ```json theme={null}
+> {
+>   "organization": { "id": "org_123", "name": "your-organization" },
+>   "project": { "id": "proj_456", "name": "your-project" },
+>   "automation": {
+>     "id": "c5b32408-8568-4bff-9299-8cdd56979b67",
+>     "name": "Production Environment Changes",
+>     "description": "Alert when production environment is updated",
+>     "event_type": "environment_update"
+>   },
+>   "details": {
+>     "environment": {
+>       "slug": "production"
+>     },
+>     "object_type": "dataset",
+>     "dataset": {
+>       "id": "dataset_789",
+>       "name": "golden-set"
+>     },
+>     "new_version": "8234923849293849...",
+>     "action": "update"
+>   }
+> }
+> ```
+>
+> The `action` field will be either `"update"` (environment assigned to object) or `"delete"` (environment removed from object). When `action` is `"delete"`, the `new_version` field will be `null`.
+
+## Limitations
+
+For Slack workspaces with more than 100,000 channels:
+
+* The channel list shows the most recently active channels.
+
+  The channel list refreshes automatically every 7 days. To trigger a manual refresh, click **Refresh channels**. If your channel does not appear, you can enter its channel ID (To find a channel ID in Slack: Right-click the channel name, click "View channel details", and scroll to the bottom and copy the channel ID.) manually.
+
+## Next steps
+
+* [Export to cloud storage](https://docs.braintrust.dev/admin/data-management/export.md) and [configure data retention](https://docs.braintrust.dev/admin/data-management/retention.md)
+* [View logs](https://docs.braintrust.dev/observe/view-logs.md) to understand alert triggers
+* [Monitor deployments](https://docs.braintrust.dev/deploy/monitor.md) with dashboards
+* [SQL reference](https://docs.braintrust.dev/reference/sql.md) for advanced filter queries
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

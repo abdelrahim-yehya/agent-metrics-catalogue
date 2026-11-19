@@ -1,0 +1,211 @@
+# Braintrust: Guides
+
+> Braintrust is the active observability platform for instrumenting, understanding, and improving agents. By actively applying intelligence to agent traces and automatically surfacing the most critical patterns, Braintrust gives teams the visibility to understand how agents behave in production and the tools to improve them.
+
+## Guides
+
+### Start
+
+- [Get started with Braintrust](https://docs.braintrust.dev/index.md)
+- [Braintrust workflow](https://docs.braintrust.dev/workflow.md): Understand how to trace, evaluate, and improve AI applications with Braintrust
+- [Plans and limits](https://docs.braintrust.dev/plans-and-limits.md): Choose the right Braintrust plan for your needs
+
+#### Quickstart
+
+- [Tracing quickstart](https://docs.braintrust.dev/tracing-quickstart.md): Instrument your AI application with a coding agent and verify that traces appear in Braintrust.
+- [Evaluation quickstart](https://docs.braintrust.dev/evaluation-quickstart.md): Systematically measure AI quality. Compare approaches, catch regressions before deployment, and validate improvements with data instead of intuition.
+
+#### Loop agent
+
+- [Get started with Loop](https://docs.braintrust.dev/loop/index.md): Braintrust's AI agent investigates your project data, creates and edits objects with your approval, and runs on a schedule when you're not watching.
+- [What Loop can do](https://docs.braintrust.dev/loop/capabilities.md): Query logs, diagnose traces, write scorers, run experiments, and build dashboards through natural language, with example prompts for every task.
+- [Run Loop on a schedule](https://docs.braintrust.dev/loop/automations.md): Configure a Loop automation to investigate your project on a schedule, control what it's allowed to change, and send results to Slack, PagerDuty, or a webhook.
+- [Manage Loop threads and limits](https://docs.braintrust.dev/loop/manage.md): Copy, export, share, rename, and delete threads, understand sandbox lifecycle, and learn how Loop limits concurrent active threads.
+
+##### Integrations
+
+- [Connect external MCP servers](https://docs.braintrust.dev/loop/mcp.md): Connect Loop to external tools and data to investigate failures with business context, find related issues, and turn findings into follow-up work.
+- [Connect GitHub repositories](https://docs.braintrust.dev/loop/github.md): Connect GitHub so Loop can trace failures to your source code and, when you allow writes, push fixes and open pull requests.
+
+### Instrument
+
+- [Instrument your application](https://docs.braintrust.dev/instrument/index.md): Add tracing to your AI application to capture LLM calls, application logic, and user feedback — the foundation for observability and evaluation.
+- [Capture user feedback](https://docs.braintrust.dev/instrument/user-feedback.md): Attach ratings, corrections, and comments from users to traces to measure real-world quality and power feedback-driven evaluations.
+- [Log attachments](https://docs.braintrust.dev/instrument/attachments.md): Attach images, audio, PDFs, and other binary files to traces and experiments to review multimodal inputs and outputs in context.
+
+#### Tracing
+
+- [Trace LLM calls](https://docs.braintrust.dev/instrument/trace-llm-calls.md): Enable auto-instrumentation once and every call to a supported AI provider is logged — inputs, outputs, latency, token usage, and costs.
+- [Trace application logic](https://docs.braintrust.dev/instrument/trace-application-logic.md): Trace retrieval steps, tool calls, preprocessing, and business logic in spans to get full end-to-end visibility into your AI application's behavior.
+- [Send application logs](https://docs.braintrust.dev/instrument/application-logs.md): Send application logs to Braintrust from the Python SDK, TypeScript SDK, or OpenTelemetry, then browse, filter, and query them alongside your traces.
+- [Advanced tracing patterns](https://docs.braintrust.dev/instrument/advanced-tracing.md): Implement distributed tracing across services, redact sensitive data, customize span rendering, and tune performance for high-throughput AI applications.
+
+### Observe
+
+- [Observe your application](https://docs.braintrust.dev/observe/index.md): Turn every production request into a searchable trace. Filter, analyze, and drill into real-time data to identify issues and gather signal for improving your AI system.
+- [Set up alerts](https://docs.braintrust.dev/observe/alerts.md): Configure log, time window, and environment alerts, and send notifications to Slack, PagerDuty, or webhooks
+
+#### Logs
+
+- [View your logs](https://docs.braintrust.dev/observe/view-logs.md): Browse and inspect production traces, create custom columns to surface relevant data, and organize logs with tags for faster triage and analysis.
+- [Filter and search logs](https://docs.braintrust.dev/observe/filter.md): Narrow down to exactly the traces you need using metadata filters, SQL queries, or the API. Pull out specific production data for debugging, analysis, or dataset creation.
+- [Examine traces](https://docs.braintrust.dev/observe/examine-traces.md): Open any trace to inspect its spans, inputs, outputs, timing, metadata, and context. Explore trace views, translate content, navigate origins, and share results.
+
+#### Patterns
+
+- [Patterns](https://docs.braintrust.dev/observe/patterns/index.md): Let Loop investigate your traces on a schedule and record recurring problems and trends as patterns, each with supporting evidence and a suggested fix.
+- [Enable Patterns](https://docs.braintrust.dev/observe/patterns/enable.md): Turn on pattern discovery, choose where results go, tune the pattern rules that run it, and customize how Loop rates and labels patterns.
+- [Review and act on patterns](https://docs.braintrust.dev/observe/patterns/review.md): Read a pattern and its evidence, turn it into a scorer or classifier you can monitor, hand it to a coding agent, and close it when it's resolved.
+
+#### Topics
+
+- [Topics](https://docs.braintrust.dev/observe/topics/index.md): Automatically classify logs by user intent, sentiment, and issues, then turn what you find into evaluation datasets, scorers, and review queues.
+- [Enable Topics](https://docs.braintrust.dev/observe/topics/enable.md): Confirm your traces render with the Thread preprocessor, enable Topics, and adapt traces that need a custom preprocessor.
+- [Review insights from Topics](https://docs.braintrust.dev/observe/topics/review-insights.md): Find patterns in classified logs through topic distributions, trace classifications, and time-series trends, with snapshot and real-time views.
+- [Act on findings from Topics](https://docs.braintrust.dev/observe/topics/act-on-findings.md): Turn topic classifications into action: build evaluation datasets, set up online scoring by classification, and assign matching logs for human review.
+- [Manage Topics](https://docs.braintrust.dev/observe/topics/manage.md): Keep the Topics pipeline healthy: check status, trigger runs on demand, adjust sampling, pause, rewind history, and delete automations.
+- [Custom facets](https://docs.braintrust.dev/observe/topics/custom-facets.md): Define domain-specific facets with custom preprocessors and prompts to extract patterns the built-in Task, Sentiment, and Issues facets miss.
+
+#### Dashboards
+
+- [Dashboards](https://docs.braintrust.dev/observe/dashboards/index.md): Browse the dashboards in your project, then filter, group, and drill into aggregated metrics across your logs and experiments over time.
+- [Create dashboards](https://docs.braintrust.dev/observe/dashboards/create.md): Create a dashboard by cloning the built-in one, starting empty, or duplicating an existing dashboard, then rename, delete, or copy it between projects.
+- [Build charts](https://docs.braintrust.dev/observe/dashboards/build-charts.md): Plot metrics with time series, top list, and big number charts, export and move charts between dashboards, and add Markdown notes for context.
+- [SQL charts](https://docs.braintrust.dev/observe/dashboards/sql-charts.md): Build dashboard charts from SQL with a visual builder or query text, chart queries on the Query page, and plot time series, top lists, or tables.
+- [Coding agent insights dashboard](https://docs.braintrust.dev/observe/dashboards/coding-agent-insights.md): Track your team's coding-agent costs, model and tool usage, and activity by user, permission group, API key, and branch.
+
+#### Tutorials
+
+- [Trace and improve your MCP server](https://docs.braintrust.dev/observe/mcp-servers.md): Use traces and agent feedback to find recurring issues and improve your MCP tools.
+
+### Annotate
+
+- [Annotate and curate data](https://docs.braintrust.dev/annotate/index.md): Transform production logs into high-quality datasets. Add human feedback, labels, and corrections to build test cases that drive systematic improvement.
+- [Add labels and corrections](https://docs.braintrust.dev/annotate/labels.md): Go beyond numeric scores by tagging traces, adding expected values, and writing corrections. Use these annotations to organize data and build higher-quality datasets.
+- [Export annotated data](https://docs.braintrust.dev/annotate/export.md): Take annotated traces and datasets outside Braintrust to use in external evaluation frameworks, analysis pipelines, reporting, or training workflows.
+- [Create custom views](https://docs.braintrust.dev/annotate/custom-views.md): Help your team understand and act on traces and dataset rows faster. Describe the interface you need in natural language, and Loop generates a customizable React component you can embed anywhere.
+
+#### Human review
+
+- [Set up human review](https://docs.braintrust.dev/annotate/human-review/index.md): Capture structured human judgment on production traces to build ground truth, validate automated scores, and surface edge cases your scorers miss.
+- [Score traces and datasets](https://docs.braintrust.dev/annotate/human-review/score-traces.md): Open logs, experiments, and dataset rows in review mode, set scores, add comments, and move through rows efficiently to record human judgments.
+- [Review with multiple reviewers](https://docs.braintrust.dev/annotate/human-review/multiple-reviewers.md): See how Braintrust combines scores when several reviewers grade the same span, set a base value for non-numeric scores, and switch between reviewers.
+- [Manage review work](https://docs.braintrust.dev/annotate/human-review/manage-review-work.md): Assign rows to reviewers, filter and organize the review queue, and customize table views to distribute and track human review across your team.
+
+#### Datasets
+
+- [Datasets](https://docs.braintrust.dev/annotate/datasets/index.md): Versioned collections of test cases that power repeatable evaluations and capture real production behavior as your application evolves.
+- [Create datasets](https://docs.braintrust.dev/annotate/datasets/create.md): Build datasets from CSV uploads, the SDK, production logs, user feedback, traces, or Loop. Includes multimodal records like images and attachments.
+- [Dataset pipelines](https://docs.braintrust.dev/annotate/datasets/pipelines.md): Transform spans or traces from your project logs into dataset rows in bulk with declarative, version-controlled pipelines.
+- [Manage datasets](https://docs.braintrust.dev/annotate/datasets/manage.md): Organize datasets with tags and stars, pin versions with snapshots, validate with schemas, and edit records programmatically.
+- [Use datasets in evaluations](https://docs.braintrust.dev/annotate/datasets/use-in-evaluations.md): Pass datasets directly to Eval(), assign them to environments, or convert experiment results into dataset format.
+- [Track dataset performance](https://docs.braintrust.dev/annotate/datasets/track-performance.md): See which experiments used a dataset and how each row performs over time, with chart and SQL filters to spot trends.
+
+### Evaluate
+
+- [Evaluate systematically](https://docs.braintrust.dev/evaluate/index.md): Measure AI application quality, detect regressions before they reach production, and build confidence that your system is improving over time.
+- [Iterate in playgrounds](https://docs.braintrust.dev/evaluate/playgrounds.md): Prototype prompts, swap models, and test scorers interactively. Validate ideas quickly in the browser before committing to a full evaluation experiment.
+- [Score production traces](https://docs.braintrust.dev/evaluate/score-online.md): Get continuous quality monitoring on every production request. Evaluations run asynchronously in the background without adding latency to your application.
+- [Evaluation best practices](https://docs.braintrust.dev/evaluate/best-practices.md): Build evaluations that produce reliable, actionable signals. Learn how to structure datasets, write effective scorers, and avoid common pitfalls.
+
+#### Prompts
+
+- [Prompts](https://docs.braintrust.dev/evaluate/prompts/index.md): Manage prompts as versioned Braintrust objects that you author, template, test, and roll out to production without redeploying your app.
+- [Create prompts](https://docs.braintrust.dev/evaluate/prompts/create.md): Define a prompt's model, parameters, messages, and response format in the Braintrust UI, or define it in code and push with the bt CLI.
+- [Prompt templating](https://docs.braintrust.dev/evaluate/prompts/templating.md): Substitute variables, loop over data, and apply conditionals and filters inside prompt messages using Mustache or Nunjucks syntax.
+- [Use prompts in code](https://docs.braintrust.dev/evaluate/prompts/use-in-code.md): Call prompts from your application, build them locally, handle tool calls, stream responses, and invoke them over the REST API.
+- [Version prompts](https://docs.braintrust.dev/evaluate/prompts/versions.md): Track a prompt's history, restore or compare earlier versions, and keep production on a known-good version as you iterate.
+- [Manage prompts](https://docs.braintrust.dev/evaluate/prompts/manage.md): Duplicate prompts and scorers within a project or into another one, and save the filters, columns, and display settings your team works from.
+
+#### Evaluators
+
+- [Evaluate output quality with scorers and classifiers](https://docs.braintrust.dev/evaluate/write-scorers.md): Build scorers and classifiers to evaluate AI outputs with numeric scores or categorical labels, in experiments and in production.
+- [Autoevals](https://docs.braintrust.dev/evaluate/autoevals.md): Use pre-built, battle-tested scorers for common evaluation tasks like factuality checking, semantic similarity, and format validation.
+- [Custom code evaluators](https://docs.braintrust.dev/evaluate/custom-code.md): Write scorers and classifiers as custom code with full control over scoring logic, business rules, and pattern matching to evaluate AI outputs.
+- [LLM-as-a-judge evaluators](https://docs.braintrust.dev/evaluate/llm-as-a-judge.md): Use language models to score or classify AI outputs based on natural language criteria like tone, helpfulness, or intent.
+
+#### Experiments
+
+- [Experiments](https://docs.braintrust.dev/evaluate/run-evaluations.md): Choose how to run evaluations, in code, the UI, or CI/CD, and turn each run into a permanent record you can compare and share.
+- [Run experiments in code](https://docs.braintrust.dev/evaluate/run-in-code.md): Run evaluations with the Braintrust SDK, from a local script or the bt eval CLI, and capture each run as an immutable experiment snapshot.
+- [Run experiments in the UI](https://docs.braintrust.dev/evaluate/run-in-ui.md): Evaluate prompts and workflows in the Braintrust UI, with no code or local setup required.
+- [Run experiments in CI/CD](https://docs.braintrust.dev/evaluate/run-in-ci.md): Automate evaluation runs in CI with GitHub Actions or the bt eval CLI to keep regressions off your main branch.
+- [Advanced eval techniques](https://docs.braintrust.dev/evaluate/advanced-evaluations.md): Improve scoring reliability with trials and hill climbing, evaluate images and PDFs with attachments, and trace tasks to debug them.
+
+##### Analyze results
+
+- [Interpret evaluation results](https://docs.braintrust.dev/evaluate/interpret-results.md): Diagnose where your AI system is underperforming and understand why. Drill into traces, score distributions, and individual test cases to find actionable improvement opportunities.
+- [Compare experiments](https://docs.braintrust.dev/evaluate/compare-experiments.md): Identify which test cases improved or regressed between runs. Set a baseline experiment to align test cases and compare score deltas side by side.
+- [Evaluate reasoning models](https://docs.braintrust.dev/evaluate/reasoning.md): Configure thinking budgets, capture intermediate reasoning traces, and score final outputs for models like OpenAI o4, Claude, and Gemini that think before responding.
+
+#### Remote evals
+
+- [Remote evals and sandboxes](https://docs.braintrust.dev/evaluate/remote-evals.md): Connect custom agent code to a playground, run it in a sandbox, and test complex agents interactively without modifying your deployed code.
+- [Create evaluation parameters](https://docs.braintrust.dev/evaluate/write-parameters.md): Store configurable settings as versioned parameters and reference them across experiments, prompts, and environments without hardcoding values in your code.
+
+### Deploy
+
+- [Deploy](https://docs.braintrust.dev/deploy/index.md): Ship your AI applications to production with confidence
+- [Deploy functions](https://docs.braintrust.dev/deploy/functions.md): Deploy tools, scorers, and workflows to production
+- [Manage environments](https://docs.braintrust.dev/deploy/environments.md): Separate dev, staging, and production configurations
+- [Monitor deployments](https://docs.braintrust.dev/deploy/monitor.md): Track production performance and errors
+- [Stream responses](https://docs.braintrust.dev/deploy/streaming.md): Return incremental responses from prompts and functions
+
+#### Braintrust Gateway
+
+- [Use the Braintrust Gateway](https://docs.braintrust.dev/deploy/gateway.md): Route requests to any AI provider through a unified LLM API
+- [Supported models](https://docs.braintrust.dev/deploy/supported-models.md): Models available through the Braintrust gateway
+- [Use the proxy (deprecated)](https://docs.braintrust.dev/deploy/ai-proxy.md): Call any AI provider through a unified interface (deprecated, use the gateway instead)
+
+### Admin
+
+- [Administration](https://docs.braintrust.dev/admin/index.md): Manage organizations, access control, and infrastructure
+- [Manage organizations](https://docs.braintrust.dev/admin/organizations.md): Configure organization settings and integrations
+- [Manage projects](https://docs.braintrust.dev/admin/projects.md): Configure project settings and features
+- [Configure AI providers](https://docs.braintrust.dev/admin/ai-providers.md): Manage organization-level and project-level AI provider credentials for playgrounds, experiments, and the gateway.
+- [Personal settings](https://docs.braintrust.dev/admin/personal-settings.md): Configure your individual user preferences
+- [Service health](https://docs.braintrust.dev/admin/service-health.md): Monitor Braintrust service availability and subscribe to incident notifications
+
+#### Security
+
+- [Security](https://docs.braintrust.dev/security.md)
+- [Authentication](https://docs.braintrust.dev/admin/authentication.md): Understand how users and services authenticate to Braintrust, and how Braintrust authenticates to model providers on your behalf.
+- [SCIM provisioning](https://docs.braintrust.dev/admin/scim.md): Provision organization members and permission groups from your identity provider, and keep Braintrust access in sync with it.
+- [Audit logging](https://docs.braintrust.dev/admin/audit-logs.md): Track and review administrative actions in your Braintrust organization, such as permission changes, member management, and API key creation
+- [Protect sensitive data](https://docs.braintrust.dev/admin/data-management/protect-sensitive-data.md): Redact PII during project-log ingestion, hide log and dataset fields from selected members when they read them, or remove sensitive data before upload.
+
+##### Access control
+
+- [Access control](https://docs.braintrust.dev/admin/access-control/index.md): Control who can access your projects, experiments, and data using permission groups scoped to organizations, project groups, projects, and objects
+- [Manage permissions](https://docs.braintrust.dev/admin/access-control/manage-permissions.md): Create permission groups, assign permissions, and provision service accounts
+
+#### Billing
+
+- [Manage billing](https://docs.braintrust.dev/admin/billing/index.md): Change plans, monitor usage, and manage billing
+- [Change your plan](https://docs.braintrust.dev/admin/billing/change-plan.md): Upgrade or downgrade between Starter, Pro, and Enterprise
+- [Monitor usage](https://docs.braintrust.dev/admin/billing/monitor-usage.md): Track usage and set up cost alerts
+- [Optimize costs](https://docs.braintrust.dev/admin/billing/optimize-costs.md): Optimize your Braintrust usage and LLM spend with less duplicate logging, sampled online scoring, cheaper models and judges, and batch evals.
+- [Billing FAQ](https://docs.braintrust.dev/admin/billing/faq.md): Common questions about Braintrust pricing, billing, and plans
+
+#### Data management
+
+- [Export to cloud storage](https://docs.braintrust.dev/admin/data-management/export.md): Deliver project logs to S3 or GCS in JSONL or Parquet format, with Hive partitioning for efficient downstream querying.
+- [Configure data retention](https://docs.braintrust.dev/admin/data-management/retention.md): Extend your retention window to keep data longer, or automate and manually delete data to meet compliance obligations and store less.
+
+#### Deployment
+
+- [Deployment options](https://docs.braintrust.dev/admin/deployment/index.md): Compare SaaS and BYOC deployments and choose the right data residency and operational model for your team.
+- [Architecture](https://docs.braintrust.dev/admin/deployment/architecture.md): Understand how Braintrust splits the control plane and data plane, what each data plane component does, and where each type of data is stored.
+
+##### BYOC
+
+- [Bring your own cloud (BYOC)](https://docs.braintrust.dev/admin/deployment/byoc/index.md): Keep application data in your cloud with BYOC while Braintrust operates the data plane.
+- [Set up BYOC on AWS](https://docs.braintrust.dev/admin/deployment/byoc/aws.md): Prepare your AWS account for BYOC so Braintrust can deploy and operate your data plane.
+- [BYOC operations and lifecycle](https://docs.braintrust.dev/admin/deployment/byoc/manage.md): Coordinate maintenance, respond to incidents, and offboard your BYOC deployment.
+- [AWS access and security](https://docs.braintrust.dev/admin/deployment/byoc/aws-security.md): Review Braintrust’s BYOC permissions on AWS, audit its activity, and revoke access.
+
+### Best practices
+
+- [Evaluating agents](https://docs.braintrust.dev/best-practices/agents.md)
+- [Writing scorers](https://docs.braintrust.dev/best-practices/scorers.md)
+- [Product manager workflows](https://docs.braintrust.dev/best-practices/pm-workflows.md)
