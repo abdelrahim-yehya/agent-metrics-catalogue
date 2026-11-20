@@ -65,8 +65,8 @@ and it is not:
 
 **As applied:** S3 was not run as a separate filter over all 31 tools. It was
 applied to the 13 selected tools while collecting `results/built_in_metrics.csv`,
-with the evidence rule in `CLAUDE.md` (URL, saved page, verbatim quote, access
-date). A tool with no built-in agent-execution metric is still reported, with
+with the evidence rule that every row carries a URL, a saved page, a verbatim quote and an
+access date. A tool with no built-in agent-execution metric is still reported, with
 zero rows.
 
 An early keyword scan of the repositories (columns `s3_candidate_rows` and

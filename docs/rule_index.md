@@ -36,7 +36,7 @@ Every rule ID used in this repo, defined once. The full text is in the file name
 
 ## Matrix statuses
 
-The cell statuses of `results/tool_metric_matrix.csv` are defined in `README.md` (How to read the matrix).
+The cell statuses of `results/tool_metric_matrix.csv` are defined in `README.md` (How to read the matrix) and in the header of `src/build_matrix.py`.
 
 ## Known overlaps
 

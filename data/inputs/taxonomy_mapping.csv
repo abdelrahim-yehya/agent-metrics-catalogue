@@ -138,8 +138,8 @@ Opik,Trace count / error count,Error count / rate
 Galileo,Action Advancement,Action progress toward goal
 Galileo,Action Completion,Task / goal completion
 Galileo,Agent Efficiency,Step / action efficiency
-Galileo,Agent Flow,Flow and reasoning coherence
-Galileo,Reasoning Coherence,Flow and reasoning coherence
+Galileo,Agent Flow,Trajectory accuracy
+Galileo,Reasoning Coherence,Plan adherence
 Galileo,Tool Errors,Tool execution errors
 Galileo,Tool Selection Quality,Tool selection
 Weights & Biases Weave,Errors (Call errors),Error count / rate

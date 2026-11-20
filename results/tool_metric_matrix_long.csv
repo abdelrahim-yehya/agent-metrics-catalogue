@@ -409,7 +409,7 @@ Evaluation,Plan and trajectory,Plan adherence,Braintrust,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,promptfoo,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,OpenLLMetry,not documented,,,
 Evaluation,Plan and trajectory,Plan adherence,Opik,generic custom,,,
-Evaluation,Plan and trajectory,Plan adherence,Galileo,generic custom,,,
+Evaluation,Plan and trajectory,Plan adherence,Galileo,built-in,Reasoning Coherence,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Plan and trajectory,Plan adherence,OpenInference,records scores,,,
 Evaluation,Plan and trajectory,Plan adherence,Weights & Biases Weave,generic custom,,,
 Evaluation,Plan and trajectory,Plan adherence,MLflow,generic custom,,,
@@ -425,7 +425,7 @@ Evaluation,Plan and trajectory,Trajectory accuracy,Braintrust,generic custom,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,promptfoo,built-in,trajectory:tool-sequence,built-in evaluator,https://www.promptfoo.dev/docs/configuration/expected-outputs/deterministic/
 Evaluation,Plan and trajectory,Trajectory accuracy,OpenLLMetry,not documented,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,Opik,built-in,Trajectory Accuracy,built-in evaluator,https://www.comet.com/docs/opik/evaluation/metrics/overview
-Evaluation,Plan and trajectory,Trajectory accuracy,Galileo,generic custom,,,
+Evaluation,Plan and trajectory,Trajectory accuracy,Galileo,built-in,Agent Flow,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
 Evaluation,Plan and trajectory,Trajectory accuracy,OpenInference,records scores,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,Weights & Biases Weave,generic custom,,,
 Evaluation,Plan and trajectory,Trajectory accuracy,MLflow,generic custom,,,
@@ -463,22 +463,6 @@ Evaluation,Plan and trajectory,Action progress toward goal,Weights & Biases Weav
 Evaluation,Plan and trajectory,Action progress toward goal,MLflow,generic custom,,,
 Evaluation,Plan and trajectory,Action progress toward goal,Laminar,generic custom,,,
 Evaluation,Plan and trajectory,Action progress toward goal,LangWatch,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,Arize Phoenix,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,Langfuse,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,LangSmith,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,DeepEval,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,OpenTelemetry,records scores,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,Helicone,records scores,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,Braintrust,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,promptfoo,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,OpenLLMetry,not documented,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,Opik,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,Galileo,built-in,Agent Flow | Reasoning Coherence,built-in evaluator,https://docs.galileo.ai/concepts/metrics/metric-comparison
-Evaluation,Plan and trajectory,Flow and reasoning coherence,OpenInference,records scores,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,Weights & Biases Weave,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,MLflow,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,Laminar,generic custom,,,
-Evaluation,Plan and trajectory,Flow and reasoning coherence,LangWatch,generic custom,,,
 Evaluation,Answer quality,Answer correctness,Arize Phoenix,built-in,Correctness,built-in evaluator,https://arize.com/docs/phoenix/evaluation/pre-built-metrics
 Evaluation,Answer quality,Answer correctness,Langfuse,generic custom,,,
 Evaluation,Answer quality,Answer correctness,LangSmith,built-in,Correctness,built-in evaluator,https://docs.langchain.com/langsmith/prebuilt-evaluators.md

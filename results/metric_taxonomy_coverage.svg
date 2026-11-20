@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.64 369.0" width="512.64pt" height="369.0pt" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif">
-<rect width="512.64" height="369.0" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0.0 512.64 369.00" width="512.64pt" height="369.00pt" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif">
+<rect y="0.0" width="512.64" height="369.00" fill="#ffffff"/>
 <text x="0.00" y="43.00" font-size="9" fill="#1f6f8b" font-weight="bold" text-anchor="start">Observability</text>
 <text x="0.00" y="54.60" font-size="5.5" fill="#5d666d" font-weight="normal" text-anchor="start">18 metrics in 6 categories</text>
 <text transform="translate(127.80,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Langfuse</text>
@@ -311,7 +311,7 @@
 <text x="22.00" y="333.10" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Tools: number of the 13 tools shown that document the metric as built-in</text>
 <text x="22.00" y="343.90" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">The number after a category is its number of metrics</text>
 <text x="262.64" y="43.00" font-size="9" fill="#b4582a" font-weight="bold" text-anchor="start">Evaluation</text>
-<text x="262.64" y="54.60" font-size="5.5" fill="#5d666d" font-weight="normal" text-anchor="start">28 metrics in 7 categories</text>
+<text x="262.64" y="54.60" font-size="5.5" fill="#5d666d" font-weight="normal" text-anchor="start">27 metrics in 7 categories</text>
 <text transform="translate(390.44,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Langfuse</text>
 <text transform="translate(398.84,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">MLflow</text>
 <text transform="translate(407.24,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Laminar</text>
@@ -424,7 +424,7 @@
 <circle cx="481.04" cy="129.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="129.65" r="1.5" fill="#b4582a"/>
 <text x="508.64" y="131.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">8</text>
-<text x="262.64" y="142.89" font-size="6.5" font-weight="bold" fill="#b4582a">Plan and trajectory<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">6</tspan></text>
+<text x="262.64" y="142.89" font-size="6.5" font-weight="bold" fill="#b4582a">Plan and trajectory<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">5</tspan></text>
 <line x1="262.64" y1="145.04" x2="512.64" y2="145.04" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
 <text x="267.64" y="150.46" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Plan quality†</text>
 <circle cx="388.64" cy="148.46" r="0.55" fill="#c9c5bc"/>
@@ -452,10 +452,10 @@
 <circle cx="447.44" cy="156.23" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="156.23" r="1.5" fill="#b4582a"/>
 <circle cx="464.24" cy="156.23" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="156.23" r="0.55" fill="#c9c5bc"/>
+<circle cx="472.64" cy="156.23" r="1.5" fill="#b4582a"/>
 <circle cx="481.04" cy="156.23" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="156.23" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="158.23" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">2</text>
+<text x="508.64" y="158.23" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">3</text>
 <text x="267.64" y="166.00" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Trajectory accuracy</text>
 <circle cx="388.64" cy="164.00" r="0.55" fill="#c9c5bc"/>
 <circle cx="397.04" cy="164.00" r="0.55" fill="#c9c5bc"/>
@@ -467,10 +467,10 @@
 <circle cx="447.44" cy="164.00" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="164.00" r="1.5" fill="#b4582a"/>
 <circle cx="464.24" cy="164.00" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="164.00" r="0.55" fill="#c9c5bc"/>
+<circle cx="472.64" cy="164.00" r="1.5" fill="#b4582a"/>
 <circle cx="481.04" cy="164.00" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="164.00" r="1.5" fill="#b4582a"/>
-<text x="508.64" y="166.00" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">3</text>
+<text x="508.64" y="166.00" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">4</text>
 <text x="267.64" y="173.77" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Step/action efficiency</text>
 <circle cx="388.64" cy="171.77" r="0.55" fill="#c9c5bc"/>
 <circle cx="397.04" cy="171.77" r="0.55" fill="#c9c5bc"/>
@@ -501,60 +501,60 @@
 <circle cx="481.04" cy="179.54" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="179.54" r="0.55" fill="#c9c5bc"/>
 <text x="508.64" y="181.54" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">1</text>
-<text x="267.64" y="189.31" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Flow and reasoning coherence†</text>
-<circle cx="388.64" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="405.44" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="422.24" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="430.64" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="439.04" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="447.44" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="464.24" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="187.31" r="1.5" fill="#b4582a"/>
-<circle cx="481.04" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<circle cx="498.44" cy="187.31" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="189.31" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">1</text>
-<text x="262.64" y="200.54" font-size="6.5" font-weight="bold" fill="#b4582a">Answer quality<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">6</tspan></text>
-<line x1="262.64" y1="202.69" x2="512.64" y2="202.69" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
-<text x="267.64" y="208.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Answer correctness</text>
+<text x="262.64" y="192.77" font-size="6.5" font-weight="bold" fill="#b4582a">Answer quality<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">6</tspan></text>
+<line x1="262.64" y1="194.92" x2="512.64" y2="194.92" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="267.64" y="200.34" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Answer correctness</text>
+<circle cx="388.64" cy="198.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="397.04" cy="198.34" r="1.5" fill="#b4582a"/>
+<circle cx="405.44" cy="198.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="413.84" cy="198.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="422.24" cy="198.34" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="198.34" r="1.5" fill="#b4582a"/>
+<circle cx="439.04" cy="198.34" r="1.5" fill="#b4582a"/>
+<circle cx="447.44" cy="198.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="455.84" cy="198.34" r="1.5" fill="#b4582a"/>
+<circle cx="464.24" cy="198.34" r="1.5" fill="#b4582a"/>
+<circle cx="472.64" cy="198.34" r="1.5" fill="#b4582a"/>
+<circle cx="481.04" cy="198.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="498.44" cy="198.34" r="1.5" fill="#b4582a"/>
+<text x="508.64" y="200.34" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">8</text>
+<text x="267.64" y="208.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Answer relevance</text>
 <circle cx="388.64" cy="206.11" r="0.55" fill="#c9c5bc"/>
 <circle cx="397.04" cy="206.11" r="1.5" fill="#b4582a"/>
 <circle cx="405.44" cy="206.11" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="206.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="413.84" cy="206.11" r="1.5" fill="#b4582a"/>
 <circle cx="422.24" cy="206.11" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="206.11" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="206.11" r="0.55" fill="#c9c5bc"/>
 <circle cx="439.04" cy="206.11" r="1.5" fill="#b4582a"/>
 <circle cx="447.44" cy="206.11" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="206.11" r="1.5" fill="#b4582a"/>
 <circle cx="464.24" cy="206.11" r="1.5" fill="#b4582a"/>
-<circle cx="472.64" cy="206.11" r="1.5" fill="#b4582a"/>
+<circle cx="472.64" cy="206.11" r="0.55" fill="#c9c5bc"/>
 <circle cx="481.04" cy="206.11" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="206.11" r="1.5" fill="#b4582a"/>
-<text x="508.64" y="208.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">8</text>
-<text x="267.64" y="215.88" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Answer relevance</text>
-<circle cx="388.64" cy="213.88" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="213.88" r="1.5" fill="#b4582a"/>
+<text x="508.64" y="208.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
+<text x="267.64" y="215.88" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Helpfulness</text>
+<circle cx="388.64" cy="213.88" r="1.5" fill="#b4582a"/>
+<circle cx="397.04" cy="213.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="405.44" cy="213.88" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="213.88" r="1.5" fill="#b4582a"/>
+<circle cx="413.84" cy="213.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="422.24" cy="213.88" r="1.5" fill="#b4582a"/>
 <circle cx="430.64" cy="213.88" r="0.55" fill="#c9c5bc"/>
-<circle cx="439.04" cy="213.88" r="1.5" fill="#b4582a"/>
+<circle cx="439.04" cy="213.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="447.44" cy="213.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="213.88" r="1.5" fill="#b4582a"/>
-<circle cx="464.24" cy="213.88" r="1.5" fill="#b4582a"/>
+<circle cx="464.24" cy="213.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="472.64" cy="213.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="481.04" cy="213.88" r="0.55" fill="#c9c5bc"/>
-<circle cx="498.44" cy="213.88" r="1.5" fill="#b4582a"/>
-<text x="508.64" y="215.88" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
-<text x="267.64" y="223.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Helpfulness</text>
-<circle cx="388.64" cy="221.65" r="1.5" fill="#b4582a"/>
+<circle cx="498.44" cy="213.88" r="0.55" fill="#c9c5bc"/>
+<text x="508.64" y="215.88" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">3</text>
+<text x="267.64" y="223.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Conciseness</text>
+<circle cx="388.64" cy="221.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="397.04" cy="221.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="405.44" cy="221.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="413.84" cy="221.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="422.24" cy="221.65" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="221.65" r="0.55" fill="#c9c5bc"/>
+<circle cx="422.24" cy="221.65" r="0.55" fill="#c9c5bc"/>
+<circle cx="430.64" cy="221.65" r="1.5" fill="#b4582a"/>
 <circle cx="439.04" cy="221.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="447.44" cy="221.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="221.65" r="1.5" fill="#b4582a"/>
@@ -562,108 +562,108 @@
 <circle cx="472.64" cy="221.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="481.04" cy="221.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="221.65" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="223.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">3</text>
-<text x="267.64" y="231.42" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Conciseness</text>
+<text x="508.64" y="223.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">2</text>
+<text x="267.64" y="231.42" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Tone appropriateness</text>
 <circle cx="388.64" cy="229.42" r="0.55" fill="#c9c5bc"/>
 <circle cx="397.04" cy="229.42" r="0.55" fill="#c9c5bc"/>
 <circle cx="405.44" cy="229.42" r="0.55" fill="#c9c5bc"/>
 <circle cx="413.84" cy="229.42" r="0.55" fill="#c9c5bc"/>
-<circle cx="422.24" cy="229.42" r="0.55" fill="#c9c5bc"/>
-<circle cx="430.64" cy="229.42" r="1.5" fill="#b4582a"/>
+<circle cx="422.24" cy="229.42" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="229.42" r="0.55" fill="#c9c5bc"/>
 <circle cx="439.04" cy="229.42" r="0.55" fill="#c9c5bc"/>
 <circle cx="447.44" cy="229.42" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="229.42" r="1.5" fill="#b4582a"/>
 <circle cx="464.24" cy="229.42" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="229.42" r="0.55" fill="#c9c5bc"/>
+<circle cx="472.64" cy="229.42" r="1.5" fill="#b4582a"/>
 <circle cx="481.04" cy="229.42" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="229.42" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="231.42" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">2</text>
-<text x="267.64" y="239.19" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Tone appropriateness</text>
+<text x="508.64" y="231.42" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">3</text>
+<text x="267.64" y="239.19" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Fluency†</text>
 <circle cx="388.64" cy="237.19" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="237.19" r="0.55" fill="#c9c5bc"/>
+<circle cx="397.04" cy="237.19" r="1.5" fill="#b4582a"/>
 <circle cx="405.44" cy="237.19" r="0.55" fill="#c9c5bc"/>
 <circle cx="413.84" cy="237.19" r="0.55" fill="#c9c5bc"/>
-<circle cx="422.24" cy="237.19" r="1.5" fill="#b4582a"/>
+<circle cx="422.24" cy="237.19" r="0.55" fill="#c9c5bc"/>
 <circle cx="430.64" cy="237.19" r="0.55" fill="#c9c5bc"/>
 <circle cx="439.04" cy="237.19" r="0.55" fill="#c9c5bc"/>
 <circle cx="447.44" cy="237.19" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="237.19" r="1.5" fill="#b4582a"/>
+<circle cx="455.84" cy="237.19" r="0.55" fill="#c9c5bc"/>
 <circle cx="464.24" cy="237.19" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="237.19" r="1.5" fill="#b4582a"/>
+<circle cx="472.64" cy="237.19" r="0.55" fill="#c9c5bc"/>
 <circle cx="481.04" cy="237.19" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="237.19" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="239.19" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">3</text>
-<text x="267.64" y="246.96" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Fluency†</text>
-<circle cx="388.64" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="244.96" r="1.5" fill="#b4582a"/>
-<circle cx="405.44" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="422.24" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="430.64" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="439.04" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="447.44" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="464.24" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="481.04" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<circle cx="498.44" cy="244.96" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="246.96" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">1</text>
-<text x="262.64" y="258.19" font-size="6.5" font-weight="bold" fill="#b4582a">Grounding<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">1</tspan></text>
-<line x1="262.64" y1="260.34" x2="512.64" y2="260.34" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
-<text x="267.64" y="265.76" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Faithfulness to context</text>
-<circle cx="388.64" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="397.04" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="405.44" cy="263.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="422.24" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="439.04" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="447.44" cy="263.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="464.24" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="472.64" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="481.04" cy="263.76" r="1.5" fill="#b4582a"/>
-<circle cx="498.44" cy="263.76" r="1.5" fill="#b4582a"/>
-<text x="508.64" y="265.76" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">11</text>
-<text x="262.64" y="277.00" font-size="6.5" font-weight="bold" fill="#b4582a">Safety and policy<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">6</tspan></text>
-<line x1="262.64" y1="279.15" x2="512.64" y2="279.15" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
-<text x="267.64" y="284.57" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Toxicity</text>
-<circle cx="388.64" cy="282.57" r="1.5" fill="#b4582a"/>
-<circle cx="397.04" cy="282.57" r="1.5" fill="#b4582a"/>
+<text x="508.64" y="239.19" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">1</text>
+<text x="262.64" y="250.42" font-size="6.5" font-weight="bold" fill="#b4582a">Grounding<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">1</tspan></text>
+<line x1="262.64" y1="252.57" x2="512.64" y2="252.57" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="267.64" y="257.99" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Faithfulness to context</text>
+<circle cx="388.64" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="397.04" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="405.44" cy="255.99" r="0.55" fill="#c9c5bc"/>
+<circle cx="413.84" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="422.24" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="439.04" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="447.44" cy="255.99" r="0.55" fill="#c9c5bc"/>
+<circle cx="455.84" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="464.24" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="472.64" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="481.04" cy="255.99" r="1.5" fill="#b4582a"/>
+<circle cx="498.44" cy="255.99" r="1.5" fill="#b4582a"/>
+<text x="508.64" y="257.99" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">11</text>
+<text x="262.64" y="269.23" font-size="6.5" font-weight="bold" fill="#b4582a">Safety and policy<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">6</tspan></text>
+<line x1="262.64" y1="271.38" x2="512.64" y2="271.38" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="267.64" y="276.80" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Toxicity</text>
+<circle cx="388.64" cy="274.80" r="1.5" fill="#b4582a"/>
+<circle cx="397.04" cy="274.80" r="1.5" fill="#b4582a"/>
+<circle cx="405.44" cy="274.80" r="0.55" fill="#c9c5bc"/>
+<circle cx="413.84" cy="274.80" r="1.5" fill="#b4582a"/>
+<circle cx="422.24" cy="274.80" r="0.55" fill="#c9c5bc"/>
+<circle cx="430.64" cy="274.80" r="1.5" fill="#b4582a"/>
+<circle cx="439.04" cy="274.80" r="1.5" fill="#b4582a"/>
+<circle cx="447.44" cy="274.80" r="0.55" fill="#c9c5bc"/>
+<circle cx="455.84" cy="274.80" r="1.5" fill="#b4582a"/>
+<circle cx="464.24" cy="274.80" r="0.55" fill="#c9c5bc"/>
+<circle cx="472.64" cy="274.80" r="1.5" fill="#b4582a"/>
+<circle cx="481.04" cy="274.80" r="0.55" fill="#c9c5bc"/>
+<circle cx="498.44" cy="274.80" r="0.55" fill="#c9c5bc"/>
+<text x="508.64" y="276.80" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
+<text x="267.64" y="284.57" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Bias and fairness</text>
+<circle cx="388.64" cy="282.57" r="0.55" fill="#c9c5bc"/>
+<circle cx="397.04" cy="282.57" r="0.55" fill="#c9c5bc"/>
 <circle cx="405.44" cy="282.57" r="0.55" fill="#c9c5bc"/>
 <circle cx="413.84" cy="282.57" r="1.5" fill="#b4582a"/>
-<circle cx="422.24" cy="282.57" r="0.55" fill="#c9c5bc"/>
-<circle cx="430.64" cy="282.57" r="1.5" fill="#b4582a"/>
-<circle cx="439.04" cy="282.57" r="1.5" fill="#b4582a"/>
+<circle cx="422.24" cy="282.57" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="282.57" r="0.55" fill="#c9c5bc"/>
+<circle cx="439.04" cy="282.57" r="0.55" fill="#c9c5bc"/>
 <circle cx="447.44" cy="282.57" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="282.57" r="1.5" fill="#b4582a"/>
 <circle cx="464.24" cy="282.57" r="0.55" fill="#c9c5bc"/>
 <circle cx="472.64" cy="282.57" r="1.5" fill="#b4582a"/>
 <circle cx="481.04" cy="282.57" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="282.57" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="284.57" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
-<text x="267.64" y="292.34" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Bias and fairness</text>
+<text x="508.64" y="284.57" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">4</text>
+<text x="267.64" y="292.34" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Sensitive data leakage</text>
 <circle cx="388.64" cy="290.34" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="290.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="397.04" cy="290.34" r="1.5" fill="#b4582a"/>
 <circle cx="405.44" cy="290.34" r="0.55" fill="#c9c5bc"/>
 <circle cx="413.84" cy="290.34" r="1.5" fill="#b4582a"/>
-<circle cx="422.24" cy="290.34" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="290.34" r="0.55" fill="#c9c5bc"/>
-<circle cx="439.04" cy="290.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="422.24" cy="290.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="430.64" cy="290.34" r="1.5" fill="#b4582a"/>
+<circle cx="439.04" cy="290.34" r="1.5" fill="#b4582a"/>
 <circle cx="447.44" cy="290.34" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="290.34" r="1.5" fill="#b4582a"/>
 <circle cx="464.24" cy="290.34" r="0.55" fill="#c9c5bc"/>
 <circle cx="472.64" cy="290.34" r="1.5" fill="#b4582a"/>
-<circle cx="481.04" cy="290.34" r="0.55" fill="#c9c5bc"/>
+<circle cx="481.04" cy="290.34" r="1.5" fill="#b4582a"/>
 <circle cx="498.44" cy="290.34" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="292.34" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">4</text>
-<text x="267.64" y="300.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Sensitive data leakage</text>
+<text x="508.64" y="292.34" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
+<text x="267.64" y="300.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Injection detection</text>
 <circle cx="388.64" cy="298.11" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="298.11" r="1.5" fill="#b4582a"/>
+<circle cx="397.04" cy="298.11" r="0.55" fill="#c9c5bc"/>
 <circle cx="405.44" cy="298.11" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="298.11" r="1.5" fill="#b4582a"/>
-<circle cx="422.24" cy="298.11" r="0.55" fill="#c9c5bc"/>
-<circle cx="430.64" cy="298.11" r="1.5" fill="#b4582a"/>
+<circle cx="413.84" cy="298.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="422.24" cy="298.11" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="298.11" r="0.55" fill="#c9c5bc"/>
 <circle cx="439.04" cy="298.11" r="1.5" fill="#b4582a"/>
 <circle cx="447.44" cy="298.11" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="298.11" r="1.5" fill="#b4582a"/>
@@ -671,61 +671,61 @@
 <circle cx="472.64" cy="298.11" r="1.5" fill="#b4582a"/>
 <circle cx="481.04" cy="298.11" r="1.5" fill="#b4582a"/>
 <circle cx="498.44" cy="298.11" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="300.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
-<text x="267.64" y="307.88" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Injection detection</text>
+<text x="508.64" y="300.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">5</text>
+<text x="267.64" y="307.88" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Refusal detection</text>
 <circle cx="388.64" cy="305.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="397.04" cy="305.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="405.44" cy="305.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="413.84" cy="305.88" r="0.55" fill="#c9c5bc"/>
-<circle cx="422.24" cy="305.88" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="305.88" r="0.55" fill="#c9c5bc"/>
-<circle cx="439.04" cy="305.88" r="1.5" fill="#b4582a"/>
+<circle cx="422.24" cy="305.88" r="0.55" fill="#c9c5bc"/>
+<circle cx="430.64" cy="305.88" r="1.5" fill="#b4582a"/>
+<circle cx="439.04" cy="305.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="447.44" cy="305.88" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="305.88" r="1.5" fill="#b4582a"/>
+<circle cx="455.84" cy="305.88" r="0.55" fill="#c9c5bc"/>
 <circle cx="464.24" cy="305.88" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="305.88" r="1.5" fill="#b4582a"/>
-<circle cx="481.04" cy="305.88" r="1.5" fill="#b4582a"/>
-<circle cx="498.44" cy="305.88" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="307.88" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">5</text>
-<text x="267.64" y="315.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Refusal detection</text>
+<circle cx="472.64" cy="305.88" r="0.55" fill="#c9c5bc"/>
+<circle cx="481.04" cy="305.88" r="0.55" fill="#c9c5bc"/>
+<circle cx="498.44" cy="305.88" r="1.5" fill="#b4582a"/>
+<text x="508.64" y="307.88" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">2</text>
+<text x="267.64" y="315.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Policy and moderation violations</text>
 <circle cx="388.64" cy="313.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="397.04" cy="313.65" r="0.55" fill="#c9c5bc"/>
 <circle cx="405.44" cy="313.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="313.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="422.24" cy="313.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="430.64" cy="313.65" r="1.5" fill="#b4582a"/>
-<circle cx="439.04" cy="313.65" r="0.55" fill="#c9c5bc"/>
+<circle cx="413.84" cy="313.65" r="1.5" fill="#b4582a"/>
+<circle cx="422.24" cy="313.65" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="313.65" r="0.55" fill="#c9c5bc"/>
+<circle cx="439.04" cy="313.65" r="1.5" fill="#b4582a"/>
 <circle cx="447.44" cy="313.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="313.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="464.24" cy="313.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="313.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="481.04" cy="313.65" r="0.55" fill="#c9c5bc"/>
-<circle cx="498.44" cy="313.65" r="1.5" fill="#b4582a"/>
-<text x="508.64" y="315.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">2</text>
-<text x="267.64" y="323.42" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Policy and moderation violations</text>
-<circle cx="388.64" cy="321.42" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="321.42" r="0.55" fill="#c9c5bc"/>
-<circle cx="405.44" cy="321.42" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="321.42" r="1.5" fill="#b4582a"/>
-<circle cx="422.24" cy="321.42" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="321.42" r="0.55" fill="#c9c5bc"/>
-<circle cx="439.04" cy="321.42" r="1.5" fill="#b4582a"/>
-<circle cx="447.44" cy="321.42" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="321.42" r="1.5" fill="#b4582a"/>
-<circle cx="464.24" cy="321.42" r="1.5" fill="#b4582a"/>
-<circle cx="472.64" cy="321.42" r="1.5" fill="#b4582a"/>
-<circle cx="481.04" cy="321.42" r="1.5" fill="#b4582a"/>
-<circle cx="498.44" cy="321.42" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="323.42" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
-<text x="262.64" y="334.65" font-size="6.5" font-weight="bold" fill="#b4582a">Conversation<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">3</tspan></text>
-<line x1="262.64" y1="336.80" x2="512.64" y2="336.80" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
-<text x="267.64" y="342.22" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Knowledge retention</text>
+<circle cx="455.84" cy="313.65" r="1.5" fill="#b4582a"/>
+<circle cx="464.24" cy="313.65" r="1.5" fill="#b4582a"/>
+<circle cx="472.64" cy="313.65" r="1.5" fill="#b4582a"/>
+<circle cx="481.04" cy="313.65" r="1.5" fill="#b4582a"/>
+<circle cx="498.44" cy="313.65" r="0.55" fill="#c9c5bc"/>
+<text x="508.64" y="315.65" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
+<text x="262.64" y="326.88" font-size="6.5" font-weight="bold" fill="#b4582a">Conversation<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">3</tspan></text>
+<line x1="262.64" y1="329.03" x2="512.64" y2="329.03" stroke="#b4582a" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="267.64" y="334.45" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Knowledge retention</text>
+<circle cx="388.64" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<circle cx="397.04" cy="332.45" r="1.5" fill="#b4582a"/>
+<circle cx="405.44" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<circle cx="413.84" cy="332.45" r="1.5" fill="#b4582a"/>
+<circle cx="422.24" cy="332.45" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<circle cx="439.04" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<circle cx="447.44" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<circle cx="455.84" cy="332.45" r="1.5" fill="#b4582a"/>
+<circle cx="464.24" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<circle cx="472.64" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<circle cx="481.04" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<circle cx="498.44" cy="332.45" r="0.55" fill="#c9c5bc"/>
+<text x="508.64" y="334.45" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">4</text>
+<text x="267.64" y="342.22" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">User satisfaction or frustration</text>
 <circle cx="388.64" cy="340.22" r="0.55" fill="#c9c5bc"/>
 <circle cx="397.04" cy="340.22" r="1.5" fill="#b4582a"/>
 <circle cx="405.44" cy="340.22" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="340.22" r="1.5" fill="#b4582a"/>
+<circle cx="413.84" cy="340.22" r="0.55" fill="#c9c5bc"/>
 <circle cx="422.24" cy="340.22" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="340.22" r="0.55" fill="#c9c5bc"/>
+<circle cx="430.64" cy="340.22" r="1.5" fill="#b4582a"/>
 <circle cx="439.04" cy="340.22" r="0.55" fill="#c9c5bc"/>
 <circle cx="447.44" cy="340.22" r="0.55" fill="#c9c5bc"/>
 <circle cx="455.84" cy="340.22" r="1.5" fill="#b4582a"/>
@@ -734,34 +734,19 @@
 <circle cx="481.04" cy="340.22" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="340.22" r="0.55" fill="#c9c5bc"/>
 <text x="508.64" y="342.22" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">4</text>
-<text x="267.64" y="349.99" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">User satisfaction or frustration</text>
+<text x="267.64" y="349.99" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Conversation coherence</text>
 <circle cx="388.64" cy="347.99" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="347.99" r="1.5" fill="#b4582a"/>
+<circle cx="397.04" cy="347.99" r="0.55" fill="#c9c5bc"/>
 <circle cx="405.44" cy="347.99" r="0.55" fill="#c9c5bc"/>
 <circle cx="413.84" cy="347.99" r="0.55" fill="#c9c5bc"/>
 <circle cx="422.24" cy="347.99" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="347.99" r="1.5" fill="#b4582a"/>
+<circle cx="430.64" cy="347.99" r="0.55" fill="#c9c5bc"/>
 <circle cx="439.04" cy="347.99" r="0.55" fill="#c9c5bc"/>
 <circle cx="447.44" cy="347.99" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="347.99" r="1.5" fill="#b4582a"/>
+<circle cx="455.84" cy="347.99" r="0.55" fill="#c9c5bc"/>
 <circle cx="464.24" cy="347.99" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="347.99" r="0.55" fill="#c9c5bc"/>
+<circle cx="472.64" cy="347.99" r="1.5" fill="#b4582a"/>
 <circle cx="481.04" cy="347.99" r="0.55" fill="#c9c5bc"/>
 <circle cx="498.44" cy="347.99" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="349.99" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">4</text>
-<text x="267.64" y="357.76" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Conversation coherence</text>
-<circle cx="388.64" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="397.04" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="405.44" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="413.84" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="422.24" cy="355.76" r="1.5" fill="#b4582a"/>
-<circle cx="430.64" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="439.04" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="447.44" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="455.84" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="464.24" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="472.64" cy="355.76" r="1.5" fill="#b4582a"/>
-<circle cx="481.04" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<circle cx="498.44" cy="355.76" r="0.55" fill="#c9c5bc"/>
-<text x="508.64" y="357.76" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">2</text>
+<text x="508.64" y="349.99" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">2</text>
 </svg>

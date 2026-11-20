@@ -1,0 +1,301 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 18.0 252.0 255.03" width="252.0pt" height="255.03pt" font-family="Helvetica, Arial, 'Liberation Sans', sans-serif">
+<rect y="18.0" width="252.0" height="255.03" fill="#ffffff"/>
+<text x="0.00" y="43.00" font-size="9" fill="#1f6f8b" font-weight="bold" text-anchor="start">Observability</text>
+<text x="0.00" y="54.60" font-size="5.5" fill="#5d666d" font-weight="normal" text-anchor="start">18 metrics in 6 categories</text>
+<text transform="translate(127.80,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Langfuse</text>
+<text transform="translate(136.20,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">MLflow</text>
+<text transform="translate(144.60,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Laminar</text>
+<text transform="translate(153.00,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">DeepEval</text>
+<text transform="translate(161.40,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Opik</text>
+<text transform="translate(169.80,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Arize Phoenix</text>
+<text transform="translate(178.20,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">LangWatch</text>
+<text transform="translate(186.60,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Helicone</text>
+<text transform="translate(195.00,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">LangSmith</text>
+<text transform="translate(203.40,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Braintrust</text>
+<text transform="translate(211.80,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Galileo</text>
+<text transform="translate(220.20,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">W&amp;B Weave</text>
+<text transform="translate(228.60,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">promptfoo</text>
+<text transform="translate(247.80,59.5) rotate(-90)" font-size="5.5" fill="#1d2328">Tools</text>
+<text x="0.00" y="74.20" font-size="6.5" font-weight="bold" fill="#1f6f8b">Tool use<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">3</tspan></text>
+<line x1="0.00" y1="76.35" x2="250.00" y2="76.35" stroke="#1f6f8b" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="5.00" y="81.77" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Tool execution errors</text>
+<circle cx="126.00" cy="79.77" r="0.55" fill="#c9c5bc"/>
+<circle cx="134.40" cy="79.77" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="79.77" r="0.55" fill="#c9c5bc"/>
+<circle cx="151.20" cy="79.77" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="79.77" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="79.77" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="79.77" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="79.77" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="79.77" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="79.77" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="79.77" r="1.5" fill="#1f6f8b"/>
+<circle cx="218.40" cy="79.77" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="79.77" r="0.55" fill="#c9c5bc"/>
+<text x="246.00" y="81.77" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">5</text>
+<text x="5.00" y="89.54" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Tool call count</text>
+<circle cx="126.00" cy="87.54" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<circle cx="151.20" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<circle cx="159.60" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="87.54" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="87.54" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="87.54" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="87.54" r="0.55" fill="#c9c5bc"/>
+<text x="246.00" y="89.54" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">4</text>
+<text x="5.00" y="97.31" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Tool execution latency</text>
+<circle cx="126.00" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="134.40" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="151.20" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="159.60" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="176.40" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="95.31" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="210.00" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="95.31" r="0.55" fill="#c9c5bc"/>
+<text x="246.00" y="97.31" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">1</text>
+<text x="0.00" y="108.54" font-size="6.5" font-weight="bold" fill="#1f6f8b">Plan and trajectory<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">1</tspan></text>
+<line x1="0.00" y1="110.69" x2="250.00" y2="110.69" stroke="#1f6f8b" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="5.00" y="116.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Step count</text>
+<circle cx="126.00" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="134.40" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="151.20" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="159.60" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="176.40" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="201.60" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="210.00" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="114.11" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="114.11" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="116.11" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">1</text>
+<text x="0.00" y="127.35" font-size="6.5" font-weight="bold" fill="#1f6f8b">Token usage<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">5</tspan></text>
+<line x1="0.00" y1="129.50" x2="250.00" y2="129.50" stroke="#1f6f8b" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="5.00" y="134.92" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Input tokens</text>
+<circle cx="126.00" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="142.80" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="184.80" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<circle cx="218.40" cy="132.92" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="132.92" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="134.92" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">12</text>
+<text x="5.00" y="142.69" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Output tokens</text>
+<circle cx="126.00" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="142.80" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="184.80" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<circle cx="218.40" cy="140.69" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="140.69" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="142.69" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">12</text>
+<text x="5.00" y="150.46" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Total tokens</text>
+<circle cx="126.00" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="142.80" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="148.46" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="218.40" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<circle cx="226.80" cy="148.46" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="150.46" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">12</text>
+<text x="5.00" y="158.23" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Cached tokens</text>
+<circle cx="126.00" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="156.23" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="156.23" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="184.80" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="156.23" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<circle cx="226.80" cy="156.23" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="158.23" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">10</text>
+<text x="5.00" y="166.00" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Reasoning tokens</text>
+<circle cx="126.00" cy="164.00" r="0.55" fill="#c9c5bc"/>
+<circle cx="134.40" cy="164.00" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="164.00" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="164.00" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="164.00" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="164.00" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="164.00" r="1.5" fill="#1f6f8b"/>
+<circle cx="184.80" cy="164.00" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="164.00" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="164.00" r="0.55" fill="#c9c5bc"/>
+<circle cx="210.00" cy="164.00" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="164.00" r="1.5" fill="#1f6f8b"/>
+<circle cx="226.80" cy="164.00" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="166.00" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
+<text x="0.00" y="177.23" font-size="6.5" font-weight="bold" fill="#1f6f8b">Cost<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">2</tspan></text>
+<line x1="0.00" y1="179.38" x2="250.00" y2="179.38" stroke="#1f6f8b" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="5.00" y="184.80" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Estimated cost</text>
+<circle cx="126.00" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="142.80" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="184.80" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="218.40" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<circle cx="226.80" cy="182.80" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="184.80" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">13</text>
+<text x="5.00" y="192.57" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Cost breakdown by token type</text>
+<circle cx="126.00" cy="190.57" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="190.57" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="190.57" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="190.57" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="190.57" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="190.57" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="190.57" r="1.5" fill="#1f6f8b"/>
+<circle cx="184.80" cy="190.57" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="190.57" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="190.57" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="190.57" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="190.57" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="190.57" r="0.55" fill="#c9c5bc"/>
+<text x="246.00" y="192.57" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">7</text>
+<text x="0.00" y="203.80" font-size="6.5" font-weight="bold" fill="#1f6f8b">Latency<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">4</tspan></text>
+<line x1="0.00" y1="205.95" x2="250.00" y2="205.95" stroke="#1f6f8b" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="5.00" y="211.37" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Trace/run latency</text>
+<circle cx="126.00" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="142.80" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="209.37" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="209.37" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="209.37" r="1.5" fill="#1f6f8b"/>
+<circle cx="218.40" cy="209.37" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="209.37" r="0.55" fill="#c9c5bc"/>
+<text x="246.00" y="211.37" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">9</text>
+<text x="5.00" y="219.14" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">LLM call latency</text>
+<circle cx="126.00" cy="217.14" r="0.55" fill="#c9c5bc"/>
+<circle cx="134.40" cy="217.14" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="217.14" r="0.55" fill="#c9c5bc"/>
+<circle cx="151.20" cy="217.14" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="217.14" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="217.14" r="0.55" fill="#c9c5bc"/>
+<circle cx="176.40" cy="217.14" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="217.14" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="217.14" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="217.14" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="217.14" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="217.14" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="217.14" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="219.14" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">5</text>
+<text x="5.00" y="226.91" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Span duration</text>
+<circle cx="126.00" cy="224.91" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="224.91" r="1.5" fill="#1f6f8b"/>
+<circle cx="142.80" cy="224.91" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="224.91" r="0.55" fill="#c9c5bc"/>
+<circle cx="159.60" cy="224.91" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="224.91" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="224.91" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="224.91" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="224.91" r="0.55" fill="#c9c5bc"/>
+<circle cx="201.60" cy="224.91" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="224.91" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="224.91" r="1.5" fill="#1f6f8b"/>
+<circle cx="226.80" cy="224.91" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="226.91" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">8</text>
+<text x="5.00" y="234.68" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Time to first token</text>
+<circle cx="126.00" cy="232.68" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="232.68" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="232.68" r="0.55" fill="#c9c5bc"/>
+<circle cx="151.20" cy="232.68" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="232.68" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="232.68" r="0.55" fill="#c9c5bc"/>
+<circle cx="176.40" cy="232.68" r="1.5" fill="#1f6f8b"/>
+<circle cx="184.80" cy="232.68" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="232.68" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="232.68" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="232.68" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="232.68" r="1.5" fill="#1f6f8b"/>
+<circle cx="226.80" cy="232.68" r="0.55" fill="#c9c5bc"/>
+<text x="246.00" y="234.68" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">8</text>
+<text x="0.00" y="245.92" font-size="6.5" font-weight="bold" fill="#1f6f8b">Errors and volume<tspan dx="3.5" font-size="5.5" font-weight="normal" fill="#5d666d">3</tspan></text>
+<line x1="0.00" y1="248.07" x2="250.00" y2="248.07" stroke="#1f6f8b" stroke-opacity="0.5" stroke-width="0.9"/>
+<text x="5.00" y="253.49" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Error count/rate</text>
+<circle cx="126.00" cy="251.49" r="0.55" fill="#c9c5bc"/>
+<circle cx="134.40" cy="251.49" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="251.49" r="0.55" fill="#c9c5bc"/>
+<circle cx="151.20" cy="251.49" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="251.49" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="251.49" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="251.49" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="251.49" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="251.49" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="251.49" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="251.49" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="251.49" r="1.5" fill="#1f6f8b"/>
+<circle cx="226.80" cy="251.49" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="253.49" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">8</text>
+<text x="5.00" y="261.26" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">Trace/span count</text>
+<circle cx="126.00" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<circle cx="134.40" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<circle cx="142.80" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<circle cx="151.20" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<circle cx="168.00" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="259.26" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="259.26" r="0.55" fill="#c9c5bc"/>
+<circle cx="193.20" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="259.26" r="0.55" fill="#c9c5bc"/>
+<circle cx="210.00" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<circle cx="218.40" cy="259.26" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="259.26" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="261.26" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">9</text>
+<text x="5.00" y="269.03" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="start">LLM call count</text>
+<circle cx="126.00" cy="267.03" r="0.55" fill="#c9c5bc"/>
+<circle cx="134.40" cy="267.03" r="0.55" fill="#c9c5bc"/>
+<circle cx="142.80" cy="267.03" r="0.55" fill="#c9c5bc"/>
+<circle cx="151.20" cy="267.03" r="1.5" fill="#1f6f8b"/>
+<circle cx="159.60" cy="267.03" r="0.55" fill="#c9c5bc"/>
+<circle cx="168.00" cy="267.03" r="1.5" fill="#1f6f8b"/>
+<circle cx="176.40" cy="267.03" r="0.55" fill="#c9c5bc"/>
+<circle cx="184.80" cy="267.03" r="1.5" fill="#1f6f8b"/>
+<circle cx="193.20" cy="267.03" r="1.5" fill="#1f6f8b"/>
+<circle cx="201.60" cy="267.03" r="1.5" fill="#1f6f8b"/>
+<circle cx="210.00" cy="267.03" r="0.55" fill="#c9c5bc"/>
+<circle cx="218.40" cy="267.03" r="0.55" fill="#c9c5bc"/>
+<circle cx="226.80" cy="267.03" r="1.5" fill="#1f6f8b"/>
+<text x="246.00" y="269.03" font-size="5.5" fill="#1d2328" font-weight="normal" text-anchor="end">6</text>
+</svg>
