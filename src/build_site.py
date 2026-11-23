@@ -151,7 +151,9 @@ def load():
     metrics = [metric(r) for r in read(RESULTS / "metric_taxonomy.csv")]
     extra = [metric(r, standards_only=True) for r in read(RESULTS / "standards_only_metrics.csv")]
     dates = sorted(r["access_date"] for r in built.values())
-    return dict(tools=tools, metrics=metrics, extra=extra, n_rows=len(built), first=dates[0], last=dates[-1],
+    return dict(tools=tools, metrics=metrics, extra=extra, n_rows=len(built),
+                n_tool_rows=sum(1 for (t, _) in built if t not in {x["name"] for x in tools if x["group"] == "standard"}),
+                first=dates[0], last=dates[-1],
                 n_pairs=sum(len(v) for ev in evidence.values() for v in ev.values()))
 
 
@@ -186,7 +188,7 @@ def hero(d):
     <div><dt>{len(d['metrics'])}</dt><dd>unique metrics: {n_obs} observability, {len(d['metrics']) - n_obs} evaluation</dd></div>
     <div><dt>{n_cat}</dt><dd>categories, by the part of the run a metric is about</dd></div>
     <div><dt>{n_tools} + {n_std}</dt><dd>tools and the telemetry conventions beneath them</dd></div>
-    <div><dt>{d['n_rows']}</dt><dd>built-in metrics found, each with a quote and a link</dd></div>
+    <div><dt>{d['n_rows']}</dt><dd>built-in metrics found ({d['n_tool_rows']} from the tools, {d['n_rows'] - d['n_tool_rows']} from the conventions), each with a quote and a link</dd></div>
   </dl>
   <p class="cta"><a class="btn" href="metrics.html">Browse the catalogue</a><a href="coverage.html">Coverage table</a>
     <a href="tools.html">The tools</a><a href="method.html">How it was built</a></p>
@@ -452,8 +454,9 @@ def method(d):
       <h3>Collecting the metrics</h3>
       <p>For each tool we read the official documentation and recorded every built-in metric: one the tool itself
       ships, as opposed to a metric the user writes, a community contribution or one reached through an integration.
-      We kept the metrics that describe how an agent run executes or how good its output is. Each of the
-      {d['n_rows']} rows stores the page, a verbatim quote, a saved copy of the page and the date, and a script checks
+      We identified 463 built-in metrics in the 13 tools and kept the {d['n_tool_rows']} that describe how an agent
+      run executes or how good its output is; the other 208 were out of scope. The {d['n_rows'] - d['n_tool_rows']}
+      rows from the telemetry conventions are kept as well. Each of the {d['n_rows']} kept rows stores the page, a verbatim quote, a saved copy of the page and the date, and a script checks
       that every quote appears word for word in the saved copy.</p>
       <h3>Merging them</h3>
       <p>Two metrics from different tools become one unique metric when they measure the same thing about the same
